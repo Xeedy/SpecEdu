@@ -90,9 +90,24 @@ body {
 .spec-brand {
     font-weight: 700;
     font-size: 1.5rem;
-    color: var(--spec-primary) !important;
+    /* color: var(--spec-primary) !important; */
     text-decoration: none;
     transition: var(--spec-transition);
+}
+
+/* This is just for test purposes */
+.spec-brand {
+    font-weight: 800;
+    letter-spacing: .2px;
+    text-decoration: none;
+}
+
+.spec-brand-spec {
+    color: var(--spec-blue);
+}
+
+.spec-brand-edu {
+    color: #000;
 }
 
 .spec-brand:hover {
