@@ -1,8 +1,3 @@
-/* ============================================
-   SpecEdu - Global Styles
-   ============================================ */
-
-/* ----- Font Face ----- */
 @font-face {
     font-family: 'Google Sans';
     src: url('../fonts/GoogleSans-VariableFont_GRAD,opsz,wght.woff2') format('woff2');
@@ -11,25 +6,20 @@
     font-display: swap;
 }
 
-/* ----- CSS Variables (Color Scheme) ----- */
 :root {
-    /* Primary colors - Light Blue theme */
     --spec-primary: #4A90D9;
     --spec-primary-dark: #357ABD;
     --spec-primary-light: #E8F4FD;
     --spec-primary-rgb: 74, 144, 217;
 
-    /* Secondary colors */
     --spec-secondary: #6C757D;
     --spec-secondary-light: #ADB5BD;
 
-    /* Status colors */
     --spec-success: #28A745;
     --spec-warning: #FFC107;
     --spec-danger: #DC3545;
     --spec-info: #17A2B8;
 
-    /* Neutral colors */
     --spec-white: #FFFFFF;
     --spec-black: #212529;
     --spec-gray-100: #F8F9FA;
@@ -42,32 +32,26 @@
     --spec-gray-800: #343A40;
     --spec-gray-900: #212529;
 
-    /* Typography */
     --spec-font-family: 'Google Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     --spec-font-size-base: 1rem;
     --spec-line-height-base: 1.5;
 
-    /* Spacing */
     --spec-spacing-xs: 0.25rem;
     --spec-spacing-sm: 0.5rem;
     --spec-spacing-md: 1rem;
     --spec-spacing-lg: 1.5rem;
     --spec-spacing-xl: 3rem;
 
-    /* Border radius */
     --spec-border-radius: 0.375rem;
     --spec-border-radius-lg: 0.5rem;
 
-    /* Shadows */
     --spec-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
     --spec-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
     --spec-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
 
-    /* Transitions */
     --spec-transition: all 0.2s ease-in-out;
 }
 
-/* ----- Base Styles ----- */
 html {
     font-size: 14px;
 }
@@ -83,14 +67,17 @@ body {
     color: var(--spec-gray-800);
     background-color: var(--spec-gray-100);
     line-height: var(--spec-line-height-base);
-    /* Flexbox layout for stable sticky footer */
     display: flex;
     flex-direction: column;
     min-height: 100vh;
     margin: 0;
 }
+@media (min-width: 992px) {
+    .spec-hover-dropdown:hover > .dropdown-menu {
+        display: block;
+    }
+}
 
-/* ----- Header Styles ----- */
 .spec-header {
     background-color: var(--spec-white);
     box-shadow: var(--spec-shadow);
@@ -130,26 +117,22 @@ body {
     background-color: var(--spec-primary-light);
 }
 
-/* ----- Main Content Wrapper ----- */
 .spec-content-wrapper {
-    flex: 1; /* Grow to fill available space */
+    flex: 1;
     display: flex;
     flex-direction: column;
 }
 
-/* ----- Main Content ----- */
 .spec-main {
     padding: var(--spec-spacing-lg) 0;
     flex: 1;
 }
 
-/* ----- Footer Styles ----- */
 .spec-footer {
     background-color: var(--spec-white);
     border-top: 1px solid var(--spec-gray-200);
     padding: var(--spec-spacing-lg) 0;
     color: var(--spec-gray-600);
-    /* No absolute positioning - flexbox handles sticky footer */
 }
 
 .spec-footer a {
@@ -163,7 +146,6 @@ body {
     text-decoration: underline;
 }
 
-/* ----- Button Styles ----- */
 .btn-spec-primary {
     background-color: var(--spec-primary);
     border-color: var(--spec-primary);
@@ -189,7 +171,6 @@ body {
     color: var(--spec-white);
 }
 
-/* ----- Card Styles ----- */
 .spec-card {
     background-color: var(--spec-white);
     border: 1px solid var(--spec-gray-200);
@@ -213,7 +194,6 @@ body {
     padding: var(--spec-spacing-md);
 }
 
-/* ----- Form Focus States ----- */
 .btn:focus,
 .btn:active:focus,
 .btn-link.nav-link:focus,
@@ -226,7 +206,6 @@ body {
     border-color: var(--spec-primary);
 }
 
-/* ----- Utility Classes ----- */
 .text-spec-primary {
     color: var(--spec-primary) !important;
 }
@@ -239,7 +218,6 @@ body {
     background-color: var(--spec-primary-light) !important;
 }
 
-/* ----- Form Floating Placeholders ----- */
 .form-floating > .form-control-plaintext::placeholder,
 .form-floating > .form-control::placeholder {
     color: var(--bs-secondary-color);

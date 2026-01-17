@@ -1,10 +1,151 @@
 ﻿@page
 @model IndexModel
 @{
-    ViewData["Title"] = "Home page";
+    ViewData["Title"] = "Domů";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+@section FullWidthTop {
+    <div class="spec-hero-fullbleed">
+
+        <div id="specHero"
+             class="carousel slide spec-hero shadow-sm"
+             data-bs-ride="carousel"
+             data-bs-interval="7000"
+             data-bs-pause="hover">
+
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#specHero" data-bs-slide-to="0"
+                        class="active" aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#specHero" data-bs-slide-to="1"
+                        aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#specHero" data-bs-slide-to="2"
+                        aria-label="Slide 3"></button>
+            </div>
+
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="https://www.esker.com/sites/default/files/cp_2-docdel.jpg"
+                         class="d-block w-100 spec-hero-img"
+                         alt="SpecEdu – digitální složka žáka">
+
+                    <div class="spec-hero-overlay"></div>
+
+                    <div class="carousel-caption spec-hero-caption text-start">
+                        <div class="spec-hero-badge">SpecEdu</div>
+                        <h1 class="spec-hero-title">Digitální složka žáka bez chaosu</h1>
+                        <p class="spec-hero-text">
+                            Přehledná dokumentace, doporučení a historie poznámek – s přístupem jen pro oprávněné role.
+                        </p>
+
+                        <div class="spec-hero-actions">
+                            <a class="btn btn-primary btn-lg" href="/Account/Login">Přihlásit se</a>
+                            <a class="btn btn-outline-light btn-lg" href="/Kontakt">Požádat o pilot</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="carousel-item">
+                    <img src="https://iitaa.dev/images/carousel-2.jpg"
+                         class="d-block w-100 spec-hero-img"
+                         alt="SpecEdu – dokumenty a doporučení">
+
+                    <div class="spec-hero-overlay"></div>
+
+                    <div class="carousel-caption spec-hero-caption text-start">
+                        <div class="spec-hero-badge">Dokumenty</div>
+                        <h2 class="spec-hero-title">PDF doporučení, zprávy, přílohy – vše na jednom místě</h2>
+                        <p class="spec-hero-text">
+                            Nahrávání dokumentů, jasná metadata a rychlé dohledání. Připravené i na auditní stopu.
+                        </p>
+
+                        <div class="spec-hero-actions">
+                            <a class="btn btn-primary btn-lg" href="/JakToFunguje">Jak to funguje</a>
+                            <a class="btn btn-outline-light btn-lg" href="/Funkce">Zobrazit funkce</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="carousel-item">
+                    <img src="https://iitaa.dev/images/carousel-3.jpg"
+                         class="d-block w-100 spec-hero-img"
+                         alt="SpecEdu – komunikační deník a notifikace">
+
+                    <div class="spec-hero-overlay"></div>
+
+                    <div class="carousel-caption spec-hero-caption text-start">
+                        <div class="spec-hero-badge">Spolupráce</div>
+                        <h2 class="spec-hero-title">Komunikační deník a termíny kontrol</h2>
+                        <p class="spec-hero-text">
+                            Jednotné zápisy (telefon, schůzky, spolupráce s rodiči/PPP/SPC) a upozornění na kontrolní vyšetření.
+                        </p>
+
+                        <div class="spec-hero-actions">
+                            <a class="btn btn-primary btn-lg" href="/Cenik">Zobrazit ceník</a>
+                            <a class="btn btn-outline-light btn-lg" href="/Kontakt">Kontakt</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <button class="carousel-control-prev" type="button" data-bs-target="#specHero" data-bs-slide="prev" aria-label="Předchozí">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#specHero" data-bs-slide="next" aria-label="Další">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            </button>
+        </div>
+
+        <div class="container py-3">
+            <div class="row g-3">
+                <div class="col-md-4">
+                    <div class="card h-100 border-0 shadow-sm spec-mini-card">
+                        <div class="card-body">
+                            <div class="spec-mini-title">Přístup jen ke konkrétnímu žákovi</div>
+                            <div class="spec-mini-text">
+                                Role + vazby na dítě. Rodič vidí jen své dítě, poradna jen přidělené žáky.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card h-100 border-0 shadow-sm spec-mini-card">
+                        <div class="card-body">
+                            <div class="spec-mini-title">Dokumenty přehledně</div>
+                            <div class="spec-mini-text">
+                                Zprávy, doporučení, přílohy. Vždy s datem, autorem a historií.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card h-100 border-0 shadow-sm spec-mini-card">
+                        <div class="card-body">
+                            <div class="spec-mini-title">Komunikační deník</div>
+                            <div class="spec-mini-text">
+                                Poznámky a zápisy ze schůzek na jednom místě, s filtrací a rychlým dohledáním.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+}
+
+<div class="container py-4">
+    <h2 class="mb-3">Co je SpecEdu?</h2>
+    <p class="text-muted mb-0">
+        SpecEdu je platforma pro školy a školská poradenská zařízení, která zjednodušuje práci s dokumentací žáků,
+        sdílení doporučení a komunikaci s rodiči.
+    </p>
 </div>
+@section Styles {
+    <link rel="stylesheet" href="~/css/Layout/Layout.css" />
+}
+
+@section Scripts {
+    <script src="~/js/Carousel.js" asp-append-version="true"></script>
+}

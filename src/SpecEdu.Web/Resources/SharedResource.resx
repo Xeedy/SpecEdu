@@ -183,4 +183,49 @@
   <data name="FooterPage.Privacy" xml:space="preserve">
     <value>Privacy</value>
   </data>
+  <data name="HeaderPage.System" xml:space="preserve">
+    <value>System</value>
+  </data>
+  <data name="HeaderPage.ForClients" xml:space="preserve">
+    <value>For schools and parents</value>
+  </data>
+  <data name="HeaderPage.Security" xml:space="preserve">
+    <value>Security and GDPR</value>
+  </data>
+  <data name="HeaderPage.Documentation" xml:space="preserve">
+    <value>Documentation</value>
+  </data>
+  <data name="HeaderPage.Functions" xml:space="preserve">
+    <value>Functions</value>
+  </data>
+  <data name="HeaderPage.StudentFile" xml:space="preserve">
+    <value>Students files</value>
+  </data>
+  <data name="HeaderPage.StudentDocuments" xml:space="preserve">
+    <value>Student documents</value>
+  </data>
+  <data name="HeaderPage.CommunicationDiary" xml:space="preserve">
+    <value>Communication diary</value>
+  </data>
+  <data name="HeaderPage.Notifications" xml:space="preserve">
+    <value>Notifications</value>
+  </data>
+  <data name="HeaderPage.PLLP" xml:space="preserve">
+    <value>PLLP / IVP</value>
+  </data>
+  <data name="HeaderPage.Calendar" xml:space="preserve">
+    <value>Calendar</value>
+  </data>
+  <data name="HeaderPage.Messages" xml:space="preserve">
+    <value>Messages</value>
+  </data>
+  <data name="HeaderPage.OverView" xml:space="preserve">
+    <value>How it works</value>
+  </data>
+  <data name="HeaderPage.Price" xml:space="preserve">
+    <value>Price</value>
+  </data>
+  <data name="HeaderPage.Contact" xml:space="preserve">
+    <value>Contact</value>
+  </data>
 </root>
