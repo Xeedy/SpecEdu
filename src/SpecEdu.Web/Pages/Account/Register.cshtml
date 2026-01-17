@@ -1,0 +1,189 @@
+﻿@page
+@model SpecEdu.Web.Pages.Account.RegisterModel
+@{
+    ViewData["Title"] = "Žádost o zřízení instituce";
+}
+
+<div class="container py-4">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+
+            <h1 class="mb-2">Žádost o zřízení instituce</h1>
+            <p class="text-muted mb-4">
+                SpecEdu je určené pro školy a školská poradenská zařízení (např. PPP/SPC).
+                Účty pro běžné uživatele (učitelé, rodiče, asistenti) nezakládáme veřejnou registrací –
+                ty zakládá a spravuje vždy vaše instituce.
+            </p>
+
+            @if (!string.IsNullOrWhiteSpace(Model.SuccessMessage))
+            {
+                <div class="alert alert-success" role="alert">
+                    <strong>Hotovo.</strong> @Model.SuccessMessage
+                </div>
+            }
+            @if (!string.IsNullOrWhiteSpace(Model.ErrorMessage))
+            {
+                <div class="alert alert-danger" role="alert">
+                    <strong>Chyba.</strong> @Model.ErrorMessage
+                </div>
+            }
+
+            <div class="alert alert-info mb-4" role="alert">
+                <strong>Jak to funguje:</strong>
+                nejdřív vytvoříme účet pro vaši instituci a určíme správce (např. Správce školy).
+                Ten pak v systému zakládá účty ostatním uživatelům a přiřazuje je pouze ke konkrétním žákům,
+                ke kterým mají mít přístup.
+            </div>
+
+            <div class="spec-card">
+                <div class="spec-card-header">Kontaktní údaje instituce</div>
+                <div class="spec-card-body">
+
+                    <form method="post" class="needs-validation" novalidate>
+                        <div class="row g-3">
+
+                            <div class="col-md-8">
+                                <label class="form-label">Název instituce <span class="text-danger">*</span></label>
+                                <input class="form-control" asp-for="Input.InstitutionName"
+                                       placeholder="ZŠ a MŠ … / PPP … / SPC …" required />
+                                <span class="text-danger" asp-validation-for="Input.InstitutionName"></span>
+                                <div class="invalid-feedback">Vyplňte prosím název instituce.</div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <label class="form-label">Typ instituce <span class="text-danger">*</span></label>
+                                <select class="form-select" asp-for="Input.InstitutionType" required>
+                                    <option value="" selected disabled>Vyberte…</option>
+                                    <option>Škola</option>
+                                    <option>PPP</option>
+                                    <option>SPC</option>
+                                    <option>ŠPP (školní poradenské pracoviště)</option>
+                                    <option>Jiné</option>
+                                </select>
+                                <span class="text-danger" asp-validation-for="Input.InstitutionType"></span>
+                                <div class="invalid-feedback">Vyberte prosím typ instituce.</div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <label class="form-label">IČO</label>
+                                <input class="form-control" asp-for="Input.Ico"
+                                       placeholder="např. 12345678" inputmode="numeric" />
+                                <div class="form-text">Volitelné. 8 číslic bez mezer.</div>
+                            </div>
+
+                            <div class="col-md-8">
+                                <label class="form-label">Adresa (město, ulice)</label>
+                                <input class="form-control" asp-for="Input.Address"
+                                       placeholder="např. Zlín, Dlouhá 12" />
+                            </div>
+
+                            <hr class="my-2" />
+
+                            <div class="col-md-6">
+                                <label class="form-label">Kontaktní osoba <span class="text-danger">*</span></label>
+                                <input class="form-control" asp-for="Input.ContactName"
+                                       placeholder="Jméno a příjmení" required />
+                                <span class="text-danger" asp-validation-for="Input.ContactName"></span>
+                                <div class="invalid-feedback">Vyplňte prosím jméno kontaktní osoby.</div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="form-label">Funkce</label>
+                                <input class="form-control" asp-for="Input.ContactRole"
+                                       placeholder="např. Správce školy / Speciální pedagog" />
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="form-label">E-mail <span class="text-danger">*</span></label>
+                                <input class="form-control" asp-for="Input.Email"
+                                       placeholder="např. spravce@skola.cz" required />
+                                <span class="text-danger" asp-validation-for="Input.Email"></span>
+                                <div class="invalid-feedback">Zadejte prosím platný e-mail.</div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="form-label">Telefon</label>
+                                <input class="form-control" asp-for="Input.Phone"
+                                       placeholder="+420 777 123 456" />
+                            </div>
+
+                            <hr class="my-2" />
+
+                            <div class="col-md-4">
+                                <label class="form-label">Odhad počtu žáků</label>
+                                <input class="form-control" asp-for="Input.StudentsCount" min="1" />
+                            </div>
+
+                            <div class="col-md-4">
+                                <label class="form-label">Odhad počtu uživatelů</label>
+                                <input class="form-control" asp-for="Input.UsersCount" min="1" />
+                            </div>
+
+                            <div class="col-md-4">
+                                <label class="form-label">Preferovaný start</label>
+                                <select class="form-select" asp-for="Input.PreferredStart">
+                                    <option selected>Co nejdříve</option>
+                                    <option>Do 1 měsíce</option>
+                                    <option>Do 3 měsíců</option>
+                                    <option>Jen pilot / demo</option>
+                                </select>
+                            </div>
+
+                            <div class="col-12">
+                                <label class="form-label">Zpráva / požadavky</label>
+                                <textarea class="form-control" asp-for="Input.Message" rows="4"
+                                          placeholder="Stručně popište, co potřebujete (např. pilotní provoz, role, integrace…)."></textarea>
+                                <div class="form-text">
+                                    Tip: napište, zda jste škola, PPP nebo SPC a kdo bude u vás správcem systému.
+                                </div>
+                            </div>
+
+                            <div class="col-12">
+                                <div class="form-check">
+                                    <input class="form-check-input" asp-for="Input.Consent" />
+                                    <label class="form-check-label" asp-for="Input.Consent">
+                                        Souhlasím se zpracováním kontaktních údajů za účelem vyřízení žádosti.
+                                    </label>
+                                </div>
+                                <span class="text-danger" asp-validation-for="Input.Consent"></span>
+                            </div>
+
+                            <div class="col-12 d-flex gap-2 flex-wrap mt-2">
+                                <button type="submit" class="btn btn-spec-primary">Odeslat žádost</button>
+                                <a class="btn btn-outline-secondary" href="/Account/Login">Už mám účet – přihlásit se</a>
+                            </div>
+
+                            <div class="col-12">
+                                <p class="small text-muted mb-0">
+                                    Pozn.: Toto není veřejná registrace běžného uživatele. Po ověření žádosti vám vytvoříme instituci
+                                    a správce, který následně zakládá účty pro učitele/rodiče a přiřazuje je k žákům.
+                                </p>
+                            </div>
+
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        (function () {
+            const forms = document.querySelectorAll('.needs-validation');
+            Array.prototype.slice.call(forms).forEach(function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (!form.checkValidity()) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        })();
+    </script>
+}
