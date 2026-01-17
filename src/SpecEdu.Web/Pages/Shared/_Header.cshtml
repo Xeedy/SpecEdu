@@ -13,15 +13,40 @@
                     <li class="nav-item">
                         <a class="nav-link spec-nav-link" asp-area="" asp-page="/Index">@L["HeaderPage.Home"]</a>
                     </li>
+                    <li class="nav-item dropdown spec-hover-dropdown">
+                        <a class="nav-link spec-nav-link dropdown-toggle" asp-area="" asp-page="/System" id="systemDropdown" role="button"> @L["HeaderPage.System"]</a>
+                        <ul class="dropdown-menu" aria-labelledby="homeDropdown">
+                            <li><a class="dropdown-item" asp-area="" asp-page="/ForClients">@L["HeaderPage.ForClients"]</a></li>
+                            <li><a class="dropdown-item" asp-area="" asp-page="/Security">@L["HeaderPage.Security"]</a></li>
+                            <li><a class="dropdown-item" asp-area="" asp-page="/Documentation">@L["HeaderPage.Documentation"]</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown spec-hover-dropdown">
+                        <a class="nav-link spec-nav-link dropdown-toggle" asp-area="" asp-page="/Functions" id="functionsDropdown" role="button"> @L["HeaderPage.Functions"]</a>
+                        <ul class="dropdown-menu" aria-labelledby="homeDropdown">
+                            <li><a class="dropdown-item" asp-area="" asp-page="/StudentFiles">@L["HeaderPage.StudentFile"]</a></li>
+                            <li><a class="dropdown-item" asp-area="" asp-page="/StudentDocuments">@L["HeaderPage.StudentDocuments"]</a></li>
+                            <li><a class="dropdown-item" asp-area="" asp-page="/Diary">@L["HeaderPage.CommunicationDiary"]</a></li>
+                            <li><a class="dropdown-item" asp-area="" asp-page="/Notifications">@L["HeaderPage.Notifications"]</a></li>
+                            <li><a class="dropdown-item" asp-area="" asp-page="/PLLP">@L["HeaderPage.PLLP"]</a></li>
+                            <li><a class="dropdown-item" asp-area="" asp-page="/Calendar">@L["HeaderPage.Calendar"]</a></li>
+                            <li><a class="dropdown-item" asp-area="" asp-page="/Messages">@L["HeaderPage.Messages"]</a></li>
+                        </ul>
+                    </li>
                     <li class="nav-item">
-                        <a class="nav-link spec-nav-link" asp-area="" asp-page="/Privacy">@L["HeaderPage.Privacy"]</a>
+                        <a class="nav-link spec-nav-link" asp-area="" asp-page="/Overview">@L["HeaderPage.OverView"]</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link spec-nav-link" asp-area="" asp-page="/Price">@L["HeaderPage.Price"]</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link spec-nav-link" asp-area="" asp-page="/Contact">@L["HeaderPage.Contact"]</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link spec-nav-link" asp-area="" asp-page="/Test">@L["HeaderPage.Test"]</a>
                     </li>
                 </ul>
                 <div class="d-flex align-items-center">
-                    @* Login button - will be replaced with user menu when authenticated *@
                     <a class="btn btn-spec-outline me-2" asp-area="" asp-page="/Account/Login">@L["HeaderPage.Login"]</a>
                     <a class="btn btn-spec-primary" asp-area="" asp-page="/Account/Register">@L["HeaderPage.Register"]</a>
                 </div>
