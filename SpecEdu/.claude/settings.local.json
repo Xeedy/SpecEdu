@@ -6,7 +6,9 @@
       "Bash(powershell -Command:*)",
       "Bash(xcopy:*)",
       "Bash(dotnet sln:*)",
-      "Bash(dotnet build:*)"
+      "Bash(dotnet build:*)",
+      "Bash(dotnet add package:*)",
+      "Bash(dir \"C:\\\\Users\\\\micha\\\\Documents\\\\Projekty\\\\SpecEdu\\\\src\\\\SpecEdu.Web\\\\Pages\" /b)"
     ]
   }
 }
