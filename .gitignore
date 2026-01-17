@@ -1,0 +1,90 @@
+# SpecEdu .gitignore
+
+## Build results
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+[Ww][Ii][Nn]32/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+bld/
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
+
+## Visual Studio
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+*.rsuser
+
+## User-specific files
+*.userprefs
+
+## NuGet
+*.nupkg
+*.snupkg
+.nuget/
+**/[Pp]ackages/*
+!**/[Pp]ackages/build/
+!**/[Pp]ackages/repositories.config
+
+## Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+## macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+## JetBrains Rider
+.idea/
+*.sln.iml
+
+## VS Code
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+## Secrets and environment
+*.env
+*.local
+appsettings.*.local.json
+secrets.json
+
+## User secrets (stored outside repo by default, but just in case)
+secrets/
+
+## Test results
+[Tt]est[Rr]esult*/
+*.trx
+*.Coverage
+*.coveragexml
+
+## Publish output
+publish/
+out/
+
+## ASP.NET
+ScaffoldingReadMe.txt
+
+## Entity Framework
+*.mdf
+*.ldf
+*.ndf
+
+## SSL certificates
+*.pfx
+*.p12
+
+## Documentation and thesis (local only)
+Documentation_And_Materials/
+Thesis/

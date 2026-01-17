@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git init:*)",
+      "Bash(cmd /c \"move /Y \"\"C:\\\\Users\\\\micha\\\\Documents\\\\Projekty\\\\SpecEdu\\\\SpecEdu\"\" \"\"C:\\\\Users\\\\micha\\\\Documents\\\\Projekty\\\\SpecEdu\\\\src\\\\SpecEdu.Web\"\"\")",
+      "Bash(powershell -Command:*)",
+      "Bash(xcopy:*)"
+    ]
+  }
+}
