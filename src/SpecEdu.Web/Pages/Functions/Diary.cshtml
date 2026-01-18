@@ -1,0 +1,140 @@
+@page
+@model SpecEdu.Web.Pages.Functions.DiaryModel
+@inject IStringLocalizer<SharedResource> L
+@{
+    ViewData["Title"] = L["DiaryPage.Title"];
+}
+
+<!-- Hero -->
+<section class="bg-spec-primary-light py-5">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <span class="badge bg-spec-primary mb-3">@L["DiaryPage.Badge"]</span>
+                <h1 class="display-5 fw-bold mb-3">@L["DiaryPage.Title"]</h1>
+                <p class="lead text-muted mb-4">@L["DiaryPage.Subtitle"]</p>
+                <a asp-page="/Account/Register" class="btn btn-spec-primary btn-lg">@L["Common.TryFree"]</a>
+            </div>
+            <div class="col-lg-6 mt-4 mt-lg-0">
+                <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=600&h=400&fit=crop"
+                     alt="Communication" class="img-fluid rounded shadow-lg">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Features -->
+<section class="py-5">
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-lg-6">
+                <div class="spec-card p-4 h-100">
+                    <div class="d-flex">
+                        <div class="text-spec-primary me-3 flex-shrink-0">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M14 1a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H4.414A2 2 0 0 0 3 11.586l-2 2V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12.793a.5.5 0 0 0 .854.353l2.853-2.853A1 1 0 0 1 4.414 12H14a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
+                                <path d="M3 3.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zM3 6a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9A.5.5 0 0 1 3 6zm0 2.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5z"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h5 class="fw-bold">@L["DiaryPage.Feature1Title"]</h5>
+                            <p class="text-muted mb-0">@L["DiaryPage.Feature1Desc"]</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="spec-card p-4 h-100">
+                    <div class="d-flex">
+                        <div class="text-spec-primary me-3 flex-shrink-0">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M3.5 6.5A.5.5 0 0 1 4 7v1a4 4 0 0 0 8 0V7a.5.5 0 0 1 1 0v1a5 5 0 0 1-4.5 4.975V15h3a.5.5 0 0 1 0 1h-7a.5.5 0 0 1 0-1h3v-2.025A5 5 0 0 1 3 8V7a.5.5 0 0 1 .5-.5z"/>
+                                <path d="M10 8a2 2 0 1 1-4 0V3a2 2 0 1 1 4 0v5zM8 0a3 3 0 0 0-3 3v5a3 3 0 0 0 6 0V3a3 3 0 0 0-3-3z"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h5 class="fw-bold">@L["DiaryPage.Feature2Title"]</h5>
+                            <p class="text-muted mb-0">@L["DiaryPage.Feature2Desc"]</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="spec-card p-4 h-100">
+                    <div class="d-flex">
+                        <div class="text-spec-primary me-3 flex-shrink-0">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M4 .5a.5.5 0 0 0-1 0V1H2a2 2 0 0 0-2 2v1h16V3a2 2 0 0 0-2-2h-1V.5a.5.5 0 0 0-1 0V1H4V.5zM16 14V5H0v9a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2zm-3.5-7h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5z"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h5 class="fw-bold">@L["DiaryPage.Feature3Title"]</h5>
+                            <p class="text-muted mb-0">@L["DiaryPage.Feature3Desc"]</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="spec-card p-4 h-100">
+                    <div class="d-flex">
+                        <div class="text-spec-primary me-3 flex-shrink-0">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-5 6s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zM11 3.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5zm.5 2.5a.5.5 0 0 0 0 1h4a.5.5 0 0 0 0-1h-4zm2 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1h-2zm0 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1h-2z"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h5 class="fw-bold">@L["DiaryPage.Feature4Title"]</h5>
+                            <p class="text-muted mb-0">@L["DiaryPage.Feature4Desc"]</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Demo Chat -->
+<section class="bg-white py-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <h2 class="fw-bold text-center mb-5">@L["DiaryPage.DemoTitle"]</h2>
+                <div class="spec-card p-4">
+                    <!-- Sample conversation -->
+                    <div class="mb-3">
+                        <div class="d-flex mb-3">
+                            <img src="https://i.pravatar.cc/40?img=1" class="rounded-circle me-2" alt="">
+                            <div class="bg-spec-primary-light rounded p-3" style="max-width: 70%;">
+                                <div class="small fw-bold text-spec-primary mb-1">Mgr. Novakova (Ucitelka)</div>
+                                <p class="mb-0 small">@L["DiaryPage.DemoMsg1"]</p>
+                                <small class="text-muted">10:30</small>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-end mb-3">
+                            <div class="bg-spec-primary text-white rounded p-3" style="max-width: 70%;">
+                                <p class="mb-0 small">@L["DiaryPage.DemoMsg2"]</p>
+                                <small class="opacity-75">10:45</small>
+                            </div>
+                        </div>
+                        <div class="d-flex mb-3">
+                            <img src="https://i.pravatar.cc/40?img=5" class="rounded-circle me-2" alt="">
+                            <div class="bg-spec-primary-light rounded p-3" style="max-width: 70%;">
+                                <div class="small fw-bold text-spec-primary mb-1">PhDr. Svoboda (PPP)</div>
+                                <p class="mb-0 small">@L["DiaryPage.DemoMsg3"]</p>
+                                <small class="text-muted">11:00</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="@L["DiaryPage.TypeMessage"]" disabled>
+                        <button class="btn btn-spec-primary" type="button" disabled>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M15.854.146a.5.5 0 0 1 .11.54l-5.819 14.547a.75.75 0 0 1-1.329.124l-3.178-4.995L.643 7.184a.75.75 0 0 1 .124-1.33L15.314.037a.5.5 0 0 1 .54.11ZM6.636 10.07l2.761 4.338L14.13 2.576 6.636 10.07Zm6.787-8.201L1.591 6.602l4.339 2.76 7.494-7.493Z"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

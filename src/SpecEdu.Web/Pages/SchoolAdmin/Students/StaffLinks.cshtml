@@ -1,0 +1,138 @@
+@page "{id:guid}"
+@model SpecEdu.Web.Pages.SchoolAdmin.Students.StaffLinksModel
+@inject IStringLocalizer<SharedResource> L
+@{
+    ViewData["Title"] = $"{L["StudentsPage.Staff"]} - {Model.Student.FullName}";
+}
+
+<div class="container py-4">
+    <h1 class="mb-4">@L["StudentsPage.Staff"] - @Model.Student.FullName</h1>
+
+    @if (!string.IsNullOrWhiteSpace(Model.SuccessMessage))
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            @Model.SuccessMessage
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Zavřít"></button>
+        </div>
+    }
+
+    @if (!string.IsNullOrWhiteSpace(Model.ErrorMessage))
+    {
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            @Model.ErrorMessage
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Zavřít"></button>
+        </div>
+    }
+
+    <!-- Add Staff Link Form -->
+    <div class="spec-card mb-4">
+        <div class="spec-card-header">
+            <h5 class="mb-0">@L["StudentsPage.AddStaffLink"]</h5>
+        </div>
+        <div class="spec-card-body">
+            <form method="post" asp-page-handler="Add" asp-route-id="@Model.Student.Id">
+                <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+                <div class="row g-3">
+                    <div class="col-md-4">
+                        <label asp-for="AddInput.UserId" class="form-label">@L["StudentsPage.StaffMember"]</label>
+                        <select asp-for="AddInput.UserId" asp-items="Model.AvailableStaff" class="form-select">
+                            <option value="">@L["Common.Select"]...</option>
+                        </select>
+                        <span asp-validation-for="AddInput.UserId" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-3">
+                        <label asp-for="AddInput.LinkType" class="form-label">@L["StudentsPage.LinkType"]</label>
+                        <select asp-for="AddInput.LinkType" asp-items="Model.LinkTypes" class="form-select">
+                        </select>
+                        <span asp-validation-for="AddInput.LinkType" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-3">
+                        <label asp-for="AddInput.AccessLevel" class="form-label">@L["StudentsPage.AccessLevel"]</label>
+                        <select asp-for="AddInput.AccessLevel" asp-items="Model.AccessLevels" class="form-select">
+                        </select>
+                        <span asp-validation-for="AddInput.AccessLevel" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-2">
+                        <label class="form-label d-block">&nbsp;</label>
+                        <button type="submit" class="btn btn-spec-primary w-100">@L["Common.Add"]</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Current Staff Links -->
+    <div class="spec-card">
+        <div class="spec-card-header">
+            <h5 class="mb-0">@L["StudentsPage.CurrentStaffLinks"]</h5>
+        </div>
+        <div class="spec-card-body">
+            @if (Model.StaffLinks.Any())
+            {
+                <div class="table-responsive">
+                    <table class="table table-hover mb-0">
+                        <thead>
+                            <tr>
+                                <th>@L["StudentsPage.StaffMember"]</th>
+                                <th>@L["StudentsPage.Email"]</th>
+                                <th>@L["StudentsPage.LinkType"]</th>
+                                <th>@L["StudentsPage.AccessLevel"]</th>
+                                <th>@L["StudentsPage.Status"]</th>
+                                <th class="text-end">@L["Common.Actions"]</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var link in Model.StaffLinks)
+                            {
+                                <tr>
+                                    <td><strong>@(link.UserName ?? "-")</strong></td>
+                                    <td>@(link.UserEmail ?? "-")</td>
+                                    <td>@link.LinkTypeName</td>
+                                    <td>
+                                        @if (link.AccessLevel == SpecEdu.Domain.Enums.AccessLevel.Edit)
+                                        {
+                                            <span class="badge bg-warning text-dark">@link.AccessLevelName</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="badge bg-info">@link.AccessLevelName</span>
+                                        }
+                                    </td>
+                                    <td>
+                                        @if (link.IsActive)
+                                        {
+                                            <span class="badge bg-success">@L["Common.Active"]</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="badge bg-secondary">@L["Common.Inactive"]</span>
+                                        }
+                                    </td>
+                                    <td class="text-end">
+                                        <form method="post" asp-page-handler="Remove" asp-route-id="@Model.Student.Id" asp-route-linkId="@link.Id" class="d-inline">
+                                            <button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm('@L["Common.ConfirmRemove"]')">
+                                                @L["Common.Remove"]
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+            else
+            {
+                <p class="text-muted mb-0">@L["StudentsPage.NoStaffLinks"]</p>
+            }
+        </div>
+    </div>
+
+    <div class="mt-3">
+        <a asp-page="Details" asp-route-id="@Model.Student.Id" class="btn btn-outline-secondary">@L["Common.Back"]</a>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

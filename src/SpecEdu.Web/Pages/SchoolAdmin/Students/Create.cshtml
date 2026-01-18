@@ -1,0 +1,53 @@
+@page
+@model SpecEdu.Web.Pages.SchoolAdmin.Students.CreateModel
+@inject IStringLocalizer<SharedResource> L
+@{
+    ViewData["Title"] = L["StudentsPage.AddStudent"];
+}
+
+<div class="container py-4">
+    <h1 class="mb-4">@L["StudentsPage.AddStudent"]</h1>
+
+    <div class="spec-card">
+        <div class="spec-card-body">
+            <form method="post">
+                <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label asp-for="Input.FirstName" class="form-label"></label>
+                        <input asp-for="Input.FirstName" class="form-control" />
+                        <span asp-validation-for="Input.FirstName" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label asp-for="Input.LastName" class="form-label"></label>
+                        <input asp-for="Input.LastName" class="form-control" />
+                        <span asp-validation-for="Input.LastName" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label asp-for="Input.BirthDate" class="form-label"></label>
+                        <input asp-for="Input.BirthDate" type="date" class="form-control" />
+                        <span asp-validation-for="Input.BirthDate" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label asp-for="Input.Class" class="form-label"></label>
+                        <input asp-for="Input.Class" class="form-control" placeholder="@L["StudentsPage.ClassPlaceholder"]" />
+                        <span asp-validation-for="Input.Class" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="mt-4">
+                    <button type="submit" class="btn btn-spec-primary">@L["Common.Save"]</button>
+                    <a asp-page="Index" class="btn btn-outline-secondary">@L["Common.Cancel"]</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

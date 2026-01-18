@@ -17,7 +17,9 @@ public class JwtTokenService : IJwtTokenService
         _jwtSettings = jwtSettings.Value;
     }
 
-    public string GenerateToken(string userId, string email, IEnumerable<string> roles)
+    public const string SchoolIdClaimType = "school_id";
+
+    public string GenerateToken(string userId, string email, IEnumerable<string> roles, Guid? schoolId = null)
     {
         var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtSettings.Secret));
         var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
@@ -29,6 +31,11 @@ public class JwtTokenService : IJwtTokenService
             new(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
             new(ClaimTypes.NameIdentifier, userId)
         };
+
+        if (schoolId.HasValue)
+        {
+            claims.Add(new Claim(SchoolIdClaimType, schoolId.Value.ToString()));
+        }
 
         foreach (var role in roles)
         {

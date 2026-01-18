@@ -1,3 +1,8 @@
+@{
+    var currentCulture = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
+    var returnUrl = Context.Request.Path + Context.Request.QueryString;
+}
+
 <header class="spec-header">
     <nav class="navbar navbar-expand-lg spec-navbar">
         <div class="container">
@@ -11,45 +16,125 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarMain">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link spec-nav-link" asp-area="" asp-page="/Index">@L["HeaderPage.Home"]</a>
-                    </li>
+                    <!-- O systému dropdown -->
                     <li class="nav-item dropdown spec-hover-dropdown">
-                        <a class="nav-link spec-nav-link dropdown-toggle" asp-area="" asp-page="/System" id="systemDropdown" role="button"> @L["HeaderPage.System"]</a>
-                        <ul class="dropdown-menu" aria-labelledby="homeDropdown">
-                            <li><a class="dropdown-item" asp-area="" asp-page="/ForClients">@L["HeaderPage.ForClients"]</a></li>
-                            <li><a class="dropdown-item" asp-area="" asp-page="/Security">@L["HeaderPage.Security"]</a></li>
-                            <li><a class="dropdown-item" asp-area="" asp-page="/Documentation">@L["HeaderPage.Documentation"]</a></li>
+                        <a class="nav-link spec-nav-link dropdown-toggle" href="#" id="systemDropdown"
+                           role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            @L["HeaderPage.System"]
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="systemDropdown">
+                            <li><a class="dropdown-item" asp-area="" asp-page="/System/Index">@L["HeaderPage.SystemOverview"]</a></li>
+                            <li><a class="dropdown-item" asp-area="" asp-page="/System/ForClients">@L["HeaderPage.ForClients"]</a></li>
+                            <li><a class="dropdown-item" asp-area="" asp-page="/System/Security">@L["HeaderPage.Security"]</a></li>
+                            <li><a class="dropdown-item" asp-area="" asp-page="/System/Documentation">@L["HeaderPage.Documentation"]</a></li>
                         </ul>
                     </li>
+
+                    <!-- Funkce dropdown -->
                     <li class="nav-item dropdown spec-hover-dropdown">
-                        <a class="nav-link spec-nav-link dropdown-toggle" asp-area="" asp-page="/Functions" id="functionsDropdown" role="button"> @L["HeaderPage.Functions"]</a>
-                        <ul class="dropdown-menu" aria-labelledby="homeDropdown">
-                            <li><a class="dropdown-item" asp-area="" asp-page="/StudentFiles">@L["HeaderPage.StudentFile"]</a></li>
-                            <li><a class="dropdown-item" asp-area="" asp-page="/StudentDocuments">@L["HeaderPage.StudentDocuments"]</a></li>
-                            <li><a class="dropdown-item" asp-area="" asp-page="/Diary">@L["HeaderPage.CommunicationDiary"]</a></li>
-                            <li><a class="dropdown-item" asp-area="" asp-page="/Notifications">@L["HeaderPage.Notifications"]</a></li>
-                            <li><a class="dropdown-item" asp-area="" asp-page="/PLLP">@L["HeaderPage.PLLP"]</a></li>
-                            <li><a class="dropdown-item" asp-area="" asp-page="/Calendar">@L["HeaderPage.Calendar"]</a></li>
-                            <li><a class="dropdown-item" asp-area="" asp-page="/Messages">@L["HeaderPage.Messages"]</a></li>
+                        <a class="nav-link spec-nav-link dropdown-toggle" href="#" id="functionsDropdown"
+                           role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            @L["HeaderPage.Functions"]
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="functionsDropdown">
+                            <li><a class="dropdown-item" asp-area="" asp-page="/Functions/StudentFiles">@L["HeaderPage.StudentFile"]</a></li>
+                            <li><a class="dropdown-item" asp-area="" asp-page="/Functions/Documents">@L["HeaderPage.StudentDocuments"]</a></li>
+                            <li><a class="dropdown-item" asp-area="" asp-page="/Functions/Diary">@L["HeaderPage.CommunicationDiary"]</a></li>
+                            <li><a class="dropdown-item" asp-area="" asp-page="/Functions/Notifications">@L["HeaderPage.Notifications"]</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li>
+                                <a class="dropdown-item disabled-item" href="#">
+                                    @L["HeaderPage.PLLP"] <span class="badge-coming-soon">@L["Common.ComingSoon"]</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item disabled-item" href="#">
+                                    @L["HeaderPage.Calendar"] <span class="badge-coming-soon">@L["Common.ComingSoon"]</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item disabled-item" href="#">
+                                    @L["HeaderPage.Messages"] <span class="badge-coming-soon">@L["Common.ComingSoon"]</span>
+                                </a>
+                            </li>
                         </ul>
                     </li>
+
+                    <!-- Jak to funguje -->
                     <li class="nav-item">
-                        <a class="nav-link spec-nav-link" asp-area="" asp-page="/Overview">@L["HeaderPage.OverView"]</a>
+                        <a class="nav-link spec-nav-link" asp-area="" asp-page="/HowItWorks">@L["HeaderPage.HowItWorks"]</a>
                     </li>
+
+                    <!-- Ceník -->
                     <li class="nav-item">
-                        <a class="nav-link spec-nav-link" asp-area="" asp-page="/Price">@L["HeaderPage.Price"]</a>
+                        <a class="nav-link spec-nav-link" asp-area="" asp-page="/Pricing">@L["HeaderPage.Price"]</a>
                     </li>
+
+                    <!-- Kontakt -->
                     <li class="nav-item">
                         <a class="nav-link spec-nav-link" asp-area="" asp-page="/Contact">@L["HeaderPage.Contact"]</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link spec-nav-link" asp-area="" asp-page="/Test">@L["HeaderPage.Test"]</a>
-                    </li>
                 </ul>
-                <div class="d-flex align-items-center">
-                    <a class="btn btn-spec-outline me-2" asp-area="" asp-page="/Account/Login">@L["HeaderPage.Login"]</a>
-                    <a class="btn btn-spec-primary" asp-area="" asp-page="/Account/Register">@L["HeaderPage.Register"]</a>
+
+                <div class="d-flex align-items-center gap-2">
+                    <!-- Language switch ALWAYS visible -->
+                    <div class="lang-switch d-flex align-items-center gap-2 me-2">
+                        <a class="lang-pill @(currentCulture == "cs" ? "active" : "")"
+                           asp-page="/Culture/Set"
+                           asp-route-culture="cs"
+                           asp-route-returnUrl="@returnUrl"
+                           title="Čeština"
+                           aria-label="Čeština">
+                            <img src="~/img/cs.svg" alt="CS" />
+                        </a>
+
+                        <a class="lang-pill @(currentCulture == "en" ? "active" : "")"
+                           asp-page="/Culture/Set"
+                           asp-route-culture="en"
+                           asp-route-returnUrl="@returnUrl"
+                           title="English"
+                           aria-label="English">
+                            <img src="~/img/en.svg" alt="EN" />
+                        </a>
+                    </div>
+                    @if (User.Identity?.IsAuthenticated == true)
+                    {
+                        <!-- User dropdown menu -->
+                        <div class="dropdown">
+                            <button class="btn btn-spec-outline dropdown-toggle" type="button" id="userDropdown"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                     class="bi bi-person-circle me-1" viewBox="0 0 16 16">
+                                    <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                                    <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+                                </svg>
+                                @User.Identity.Name
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                                <li><a class="dropdown-item" asp-area="" asp-page="/Account/Profile">@L["HeaderPage.Profile"]</a></li>
+                                @if (User.IsInRole("Admin"))
+                                {
+                                    <li><a class="dropdown-item" asp-area="" asp-page="/Admin/Index">@L["HeaderPage.Admin"]</a></li>
+                                }
+                                @if (User.IsInRole("Admin") || User.IsInRole("SchoolAdmin") || User.IsInRole("Teacher") || User.IsInRole("SPP"))
+                                {
+                                    <li><a class="dropdown-item" asp-area="" asp-page="/Dashboard/Index">@L["HeaderPage.Dashboard"]</a></li>
+                                }
+                                @if (User.IsInRole("Parent"))
+                                {
+                                    <li><a class="dropdown-item" asp-area="" asp-page="/MyChildren/Index">@L["HeaderPage.MyChildren"]</a></li>
+                                }
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" asp-area="" asp-page="/Account/Settings">@L["HeaderPage.Settings"]</a></li>
+                                <li><a class="dropdown-item" asp-area="" asp-page="/Account/Logout">@L["HeaderPage.Logout"]</a></li>
+                            </ul>
+                        </div>
+                    }
+                    else
+                    {
+                        <a class="btn btn-spec-outline" asp-area="" asp-page="/Account/Login">@L["HeaderPage.Login"]</a>
+                        <a class="btn btn-spec-primary" asp-area="" asp-page="/Account/Register">@L["HeaderPage.Register"]</a>
+                    }
                 </div>
             </div>
         </div>

@@ -228,4 +228,1450 @@
   <data name="HeaderPage.Contact" xml:space="preserve">
     <value>Kontakt</value>
   </data>
+  <data name="HeaderPage.Admin" xml:space="preserve">
+    <value>Administrace</value>
+  </data>
+  <data name="HeaderPage.Logout" xml:space="preserve">
+    <value>Odhlásit se</value>
+  </data>
+  <data name="HeaderPage.SystemOverview" xml:space="preserve">
+    <value>Přehled systému</value>
+  </data>
+  <data name="HeaderPage.HowItWorks" xml:space="preserve">
+    <value>Jak to funguje</value>
+  </data>
+  <data name="HeaderPage.Profile" xml:space="preserve">
+    <value>Profil</value>
+  </data>
+  <data name="HeaderPage.Dashboard" xml:space="preserve">
+    <value>Nástěnka</value>
+  </data>
+  <data name="HeaderPage.MyChildren" xml:space="preserve">
+    <value>Moje děti</value>
+  </data>
+  <data name="HeaderPage.Settings" xml:space="preserve">
+    <value>Nastavení</value>
+  </data>
+  <data name="Common.ComingSoon" xml:space="preserve">
+    <value>Brzy</value>
+  </data>
+  <data name="Common.TryFree" xml:space="preserve">
+    <value>Vyzkoušet zdarma</value>
+  </data>
+  <data name="SystemPage.Title" xml:space="preserve">
+    <value>O systému SpecEdu</value>
+  </data>
+  <data name="SystemPage.Subtitle" xml:space="preserve">
+    <value>Komplexní řešení pro správu speciálního vzdělávání</value>
+  </data>
+  <data name="SystemPage.TryFree" xml:space="preserve">
+    <value>Vyzkoušet zdarma</value>
+  </data>
+  <data name="SystemPage.LearnMore" xml:space="preserve">
+    <value>Zjistit více</value>
+  </data>
+  <data name="SystemPage.WhySpecEdu" xml:space="preserve">
+    <value>Proč SpecEdu?</value>
+  </data>
+  <data name="SystemPage.WhySpecEduDesc" xml:space="preserve">
+    <value>Navržen speciálně pro potřeby škol a poraden</value>
+  </data>
+  <data name="SystemPage.Feature1Title" xml:space="preserve">
+    <value>Digitální složka žáka</value>
+  </data>
+  <data name="SystemPage.Feature1Desc" xml:space="preserve">
+    <value>Všechny dokumenty na jednom místě, bezpečně a přístupné</value>
+  </data>
+  <data name="SystemPage.Feature2Title" xml:space="preserve">
+    <value>Snadná komunikace</value>
+  </data>
+  <data name="SystemPage.Feature2Desc" xml:space="preserve">
+    <value>Propojte školu, rodiče a poradny v reálném čase</value>
+  </data>
+  <data name="SystemPage.Feature3Title" xml:space="preserve">
+    <value>Podpora a školení</value>
+  </data>
+  <data name="SystemPage.Feature3Desc" xml:space="preserve">
+    <value>Vždy po ruce když nás potřebujete</value>
+  </data>
+  <data name="SystemPage.StatSchools" xml:space="preserve">
+    <value>Škol</value>
+  </data>
+  <data name="SystemPage.StatStudents" xml:space="preserve">
+    <value>Žáků</value>
+  </data>
+  <data name="SystemPage.StatSatisfaction" xml:space="preserve">
+    <value>Spokojenost</value>
+  </data>
+  <data name="SystemPage.StatSupport" xml:space="preserve">
+    <value>Podpora</value>
+  </data>
+  <data name="SystemPage.Testimonials" xml:space="preserve">
+    <value>Co říkají naši uživatelé</value>
+  </data>
+  <data name="SystemPage.TestimonialRole1" xml:space="preserve">
+    <value>Školní psycholog</value>
+  </data>
+  <data name="SystemPage.TestimonialRole2" xml:space="preserve">
+    <value>Pracovník PPP</value>
+  </data>
+  <data name="SystemPage.TestimonialRole3" xml:space="preserve">
+    <value>Rodič</value>
+  </data>
+  <data name="SystemPage.Testimonial1" xml:space="preserve">
+    <value>Specedu nám výrazně usnadnilo práci s dokumentací žáků se speciílními vzdělávacími potřebami.</value>
+  </data>
+  <data name="SystemPage.Testimonial2" xml:space="preserve">
+    <value>Koněčně máme přehled o všech případech a můžeme efektivně spolupracovat se školami.</value>
+  </data>
+  <data name="SystemPage.Testimonial3" xml:space="preserve">
+    <value>Jako rodič oceňuji, že mám přístup ke všem dokumentům svého dítěte na jednom místě.</value>
+  </data>
+  <data name="ForClientsPage.Title" xml:space="preserve">
+    <value>Pro školy a rodiče</value>
+  </data>
+  <data name="ForClientsPage.Subtitle" xml:space="preserve">
+    <value>Zjistěte jak vám může SpecEdu pomoci</value>
+  </data>
+  <data name="ForClientsPage.TabSchool" xml:space="preserve">
+    <value>Školy</value>
+  </data>
+  <data name="ForClientsPage.TabTeacher" xml:space="preserve">
+    <value>Učitelé</value>
+  </data>
+  <data name="ForClientsPage.TabParent" xml:space="preserve">
+    <value>Rodiče</value>
+  </data>
+  <data name="ForClientsPage.TabCounseling" xml:space="preserve">
+    <value>PPP/SPC</value>
+  </data>
+  <data name="ForClientsPage.SchoolTitle" xml:space="preserve">
+    <value>Pro školy</value>
+  </data>
+  <data name="ForClientsPage.SchoolDesc" xml:space="preserve">
+    <value>Zjednodušte administrativu a zvyšte efektivitu práce žáků s SVP.</value>
+  </data>
+  <data name="ForClientsPage.SchoolBenefit1" xml:space="preserve">
+    <value>Centrální správa dokumentace</value>
+  </data>
+  <data name="ForClientsPage.SchoolBenefit2" xml:space="preserve">
+    <value>Automatické upozornění na termíny</value>
+  </data>
+  <data name="ForClientsPage.SchoolBenefit3" xml:space="preserve">
+    <value>Bezpečné sdílení s rodiči</value>
+  </data>
+  <data name="ForClientsPage.SchoolBenefit4" xml:space="preserve">
+    <value>Soulad s GDPR</value>
+  </data>
+  <data name="ForClientsPage.ContactUs" xml:space="preserve">
+    <value>Kontaktujte nás</value>
+  </data>
+  <data name="ForClientsPage.TeacherTitle" xml:space="preserve">
+    <value>Pro učitele</value>
+  </data>
+  <data name="ForClientsPage.TeacherDesc" xml:space="preserve">
+    <value>Máte vše potřebné pro individuální přístup k žákům</value>
+  </data>
+  <data name="ForClientsPage.TeacherBenefit1" xml:space="preserve">
+    <value>Přehled o SVP žáků ve třídě</value>
+  </data>
+  <data name="ForClientsPage.TeacherBenefit2" xml:space="preserve">
+    <value>Přístup k doporučením</value>
+  </data>
+  <data name="ForClientsPage.TeacherBenefit3" xml:space="preserve">
+    <value>Komunikace s rodiči</value>
+  </data>
+  <data name="ForClientsPage.TeacherBenefit4" xml:space="preserve">
+    <value>Evidence podpory</value>
+  </data>
+  <data name="ForClientsPage.ParentTitle" xml:space="preserve">
+    <value>Pro rodiče</value>
+  </data>
+  <data name="ForClientsPage.ParentDesc" xml:space="preserve">
+    <value>Buďte informováni o vzdělávání vašeho dítěte</value>
+  </data>
+  <data name="ForClientsPage.ParentBenefit1" xml:space="preserve">
+    <value>Přístup k dokumentům SPC</value>
+  </data>
+  <data name="ForClientsPage.ParentBenefit2" xml:space="preserve">
+    <value>Komunikace se školou</value>
+  </data>
+  <data name="ForClientsPage.ParentBenefit3" xml:space="preserve">
+    <value>Upozornění na důležité termíny</value>
+  </data>
+  <data name="ForClientsPage.ParentBenefit4" xml:space="preserve">
+    <value>Bezpečný přístup odkudkoliv</value>
+  </data>
+  <data name="ForClientsPage.CounselingTitle" xml:space="preserve">
+    <value>Pro PPP a SPC</value>
+  </data>
+  <data name="ForClientsPage.CounselingDesc" xml:space="preserve">
+    <value>Efektivní správa přidělených žáků a dokumentace.</value>
+  </data>
+  <data name="ForClientsPage.CounselingBenefit1" xml:space="preserve">
+    <value>Přehled o přidělených žácích</value>
+  </data>
+  <data name="ForClientsPage.CounselingBenefit2" xml:space="preserve">
+    <value>Vytváření doporučení</value>
+  </data>
+  <data name="ForClientsPage.CounselingBenefit3" xml:space="preserve">
+    <value>Sledování termínu vyšetření</value>
+  </data>
+  <data name="ForClientsPage.CounselingBenefit4" xml:space="preserve">
+    <value>Komunikace se školami</value>
+  </data>
+  <data name="SecurityPage.Title" xml:space="preserve">
+    <value>Bezpečnost a GDPR</value>
+  </data>
+  <data name="SecurityPage.Subtitle" xml:space="preserve">
+    <value>Vaše data jsou u nás v bezpečí</value>
+  </data>
+  <data name="SecurityPage.EncryptionTitle" xml:space="preserve">
+    <value>Šifrování</value>
+  </data>
+  <data name="SecurityPage.EncryptionDesc" xml:space="preserve">
+    <value>Veškerá komunikace je šifrována pomocí TLS 1.3</value>
+  </data>
+  <data name="SecurityPage.AccessControlTitle" xml:space="preserve">
+    <value>Řízení přístupu</value>
+  </data>
+  <data name="SecurityPage.AccessControlDesc" xml:space="preserve">
+    <value>Přístup pouze pro oprávněné uživatele dle jejich role</value>
+  </data>
+  <data name="SecurityPage.AuditTitle" xml:space="preserve">
+    <value>Audit log</value>
+  </data>
+  <data name="SecurityPage.AuditDesc" xml:space="preserve">
+    <value>Kompletní záznam všech akcí v systému</value>
+  </data>
+  <data name="SecurityPage.BackupTitle" xml:space="preserve">
+    <value>Zálohování</value>
+  </data>
+  <data name="SecurityPage.BackupDesc" xml:space="preserve">
+    <value>Pravidelné zálohy s možností obnovy</value>
+  </data>
+  <data name="SecurityPage.GdprTitle" xml:space="preserve">
+    <value>GDPR</value>
+  </data>
+  <data name="SecurityPage.GdprDesc" xml:space="preserve">
+    <value>Plný soulad s evropskými předpisy o ochraně dat</value>
+  </data>
+  <data name="SecurityPage.CertTitle" xml:space="preserve">
+    <value>Certifikace</value>
+  </data>
+  <data name="SecurityPage.CertDesc" xml:space="preserve">
+    <value>Splňujeme nejvyšší bezpečnostní standarty</value>
+  </data>
+  <data name="SecurityPage.GdprSectionTitle" xml:space="preserve">
+    <value>GDPR Compliance</value>
+  </data>
+  <data name="SecurityPage.GdprSectionDesc" xml:space="preserve">
+    <value>SpecEdu je plně v souladu s Obecným nařízením o ochraně osobních údajů.</value>
+  </data>
+  <data name="SecurityPage.GdprPoint1" xml:space="preserve">
+    <value>Právo na přístup k datům</value>
+  </data>
+  <data name="SecurityPage.GdprPoint2" xml:space="preserve">
+    <value>Právo na opravu údajů</value>
+  </data>
+  <data name="SecurityPage.GdprPoint3" xml:space="preserve">
+    <value>Právo na vymazání</value>
+  </data>
+  <data name="SecurityPage.GdprPoint4" xml:space="preserve">
+    <value>Právo na přenositelnost</value>
+  </data>
+  <data name="SecurityPage.ReadPrivacyPolicy" xml:space="preserve">
+    <value>Přečíst zásady ochrany soukromí</value>
+  </data>
+  <data name="DocumentationPage.Title" xml:space="preserve">
+    <value>Dokumentace a pojmy</value>
+  </data>
+  <data name="DocumentationPage.Subtitle" xml:space="preserve">
+    <value>Vše co potřebujete vědět o speciálním vzdělávání</value>
+  </data>
+  <data name="DocumentationPage.SearchPlaceholder" xml:space="preserve">
+    <value>Hledat v dokumentaci...</value>
+  </data>
+  <data name="DocumentationPage.GlossaryTitle" xml:space="preserve">
+    <value>Slovníček pojmů</value>
+  </data>
+  <data name="DocumentationPage.SppShort" xml:space="preserve">
+    <value>Školní poradenské pracoviště</value>
+  </data>
+  <data name="DocumentationPage.SppDesc" xml:space="preserve">
+    <value>Školní poradenské pracoviště poskytuje poradenskou činnost přímo na půdě školy.</value>
+  </data>
+  <data name="DocumentationPage.PppShort" xml:space="preserve">
+    <value>Pedagogicko-psychologická poradna</value>
+  </data>
+  <data name="DocumentationPage.PppDesc" xml:space="preserve">
+    <value>Pedagogicko-psychologická poradna je školské poradenské zařízení.</value>
+  </data>
+  <data name="DocumentationPage.SpcShort" xml:space="preserve">
+    <value>Speciálně pedagogické centrum</value>
+  </data>
+  <data name="DocumentationPage.SpcDesc" xml:space="preserve">
+    <value>Speciálně pedagogické centrum poskytuje poradenskou činnost pro žáky se zdravotním postižením.</value>
+  </data>
+  <data name="DocumentationPage.SvpShort" xml:space="preserve">
+    <value>Speciální vzdělávací potřeby</value>
+  </data>
+  <data name="DocumentationPage.SvpDesc" xml:space="preserve">
+    <value>Speciální vzdělávací potřeby jsou potřeby žáka vyplývající z jeho zdravotního stavu.</value>
+  </data>
+  <data name="DocumentationPage.PlppShort" xml:space="preserve">
+    <value>Plán pedagogické podpory</value>
+  </data>
+  <data name="DocumentationPage.PlppDesc" xml:space="preserve">
+    <value>Plán pedagogické podpory je dokument zpracovaný školou pro žáky s potřebou podpůrných opatření.</value>
+  </data>
+  <data name="DocumentationPage.IvpShort" xml:space="preserve">
+    <value>Individuální vzdělávací plán</value>
+  </data>
+  <data name="DocumentationPage.IvpDesc" xml:space="preserve">
+    <value>Individuální vzdělávací plán je závazný dokument pro žáky se SVP.</value>
+  </data>
+  <data name="DocumentationPage.PoShort" xml:space="preserve">
+    <value>Podpůrná opatření</value>
+  </data>
+  <data name="DocumentationPage.PoDesc" xml:space="preserve">
+    <value>Podpůrná opatření jsou opatření poskytována žákům se speciálními vzdělávacími potřebami.</value>
+  </data>
+  <data name="DocumentationPage.QuickLinksTitle" xml:space="preserve">
+    <value>Rychlé odkazy</value>
+  </data>
+  <data name="DocumentationPage.GettingStarted" xml:space="preserve">
+    <value>Začátek práce</value>
+  </data>
+  <data name="DocumentationPage.GettingStartedDesc" xml:space="preserve">
+    <value>Jak začít se SpecEdu</value>
+  </data>
+  <data name="DocumentationPage.UserGuide" xml:space="preserve">
+    <value>Uživatelská příručka</value>
+  </data>
+  <data name="DocumentationPage.UserGuideDesc" xml:space="preserve">
+    <value>Podrobný návod k používání</value>
+  </data>
+  <data name="DocumentationPage.FAQ" xml:space="preserve">
+    <value>Časté dotazy</value>
+  </data>
+  <data name="DocumentationPage.FAQDesc" xml:space="preserve">
+    <value>Odpovědi na časté dotazy</value>
+  </data>
+  <data name="DocumentationPage.VideoTutorials" xml:space="preserve">
+    <value>Video návody</value>
+  </data>
+  <data name="DocumentationPage.VideoTutorialsDesc" xml:space="preserve">
+    <value>Výuková videa krok za krokem</value>
+  </data>
+  <data name="StudentFilesPage.Title" xml:space="preserve">
+    <value>Digitální složka žáka</value>
+  </data>
+  <data name="StudentFilesPage.Badge" xml:space="preserve">
+    <value>Hlavní funkce</value>
+  </data>
+  <data name="StudentFilesPage.Subtitle" xml:space="preserve">
+    <value>Kompletní přehled o každém žákovi na jednom místě</value>
+  </data>
+  <data name="StudentFilesPage.Feature1Title" xml:space="preserve">
+    <value>Centrální úložiště</value>
+  </data>
+  <data name="StudentFilesPage.Feature1Desc" xml:space="preserve">
+    <value>Všechny dokumenty bezpečně na jednom místě</value>
+  </data>
+  <data name="StudentFilesPage.Feature2Title" xml:space="preserve">
+    <value>Historie změn</value>
+  </data>
+  <data name="StudentFilesPage.Feature2Desc" xml:space="preserve">
+    <value>Kompletní historie všech úprav</value>
+  </data>
+  <data name="StudentFilesPage.Feature3Title" xml:space="preserve">
+    <value>Přístupová práva</value>
+  </data>
+  <data name="StudentFilesPage.Feature3Desc" xml:space="preserve">
+    <value>Přesně definovaný přístup dle role</value>
+  </data>
+  <data name="StudentFilesPage.Feature4Title" xml:space="preserve">
+    <value>Exporty</value>
+  </data>
+  <data name="StudentFilesPage.Feature4Desc" xml:space="preserve">
+    <value>Export do PDF a dalších formátů</value>
+  </data>
+  <data name="StudentFilesPage.ScreenshotTitle" xml:space="preserve">
+    <value>Vše na jednom místě</value>
+  </data>
+  <data name="StudentFilesPage.ScreenshotDesc" xml:space="preserve">
+    <value>Přehledné rozhraní pro rychlý přístup k informacím</value>
+  </data>
+  <data name="StudentFilesPage.ScreenshotPoint1" xml:space="preserve">
+    <value>Základní údaje o žákovi</value>
+  </data>
+  <data name="StudentFilesPage.ScreenshotPoint2" xml:space="preserve">
+    <value>Dokumenty a doporučení</value>
+  </data>
+  <data name="StudentFilesPage.ScreenshotPoint3" xml:space="preserve">
+    <value>Komunikační deník</value>
+  </data>
+  <data name="DocumentsPage.Title" xml:space="preserve">
+    <value>Dokumenty a doporučení</value>
+  </data>
+  <data name="DocumentsPage.Badge" xml:space="preserve">
+    <value>Dokumentace</value>
+  </data>
+  <data name="DocumentsPage.Subtitle" xml:space="preserve">
+    <value>Správa všech dokumentů na jednom místě</value>
+  </data>
+  <data name="DocumentsPage.TypesTitle" xml:space="preserve">
+    <value>Typy dokumentu</value>
+  </data>
+  <data name="DocumentsPage.Type1Title" xml:space="preserve">
+    <value>Doporučení PPP/SPC</value>
+  </data>
+  <data name="DocumentsPage.Type1Desc" xml:space="preserve">
+    <value>Odborné doporučení z poraden</value>
+  </data>
+  <data name="DocumentsPage.Type2Title" xml:space="preserve">
+    <value>PLPP / IVP</value>
+  </data>
+  <data name="DocumentsPage.Type2Desc" xml:space="preserve">
+    <value>Plány pedagogické poradny</value>
+  </data>
+  <data name="DocumentsPage.Type3Title" xml:space="preserve">
+    <value>Informované souhlasy</value>
+  </data>
+  <data name="DocumentsPage.Type3Desc" xml:space="preserve">
+    <value>Souhlasy rodičů a zákonných zástupců</value>
+  </data>
+  <data name="DocumentsPage.HowItWorksTitle" xml:space="preserve">
+    <value>Jak to funguje</value>
+  </data>
+  <data name="DocumentsPage.Step1Title" xml:space="preserve">
+    <value>Nahrajte</value>
+  </data>
+  <data name="DocumentsPage.Step1Desc" xml:space="preserve">
+    <value>Nahrajte dokument do systému</value>
+  </data>
+  <data name="DocumentsPage.Step2Title" xml:space="preserve">
+    <value>Kategorizujte</value>
+  </data>
+  <data name="DocumentsPage.Step2Desc" xml:space="preserve">
+    <value>Přiřaďte dokument k žákovi</value>
+  </data>
+  <data name="DocumentsPage.Step3Title" xml:space="preserve">
+    <value>Sdílejte</value>
+  </data>
+  <data name="DocumentsPage.Step3Desc" xml:space="preserve">
+    <value>Automatické sdílení dle oprávnění</value>
+  </data>
+  <data name="DiaryPage.Title" xml:space="preserve">
+    <value>Komunikační deník</value>
+  </data>
+  <data name="DiaryPage.Badge" xml:space="preserve">
+    <value>Komunikace</value>
+  </data>
+  <data name="DiaryPage.Subtitle" xml:space="preserve">
+    <value>Efektivní komunikace mezi všemi zůčstněnými</value>
+  </data>
+  <data name="DiaryPage.Feature1Title" xml:space="preserve">
+    <value>Strukturované zprávy</value>
+  </data>
+  <data name="DiaryPage.Feature1Desc" xml:space="preserve">
+    <value>Přehledné vlákna konverzací</value>
+  </data>
+  <data name="DiaryPage.Feature2Title" xml:space="preserve">
+    <value>Přílohy</value>
+  </data>
+  <data name="DiaryPage.Feature2Desc" xml:space="preserve">
+    <value>Možnost přikládat soubory</value>
+  </data>
+  <data name="DiaryPage.Feature3Title" xml:space="preserve">
+    <value>Historie</value>
+  </data>
+  <data name="DiaryPage.Feature3Desc" xml:space="preserve">
+    <value>Kompletní historie komunikace</value>
+  </data>
+  <data name="DiaryPage.Feature4Title" xml:space="preserve">
+    <value>Upozornění</value>
+  </data>
+  <data name="DiaryPage.Feature4Desc" xml:space="preserve">
+    <value>Notifikace na nové zprávy</value>
+  </data>
+  <data name="DiaryPage.DemoTitle" xml:space="preserve">
+    <value>Ukázka komunikace</value>
+  </data>
+  <data name="DiaryPage.DemoMsg1" xml:space="preserve">
+    <value>Dnes jsme s Honzíkem pracovali na matematice, výrazně se zlepšil.</value>
+  </data>
+  <data name="DiaryPage.DemoMsg2" xml:space="preserve">
+    <value>Dekuji za informaci, doma jsme také zpozorovali zlepšení.</value>
+  </data>
+  <data name="DiaryPage.DemoMsg3" xml:space="preserve">
+    <value>Na základě aktuálního vývoje doporučuji prodloužit podporu o další 3 měsíce.</value>
+  </data>
+  <data name="DiaryPage.TypeMessage" xml:space="preserve">
+    <value>Napište zprávu...</value>
+  </data>
+  <data name="NotificationsPage.Title" xml:space="preserve">
+    <value>Notifikace a termíny</value>
+  </data>
+  <data name="NotificationsPage.Badge" xml:space="preserve">
+    <value>Upozornění</value>
+  </data>
+  <data name="NotificationsPage.Subtitle" xml:space="preserve">
+    <value>Nikdy nezmeškejte důležitý termín</value>
+  </data>
+  <data name="NotificationsPage.TypesTitle" xml:space="preserve">
+    <value>Typy upozornění</value>
+  </data>
+  <data name="NotificationsPage.Type1Title" xml:space="preserve">
+    <value>Termíny vyšetření</value>
+  </data>
+  <data name="NotificationsPage.Type1Desc" xml:space="preserve">
+    <value>Upozornění na blížící se kontrolní vyšetření</value>
+  </data>
+  <data name="NotificationsPage.Type2Title" xml:space="preserve">
+    <value>Platnost dokumentu</value>
+  </data>
+  <data name="NotificationsPage.Type2Desc" xml:space="preserve">
+    <value>Upozornění na konec splatnosti doporučení</value>
+  </data>
+  <data name="NotificationsPage.Type3Title" xml:space="preserve">
+    <value>Nové zprávy</value>
+  </data>
+  <data name="NotificationsPage.Type3Desc" xml:space="preserve">
+    <value>Upozornění na nové zprávy v komunikačním deníku</value>
+  </data>
+  <data name="NotificationsPage.SampleTitle" xml:space="preserve">
+    <value>Ukázka notifikací</value>
+  </data>
+  <data name="NotificationsPage.Sample1Title" xml:space="preserve">
+    <value>Blíží se kontrolní vyšetření</value>
+  </data>
+  <data name="NotificationsPage.Sample1Desc" xml:space="preserve">
+    <value>Jan Novák - kontrolní vyšetření za 30 dní</value>
+  </data>
+  <data name="NotificationsPage.Sample2Title" xml:space="preserve">
+    <value>Nová zpráva od učitele</value>
+  </data>
+  <data name="NotificationsPage.Sample2Desc" xml:space="preserve">
+    <value>Mgr. Nováková vám poslala zprávu</value>
+  </data>
+  <data name="NotificationsPage.Sample3Title" xml:space="preserve">
+    <value>Dokument schválen</value>
+  </data>
+  <data name="NotificationsPage.Sample3Desc" xml:space="preserve">
+    <value>PLPP pro Jana Nováka bylo schváleno</value>
+  </data>
+  <data name="HowItWorksPage.Title" xml:space="preserve">
+    <value>Jak to funguje</value>
+  </data>
+  <data name="HowItWorksPage.Subtitle" xml:space="preserve">
+    <value>Podrobný průvodce systémem SpecEdu</value>
+  </data>
+  <data name="HowItWorksPage.NavOverview" xml:space="preserve">
+    <value>Přehled</value>
+  </data>
+  <data name="HowItWorksPage.NavRoles" xml:space="preserve">
+    <value>Role</value>
+  </data>
+  <data name="HowItWorksPage.NavScenarios" xml:space="preserve">
+    <value>Scénáře</value>
+  </data>
+  <data name="HowItWorksPage.NavDocuments" xml:space="preserve">
+    <value>Dokumenty</value>
+  </data>
+  <data name="HowItWorksPage.NavScreenshots" xml:space="preserve">
+    <value>Ukázky</value>
+  </data>
+  <data name="HowItWorksPage.StepsTitle" xml:space="preserve">
+    <value>3 jednoduché kroky</value>
+  </data>
+  <data name="HowItWorksPage.Step1Title" xml:space="preserve">
+    <value>Založení školy</value>
+  </data>
+  <data name="HowItWorksPage.Step1Desc" xml:space="preserve">
+    <value>Vytvořte účet pro vaši školu a nakonfigurujte základní nastavení.</value>
+  </data>
+  <data name="HowItWorksPage.Step2Title" xml:space="preserve">
+    <value>Přidání žáků</value>
+  </data>
+  <data name="HowItWorksPage.Step2Desc" xml:space="preserve">
+    <value>Importujte nebo přidejte žáky se speciálními vzdělávacími potřebami.</value>
+  </data>
+  <data name="HowItWorksPage.Step3Title" xml:space="preserve">
+    <value>Pozvání uživatelů</value>
+  </data>
+  <data name="HowItWorksPage.Step3Desc" xml:space="preserve">
+    <value>Pozvěte učitele, rodiče, pracovníky poraden.</value>
+  </data>
+  <data name="HowItWorksPage.RolesTitle" xml:space="preserve">
+    <value>Role a oprávnění</value>
+  </data>
+  <data name="HowItWorksPage.RoleColumn" xml:space="preserve">
+    <value>Role</value>
+  </data>
+  <data name="HowItWorksPage.ViewStudents" xml:space="preserve">
+    <value>Zobrazit žáky</value>
+  </data>
+  <data name="HowItWorksPage.EditStudents" xml:space="preserve">
+    <value>Upravit žáky</value>
+  </data>
+  <data name="HowItWorksPage.ViewDocuments" xml:space="preserve">
+    <value>Zobrazit dokumenty</value>
+  </data>
+  <data name="HowItWorksPage.CreateDocuments" xml:space="preserve">
+    <value>Vytvořit dokumenty</value>
+  </data>
+  <data name="HowItWorksPage.ManageSchool" xml:space="preserve">
+    <value>Spravovat školu</value>
+  </data>
+  <data name="HowItWorksPage.RoleSchoolAdmin" xml:space="preserve">
+    <value>Správce školy</value>
+  </data>
+  <data name="HowItWorksPage.RoleTeacher" xml:space="preserve">
+    <value>Učitel</value>
+  </data>
+  <data name="HowItWorksPage.RoleSPP" xml:space="preserve">
+    <value>Školní psycholog</value>
+  </data>
+  <data name="HowItWorksPage.RolePPP" xml:space="preserve">
+    <value>Pracovnik PPP</value>
+  </data>
+  <data name="HowItWorksPage.RoleSPC" xml:space="preserve">
+    <value>Pracovník SPC</value>
+  </data>
+  <data name="HowItWorksPage.RoleParent" xml:space="preserve">
+    <value>Rodič</value>
+  </data>
+  <data name="HowItWorksPage.ParentNote" xml:space="preserve">
+    <value>Pouze vlastní děti</value>
+  </data>
+  <data name="HowItWorksPage.ScenariosTitle" xml:space="preserve">
+    <value>Typické scénáře</value>
+  </data>
+  <data name="HowItWorksPage.ScenarioParentTitle" xml:space="preserve">
+    <value>Rodič zkontroluje dokumenty</value>
+  </data>
+  <data name="HowItWorksPage.ScenarioParent1" xml:space="preserve">
+    <value>Přihlášení do systému</value>
+  </data>
+  <data name="HowItWorksPage.ScenarioParent2" xml:space="preserve">
+    <value>Výběr dítěte</value>
+  </data>
+  <data name="HowItWorksPage.ScenarioParent3" xml:space="preserve">
+    <value>Zobrazení dokumentu</value>
+  </data>
+  <data name="HowItWorksPage.ScenarioParent4" xml:space="preserve">
+    <value>Stažení PDF</value>
+  </data>
+  <data name="HowItWorksPage.ScenarioTeacherTitle" xml:space="preserve">
+    <value>Učitel přidá záznam</value>
+  </data>
+  <data name="HowItWorksPage.ScenarioTeacher1" xml:space="preserve">
+    <value>Výběr žáka ze třídy</value>
+  </data>
+  <data name="HowItWorksPage.ScenarioTeacher2" xml:space="preserve">
+    <value>Otevření komunikačního deníku</value>
+  </data>
+  <data name="HowItWorksPage.ScenarioTeacher3" xml:space="preserve">
+    <value>Napsání zprávy</value>
+  </data>
+  <data name="HowItWorksPage.ScenarioTeacher4" xml:space="preserve">
+    <value>Odeslání rodičům</value>
+  </data>
+  <data name="HowItWorksPage.ScenarioSppTitle" xml:space="preserve">
+    <value>SPP vytvoří PLPP</value>
+  </data>
+  <data name="HowItWorksPage.ScenarioSpp1" xml:space="preserve">
+    <value>Výběr žáka</value>
+  </data>
+  <data name="HowItWorksPage.ScenarioSpp2" xml:space="preserve">
+    <value>Vytvoření nového PLPP</value>
+  </data>
+  <data name="HowItWorksPage.ScenarioSpp3" xml:space="preserve">
+    <value>Vyplnění formuláře</value>
+  </data>
+  <data name="HowItWorksPage.ScenarioSpp4" xml:space="preserve">
+    <value>Schválení a sdílení</value>
+  </data>
+  <data name="HowItWorksPage.ScenarioPppTitle" xml:space="preserve">
+    <value>PPP vydá doporučení</value>
+  </data>
+  <data name="HowItWorksPage.ScenarioPpp1" xml:space="preserve">
+    <value>Přijetí žádosti od školy</value>
+  </data>
+  <data name="HowItWorksPage.ScenarioPpp2" xml:space="preserve">
+    <value>Provedení vyšetření</value>
+  </data>
+  <data name="HowItWorksPage.ScenarioPpp3" xml:space="preserve">
+    <value>Vytvoření doporučení</value>
+  </data>
+  <data name="HowItWorksPage.ScenarioPpp4" xml:space="preserve">
+    <value>Odeslání škole</value>
+  </data>
+  <data name="HowItWorksPage.DocumentFlowTitle" xml:space="preserve">
+    <value>Tok dokumentu</value>
+  </data>
+  <data name="HowItWorksPage.Flow1" xml:space="preserve">
+    <value>Doporučení</value>
+  </data>
+  <data name="HowItWorksPage.Flow2" xml:space="preserve">
+    <value>Termín kontroly</value>
+  </data>
+  <data name="HowItWorksPage.Flow3" xml:space="preserve">
+    <value>Upozornění</value>
+  </data>
+  <data name="HowItWorksPage.Flow4" xml:space="preserve">
+    <value>Splněno</value>
+  </data>
+  <data name="HowItWorksPage.ScreenshotsTitle" xml:space="preserve">
+    <value>Ukázky obrazovek</value>
+  </data>
+  <data name="HowItWorksPage.Screenshot1Title" xml:space="preserve">
+    <value>Nástěnka</value>
+  </data>
+  <data name="HowItWorksPage.Screenshot1Desc" xml:space="preserve">
+    <value>Přehledná nástěnka s důležitými informacemi</value>
+  </data>
+  <data name="HowItWorksPage.Screenshot2Title" xml:space="preserve">
+    <value>Detail žáka</value>
+  </data>
+  <data name="HowItWorksPage.Screenshot2Desc" xml:space="preserve">
+    <value>Kompletní informace o žákovi na jednom místě</value>
+  </data>
+  <data name="HowItWorksPage.CtaTitle" xml:space="preserve">
+    <value>Připraveni začít?</value>
+  </data>
+  <data name="HowItWorksPage.CtaDesc" xml:space="preserve">
+    <value>Vyzkoušejte SpecEdu zdarma a přesvědčte se sami</value>
+  </data>
+  <data name="HowItWorksPage.CtaButton" xml:space="preserve">
+    <value>Začít zdarma</value>
+  </data>
+  <data name="PricingPage.Title" xml:space="preserve">
+    <value>Ceník</value>
+  </data>
+  <data name="PricingPage.Subtitle" xml:space="preserve">
+    <value>Vyberte plán, který Vám vyhovuje</value>
+  </data>
+  <data name="PricingPage.Monthly" xml:space="preserve">
+    <value>Měsíčně</value>
+  </data>
+  <data name="PricingPage.Yearly" xml:space="preserve">
+    <value>Ročně</value>
+  </data>
+  <data name="PricingPage.PilotTitle" xml:space="preserve">
+    <value>Pilot</value>
+  </data>
+  <data name="PricingPage.PilotDesc" xml:space="preserve">
+    <value>Pro školy, které chtějí systém vyzkoušet</value>
+  </data>
+  <data name="PricingPage.Free" xml:space="preserve">
+    <value>Zdarma</value>
+  </data>
+  <data name="PricingPage.PilotDuration" xml:space="preserve">
+    <value>na 3 měsíce</value>
+  </data>
+  <data name="PricingPage.PilotFeature1" xml:space="preserve">
+    <value>Až 10 žáků</value>
+  </data>
+  <data name="PricingPage.PilotFeature2" xml:space="preserve">
+    <value>Základní funkce</value>
+  </data>
+  <data name="PricingPage.PilotFeature3" xml:space="preserve">
+    <value>Email podpora</value>
+  </data>
+  <data name="PricingPage.PilotFeature4" xml:space="preserve">
+    <value>Školení zdarma</value>
+  </data>
+  <data name="PricingPage.PilotFeature5" xml:space="preserve">
+    <value>API přístup</value>
+  </data>
+  <data name="PricingPage.RequestPilot" xml:space="preserve">
+    <value>Požádat o pilot</value>
+  </data>
+  <data name="PricingPage.Popular" xml:space="preserve">
+    <value>Nejoblíbenější</value>
+  </data>
+  <data name="PricingPage.StandardTitle" xml:space="preserve">
+    <value>Standard</value>
+  </data>
+  <data name="PricingPage.StandardDesc" xml:space="preserve">
+    <value>Pro většinu škol</value>
+  </data>
+  <data name="PricingPage.PerMonth" xml:space="preserve">
+    <value>za měsíc</value>
+  </data>
+  <data name="PricingPage.StandardFeature1" xml:space="preserve">
+    <value>Neomezený počet žáků</value>
+  </data>
+  <data name="PricingPage.StandardFeature2" xml:space="preserve">
+    <value>Všechny funkce</value>
+  </data>
+  <data name="PricingPage.StandardFeature3" xml:space="preserve">
+    <value>Prioritní podpora</value>
+  </data>
+  <data name="PricingPage.StandardFeature4" xml:space="preserve">
+    <value>Pravidelné aktualizace</value>
+  </data>
+  <data name="PricingPage.StandardFeature5" xml:space="preserve">
+    <value>Školení zdarma</value>
+  </data>
+  <data name="PricingPage.StartNow" xml:space="preserve">
+    <value>Začít nyní</value>
+  </data>
+  <data name="PricingPage.EnterpriseTitle" xml:space="preserve">
+    <value>Enterprise</value>
+  </data>
+  <data name="PricingPage.EnterpriseDesc" xml:space="preserve">
+    <value>Pro velké organizace</value>
+  </data>
+  <data name="PricingPage.Custom" xml:space="preserve">
+    <value>Na míru</value>
+  </data>
+  <data name="PricingPage.ContactUs" xml:space="preserve">
+    <value>Kontaktujte nás</value>
+  </data>
+  <data name="PricingPage.EnterpriseFeature1" xml:space="preserve">
+    <value>Vše ze standart</value>
+  </data>
+  <data name="PricingPage.EnterpriseFeature2" xml:space="preserve">
+    <value>Vlastní integrace</value>
+  </data>
+  <data name="PricingPage.EnterpriseFeature3" xml:space="preserve">
+    <value>Dedikovaný manažer</value>
+  </data>
+  <data name="PricingPage.EnterpriseFeature4" xml:space="preserve">
+    <value>SLA garantována</value>
+  </data>
+  <data name="PricingPage.EnterpriseFeature5" xml:space="preserve">
+    <value>On-premise možnost</value>
+  </data>
+  <data name="PricingPage.ContactSales" xml:space="preserve">
+    <value>Kontaktovat obchod</value>
+  </data>
+  <data name="PricingPage.IncludedTitle" xml:space="preserve">
+    <value>Co je zahrnuto</value>
+  </data>
+  <data name="PricingPage.Included1Title" xml:space="preserve">
+    <value>Bez skrytých poplatků</value>
+  </data>
+  <data name="PricingPage.Included1Desc" xml:space="preserve">
+    <value>Platíte pouze co vidíte</value>
+  </data>
+  <data name="PricingPage.Included2Title" xml:space="preserve">
+    <value>Podpora v češtině</value>
+  </data>
+  <data name="PricingPage.Included2Desc" xml:space="preserve">
+    <value>Vždy tady pro vás</value>
+  </data>
+  <data name="PricingPage.Included3Title" xml:space="preserve">
+    <value>Pravidelné aktualizace</value>
+  </data>
+  <data name="PricingPage.Included3Desc" xml:space="preserve">
+    <value>Nové funkce zdarma</value>
+  </data>
+  <data name="PricingPage.Included4Title" xml:space="preserve">
+    <value>Školení zdarma</value>
+  </data>
+  <data name="PricingPage.Included4Desc" xml:space="preserve">
+    <value>Pro všechny uživatele</value>
+  </data>
+  <data name="PricingPage.FaqTitle" xml:space="preserve">
+    <value>Časté dotazy</value>
+  </data>
+  <data name="PricingPage.Faq1Question" xml:space="preserve">
+    <value>Mohu změnit plán kdykoliv?</value>
+  </data>
+  <data name="PricingPage.Faq1Answer" xml:space="preserve">
+    <value>Ano, plán můžete změnit kdykoliv. Změna se projeví od dalšího zúčtovacího období.</value>
+  </data>
+  <data name="PricingPage.Faq2Question" xml:space="preserve">
+    <value>Existuje dlouhodobá vazba?</value>
+  </data>
+  <data name="PricingPage.Faq2Answer" xml:space="preserve">
+    <value>Ne, naše služby jsou bez dlouhodobé vazby. Můžete zrušit kdykoliv.</value>
+  </data>
+  <data name="PricingPage.Faq3Question" xml:space="preserve">
+    <value>Jak probíhá platba?</value>
+  </data>
+  <data name="PricingPage.Faq3Answer" xml:space="preserve">
+    <value>Platba probíhá měsíčně nebo ročně na základě faktury nebo platební kartou.</value>
+  </data>
+  <data name="ContactPage.Title" xml:space="preserve">
+    <value>Kontakt</value>
+  </data>
+  <data name="ContactPage.Subtitle" xml:space="preserve">
+    <value>Máte otázky? Napište nám</value>
+  </data>
+  <data name="ContactPage.FormTitle" xml:space="preserve">
+    <value>Napište nám</value>
+  </data>
+  <data name="ContactPage.Name" xml:space="preserve">
+    <value>Jméno</value>
+  </data>
+  <data name="ContactPage.NamePlaceholder" xml:space="preserve">
+    <value>Vaše jméno</value>
+  </data>
+  <data name="ContactPage.Email" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="ContactPage.EmailPlaceholder" xml:space="preserve">
+    <value>vas@email.cz</value>
+  </data>
+  <data name="ContactPage.Subject" xml:space="preserve">
+    <value>Předmět</value>
+  </data>
+  <data name="ContactPage.SubjectSelect" xml:space="preserve">
+    <value>Vyberte předmět</value>
+  </data>
+  <data name="ContactPage.SubjectPilot" xml:space="preserve">
+    <value>Žádost o demo</value>
+  </data>
+  <data name="ContactPage.SubjectDemo" xml:space="preserve">
+    <value>Žádost o demo</value>
+  </data>
+  <data name="ContactPage.SubjectPricing" xml:space="preserve">
+    <value>Dotaz na ceny</value>
+  </data>
+  <data name="ContactPage.SubjectSupport" xml:space="preserve">
+    <value>Technická podpora</value>
+  </data>
+  <data name="ContactPage.SubjectOther" xml:space="preserve">
+    <value>Jiné</value>
+  </data>
+  <data name="ContactPage.Message" xml:space="preserve">
+    <value>Zpráva</value>
+  </data>
+  <data name="ContactPage.MessagePlaceholder" xml:space="preserve">
+    <value>Vaše zpráva</value>
+  </data>
+  <data name="ContactPage.Send" xml:space="preserve">
+    <value>Odeslat</value>
+  </data>
+  <data name="ContactPage.PilotTitle" xml:space="preserve">
+    <value>Požádejte o pilot</value>
+  </data>
+  <data name="ContactPage.PilotDesc" xml:space="preserve">
+    <value>Vyzkoušet SpecEdu zdarma na š měsíce</value>
+  </data>
+  <data name="ContactPage.PilotPoint1" xml:space="preserve">
+    <value>Bez závazků</value>
+  </data>
+  <data name="ContactPage.PilotPoint2" xml:space="preserve">
+    <value>Plná funkcionalita</value>
+  </data>
+  <data name="ContactPage.PilotPoint3" xml:space="preserve">
+    <value>Školení zdarma</value>
+  </data>
+  <data name="ContactPage.RequestPilot" xml:space="preserve">
+    <value>Požádat o pilot</value>
+  </data>
+  <data name="ContactPage.ContactInfo" xml:space="preserve">
+    <value>Kontaktni udaje</value>
+  </data>
+  <data name="ContactPage.Phone" xml:space="preserve">
+    <value>Telefon</value>
+  </data>
+  <data name="ContactPage.Address" xml:space="preserve">
+    <value>Adresa</value>
+  </data>
+  <data name="TermsPage.Title" xml:space="preserve">
+    <value>Podmínky používání</value>
+  </data>
+  <data name="TermsPage.LastUpdated" xml:space="preserve">
+    <value>Poslední aktualizace</value>
+  </data>
+  <data name="TermsPage.Section1Title" xml:space="preserve">
+    <value>Úvod</value>
+  </data>
+  <data name="TermsPage.Section1Content" xml:space="preserve">
+    <value>Tyto podmínky upravují používání platformy SpecEdu.</value>
+  </data>
+  <data name="TermsPage.Section2Title" xml:space="preserve">
+    <value>Práva a povinnosti uživatele:</value>
+  </data>
+  <data name="TermsPage.Section2Content" xml:space="preserve">
+    <value>Uživatel se zavazuje:</value>
+  </data>
+  <data name="TermsPage.Section2Point1" xml:space="preserve">
+    <value>Používat službu v souladu s právními předpisy</value>
+  </data>
+  <data name="TermsPage.Section2Point2" xml:space="preserve">
+    <value>Chránit své přihlašovací údaje</value>
+  </data>
+  <data name="TermsPage.Section2Point3" xml:space="preserve">
+    <value>Neporušovat práva třetích stran</value>
+  </data>
+  <data name="TermsPage.Section3Title" xml:space="preserve">
+    <value>Ochrana dat</value>
+  </data>
+  <data name="TermsPage.Section3Content" xml:space="preserve">
+    <value>Osobní údaje jsou zpracovány v souladu s GDPR.</value>
+  </data>
+  <data name="TermsPage.Section4Title" xml:space="preserve">
+    <value>Osoba odpovědná za škodu službou:</value>
+  </data>
+  <data name="TermsPage.Section4Content" xml:space="preserve">
+    <value>Poskytovatel nenese odpovědnost za škody vznikem neodborným použitím služby.</value>
+  </data>
+  <data name="TermsPage.Section5Title" xml:space="preserve">
+    <value>Ukončení služby</value>
+  </data>
+  <data name="TermsPage.Section5Content" xml:space="preserve">
+    <value>Uživatel může kdykoliv požádat o zrušení účtu.</value>
+  </data>
+  <data name="TermsPage.Section6Title" xml:space="preserve">
+    <value>Závěrečná ustanovení</value>
+  </data>
+  <data name="TermsPage.Section6Content" xml:space="preserve">
+    <value>Tyto podmínky se řídí českým právem.</value>
+  </data>
+  <data name="PrivacyPage.Title" xml:space="preserve">
+    <value>Zásady ochrany osobních údajů</value>
+  </data>
+  <data name="PrivacyPage.LastUpdated" xml:space="preserve">
+    <value>Poslední aktualizace</value>
+  </data>
+  <data name="PrivacyPage.GdprCompliant" xml:space="preserve">
+    <value>GDPR Compliant</value>
+  </data>
+  <data name="PrivacyPage.GdprNote" xml:space="preserve">
+    <value>Naše služby jsou v souladu s GDPR</value>
+  </data>
+  <data name="PrivacyPage.Section1Title" xml:space="preserve">
+    <value>Shromažďované údaje</value>
+  </data>
+  <data name="PrivacyPage.Section1Content" xml:space="preserve">
+    <value>Shromažďujeme následující typy údajů:</value>
+  </data>
+  <data name="PrivacyPage.Section1Point1" xml:space="preserve">
+    <value>Identifikační údaje (jméno, email)</value>
+  </data>
+  <data name="PrivacyPage.Section1Point2" xml:space="preserve">
+    <value>Údaje o žácích SVP</value>
+  </data>
+  <data name="PrivacyPage.Section1Point3" xml:space="preserve">
+    <value>Komunikační historii</value>
+  </data>
+  <data name="PrivacyPage.Section2Title" xml:space="preserve">
+    <value>Účel zpracování</value>
+  </data>
+  <data name="PrivacyPage.Section2Content" xml:space="preserve">
+    <value>Údaje zpracované za účelem poskytnutí služby a zlepšení uživatelského prořitku.</value>
+  </data>
+  <data name="PrivacyPage.Section3Title" xml:space="preserve">
+    <value>Uchovávání údajů</value>
+  </data>
+  <data name="PrivacyPage.Section3Content" xml:space="preserve">
+    <value>Údaje uchováváme po dobu nezbytnou pro poskytnutí služby.</value>
+  </data>
+  <data name="PrivacyPage.Section4Title" xml:space="preserve">
+    <value>Vaše práva</value>
+  </data>
+  <data name="PrivacyPage.Section4Content" xml:space="preserve">
+    <value>Máte následující práva:</value>
+  </data>
+  <data name="PrivacyPage.Section4Point1" xml:space="preserve">
+    <value>Právo na přístup k údajům</value>
+  </data>
+  <data name="PrivacyPage.Section4Point2" xml:space="preserve">
+    <value>Právo na opravu</value>
+  </data>
+  <data name="PrivacyPage.Section4Point3" xml:space="preserve">
+    <value>Právo na vymazání</value>
+  </data>
+  <data name="PrivacyPage.Section4Point4" xml:space="preserve">
+    <value>Právo na přenositelnost</value>
+  </data>
+  <data name="PrivacyPage.Section5Title" xml:space="preserve">
+    <value>Bezpečnost</value>
+  </data>
+  <data name="PrivacyPage.Section5Content" xml:space="preserve">
+    <value>Používané šifrování a další bezpečnostní opatření k ochraně vašich dat.</value>
+  </data>
+  <data name="PrivacyPage.Section6Title" xml:space="preserve">
+    <value>Kontakt</value>
+  </data>
+  <data name="PrivacyPage.Section6Content" xml:space="preserve">
+    <value>Pro dotazy ohledně ochrany údajů nás kontaktujte na:</value>
+  </data>
+  <data name="CookiesPage.Title" xml:space="preserve">
+    <value>Zásady používání cookies</value>
+  </data>
+  <data name="CookiesPage.LastUpdated" xml:space="preserve">
+    <value>Poslední aktualizace</value>
+  </data>
+  <data name="CookiesPage.WhatAreCookies" xml:space="preserve">
+    <value>Co jsou cookies?</value>
+  </data>
+  <data name="CookiesPage.WhatAreCookiesContent" xml:space="preserve">
+    <value>Cookies jsou malé textové soubory ukládané ve vašem prohlížeči</value>
+  </data>
+  <data name="CookiesPage.TypesTitle" xml:space="preserve">
+    <value>Typy cookies</value>
+  </data>
+  <data name="CookiesPage.EssentialTitle" xml:space="preserve">
+    <value>Nezbytne cookies</value>
+  </data>
+  <data name="CookiesPage.EssentialDesc" xml:space="preserve">
+    <value>Potrebne pro fungovani webu, nelze je vypnout.</value>
+  </data>
+  <data name="CookiesPage.FunctionalTitle" xml:space="preserve">
+    <value>Funkční cookies</value>
+  </data>
+  <data name="CookiesPage.FunctionalDesc" xml:space="preserve">
+    <value>Umožňují lepši funkcionalitu a personalizaci.</value>
+  </data>
+  <data name="CookiesPage.AnalyticsTitle" xml:space="preserve">
+    <value>Analytické cookies</value>
+  </data>
+  <data name="CookiesPage.AnalyticsDesc" xml:space="preserve">
+    <value>Pomozte nám pochopit, jak web používáte</value>
+  </data>
+  <data name="CookiesPage.ManageTitle" xml:space="preserve">
+    <value>Správa cookies</value>
+  </data>
+  <data name="CookiesPage.ManageContent" xml:space="preserve">
+    <value>Cookies můžete spravovat v nastavení vašeho prohlížeče</value>
+  </data>
+  <data name="CookiesPage.ContactTitle" xml:space="preserve">
+    <value>Kontakt</value>
+  </data>
+  <data name="CookiesPage.ContactContent" xml:space="preserve">
+    <value>Pro dotazy nás kontaktujte na info@specedu.cz</value>
+  </data>
+  <data name="ProfilePage.Title" xml:space="preserve">
+    <value>Profil</value>
+  </data>
+  <data name="ProfilePage.Role" xml:space="preserve">
+    <value>Role</value>
+  </data>
+  <data name="ProfilePage.Active" xml:space="preserve">
+    <value>Aktivní</value>
+  </data>
+  <data name="ProfilePage.QuickStats" xml:space="preserve">
+    <value>Rychlý přehled</value>
+  </data>
+  <data name="ProfilePage.MemberSince" xml:space="preserve">
+    <value>Členem od</value>
+  </data>
+  <data name="ProfilePage.LastLogin" xml:space="preserve">
+    <value>Poslední přihlášení</value>
+  </data>
+  <data name="ProfilePage.Today" xml:space="preserve">
+    <value>Dnes</value>
+  </data>
+  <data name="ProfilePage.School" xml:space="preserve">
+    <value>Škola</value>
+  </data>
+  <data name="ProfilePage.PersonalInfo" xml:space="preserve">
+    <value>Osobní údaje</value>
+  </data>
+  <data name="ProfilePage.FirstName" xml:space="preserve">
+    <value>Jméno</value>
+  </data>
+  <data name="ProfilePage.LastName" xml:space="preserve">
+    <value>Přijmení</value>
+  </data>
+  <data name="ProfilePage.Phone" xml:space="preserve">
+    <value>Telefon</value>
+  </data>
+  <data name="ProfilePage.EditProfile" xml:space="preserve">
+    <value>Upravit profil</value>
+  </data>
+  <data name="ProfilePage.Security" xml:space="preserve">
+    <value>Zabezpečení</value>
+  </data>
+  <data name="ProfilePage.Password" xml:space="preserve">
+    <value>Heslo</value>
+  </data>
+  <data name="ProfilePage.PasswordLastChanged" xml:space="preserve">
+    <value>Poslední změna hesla</value>
+  </data>
+  <data name="ProfilePage.ChangePassword" xml:space="preserve">
+    <value>Změnit heslo</value>
+  </data>
+  <data name="ProfilePage.TwoFactor" xml:space="preserve">
+    <value>Dvoufaktorové ověření</value>
+  </data>
+  <data name="ProfilePage.TwoFactorDesc" xml:space="preserve">
+    <value>Dodatečná úroveň zabezpečení</value>
+  </data>
+  <data name="ProfilePage.Enable" xml:space="preserve">
+    <value>Aktivovat</value>
+  </data>
+  <data name="SettingsPage.Title" xml:space="preserve">
+    <value>Nastavení</value>
+  </data>
+  <data name="SettingsPage.General" xml:space="preserve">
+    <value>Obecné</value>
+  </data>
+  <data name="SettingsPage.Notifications" xml:space="preserve">
+    <value>Notifikace</value>
+  </data>
+  <data name="SettingsPage.Privacy" xml:space="preserve">
+    <value>Soukromí</value>
+  </data>
+  <data name="SettingsPage.Language" xml:space="preserve">
+    <value>Jazyk</value>
+  </data>
+  <data name="SettingsPage.Timezone" xml:space="preserve">
+    <value>Časové pásmo</value>
+  </data>
+  <data name="SettingsPage.DateFormat" xml:space="preserve">
+    <value>Format data</value>
+  </data>
+  <data name="SettingsPage.NotificationSettings" xml:space="preserve">
+    <value>Nastavení notifikací</value>
+  </data>
+  <data name="SettingsPage.EmailNotifications" xml:space="preserve">
+    <value>Emailové notifikace</value>
+  </data>
+  <data name="SettingsPage.DocumentNotifications" xml:space="preserve">
+    <value>Notifikace o dokumentech</value>
+  </data>
+  <data name="SettingsPage.MarketingNotifications" xml:space="preserve">
+    <value>Marketingové notifikace</value>
+  </data>
+  <data name="SettingsPage.LanguageSettings" xml:space="preserve">
+    <value>Nastavení jazyka</value>
+  </data>
+  <data name="DashboardPage.Title" xml:space="preserve">
+    <value>Nástěnka</value>
+  </data>
+  <data name="DashboardPage.Welcome" xml:space="preserve">
+    <value>Vítejte</value>
+  </data>
+  <data name="DashboardPage.WelcomeDesc" xml:space="preserve">
+    <value>Zde je přehled vaší aktivity</value>
+  </data>
+  <data name="DashboardPage.TotalStudents" xml:space="preserve">
+    <value>Celkem žáků</value>
+  </data>
+  <data name="DashboardPage.ActiveDocuments" xml:space="preserve">
+    <value>Aktivní dokumenty</value>
+  </data>
+  <data name="DashboardPage.PendingTasks" xml:space="preserve">
+    <value>Čekající úkoly</value>
+  </data>
+  <data name="DashboardPage.Messages" xml:space="preserve">
+    <value>Zprávy</value>
+  </data>
+  <data name="DashboardPage.FromLastMonth" xml:space="preserve">
+    <value>od minulého měsíce</value>
+  </data>
+  <data name="DashboardPage.RecentActivity" xml:space="preserve">
+    <value>Nedávná aktivita</value>
+  </data>
+  <data name="DashboardPage.Activity1" xml:space="preserve">
+    <value>Nový dokument přidán pro Jana Nováka</value>
+  </data>
+  <data name="DashboardPage.Activity2" xml:space="preserve">
+    <value>Nová zpráva od Mgr. Novákové</value>
+  </data>
+  <data name="DashboardPage.Activity3" xml:space="preserve">
+    <value>Upozornění: Blíží se kontrolní vyšetření</value>
+  </data>
+  <data name="DashboardPage.HoursAgo" xml:space="preserve">
+    <value>hodiny</value>
+  </data>
+  <data name="DashboardPage.DayAgo" xml:space="preserve">
+    <value>den</value>
+  </data>
+  <data name="DashboardPage.QuickActions" xml:space="preserve">
+    <value>Rychlé akce</value>
+  </data>
+  <data name="DashboardPage.AddStudent" xml:space="preserve">
+    <value>Přidat žáka</value>
+  </data>
+  <data name="DashboardPage.CreateDocument" xml:space="preserve">
+    <value>Vytvořit dokument</value>
+  </data>
+  <data name="DashboardPage.SendMessage" xml:space="preserve">
+    <value>Poslat zprávu</value>
+  </data>
+  <data name="MyChildrenPage.Title" xml:space="preserve">
+    <value>Moje děti</value>
+  </data>
+  <data name="MyChildrenPage.Active" xml:space="preserve">
+    <value>Aktivní</value>
+  </data>
+  <data name="MyChildrenPage.Documents" xml:space="preserve">
+    <value>Dokumenty</value>
+  </data>
+  <data name="MyChildrenPage.Messages" xml:space="preserve">
+    <value>Zprávy</value>
+  </data>
+  <data name="MyChildrenPage.Notifications" xml:space="preserve">
+    <value>Upozornění</value>
+  </data>
+  <data name="MyChildrenPage.ViewDetails" xml:space="preserve">
+    <value>Zobrazit detail</value>
+  </data>
+  <data name="MyChildrenPage.ViewDocuments" xml:space="preserve">
+    <value>Zobrazit dokumenty</value>
+  </data>
+  <data name="MyChildrenPage.RecentUpdates" xml:space="preserve">
+    <value>Nedávné aktualizace</value>
+  </data>
+  <data name="MyChildrenPage.NewDocument" xml:space="preserve">
+    <value>Nový dokument</value>
+  </data>
+  <data name="MyChildrenPage.DocumentAdded" xml:space="preserve">
+    <value>Do složky byl přidán nový dokument</value>
+  </data>
+  <data name="MyChildrenPage.NewMessage" xml:space="preserve">
+    <value>Nová zpráva</value>
+  </data>
+  <data name="MyChildrenPage.MessageFromTeacher" xml:space="preserve">
+    <value>Zpráva od třídní učitelky</value>
+  </data>
+  <data name="FooterPage.Terms" xml:space="preserve">
+    <value>Podmínky</value>
+  </data>
+  <data name="FooterPage.Cookies" xml:space="preserve">
+    <value>Cookies</value>
+  </data>
+  <data name="StudentsPage.Title" xml:space="preserve">
+    <value>Správa žáků</value>
+  </data>
+  <data name="StudentsPage.AddStudent" xml:space="preserve">
+    <value>Přidat žáka</value>
+  </data>
+  <data name="StudentsPage.EditStudent" xml:space="preserve">
+    <value>Upravit žáka</value>
+  </data>
+  <data name="StudentsPage.SearchPlaceholder" xml:space="preserve">
+    <value>Hledat podle jména nebo třídy...</value>
+  </data>
+  <data name="StudentsPage.Name" xml:space="preserve">
+    <value>Jméno</value>
+  </data>
+  <data name="StudentsPage.Class" xml:space="preserve">
+    <value>Třída</value>
+  </data>
+  <data name="StudentsPage.ClassPlaceholder" xml:space="preserve">
+    <value>např. 5.A</value>
+  </data>
+  <data name="StudentsPage.BirthDate" xml:space="preserve">
+    <value>Datum narození</value>
+  </data>
+  <data name="StudentsPage.Status" xml:space="preserve">
+    <value>Stav</value>
+  </data>
+  <data name="StudentsPage.School" xml:space="preserve">
+    <value>Škola</value>
+  </data>
+  <data name="StudentsPage.Created" xml:space="preserve">
+    <value>Vytvořeno</value>
+  </data>
+  <data name="StudentsPage.NoStudents" xml:space="preserve">
+    <value>Zatím nejsou registrováni žádní žáci.</value>
+  </data>
+  <data name="StudentsPage.AddFirstStudent" xml:space="preserve">
+    <value>Přidat prvního žáka</value>
+  </data>
+  <data name="StudentsPage.Guardians" xml:space="preserve">
+    <value>Zákonní zástupci</value>
+  </data>
+  <data name="StudentsPage.Staff" xml:space="preserve">
+    <value>Zaměstnanci</value>
+  </data>
+  <data name="StudentsPage.BasicInfo" xml:space="preserve">
+    <value>Základní informace</value>
+  </data>
+  <data name="StudentsPage.ConfirmDelete" xml:space="preserve">
+    <value>Opravdu chcete deaktivovat tohoto žáka?</value>
+  </data>
+  <data name="StudentsPage.NoGuardians" xml:space="preserve">
+    <value>Žádní zákonní zástupci.</value>
+  </data>
+  <data name="StudentsPage.NoStaffLinks" xml:space="preserve">
+    <value>Žádní přiřazení zaměstnanci.</value>
+  </data>
+  <data name="StudentsPage.AddGuardian" xml:space="preserve">
+    <value>Přidat zákonného zástupce</value>
+  </data>
+  <data name="StudentsPage.CurrentGuardians" xml:space="preserve">
+    <value>Aktuální zákonní zástupci</value>
+  </data>
+  <data name="StudentsPage.Parent" xml:space="preserve">
+    <value>Rodič</value>
+  </data>
+  <data name="StudentsPage.Email" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="StudentsPage.RelationshipType" xml:space="preserve">
+    <value>Typ vztahu</value>
+  </data>
+  <data name="StudentsPage.AddStaffLink" xml:space="preserve">
+    <value>Přidat vazbu zaměstnance</value>
+  </data>
+  <data name="StudentsPage.CurrentStaffLinks" xml:space="preserve">
+    <value>Aktuální vazby zaměstnanců</value>
+  </data>
+  <data name="StudentsPage.StaffMember" xml:space="preserve">
+    <value>Zaměstnanec</value>
+  </data>
+  <data name="StudentsPage.LinkType" xml:space="preserve">
+    <value>Typ vazby</value>
+  </data>
+  <data name="StudentsPage.AccessLevel" xml:space="preserve">
+    <value>Úroveň přístupu</value>
+  </data>
+  <data name="Common.Search" xml:space="preserve">
+    <value>Hledat</value>
+  </data>
+  <data name="Common.Actions" xml:space="preserve">
+    <value>Akce</value>
+  </data>
+  <data name="Common.Active" xml:space="preserve">
+    <value>Aktivní</value>
+  </data>
+  <data name="Common.Inactive" xml:space="preserve">
+    <value>Neaktivní</value>
+  </data>
+  <data name="Common.View" xml:space="preserve">
+    <value>Zobrazit</value>
+  </data>
+  <data name="Common.Edit" xml:space="preserve">
+    <value>Upravit</value>
+  </data>
+  <data name="Common.Save" xml:space="preserve">
+    <value>Uložit</value>
+  </data>
+  <data name="Common.Cancel" xml:space="preserve">
+    <value>Zrušit</value>
+  </data>
+  <data name="Common.Back" xml:space="preserve">
+    <value>Zpět</value>
+  </data>
+  <data name="Common.BackToDashboard" xml:space="preserve">
+    <value>Zpět na nástěnku</value>
+  </data>
+  <data name="Common.Manage" xml:space="preserve">
+    <value>Spravovat</value>
+  </data>
+  <data name="Common.Deactivate" xml:space="preserve">
+    <value>Deaktivovat</value>
+  </data>
+  <data name="Common.Select" xml:space="preserve">
+    <value>Vyberte</value>
+  </data>
+  <data name="Common.Add" xml:space="preserve">
+    <value>Přidat</value>
+  </data>
+  <data name="Common.Remove" xml:space="preserve">
+    <value>Odebrat</value>
+  </data>
+  <data name="Common.ConfirmRemove" xml:space="preserve">
+    <value>Opravdu chcete odebrat tuto vazbu?</value>
+  </data>
+  <data name="Common.NoRecentActivity" xml:space="preserve">
+    <value>Žádná nedávná aktivita.</value>
+  </data>
+  <data name="MyChildrenPage.NoChildren" xml:space="preserve">
+    <value>Nemáte přiřazené žádné děti.</value>
+  </data>
 </root>

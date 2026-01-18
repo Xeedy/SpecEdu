@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using SpecEdu.Application.Common.Interfaces;
 using SpecEdu.Domain.Common;
+using SpecEdu.Domain.Entities;
 using SpecEdu.Infrastructure.Identity;
 
 namespace SpecEdu.Infrastructure.Data;
@@ -18,6 +19,16 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser, IdentityR
     {
         _currentUserService = currentUserService;
     }
+
+    public DbSet<School> Schools => Set<School>();
+
+    public DbSet<Student> Students => Set<Student>();
+
+    public DbSet<StudentGuardian> StudentGuardians => Set<StudentGuardian>();
+
+    public DbSet<StudentStaffLink> StudentStaffLinks => Set<StudentStaffLink>();
+
+    public DbSet<AuditLog> AuditLogs => Set<AuditLog>();
 
     public override int SaveChanges()
     {

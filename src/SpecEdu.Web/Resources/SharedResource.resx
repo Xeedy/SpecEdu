@@ -228,4 +228,10 @@
   <data name="HeaderPage.Contact" xml:space="preserve">
     <value>Contact</value>
   </data>
+  <data name="HeaderPage.Admin" xml:space="preserve">
+    <value>Admin</value>
+  </data>
+  <data name="HeaderPage.Logout" xml:space="preserve">
+    <value>Log out</value>
+  </data>
 </root>
