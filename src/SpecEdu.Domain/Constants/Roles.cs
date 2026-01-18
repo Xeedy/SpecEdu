@@ -7,10 +7,16 @@ namespace SpecEdu.Domain.Constants;
 public static class Roles
 {
     /// <summary>
-    /// Administrator role - full system access, one per school.
-    /// Czech: Správce
+    /// Global administrator role - full system access across all schools.
+    /// Czech: Globální správce
     /// </summary>
     public const string Admin = "Admin";
+
+    /// <summary>
+    /// School administrator role - full access within their school (tenant).
+    /// Czech: Správce školy
+    /// </summary>
+    public const string SchoolAdmin = "SchoolAdmin";
 
     /// <summary>
     /// Teacher/Pedagogue role - manages students and documentation.
@@ -55,6 +61,7 @@ public static class Roles
     public static readonly string[] All =
     [
         Admin,
+        SchoolAdmin,
         Teacher,
         Parent,
         SPP,

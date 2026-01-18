@@ -1,22 +1,15 @@
-using System.ComponentModel.DataAnnotations;
 using MailKit.Net.Smtp;
 using MailKit.Security;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using MimeKit;
+using System.ComponentModel.DataAnnotations;
+using System.Text.Encodings.Web;
 
 namespace SpecEdu.Web.Pages.Account
 {
-    public class RegisterModel : PageModel
+    public class RegisterModel(ILogger<RegisterModel> Log, IConfiguration config) : PageModel
     {
-        private readonly ILogger<RegisterModel> _logger;
-        private readonly IConfiguration _config;
-
-        public RegisterModel(ILogger<RegisterModel> logger, IConfiguration config)
-        {
-            _logger = logger;
-            _config = config;
-        }
 
         [BindProperty]
         public RegisterRequest Input { get; set; } = new();
@@ -47,7 +40,7 @@ namespace SpecEdu.Web.Pages.Account
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Sending institution request email failed");
+                Log.LogError(ex, "Sending institution request email failed");
                 ErrorMessage = "Nepodaøilo se odeslat žádost. Zkuste to prosím pozdìji.";
                 return Page();
             }
@@ -55,7 +48,7 @@ namespace SpecEdu.Web.Pages.Account
 
         private async Task SendEmailAsync(RegisterRequest req)
         {
-            var mailSection = _config.GetSection("Mail");
+            var mailSection = config.GetSection("Mail");
 
             var toEmail = mailSection["To"] ?? "michal.tesik1@gmail.com";
             var host = mailSection["SmtpHost"] ?? throw new InvalidOperationException("Mail:SmtpHost missing");
@@ -92,7 +85,7 @@ namespace SpecEdu.Web.Pages.Account
 
         private string BuildHtml(RegisterRequest req)
         {
-            string E(string? s) => System.Net.WebUtility.HtmlEncode(s ?? "");
+            string E(string? s) => HtmlEncoder.Default.Encode(s ?? "");
 
             var ip = HttpContext.Connection.RemoteIpAddress?.ToString() ?? "-";
             var now = DateTimeOffset.Now;

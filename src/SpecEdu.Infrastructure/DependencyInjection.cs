@@ -1,13 +1,16 @@
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using SpecEdu.Application.Common.Interfaces;
+using SpecEdu.Infrastructure.Authorization;
 using SpecEdu.Infrastructure.Data;
 using SpecEdu.Infrastructure.Identity;
+using SpecEdu.Infrastructure.Services;
 
 namespace SpecEdu.Infrastructure;
 
@@ -58,12 +61,8 @@ public static class DependencyInjection
             .AddEntityFrameworkStores<ApplicationDbContext>()
             .AddDefaultTokenProviders();
 
-        services.AddAuthentication(options =>
-            {
-                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-                options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-            })
+        // JWT Bearer is available for API endpoints, but Identity cookies are the default for Razor Pages
+        services.AddAuthentication()
             .AddJwtBearer(options =>
             {
                 options.TokenValidationParameters = new TokenValidationParameters
@@ -81,6 +80,18 @@ public static class DependencyInjection
             });
 
         services.AddScoped<IJwtTokenService, JwtTokenService>();
+        services.AddScoped<IIdentityService, IdentityService>();
+        services.AddScoped<ISchoolService, SchoolService>();
+        services.AddScoped<IStudentService, StudentService>();
+        services.AddScoped<IStudentAccessService, StudentAccessService>();
+        services.AddScoped<IAuditService, AuditService>();
+
+        // Register authorization handlers
+        services.AddSingleton<IAuthorizationHandler, PermissionAuthorizationHandler>();
+        services.AddScoped<IAuthorizationHandler, StudentAccessAuthorizationHandler>();
+
+        // Add authorization policies
+        services.AddAuthorization(AuthorizationPolicies.AddPolicies);
 
         return services;
     }

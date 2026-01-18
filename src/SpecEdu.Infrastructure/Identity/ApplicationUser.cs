@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Identity;
+using SpecEdu.Domain.Entities;
 
 namespace SpecEdu.Infrastructure.Identity;
 
@@ -33,6 +34,17 @@ public class ApplicationUser : IdentityUser
     /// Inactive users cannot log in.
     /// </summary>
     public bool IsActive { get; set; } = true;
+
+    /// <summary>
+    /// Identifier of the school this user belongs to.
+    /// Null for global administrators who are not tied to a specific school.
+    /// </summary>
+    public Guid? SchoolId { get; set; }
+
+    /// <summary>
+    /// Navigation property to the user's school.
+    /// </summary>
+    public School? School { get; set; }
 
     /// <summary>
     /// Gets the user's full name.

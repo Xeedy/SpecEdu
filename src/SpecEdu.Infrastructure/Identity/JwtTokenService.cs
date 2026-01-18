@@ -21,9 +21,14 @@ public class JwtTokenService : IJwtTokenService
     }
 
     /// <summary>
+    /// Custom claim type for school ID.
+    /// </summary>
+    public const string SchoolIdClaimType = "school_id";
+
+    /// <summary>
     /// Generates a JWT token with user claims and roles.
     /// </summary>
-    public string GenerateToken(string userId, string email, IEnumerable<string> roles)
+    public string GenerateToken(string userId, string email, IEnumerable<string> roles, Guid? schoolId = null)
     {
         var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtSettings.Secret));
         var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
@@ -35,6 +40,12 @@ public class JwtTokenService : IJwtTokenService
             new(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
             new(ClaimTypes.NameIdentifier, userId)
         };
+
+        // Add school ID claim if present
+        if (schoolId.HasValue)
+        {
+            claims.Add(new Claim(SchoolIdClaimType, schoolId.Value.ToString()));
+        }
 
         // Add role claims
         foreach (var role in roles)

@@ -1,0 +1,191 @@
+@page
+@model SpecEdu.Web.Pages.PricingModel
+@inject IStringLocalizer<SharedResource> L
+@{
+    ViewData["Title"] = L["PricingPage.Title"];
+}
+
+<!-- Hero -->
+<section class="bg-spec-primary-light py-5">
+    <div class="container">
+        <h1 class="display-5 fw-bold text-center mb-3">@L["PricingPage.Title"]</h1>
+        <p class="lead text-center text-muted mb-0">@L["PricingPage.Subtitle"]</p>
+    </div>
+</section>
+
+<!-- Plan Toggle -->
+<section class="py-5">
+    <div class="container">
+        <div class="d-flex justify-content-center mb-5">
+            <div class="btn-group" role="group">
+                <input type="radio" class="btn-check" name="planType" id="monthly" checked>
+                <label class="btn btn-outline-primary" for="monthly">@L["PricingPage.Monthly"]</label>
+                <input type="radio" class="btn-check" name="planType" id="yearly">
+                <label class="btn btn-outline-primary" for="yearly">@L["PricingPage.Yearly"] <span class="badge bg-success">-20%</span></label>
+            </div>
+        </div>
+
+        <!-- Pricing Cards -->
+        <div class="row g-4 justify-content-center">
+            <!-- Pilot -->
+            <div class="col-md-6 col-lg-4">
+                <div class="spec-card h-100 p-4">
+                    <div class="text-center mb-4">
+                        <h4 class="fw-bold">@L["PricingPage.PilotTitle"]</h4>
+                        <p class="text-muted small mb-3">@L["PricingPage.PilotDesc"]</p>
+                        <div class="display-4 fw-bold text-spec-primary">@L["PricingPage.Free"]</div>
+                        <p class="text-muted small">@L["PricingPage.PilotDuration"]</p>
+                    </div>
+                    <ul class="list-unstyled mb-4">
+                        <li class="mb-2"><span class="text-success me-2">&#10003;</span> @L["PricingPage.PilotFeature1"]</li>
+                        <li class="mb-2"><span class="text-success me-2">&#10003;</span> @L["PricingPage.PilotFeature2"]</li>
+                        <li class="mb-2"><span class="text-success me-2">&#10003;</span> @L["PricingPage.PilotFeature3"]</li>
+                        <li class="mb-2"><span class="text-success me-2">&#10003;</span> @L["PricingPage.PilotFeature4"]</li>
+                        <li class="mb-2 text-muted"><span class="me-2">-</span> @L["PricingPage.PilotFeature5"]</li>
+                    </ul>
+                    <a asp-page="/Contact" class="btn btn-spec-outline w-100">@L["PricingPage.RequestPilot"]</a>
+                </div>
+            </div>
+
+            <!-- Standard -->
+            <div class="col-md-6 col-lg-4">
+                <div class="spec-card h-100 p-4 border-primary border-2 position-relative">
+                    <div class="position-absolute top-0 start-50 translate-middle">
+                        <span class="badge bg-spec-primary px-3 py-2">@L["PricingPage.Popular"]</span>
+                    </div>
+                    <div class="text-center mb-4 pt-3">
+                        <h4 class="fw-bold">@L["PricingPage.StandardTitle"]</h4>
+                        <p class="text-muted small mb-3">@L["PricingPage.StandardDesc"]</p>
+                        <div class="display-4 fw-bold text-spec-primary">990 Kc</div>
+                        <p class="text-muted small">@L["PricingPage.PerMonth"]</p>
+                    </div>
+                    <ul class="list-unstyled mb-4">
+                        <li class="mb-2"><span class="text-success me-2">&#10003;</span> @L["PricingPage.StandardFeature1"]</li>
+                        <li class="mb-2"><span class="text-success me-2">&#10003;</span> @L["PricingPage.StandardFeature2"]</li>
+                        <li class="mb-2"><span class="text-success me-2">&#10003;</span> @L["PricingPage.StandardFeature3"]</li>
+                        <li class="mb-2"><span class="text-success me-2">&#10003;</span> @L["PricingPage.StandardFeature4"]</li>
+                        <li class="mb-2"><span class="text-success me-2">&#10003;</span> @L["PricingPage.StandardFeature5"]</li>
+                    </ul>
+                    <a asp-page="/Account/Register" class="btn btn-spec-primary w-100">@L["PricingPage.StartNow"]</a>
+                </div>
+            </div>
+
+            <!-- Enterprise -->
+            <div class="col-md-6 col-lg-4">
+                <div class="spec-card h-100 p-4">
+                    <div class="text-center mb-4">
+                        <h4 class="fw-bold">@L["PricingPage.EnterpriseTitle"]</h4>
+                        <p class="text-muted small mb-3">@L["PricingPage.EnterpriseDesc"]</p>
+                        <div class="display-4 fw-bold text-spec-primary">@L["PricingPage.Custom"]</div>
+                        <p class="text-muted small">@L["PricingPage.ContactUs"]</p>
+                    </div>
+                    <ul class="list-unstyled mb-4">
+                        <li class="mb-2"><span class="text-success me-2">&#10003;</span> @L["PricingPage.EnterpriseFeature1"]</li>
+                        <li class="mb-2"><span class="text-success me-2">&#10003;</span> @L["PricingPage.EnterpriseFeature2"]</li>
+                        <li class="mb-2"><span class="text-success me-2">&#10003;</span> @L["PricingPage.EnterpriseFeature3"]</li>
+                        <li class="mb-2"><span class="text-success me-2">&#10003;</span> @L["PricingPage.EnterpriseFeature4"]</li>
+                        <li class="mb-2"><span class="text-success me-2">&#10003;</span> @L["PricingPage.EnterpriseFeature5"]</li>
+                    </ul>
+                    <a asp-page="/Contact" class="btn btn-spec-outline w-100">@L["PricingPage.ContactSales"]</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- What's Included -->
+<section class="bg-white py-5">
+    <div class="container">
+        <h2 class="fw-bold text-center mb-5">@L["PricingPage.IncludedTitle"]</h2>
+        <div class="row g-4">
+            <div class="col-md-6 col-lg-3">
+                <div class="text-center">
+                    <div class="bg-spec-primary-light rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 64px; height: 64px;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="var(--spec-primary)" viewBox="0 0 16 16">
+                            <path d="M5 0a.5.5 0 0 1 .5.5V2h1V.5a.5.5 0 0 1 1 0V2h1V.5a.5.5 0 0 1 1 0V2h1V.5a.5.5 0 0 1 1 0V2A2.5 2.5 0 0 1 14 4.5h1.5a.5.5 0 0 1 0 1H14v1h1.5a.5.5 0 0 1 0 1H14v1h1.5a.5.5 0 0 1 0 1H14v1h1.5a.5.5 0 0 1 0 1H14a2.5 2.5 0 0 1-2.5 2.5v1.5a.5.5 0 0 1-1 0V14h-1v1.5a.5.5 0 0 1-1 0V14h-1v1.5a.5.5 0 0 1-1 0V14h-1v1.5a.5.5 0 0 1-1 0V14A2.5 2.5 0 0 1 2 11.5H.5a.5.5 0 0 1 0-1H2v-1H.5a.5.5 0 0 1 0-1H2v-1H.5a.5.5 0 0 1 0-1H2v-1H.5a.5.5 0 0 1 0-1H2A2.5 2.5 0 0 1 4.5 2V.5A.5.5 0 0 1 5 0z"/>
+                        </svg>
+                    </div>
+                    <h6 class="fw-bold">@L["PricingPage.Included1Title"]</h6>
+                    <p class="text-muted small mb-0">@L["PricingPage.Included1Desc"]</p>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="text-center">
+                    <div class="bg-spec-primary-light rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 64px; height: 64px;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="var(--spec-primary)" viewBox="0 0 16 16">
+                            <path d="M8 1a5 5 0 0 0-5 5v1h1a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a6 6 0 1 1 12 0v6a2.5 2.5 0 0 1-2.5 2.5H9.366a1 1 0 0 1-.866.5h-1a1 1 0 1 1 0-2h1a1 1 0 0 1 .866.5H11.5A1.5 1.5 0 0 0 13 12h-1a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1h1V6a5 5 0 0 0-5-5z"/>
+                        </svg>
+                    </div>
+                    <h6 class="fw-bold">@L["PricingPage.Included2Title"]</h6>
+                    <p class="text-muted small mb-0">@L["PricingPage.Included2Desc"]</p>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="text-center">
+                    <div class="bg-spec-primary-light rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 64px; height: 64px;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="var(--spec-primary)" viewBox="0 0 16 16">
+                            <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2z"/>
+                        </svg>
+                    </div>
+                    <h6 class="fw-bold">@L["PricingPage.Included3Title"]</h6>
+                    <p class="text-muted small mb-0">@L["PricingPage.Included3Desc"]</p>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="text-center">
+                    <div class="bg-spec-primary-light rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 64px; height: 64px;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="var(--spec-primary)" viewBox="0 0 16 16">
+                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                            <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+                        </svg>
+                    </div>
+                    <h6 class="fw-bold">@L["PricingPage.Included4Title"]</h6>
+                    <p class="text-muted small mb-0">@L["PricingPage.Included4Desc"]</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FAQ -->
+<section class="py-5">
+    <div class="container">
+        <h2 class="fw-bold text-center mb-5">@L["PricingPage.FaqTitle"]</h2>
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="accordion" id="pricingFaq">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                                @L["PricingPage.Faq1Question"]
+                            </button>
+                        </h2>
+                        <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#pricingFaq">
+                            <div class="accordion-body">@L["PricingPage.Faq1Answer"]</div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+                                @L["PricingPage.Faq2Question"]
+                            </button>
+                        </h2>
+                        <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#pricingFaq">
+                            <div class="accordion-body">@L["PricingPage.Faq2Answer"]</div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+                                @L["PricingPage.Faq3Question"]
+                            </button>
+                        </h2>
+                        <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#pricingFaq">
+                            <div class="accordion-body">@L["PricingPage.Faq3Answer"]</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

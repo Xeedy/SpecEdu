@@ -11,8 +11,9 @@ public interface IJwtTokenService
     /// <param name="userId">The user's unique identifier.</param>
     /// <param name="email">The user's email address.</param>
     /// <param name="roles">The user's roles.</param>
+    /// <param name="schoolId">The user's school identifier (optional).</param>
     /// <returns>A JWT token string.</returns>
-    string GenerateToken(string userId, string email, IEnumerable<string> roles);
+    string GenerateToken(string userId, string email, IEnumerable<string> roles, Guid? schoolId = null);
 
     /// <summary>
     /// Generates a refresh token.

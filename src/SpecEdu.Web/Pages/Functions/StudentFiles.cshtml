@@ -1,0 +1,101 @@
+@page
+@model SpecEdu.Web.Pages.Functions.StudentFilesModel
+@inject IStringLocalizer<SharedResource> L
+@{
+    ViewData["Title"] = L["StudentFilesPage.Title"];
+}
+
+<!-- Hero -->
+<section class="bg-spec-primary-light py-5">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <span class="badge bg-spec-primary mb-3">@L["StudentFilesPage.Badge"]</span>
+                <h1 class="display-5 fw-bold mb-3">@L["StudentFilesPage.Title"]</h1>
+                <p class="lead text-muted mb-4">@L["StudentFilesPage.Subtitle"]</p>
+                <a asp-page="/Account/Register" class="btn btn-spec-primary btn-lg">@L["Common.TryFree"]</a>
+            </div>
+            <div class="col-lg-6 mt-4 mt-lg-0">
+                <img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=600&h=400&fit=crop"
+                     alt="Student files" class="img-fluid rounded shadow-lg">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Features -->
+<section class="py-5">
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-md-6 col-lg-3">
+                <div class="spec-card p-4 h-100 text-center">
+                    <div class="bg-spec-primary-light rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 64px; height: 64px;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="var(--spec-primary)" viewBox="0 0 16 16">
+                            <path d="M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0zM9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1zM4.5 9a.5.5 0 0 1 0-1h7a.5.5 0 0 1 0 1h-7zM4 10.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm.5 2.5a.5.5 0 0 1 0-1h4a.5.5 0 0 1 0 1h-4z"/>
+                        </svg>
+                    </div>
+                    <h5 class="fw-bold">@L["StudentFilesPage.Feature1Title"]</h5>
+                    <p class="text-muted mb-0 small">@L["StudentFilesPage.Feature1Desc"]</p>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="spec-card p-4 h-100 text-center">
+                    <div class="bg-spec-primary-light rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 64px; height: 64px;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="var(--spec-primary)" viewBox="0 0 16 16">
+                            <path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A31.493 31.493 0 0 1 8 14.58a31.481 31.481 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94zM8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10z"/>
+                            <path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                        </svg>
+                    </div>
+                    <h5 class="fw-bold">@L["StudentFilesPage.Feature2Title"]</h5>
+                    <p class="text-muted mb-0 small">@L["StudentFilesPage.Feature2Desc"]</p>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="spec-card p-4 h-100 text-center">
+                    <div class="bg-spec-primary-light rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 64px; height: 64px;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="var(--spec-primary)" viewBox="0 0 16 16">
+                            <path d="M8 1a5 5 0 0 0-5 5v1h1a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a6 6 0 1 1 12 0v6a2.5 2.5 0 0 1-2.5 2.5H9.366a1 1 0 0 1-.866.5h-1a1 1 0 1 1 0-2h1a1 1 0 0 1 .866.5H11.5A1.5 1.5 0 0 0 13 12h-1a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1h1V6a5 5 0 0 0-5-5z"/>
+                        </svg>
+                    </div>
+                    <h5 class="fw-bold">@L["StudentFilesPage.Feature3Title"]</h5>
+                    <p class="text-muted mb-0 small">@L["StudentFilesPage.Feature3Desc"]</p>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="spec-card p-4 h-100 text-center">
+                    <div class="bg-spec-primary-light rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 64px; height: 64px;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="var(--spec-primary)" viewBox="0 0 16 16">
+                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                            <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+                        </svg>
+                    </div>
+                    <h5 class="fw-bold">@L["StudentFilesPage.Feature4Title"]</h5>
+                    <p class="text-muted mb-0 small">@L["StudentFilesPage.Feature4Desc"]</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Screenshot Preview -->
+<section class="bg-white py-5">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6 order-lg-2">
+                <h2 class="fw-bold mb-4">@L["StudentFilesPage.ScreenshotTitle"]</h2>
+                <p class="text-muted mb-4">@L["StudentFilesPage.ScreenshotDesc"]</p>
+                <ul class="list-unstyled">
+                    <li class="mb-2"><span class="text-spec-primary me-2">&#10003;</span> @L["StudentFilesPage.ScreenshotPoint1"]</li>
+                    <li class="mb-2"><span class="text-spec-primary me-2">&#10003;</span> @L["StudentFilesPage.ScreenshotPoint2"]</li>
+                    <li class="mb-2"><span class="text-spec-primary me-2">&#10003;</span> @L["StudentFilesPage.ScreenshotPoint3"]</li>
+                </ul>
+            </div>
+            <div class="col-lg-6 order-lg-1 mt-4 mt-lg-0">
+                <div class="spec-card p-3">
+                    <img src="https://images.unsplash.com/photo-1517842645767-c639042777db?w=600&h=400&fit=crop"
+                         alt="Screenshot" class="img-fluid rounded">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

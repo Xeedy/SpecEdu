@@ -1,0 +1,111 @@
+@page
+@model SpecEdu.Web.Pages.ContactModel
+@inject IStringLocalizer<SharedResource> L
+@{
+    ViewData["Title"] = L["ContactPage.Title"];
+}
+
+<!-- Hero -->
+<section class="bg-spec-primary-light py-5">
+    <div class="container">
+        <h1 class="display-5 fw-bold text-center mb-3">@L["ContactPage.Title"]</h1>
+        <p class="lead text-center text-muted mb-0">@L["ContactPage.Subtitle"]</p>
+    </div>
+</section>
+
+<section class="py-5">
+    <div class="container">
+        <div class="row g-5">
+            <!-- Contact Form -->
+            <div class="col-lg-7">
+                <div class="spec-card p-4">
+                    <h3 class="fw-bold mb-4">@L["ContactPage.FormTitle"]</h3>
+                    <form>
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label class="form-label">@L["ContactPage.Name"]</label>
+                                <input type="text" class="form-control" placeholder="@L["ContactPage.NamePlaceholder"]">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">@L["ContactPage.Email"]</label>
+                                <input type="email" class="form-control" placeholder="@L["ContactPage.EmailPlaceholder"]">
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label">@L["ContactPage.Subject"]</label>
+                                <select class="form-select">
+                                    <option selected>@L["ContactPage.SubjectSelect"]</option>
+                                    <option value="pilot">@L["ContactPage.SubjectPilot"]</option>
+                                    <option value="demo">@L["ContactPage.SubjectDemo"]</option>
+                                    <option value="pricing">@L["ContactPage.SubjectPricing"]</option>
+                                    <option value="support">@L["ContactPage.SubjectSupport"]</option>
+                                    <option value="other">@L["ContactPage.SubjectOther"]</option>
+                                </select>
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label">@L["ContactPage.Message"]</label>
+                                <textarea class="form-control" rows="5" placeholder="@L["ContactPage.MessagePlaceholder"]"></textarea>
+                            </div>
+                            <div class="col-12">
+                                <button type="submit" class="btn btn-spec-primary btn-lg">@L["ContactPage.Send"]</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Contact Info -->
+            <div class="col-lg-5">
+                <!-- Request Pilot Box -->
+                <div class="spec-card p-4 mb-4 bg-spec-primary-light border-0">
+                    <h4 class="fw-bold mb-3">@L["ContactPage.PilotTitle"]</h4>
+                    <p class="text-muted mb-4">@L["ContactPage.PilotDesc"]</p>
+                    <ul class="list-unstyled mb-4">
+                        <li class="mb-2"><span class="text-spec-primary me-2">&#10003;</span> @L["ContactPage.PilotPoint1"]</li>
+                        <li class="mb-2"><span class="text-spec-primary me-2">&#10003;</span> @L["ContactPage.PilotPoint2"]</li>
+                        <li class="mb-2"><span class="text-spec-primary me-2">&#10003;</span> @L["ContactPage.PilotPoint3"]</li>
+                    </ul>
+                    <a href="#" class="btn btn-spec-primary w-100">@L["ContactPage.RequestPilot"]</a>
+                </div>
+
+                <!-- Contact Details -->
+                <div class="spec-card p-4">
+                    <h4 class="fw-bold mb-4">@L["ContactPage.ContactInfo"]</h4>
+                    <div class="d-flex align-items-start mb-3">
+                        <div class="bg-spec-primary-light rounded-circle d-flex align-items-center justify-content-center me-3 flex-shrink-0" style="width: 48px; height: 48px;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="var(--spec-primary)" viewBox="0 0 16 16">
+                                <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2Zm13 2.383-4.708 2.825L15 11.105V5.383Zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741ZM1 11.105l4.708-2.897L1 5.383v5.722Z"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h6 class="fw-bold mb-1">Email</h6>
+                            <a href="mailto:info@specedu.cz" class="text-muted text-decoration-none">info@specedu.cz</a>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-start mb-3">
+                        <div class="bg-spec-primary-light rounded-circle d-flex align-items-center justify-content-center me-3 flex-shrink-0" style="width: 48px; height: 48px;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="var(--spec-primary)" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511z"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h6 class="fw-bold mb-1">@L["ContactPage.Phone"]</h6>
+                            <span class="text-muted">+420 123 456 789</span>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-start">
+                        <div class="bg-spec-primary-light rounded-circle d-flex align-items-center justify-content-center me-3 flex-shrink-0" style="width: 48px; height: 48px;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="var(--spec-primary)" viewBox="0 0 16 16">
+                                <path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A31.493 31.493 0 0 1 8 14.58a31.481 31.481 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94zM8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10z"/>
+                                <path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h6 class="fw-bold mb-1">@L["ContactPage.Address"]</h6>
+                            <span class="text-muted">Praha, Ceska republika</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -10,8 +10,117 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Planned
-- Database migration and initial seed data
-- Login/Register pages
+- User management pages
+- Student CRUD operations
+
+---
+
+## [0.1.0] - 2026-01-17 (Sprint 1: Identity + Role + Multi-tenant School)
+
+### Added
+- **School entity (multi-tenant)**: Schools table with Name, ICO, Address, City, PostalCode, ContactEmail, ContactPhone, InstitutionType, IsActive, LicenseExpiresAt
+- **Permission constants**: Student (View/Edit/Create/Delete), Document (View/Edit/Create/Delete), Administration (ManageSchool/ManageUsers/ManageRoles/ViewAuditLog), System (SystemAdmin/ManageSchools)
+- **SchoolAdmin role**: New role for school-level administrators
+- **ApplicationUserDto, SchoolDto, AuthResult**: DTOs for user, school, and authentication data
+- **IIdentityService**: Interface for user management (authenticate, CRUD, role management)
+- **ISchoolService**: Interface for school CRUD operations
+- **IdentityService**: Full implementation of user authentication and management
+- **SchoolService**: Full implementation of school CRUD
+- **Permission-based authorization**: PermissionRequirement, PermissionAuthorizationHandler, RolePermissions
+- **Authorization policies**: RequireAdmin, RequireSchoolAdmin, CanViewStudent, CanEditStudent, CanCreateStudent, CanDeleteStudent, CanViewDocument, CanEditDocument, CanManageUsers, CanManageSchool
+- **Login page**: `/Account/Login` with email/password, remember me, lockout handling
+- **Logout page**: `/Account/Logout` with confirmation
+- **AccessDenied page**: `/Account/AccessDenied` with user-friendly message
+- **Admin dashboard**: `/Admin` with school/user counts and quick actions
+- **Schools management**: `/Admin/Schools` list and `/Admin/Schools/Create` form
+- **DbSeeder**: Automatic seeding of roles, admin user, and test data (development only)
+- **Cookie authentication configuration**: HttpOnly, Secure, SameSite=Strict, 24h expiration
+
+### Changed
+- **ApplicationUser**: Added SchoolId (Guid?) and School navigation property
+- **ICurrentUserService**: Added SchoolId, IsAuthenticated, Roles, IsInRole()
+- **IJwtTokenService**: Added schoolId parameter to GenerateToken()
+- **JwtTokenService**: Added school_id claim to JWT tokens
+- **Roles constant**: Updated Admin description, added SchoolAdmin to All array
+- **Header**: Shows Login/Register for anonymous, user menu with logout for authenticated, Admin link for admins
+- **Program.cs**: Added cookie configuration and DbSeeder call
+
+### Database Migration
+- Added `Schools` table with proper indexes (ICO unique, Name, IsActive)
+- Added `SchoolId` column to `AspNetUsers` with FK to Schools (ON DELETE SET NULL)
+- Added indexes on AspNetUsers (SchoolId, IsActive)
+
+### Test Accounts (Development)
+| Email | Password | Role |
+|-------|----------|------|
+| admin@specedu.cz | Admin123! | Admin (global) |
+| spravce@testskola.cz | Spravce123! | SchoolAdmin |
+| ucitel@testskola.cz | Ucitel123! | Teacher |
+
+### File Structure
+```
+src/SpecEdu.Domain/
+├── Entities/
+│   └── School.cs                    ← NEW: Multi-tenant school entity
+└── Constants/
+    ├── Permissions.cs               ← NEW: All permission constants
+    └── Roles.cs                     ← UPDATED: Added SchoolAdmin
+
+src/SpecEdu.Application/
+└── Common/
+    ├── Interfaces/
+    │   ├── ICurrentUserService.cs   ← UPDATED: SchoolId, IsAuthenticated, Roles
+    │   ├── IIdentityService.cs      ← NEW: User management interface
+    │   └── ISchoolService.cs        ← NEW: School CRUD interface
+    └── Models/
+        ├── ApplicationUserDto.cs    ← NEW
+        ├── SchoolDto.cs             ← NEW
+        └── AuthResult.cs            ← NEW
+
+src/SpecEdu.Infrastructure/
+├── Authorization/
+│   ├── PermissionRequirement.cs           ← NEW
+│   ├── PermissionAuthorizationHandler.cs  ← NEW
+│   ├── RolePermissions.cs                 ← NEW
+│   └── AuthorizationPolicies.cs           ← NEW
+├── Data/
+│   ├── Configurations/
+│   │   ├── SchoolConfiguration.cs         ← NEW
+│   │   └── ApplicationUserConfiguration.cs ← NEW
+│   ├── ApplicationDbContext.cs            ← UPDATED: Added Schools DbSet
+│   └── DbSeeder.cs                        ← NEW
+├── Identity/
+│   ├── ApplicationUser.cs                 ← UPDATED: SchoolId property
+│   ├── IdentityService.cs                 ← NEW
+│   └── JwtTokenService.cs                 ← UPDATED: school_id claim
+├── Services/
+│   └── SchoolService.cs                   ← NEW
+└── DependencyInjection.cs                 ← UPDATED: New registrations
+
+src/SpecEdu.Web/
+├── Pages/
+│   ├── Account/
+│   │   ├── Login.cshtml[.cs]              ← NEW
+│   │   ├── Logout.cshtml[.cs]             ← NEW
+│   │   └── AccessDenied.cshtml[.cs]       ← NEW
+│   ├── Admin/
+│   │   ├── Index.cshtml[.cs]              ← NEW
+│   │   └── Schools/
+│   │       ├── Index.cshtml[.cs]          ← NEW
+│   │       └── Create.cshtml[.cs]         ← NEW
+│   └── Shared/
+│       └── _Header.cshtml                 ← UPDATED: Auth-aware buttons
+├── Services/
+│   └── CurrentUserService.cs              ← UPDATED: New interface members
+└── Program.cs                             ← UPDATED: Cookie config, seeder
+```
+
+### Security Features
+- Cookie HttpOnly, Secure, SameSite=Strict
+- Anti-forgery tokens on all forms (Razor Pages default)
+- Password policy: 8+ chars, uppercase, lowercase, digit, special
+- Account lockout: 5 failed attempts = 5 minute lockout
+- SchoolId in JWT claims for tenant filtering
 
 ---
 

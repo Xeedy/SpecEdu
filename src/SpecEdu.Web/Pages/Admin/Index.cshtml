@@ -1,0 +1,59 @@
+@page
+@model SpecEdu.Web.Pages.Admin.IndexModel
+@{
+    ViewData["Title"] = "Administrace";
+}
+
+<div class="container py-4">
+    <h1 class="mb-4">Administrace</h1>
+
+    <div class="row g-4">
+        <div class="col-md-6 col-lg-4">
+            <div class="spec-card h-100">
+                <div class="spec-card-header">Školy</div>
+                <div class="spec-card-body">
+                    <p class="display-4 mb-2">@Model.SchoolCount</p>
+                    <p class="text-muted mb-3">Registrované instituce</p>
+                    <a href="/Admin/Schools" class="btn btn-spec-primary">Spravovat školy</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4">
+            <div class="spec-card h-100">
+                <div class="spec-card-header">Uživatelé</div>
+                <div class="spec-card-body">
+                    <p class="display-4 mb-2">@Model.UserCount</p>
+                    <p class="text-muted mb-3">Celkem uživatelů v systému</p>
+                    <button class="btn btn-outline-secondary" disabled>Spravovat uživatele</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4">
+            <div class="spec-card h-100">
+                <div class="spec-card-header">Systém</div>
+                <div class="spec-card-body">
+                    <p class="mb-2"><strong>Verze:</strong> 0.1.0</p>
+                    <p class="mb-2"><strong>Prostředí:</strong> @Model.Environment</p>
+                    <p class="text-muted mb-3">Stav systému: <span class="text-success">OK</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-12">
+            <div class="spec-card">
+                <div class="spec-card-header">Rychlé akce</div>
+                <div class="spec-card-body">
+                    <div class="d-flex gap-2 flex-wrap">
+                        <a href="/Admin/Schools/Create" class="btn btn-spec-outline">Přidat školu</a>
+                        <button class="btn btn-outline-secondary" disabled>Audit log</button>
+                        <button class="btn btn-outline-secondary" disabled>Nastavení</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

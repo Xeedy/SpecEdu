@@ -1,0 +1,93 @@
+@page
+@model SpecEdu.Web.Pages.Account.ProfileModel
+@inject IStringLocalizer<SharedResource> L
+@{
+    ViewData["Title"] = L["ProfilePage.Title"];
+}
+
+<section class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 mb-4 mb-lg-0">
+                <!-- Profile Card -->
+                <div class="spec-card p-4 text-center">
+                    <div class="bg-spec-primary rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 100px; height: 100px;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="white" viewBox="0 0 16 16">
+                            <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                            <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+                        </svg>
+                    </div>
+                    <h4 class="fw-bold mb-1">@User.Identity?.Name</h4>
+                    <p class="text-muted mb-3">@L["ProfilePage.Role"]: Admin</p>
+                    <span class="badge bg-success">@L["ProfilePage.Active"]</span>
+                </div>
+
+                <!-- Quick Stats -->
+                <div class="spec-card p-4 mt-4">
+                    <h6 class="fw-bold mb-3">@L["ProfilePage.QuickStats"]</h6>
+                    <div class="d-flex justify-content-between mb-2">
+                        <span class="text-muted">@L["ProfilePage.MemberSince"]</span>
+                        <span>1. 1. 2026</span>
+                    </div>
+                    <div class="d-flex justify-content-between mb-2">
+                        <span class="text-muted">@L["ProfilePage.LastLogin"]</span>
+                        <span>@L["ProfilePage.Today"]</span>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <span class="text-muted">@L["ProfilePage.School"]</span>
+                        <span>ZS Demo</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-8">
+                <!-- Profile Form -->
+                <div class="spec-card p-4">
+                    <h4 class="fw-bold mb-4">@L["ProfilePage.PersonalInfo"]</h4>
+                    <form>
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label class="form-label">@L["ProfilePage.FirstName"]</label>
+                                <input type="text" class="form-control" value="Jan" disabled>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">@L["ProfilePage.LastName"]</label>
+                                <input type="text" class="form-control" value="Novak" disabled>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Email</label>
+                                <input type="email" class="form-control" value="admin@specedu.cz" disabled>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">@L["ProfilePage.Phone"]</label>
+                                <input type="tel" class="form-control" placeholder="+420 123 456 789" disabled>
+                            </div>
+                            <div class="col-12">
+                                <button type="button" class="btn btn-spec-outline" disabled>@L["ProfilePage.EditProfile"]</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Security -->
+                <div class="spec-card p-4 mt-4">
+                    <h4 class="fw-bold mb-4">@L["ProfilePage.Security"]</h4>
+                    <div class="d-flex justify-content-between align-items-center mb-3 pb-3 border-bottom">
+                        <div>
+                            <h6 class="fw-bold mb-1">@L["ProfilePage.Password"]</h6>
+                            <small class="text-muted">@L["ProfilePage.PasswordLastChanged"]: 1. 1. 2026</small>
+                        </div>
+                        <button class="btn btn-spec-outline btn-sm" disabled>@L["ProfilePage.ChangePassword"]</button>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h6 class="fw-bold mb-1">@L["ProfilePage.TwoFactor"]</h6>
+                            <small class="text-muted">@L["ProfilePage.TwoFactorDesc"]</small>
+                        </div>
+                        <button class="btn btn-spec-outline btn-sm" disabled>@L["ProfilePage.Enable"]</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

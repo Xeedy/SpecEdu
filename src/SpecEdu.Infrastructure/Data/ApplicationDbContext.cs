@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using SpecEdu.Application.Common.Interfaces;
 using SpecEdu.Domain.Common;
+using SpecEdu.Domain.Entities;
 using SpecEdu.Infrastructure.Identity;
 
 namespace SpecEdu.Infrastructure.Data;
@@ -23,6 +24,31 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser, IdentityR
     {
         _currentUserService = currentUserService;
     }
+
+    /// <summary>
+    /// Schools/institutions (tenants) in the system.
+    /// </summary>
+    public DbSet<School> Schools => Set<School>();
+
+    /// <summary>
+    /// Students with special educational needs.
+    /// </summary>
+    public DbSet<Student> Students => Set<Student>();
+
+    /// <summary>
+    /// Guardian relationships linking parents to students.
+    /// </summary>
+    public DbSet<StudentGuardian> StudentGuardians => Set<StudentGuardian>();
+
+    /// <summary>
+    /// Staff links connecting staff members to students with specific access levels.
+    /// </summary>
+    public DbSet<StudentStaffLink> StudentStaffLinks => Set<StudentStaffLink>();
+
+    /// <summary>
+    /// Audit logs for compliance and security tracking.
+    /// </summary>
+    public DbSet<AuditLog> AuditLogs => Set<AuditLog>();
 
     /// <summary>
     /// Saves changes and automatically populates audit fields.

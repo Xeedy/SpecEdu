@@ -228,4 +228,20 @@
   <data name="HeaderPage.Contact" xml:space="preserve">
     <value>Contact</value>
   </data>
+  <data name="HeaderPage.Admin" xml:space="preserve">
+    <value>Admin</value>
+  </data>
+  <data name="HeaderPage.Logout" xml:space="preserve">
+    <value>Log out</value>
+  </data>
+  <data name="Common.ComingSoon" xml:space="preserve">
+    <value>Soon</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="Common.TryFree" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="ContactPage.Address" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
 </root>

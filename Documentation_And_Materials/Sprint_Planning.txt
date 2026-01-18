@@ -1,0 +1,310 @@
+SpecEdu roadmapa (Razor Pages, .NET, SQL, škálovatelně)
+Cíl roadmapy
+
+co nejdřív mít demo, které jde ukázat (a zákazník řekne ano/ne)
+
+mít architekturu, kterou nepřepíšeš při přidání IVP/kalendáře/DM
+
+od začátku myslet na GDPR (citlivá data, audit, oprávnění)
+
+Sprint 0 (1–3 dny): „základy projektu“ – bez business logiky
+Výstup sprintu
+
+běží aplikace, má layout, font, barvy, základní stránky, logování, testy skeleton
+
+hotový základ pro nasazení i lokální vývoj
+
+Co udělat
+
+A) Repo a solution
+
+/src/Web, /src/Application, /src/Domain, /src/Infrastructure, /tests/...
+
+.editorconfig, nullable enable, analyzéry
+
+B) UI základ (světle modrá + Roboto)
+
+_Layout.cshtml, _Header.cshtml, _Footer.cshtml
+
+barvy do CSS variables (např. --spec-blue)
+
+Roboto přes lokální soubory (lepší pro GDPR než Google Fonts)
+
+C) Konfigurace a provoz
+
+secrets mimo repo
+
+logging (strukturovaně)
+
+error pages (prod vs dev)
+
+Sprint 1 (1–2 týdny): „Identity + Role + Multi-tenant škola“
+
+Tady se rozhoduje, jestli to bude bezpečné a škálovatelné.
+
+Výstup sprintu
+
+přihlášení e-mailem + heslo
+
+role existují a dají se přidělit
+
+existuje School (tenant) a uživatel patří do školy
+
+admin vidí admin stránku, ostatní ne
+
+Klíčové entity (minimální)
+
+School (Id, Name, Ico?…)
+
+AppUser (Identity user + SchoolId)
+
+Role (Identity roles)
+
+Role (tvoje)
+
+Admin (globální)
+
+SchoolAdmin / Správce školy (jeden člověk školy)
+
+Teacher / Pedagog
+
+Parent / Rodič
+
+Assistant
+
+PPP
+
+SPC
+
+ŠPP (školní poradenské pracoviště – interní role)
+
+Pozn.: PPP/SPC/ŠPP jsou často „organizace/typ uživatele“. Zpočátku je dej jako role, později můžeš rozlišit „OrganizationType“.
+
+Best practice oprávnění
+
+nepoužívat jen [Authorize(Roles="...")] všude
+
+udělat policies: CanViewStudent, CanEditStudent, CanUploadStudentDocument, CanWriteStudentDiary
+
+Sprint 2 (1–2 týdny): „Žák a přístupová pravidla“ (core produktu)
+
+Tady se vyhneš pozdějšímu přepisování.
+
+Výstup sprintu
+
+SchoolAdmin umí založit profil dítěte (Student)
+
+rodič po přihlášení vidí „profil dítěte“ jako první (dashboard)
+
+přístup je omezený: uživatel vidí jen děti, ke kterým má vazbu
+
+Datový model (MVP)
+
+Student (SchoolId, FirstName, LastName, BirthDate?, Class?, PhotoId?)
+
+StudentGuardian (StudentId, ParentUserId, RelationshipType)
+
+StudentStaffLink (StudentId, UserId, LinkType: Teacher/Assistant/ŠPP/PPP/SPC, AccessLevel: Read/Edit)
+
+AuditLog (kdo, co, kdy, IP, StudentId)
+
+Důležité rozhodnutí
+
+Všechno citlivé se filtruje přes “StudentAccess” (tabulka vazeb).
+Ne přes „role“ samotné. Role říká „co smí dělat“, vazba říká „na koho“.
+
+Sprint 3 (1–2 týdny): „Dokumenty + doporučení + GDPR režim“
+
+PDF doporučení a dokumentace jsou „hlavní hodnota“ pro školy.
+
+Výstup sprintu
+
+u žáka je záložka Dokumenty
+
+upload PDF (zprávy, doporučení SPC/PPP, lékař…)
+
+dokument má metadata + oprávnění + audit
+
+volitelně fotka dítěte (bezpečně)
+
+Datový model
+
+StudentDocument
+
+StudentId, Type (enum), Title, FileId, ValidFrom/To, UploadedByUserId, Source (SPC/PPP/School), Notes
+
+FileBlob (nebo FileStorage)
+
+Id, Path/BlobKey, Hash, Size, ContentType, UploadedAt
+
+GDPR best practice už od MVP
+
+šifrování „at rest“: minimálně šifrované disky/SQL TDE; později per-field encryption pro nejcitlivější
+
+audit log povinně pro: create/update/delete student, upload/download dokumentů
+
+přístup k souborům jen přes autorizovaný endpoint (žádné přímé URL)
+
+Sprint 4 (1–2 týdny): „Poznámky + komunikační deník (bez chatu)“
+
+Nejdřív deník na profilu dítěte (asynchronní). Chat až později.
+
+Výstup sprintu
+
+timeline deníku na profilu žáka
+
+typy záznamů: poznámka, telefonát, schůzka, spolupráce s rodiči, spolupráce s PPP/SPC
+
+filtrace podle typu + autora + data
+
+Datový model
+
+DiaryEntry (StudentId, Type enum, Content, CreatedAt, CreatedByUserId, Visibility: SchoolOnly/ParentVisible)
+
+DiaryAttachment (DiaryEntryId → FileBlob)
+
+Tímhle už máš systém reálně použitelný i bez IVP/chatu.
+
+Sprint 5 (1–2 týdny): „Notifikace na kontrolní vyšetření“
+
+Tvoje „2 měsíce dopředu“ je přesně věc, kterou zákazník ocení.
+
+Výstup sprintu
+
+u dokumentu/doporučení se nastaví datum kontrolního vyšetření
+
+systém automaticky naplánuje upozornění (email) 2 měsíce předem
+
+log o odeslání
+
+Datový model
+
+Reminder (StudentId, DueDate, NotifyAt, Channel, Status, LastError)
+
+background job: Hangfire / Quartz (nebo jednoduchý HostedService)
+
+Sprint 6 (až potom): „PLPP/IVP editor“ (verzování!)
+
+Editor je složitý. Dělej ho až když jádro používají a chtějí to.
+
+Výstup
+
+PLPP/IVP jako dokument se strukturou + verzemi
+
+měsíční vyhodnocování (IVP)
+
+Zásadní best practice
+
+versioning: každá změna vytvoří novou verzi (ne přepis)
+
+možnost exportu do PDF
+
+práva: kdo smí editovat vs jen číst
+
+Sprint 7: „Kalendář konzultací“
+
+eventy navázané na žáka a/nebo školu
+
+účastníci (role-based + konkrétní vazby)
+
+notifikace
+
+Sprint 8: „Chat / Inbox“
+
+Chat teprve když:
+
+už funguje deník + oprávnění + audit + notifikace
+
+zákazník potvrdí, že chat fakt chce (jinak je to drahé a náročné)
+
+Sprint 9+: Integrace PPP/SPC datové sklady
+
+Až bude jasné:
+
+jaké rozhraní mají
+
+co je právně možné přenášet
+
+kdo je správce/zpracovatel
+
+Co nastavit jako úplně první (pořadí rozhodnutí)
+
+Multi-tenant (School) – aby se data nikdy nemíchala
+
+StudentAccess (vazby uživatel↔dítě) – kvůli GDPR a oprávněním
+
+AuditLog – bez toho to pro školy nebude „bezpečně obhajitelné“
+
+Files bezpečně – dokumenty jsou core
+
+Technologický stack (doporučení pro Razor Pages)
+
+.NET 8/9 Razor Pages
+
+SQL Server
+
+EF Core + migrations
+
+Stored procedures jen pro reporting/složitější listy (ne hned všude)
+
+Bootstrap 5 + vlastní theme (světle modrá, Roboto)
+
+Localization: resx (UI), DB pro obsah později
+
+Background jobs: Hangfire/Quartz (až u notifikací)
+
+Email: SMTP nebo provider
+
+UX pravidla (aby to bylo “srozumitelné a normálně validní”)
+
+po loginu:
+
+Parent → výběr dítěte (pokud jich je víc) / rovnou profil dítěte
+
+Teacher/ŠPP → dashboard s filtrem (třída/stupeň/PO)
+
+Detail žáka: záložky
+
+Základní info
+
+Doporučení / podpůrná opatření
+
+Dokumenty
+
+Deník
+
+(IVP/PLPP později)
+
+Všude viditelný „kdo to zapsal“ + datum + audit
+
+„Validní“ = i právně a bezpečnostně
+
+U SpecEdu fakt počítej s tím, že budeš muset mít:
+
+role + vazby (minimální přístup)
+
+audit stopy
+
+správa souhlasů / dokumentů (privacy policy)
+
+export a smazání dat (aspoň plán)
+
+Nejbližší krok (abychom šli „pomalu, v klidu, popořadě“)
+
+Začni Sprintem 0 a 1. Prakticky:
+
+vytvořit solution + layout + theme
+
+přidat Identity + role + School tenant
+
+Pokud chceš, v dalším kroku ti rovnou napíšu:
+
+konkrétní tabulky (SQL) pro Sprint 1–2
+
+skeleton entit a DbContext
+
+seed rolí a SchoolAdmin
+
+policy CanViewStudent a vazební tabulky
+
+A tím se rozjedeš bez chaosu a bez toho, aby ses později musel vracet a přepisovat základy.

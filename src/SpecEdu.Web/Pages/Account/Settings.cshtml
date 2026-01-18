@@ -1,0 +1,80 @@
+@page
+@model SpecEdu.Web.Pages.Account.SettingsModel
+@inject IStringLocalizer<SharedResource> L
+@{
+    ViewData["Title"] = L["SettingsPage.Title"];
+}
+
+<section class="py-5">
+    <div class="container">
+        <h1 class="fw-bold mb-4">@L["SettingsPage.Title"]</h1>
+
+        <div class="row">
+            <div class="col-lg-3 mb-4 mb-lg-0">
+                <!-- Settings Navigation -->
+                <div class="spec-card p-0">
+                    <div class="list-group list-group-flush">
+                        <a href="#general" class="list-group-item list-group-item-action active">
+                            @L["SettingsPage.General"]
+                        </a>
+                        <a href="#notifications" class="list-group-item list-group-item-action">
+                            @L["SettingsPage.Notifications"]
+                        </a>
+                        <a href="#privacy" class="list-group-item list-group-item-action">
+                            @L["SettingsPage.Privacy"]
+                        </a>
+                        <a href="#language" class="list-group-item list-group-item-action">
+                            @L["SettingsPage.Language"]
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-9">
+                <!-- General Settings -->
+                <div class="spec-card p-4 mb-4" id="general">
+                    <h4 class="fw-bold mb-4">@L["SettingsPage.General"]</h4>
+                    <div class="mb-4">
+                        <label class="form-label">@L["SettingsPage.Timezone"]</label>
+                        <select class="form-select" disabled>
+                            <option selected>Europe/Prague (UTC+1)</option>
+                        </select>
+                    </div>
+                    <div class="mb-4">
+                        <label class="form-label">@L["SettingsPage.DateFormat"]</label>
+                        <select class="form-select" disabled>
+                            <option selected>DD.MM.YYYY</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Notification Settings -->
+                <div class="spec-card p-4 mb-4" id="notifications">
+                    <h4 class="fw-bold mb-4">@L["SettingsPage.NotificationSettings"]</h4>
+                    <div class="form-check form-switch mb-3">
+                        <input class="form-check-input" type="checkbox" checked disabled>
+                        <label class="form-check-label">@L["SettingsPage.EmailNotifications"]</label>
+                    </div>
+                    <div class="form-check form-switch mb-3">
+                        <input class="form-check-input" type="checkbox" checked disabled>
+                        <label class="form-check-label">@L["SettingsPage.DocumentNotifications"]</label>
+                    </div>
+                    <div class="form-check form-switch mb-3">
+                        <input class="form-check-input" type="checkbox" disabled>
+                        <label class="form-check-label">@L["SettingsPage.MarketingNotifications"]</label>
+                    </div>
+                </div>
+
+                <!-- Language Settings -->
+                <div class="spec-card p-4" id="language">
+                    <h4 class="fw-bold mb-4">@L["SettingsPage.LanguageSettings"]</h4>
+                    <div class="d-flex gap-2">
+                        <button class="btn btn-spec-primary">Cestina</button>
+                        <button class="btn btn-spec-outline">English</button>
+                        <button class="btn btn-spec-outline">Deutsch</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
