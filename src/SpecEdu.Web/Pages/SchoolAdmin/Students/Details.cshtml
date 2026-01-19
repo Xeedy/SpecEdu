@@ -9,6 +9,9 @@
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h1>@Model.Student.FullName</h1>
         <div>
+            <a asp-page="Diary" asp-route-id="@Model.Student.Id" class="btn btn-outline-primary me-2">
+                <i class="bi bi-journal-text me-1"></i>@L["StudentsPage.Diary"]
+            </a>
             <a asp-page="Edit" asp-route-id="@Model.Student.Id" class="btn btn-spec-primary">
                 @L["Common.Edit"]
             </a>

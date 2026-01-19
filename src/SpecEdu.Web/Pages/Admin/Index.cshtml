@@ -14,7 +14,7 @@
                 <div class="spec-card-body">
                     <p class="display-4 mb-2">@Model.SchoolCount</p>
                     <p class="text-muted mb-3">Registrované instituce</p>
-                    <a href="/Admin/Schools" class="btn btn-spec-primary">Spravovat školy</a>
+                    <a asp-page="/Admin/Schools/Index" class="btn btn-spec-primary">Spravovat školy</a>
                 </div>
             </div>
         </div>
@@ -48,7 +48,7 @@
                 <div class="spec-card-header">Rychlé akce</div>
                 <div class="spec-card-body">
                     <div class="d-flex gap-2 flex-wrap">
-                        <a href="/Admin/Schools/Create" class="btn btn-spec-outline">Přidat školu</a>
+                        <a asp-page="/Admin/Schools/Create" class="btn btn-spec-outline">Přidat školu</a>
                         <button class="btn btn-outline-secondary" disabled>Audit log</button>
                         <button class="btn btn-outline-secondary" disabled>Nastavení</button>
                     </div>

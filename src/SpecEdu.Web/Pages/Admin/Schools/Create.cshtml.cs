@@ -8,16 +8,8 @@ using SpecEdu.Infrastructure.Authorization;
 namespace SpecEdu.Web.Pages.Admin.Schools;
 
 [Authorize(Policy = AuthorizationPolicies.RequireAdmin)]
-public class CreateModel : PageModel
+public class CreateModel(ISchoolService schoolService, ILogger<CreateModel> logger) : PageModel
 {
-    private readonly ISchoolService _schoolService;
-    private readonly ILogger<CreateModel> _logger;
-
-    public CreateModel(ISchoolService schoolService, ILogger<CreateModel> logger)
-    {
-        _schoolService = schoolService;
-        _logger = logger;
-    }
 
     [BindProperty]
     public CreateSchoolInput Input { get; set; } = new();
@@ -38,7 +30,7 @@ public class CreateModel : PageModel
 
         try
         {
-            var school = await _schoolService.CreateAsync(
+            var school = await schoolService.CreateAsync(
                 Input.Name,
                 Input.InstitutionType,
                 Input.Ico,
@@ -48,18 +40,20 @@ public class CreateModel : PageModel
                 Input.ContactEmail,
                 Input.ContactPhone);
 
-            _logger.LogInformation("School {SchoolName} (ID: {SchoolId}) created", school.Name, school.Id);
+            logger.LogInformation("School {SchoolName} (ID: {SchoolId}) created", school.Name, school.Id);
 
             TempData["SuccessMessage"] = $"Škola \"{school.Name}\" byla úspěšně vytvořena.";
             return RedirectToPage("Index");
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Error creating school {SchoolName}", Input.Name);
+            logger.LogError(ex, "Error creating school {SchoolName}", Input.Name);
             ErrorMessage = "Nepodařilo se vytvořit školu. Zkuste to prosím znovu.";
             return Page();
         }
     }
+
+    #region SchoolModel
 
     public class CreateSchoolInput
     {
@@ -90,4 +84,6 @@ public class CreateModel : PageModel
         [StringLength(50)]
         public string? ContactPhone { get; set; }
     }
+
+    #endregion
 }

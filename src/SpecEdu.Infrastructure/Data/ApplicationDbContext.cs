@@ -51,6 +51,16 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser, IdentityR
     public DbSet<AuditLog> AuditLogs => Set<AuditLog>();
 
     /// <summary>
+    /// Diary entries (communication log) for students.
+    /// </summary>
+    public DbSet<DiaryEntry> DiaryEntries => Set<DiaryEntry>();
+
+    /// <summary>
+    /// File attachments for diary entries.
+    /// </summary>
+    public DbSet<DiaryAttachment> DiaryAttachments => Set<DiaryAttachment>();
+
+    /// <summary>
     /// Saves changes and automatically populates audit fields.
     /// </summary>
     public override int SaveChanges()

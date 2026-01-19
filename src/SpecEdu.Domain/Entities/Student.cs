@@ -67,6 +67,11 @@ public class Student : AuditableEntity
     public ICollection<StudentStaffLink> StaffLinks { get; set; } = new List<StudentStaffLink>();
 
     /// <summary>
+    /// Navigation property to diary entries.
+    /// </summary>
+    public ICollection<DiaryEntry> DiaryEntries { get; set; } = new List<DiaryEntry>();
+
+    /// <summary>
     /// Gets the student's full name.
     /// </summary>
     public string FullName => $"{FirstName} {LastName}".Trim();

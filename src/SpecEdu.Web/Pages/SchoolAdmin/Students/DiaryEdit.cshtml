@@ -1,0 +1,120 @@
+@page "{id:guid}"
+@model SpecEdu.Web.Pages.SchoolAdmin.Students.DiaryEditModel
+@inject IStringLocalizer<SharedResource> L
+@{
+    ViewData["Title"] = $"Upravit záznam - {Model.Student.FullName}";
+}
+
+<div class="container py-4">
+    <div class="mb-4">
+        <h1><i class="bi bi-pencil me-2"></i>@L["DiaryPage.EditEntry"]</h1>
+        <p class="text-muted mb-0">@Model.Student.FullName</p>
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="spec-card">
+                <div class="spec-card-body">
+                    <form method="post" enctype="multipart/form-data">
+                        <div class="mb-3">
+                            <label asp-for="Input.Type" class="form-label">@L["DiaryPage.EntryType"] *</label>
+                            <select asp-for="Input.Type" class="form-select" asp-items="Model.EntryTypeOptions">
+                            </select>
+                            <span asp-validation-for="Input.Type" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Input.Title" class="form-label">@L["DiaryPage.EntryTitle"] *</label>
+                            <input asp-for="Input.Title" class="form-control" />
+                            <span asp-validation-for="Input.Title" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Input.Content" class="form-label">@L["DiaryPage.EntryContent"] *</label>
+                            <textarea asp-for="Input.Content" class="form-control" rows="6"></textarea>
+                            <span asp-validation-for="Input.Content" class="text-danger"></span>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label asp-for="Input.Visibility" class="form-label">@L["DiaryPage.Visibility"] *</label>
+                                <select asp-for="Input.Visibility" class="form-select" asp-items="Model.VisibilityOptions">
+                                </select>
+                                <span asp-validation-for="Input.Visibility" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="Input.OccurredAt" class="form-label">@L["DiaryPage.OccurredAt"]</label>
+                                <input asp-for="Input.OccurredAt" type="date" class="form-control" />
+                                <span asp-validation-for="Input.OccurredAt" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <!-- Existing Attachments -->
+                        @if (Model.Attachments.Any())
+                        {
+                            <div class="mb-3">
+                                <label class="form-label">@L["DiaryPage.ExistingAttachments"]</label>
+                                <ul class="list-group">
+                                    @foreach (var attachment in Model.Attachments)
+                                    {
+                                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                                            <div>
+                                                <i class="bi bi-paperclip me-2"></i>
+                                                <a asp-page="DiaryDownload" asp-route-id="@attachment.Id">@attachment.FileName</a>
+                                                <small class="text-muted ms-2">(@attachment.FileSizeFormatted)</small>
+                                            </div>
+                                            <form method="post" asp-page-handler="DeleteAttachment" asp-route-attachmentId="@attachment.Id" class="d-inline">
+                                                <button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm('Opravdu chcete odstranit tuto přílohu?')">
+                                                    <i class="bi bi-trash"></i>
+                                                </button>
+                                            </form>
+                                        </li>
+                                    }
+                                </ul>
+                            </div>
+                        }
+
+                        <div class="mb-4">
+                            <label class="form-label">@L["DiaryPage.AddMoreAttachments"]</label>
+                            <input type="file" class="form-control" name="NewAttachments" multiple accept=".pdf,.doc,.docx,.xls,.xlsx,.jpg,.jpeg,.png,.gif" />
+                            <span asp-validation-for="NewAttachments" class="text-danger"></span>
+                            <small class="text-muted">@L["DiaryPage.AttachmentsHelp"]</small>
+                        </div>
+
+                        <hr />
+
+                        <div class="d-flex justify-content-between">
+                            <a asp-page="Diary" asp-route-id="@Model.Entry.StudentId" class="btn btn-outline-secondary">
+                                <i class="bi bi-arrow-left me-2"></i>@L["Common.Cancel"]
+                            </a>
+                            <button type="submit" class="btn btn-spec-primary">
+                                <i class="bi bi-check-lg me-2"></i>@L["Common.Save"]
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Entry Info -->
+            <div class="spec-card mt-3">
+                <div class="spec-card-body">
+                    <small class="text-muted">
+                        <i class="bi bi-clock me-1"></i>Vytvořeno: @(Model.Entry.CreatedAt.ToString("dd.MM.yyyy HH:mm"))
+                        @if (!string.IsNullOrEmpty(Model.Entry.CreatedByName))
+                        {
+                            <span> uživatelem @Model.Entry.CreatedByName</span>
+                        }
+                        @if (Model.Entry.ModifiedAt.HasValue)
+                        {
+                            <text><br /><i class="bi bi-pencil me-1"></i>Upraveno: @(Model.Entry.ModifiedAt.Value.ToString("dd.MM.yyyy HH:mm"))</text>
+                        }
+                    </small>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

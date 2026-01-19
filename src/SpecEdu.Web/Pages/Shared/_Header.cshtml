@@ -120,6 +120,10 @@
                                 {
                                     <li><a class="dropdown-item" asp-area="" asp-page="/Dashboard/Index">@L["HeaderPage.Dashboard"]</a></li>
                                 }
+                                @if (User.IsInRole("SchoolAdmin"))
+                                {
+                                    <li><a class="dropdown-item" asp-area="" asp-page="/SchoolAdmin/Students/Index">@L["HeaderPage.Students"]</a></li>
+                                }
                                 @if (User.IsInRole("Parent"))
                                 {
                                     <li><a class="dropdown-item" asp-area="" asp-page="/MyChildren/Index">@L["HeaderPage.MyChildren"]</a></li>

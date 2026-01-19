@@ -52,8 +52,8 @@
                             </div>
                             <hr>
                             <div class="d-flex gap-2">
-                                <button class="btn btn-spec-primary btn-sm flex-fill" disabled>@L["MyChildrenPage.ViewDetails"]</button>
-                                <button class="btn btn-spec-outline btn-sm flex-fill" disabled>@L["MyChildrenPage.ViewDocuments"]</button>
+                                <a asp-page="ChildDetails" asp-route-id="@child.Id" class="btn btn-spec-primary btn-sm flex-fill">@L["MyChildrenPage.ViewDetails"]</a>
+                                <a asp-page="ChildDiary" asp-route-id="@child.Id" class="btn btn-spec-outline btn-sm flex-fill">@L["StudentsPage.Diary"]</a>
                             </div>
                         </div>
                     </div>

@@ -231,6 +231,15 @@
   <data name="HeaderPage.Admin" xml:space="preserve">
     <value>Admin</value>
   </data>
+  <data name="HeaderPage.Students" xml:space="preserve">
+    <value>Students</value>
+  </data>
+  <data name="HeaderPage.Dashboard" xml:space="preserve">
+    <value>Dashboard</value>
+  </data>
+  <data name="HeaderPage.MyChildren" xml:space="preserve">
+    <value>My Children</value>
+  </data>
   <data name="HeaderPage.Logout" xml:space="preserve">
     <value>Log out</value>
   </data>

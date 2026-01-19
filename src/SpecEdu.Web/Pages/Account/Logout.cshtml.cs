@@ -5,16 +5,8 @@ using SpecEdu.Infrastructure.Identity;
 
 namespace SpecEdu.Web.Pages.Account;
 
-public class LogoutModel : PageModel
+public class LogoutModel(SignInManager<ApplicationUser> signInManager, ILogger<LogoutModel> logger) : PageModel
 {
-    private readonly SignInManager<ApplicationUser> _signInManager;
-    private readonly ILogger<LogoutModel> _logger;
-
-    public LogoutModel(SignInManager<ApplicationUser> signInManager, ILogger<LogoutModel> logger)
-    {
-        _signInManager = signInManager;
-        _logger = logger;
-    }
 
     public void OnGet()
     {
@@ -22,8 +14,8 @@ public class LogoutModel : PageModel
 
     public async Task<IActionResult> OnPostAsync()
     {
-        await _signInManager.SignOutAsync();
-        _logger.LogInformation("User logged out");
+        await signInManager.SignOutAsync();
+        logger.LogInformation("User logged out");
         return RedirectToPage("/Index");
     }
 }
