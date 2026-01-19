@@ -1,4 +1,5 @@
 using FluentAssertions;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -7,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.AspNetCore.Routing;
+using Microsoft.Extensions.DependencyInjection;
 using Moq;
 using SpecEdu.Infrastructure.Identity;
 using SpecEdu.Web.Pages.Account;
@@ -38,8 +40,39 @@ public class LoginModelTests : PageModelTestBase
             _userManagerMock.Object,
             _loggerMock.Object);
 
-        SetupPageModel(model);
+        SetupPageModelWithAuth(model);
         return model;
+    }
+
+    /// <summary>
+    /// Sets up page model with authentication services for Login page testing.
+    /// </summary>
+    private void SetupPageModelWithAuth(PageModel pageModel)
+    {
+        // Create service collection with authentication
+        var services = new ServiceCollection();
+        var authServiceMock = new Mock<IAuthenticationService>();
+        authServiceMock
+            .Setup(x => x.SignOutAsync(It.IsAny<HttpContext>(), It.IsAny<string>(), It.IsAny<AuthenticationProperties>()))
+            .Returns(Task.CompletedTask);
+        services.AddSingleton(authServiceMock.Object);
+
+        var serviceProvider = services.BuildServiceProvider();
+
+        var httpContext = new DefaultHttpContext
+        {
+            RequestServices = serviceProvider
+        };
+
+        var modelState = new ModelStateDictionary();
+        var actionContext = new ActionContext(httpContext, new RouteData(), new PageActionDescriptor(), modelState);
+        var modelMetadataProvider = new EmptyModelMetadataProvider();
+        var viewData = new ViewDataDictionary(modelMetadataProvider, modelState);
+        var tempDataProvider = new Mock<ITempDataProvider>();
+
+        pageModel.PageContext = new PageContext(actionContext) { ViewData = viewData };
+        pageModel.TempData = new TempDataDictionary(httpContext, tempDataProvider.Object);
+        pageModel.Url = CreateMockUrlHelper();
     }
 
     #region OnGetAsync Tests
