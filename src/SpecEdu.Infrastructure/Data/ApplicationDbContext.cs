@@ -30,6 +30,10 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser, IdentityR
 
     public DbSet<AuditLog> AuditLogs => Set<AuditLog>();
 
+    public DbSet<DiaryEntry> DiaryEntries => Set<DiaryEntry>();
+
+    public DbSet<DiaryAttachment> DiaryAttachments => Set<DiaryAttachment>();
+
     public override int SaveChanges()
     {
         UpdateAuditFields();

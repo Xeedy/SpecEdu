@@ -8,22 +8,11 @@ using SpecEdu.Infrastructure.Identity;
 
 namespace SpecEdu.Web.Pages.Account;
 
-public class LoginModel : PageModel
-{
-    private readonly SignInManager<ApplicationUser> _signInManager;
-    private readonly UserManager<ApplicationUser> _userManager;
-    private readonly ILogger<LoginModel> _logger;
-
-    public LoginModel(
+public class LoginModel(
         SignInManager<ApplicationUser> signInManager,
         UserManager<ApplicationUser> userManager,
-        ILogger<LoginModel> logger)
-    {
-        _signInManager = signInManager;
-        _userManager = userManager;
-        _logger = logger;
-    }
-
+        ILogger<LoginModel> logger) : PageModel
+{
     [BindProperty]
     public LoginInput Input { get; set; } = new();
 
@@ -53,23 +42,23 @@ public class LoginModel : PageModel
             return Page();
         }
 
-        var user = await _userManager.FindByEmailAsync(Input.Email);
+        var user = await userManager.FindByEmailAsync(Input.Email);
 
         if (user == null)
         {
-            _logger.LogWarning("Login attempt for non-existent user: {Email}", Input.Email);
+            logger.LogWarning("Login attempt for non-existent user: {Email}", Input.Email);
             ErrorMessage = "Neplatný e-mail nebo heslo.";
             return Page();
         }
 
         if (!user.IsActive)
         {
-            _logger.LogWarning("Login attempt for inactive user: {Email}", Input.Email);
+            logger.LogWarning("Login attempt for inactive user: {Email}", Input.Email);
             ErrorMessage = "Účet je deaktivován. Kontaktujte správce.";
             return Page();
         }
 
-        var result = await _signInManager.PasswordSignInAsync(
+        var result = await signInManager.PasswordSignInAsync(
             user,
             Input.Password,
             Input.RememberMe,
@@ -77,7 +66,7 @@ public class LoginModel : PageModel
 
         if (result.Succeeded)
         {
-            _logger.LogInformation("User {Email} logged in successfully", Input.Email);
+            logger.LogInformation("User {Email} logged in successfully", Input.Email);
 
             if (user.SchoolId.HasValue)
             {
@@ -85,7 +74,7 @@ public class LoginModel : PageModel
                 {
                     new(JwtTokenService.SchoolIdClaimType, user.SchoolId.Value.ToString())
                 };
-                await _signInManager.SignInWithClaimsAsync(user, Input.RememberMe, claims);
+                await signInManager.SignInWithClaimsAsync(user, Input.RememberMe, claims);
             }
 
             return LocalRedirect(returnUrl);
@@ -93,12 +82,12 @@ public class LoginModel : PageModel
 
         if (result.IsLockedOut)
         {
-            _logger.LogWarning("User {Email} is locked out", Input.Email);
+            logger.LogWarning("User {Email} is locked out", Input.Email);
             ErrorMessage = "Účet je dočasně zablokován kvůli příliš mnoha neúspěšným pokusům o přihlášení. Zkuste to prosím za 5 minut.";
             return Page();
         }
 
-        _logger.LogWarning("Invalid login attempt for user: {Email}", Input.Email);
+        logger.LogWarning("Invalid login attempt for user: {Email}", Input.Email);
         ErrorMessage = "Neplatný e-mail nebo heslo.";
         return Page();
     }

@@ -8,15 +8,8 @@ using SpecEdu.Infrastructure.Authorization;
 namespace SpecEdu.Web.Pages.Admin.Schools;
 
 [Authorize(Policy = AuthorizationPolicies.RequireAdmin)]
-public class IndexModel : PageModel
+public class IndexModel(ISchoolService schoolService) : PageModel
 {
-    private readonly ISchoolService _schoolService;
-
-    public IndexModel(ISchoolService schoolService)
-    {
-        _schoolService = schoolService;
-    }
-
     public IList<SchoolDto> Schools { get; set; } = new List<SchoolDto>();
 
     [TempData]
@@ -24,6 +17,6 @@ public class IndexModel : PageModel
 
     public async Task OnGetAsync()
     {
-        Schools = await _schoolService.GetAllAsync(includeInactive: true);
+        Schools = await schoolService.GetAllAsync(includeInactive: true);
     }
 }

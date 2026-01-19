@@ -246,6 +246,9 @@
   <data name="HeaderPage.Dashboard" xml:space="preserve">
     <value>Nástěnka</value>
   </data>
+  <data name="HeaderPage.Students" xml:space="preserve">
+    <value>Žáci</value>
+  </data>
   <data name="HeaderPage.MyChildren" xml:space="preserve">
     <value>Moje děti</value>
   </data>
@@ -1673,5 +1676,80 @@
   </data>
   <data name="MyChildrenPage.NoChildren" xml:space="preserve">
     <value>Nemáte přiřazené žádné děti.</value>
+  </data>
+  <data name="StudentsPage.Diary" xml:space="preserve">
+    <value>Deník</value>
+  </data>
+  <data name="DiaryPage.AddEntry" xml:space="preserve">
+    <value>Přidat záznam</value>
+  </data>
+  <data name="DiaryPage.EditEntry" xml:space="preserve">
+    <value>Upravit záznam</value>
+  </data>
+  <data name="DiaryPage.TotalEntries" xml:space="preserve">
+    <value>Celkem záznamů</value>
+  </data>
+  <data name="DiaryPage.FilterType" xml:space="preserve">
+    <value>Typ záznamu</value>
+  </data>
+  <data name="DiaryPage.FilterFromDate" xml:space="preserve">
+    <value>Od data</value>
+  </data>
+  <data name="DiaryPage.FilterToDate" xml:space="preserve">
+    <value>Do data</value>
+  </data>
+  <data name="DiaryPage.NoEntries" xml:space="preserve">
+    <value>Zatím nejsou žádné záznamy v deníku.</value>
+  </data>
+  <data name="DiaryPage.AddFirstEntry" xml:space="preserve">
+    <value>Přidat první záznam</value>
+  </data>
+  <data name="DiaryPage.ConfirmDelete" xml:space="preserve">
+    <value>Opravdu chcete smazat tento záznam?</value>
+  </data>
+  <data name="DiaryPage.EntryType" xml:space="preserve">
+    <value>Typ záznamu</value>
+  </data>
+  <data name="DiaryPage.EntryTitle" xml:space="preserve">
+    <value>Předmět</value>
+  </data>
+  <data name="DiaryPage.TitlePlaceholder" xml:space="preserve">
+    <value>Krátký popis záznamu</value>
+  </data>
+  <data name="DiaryPage.EntryContent" xml:space="preserve">
+    <value>Obsah</value>
+  </data>
+  <data name="DiaryPage.ContentPlaceholder" xml:space="preserve">
+    <value>Podrobný popis záznamu...</value>
+  </data>
+  <data name="DiaryPage.Visibility" xml:space="preserve">
+    <value>Viditelnost</value>
+  </data>
+  <data name="DiaryPage.VisibilityHelp" xml:space="preserve">
+    <value>Určuje, zda záznam uvidí i rodiče</value>
+  </data>
+  <data name="DiaryPage.OccurredAt" xml:space="preserve">
+    <value>Datum události</value>
+  </data>
+  <data name="DiaryPage.OccurredAtHelp" xml:space="preserve">
+    <value>Nepovinné - kdy se událost stala</value>
+  </data>
+  <data name="DiaryPage.Attachments" xml:space="preserve">
+    <value>Přílohy</value>
+  </data>
+  <data name="DiaryPage.AttachmentsHelp" xml:space="preserve">
+    <value>Max 5 MB na soubor. Povolené typy: PDF, DOC, XLS, obrázky</value>
+  </data>
+  <data name="DiaryPage.ExistingAttachments" xml:space="preserve">
+    <value>Existující přílohy</value>
+  </data>
+  <data name="DiaryPage.AddMoreAttachments" xml:space="preserve">
+    <value>Přidat další přílohy</value>
+  </data>
+  <data name="Common.Filter" xml:space="preserve">
+    <value>Filtrovat</value>
+  </data>
+  <data name="Common.BackToDetails" xml:space="preserve">
+    <value>Zpět na detail</value>
   </data>
 </root>

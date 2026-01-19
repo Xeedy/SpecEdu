@@ -24,5 +24,7 @@ public class Student : AuditableEntity
 
     public ICollection<StudentStaffLink> StaffLinks { get; set; } = new List<StudentStaffLink>();
 
+    public ICollection<DiaryEntry> DiaryEntries { get; set; } = new List<DiaryEntry>();
+
     public string FullName => $"{FirstName} {LastName}".Trim();
 }

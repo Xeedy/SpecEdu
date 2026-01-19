@@ -219,6 +219,117 @@ namespace SpecEdu.Infrastructure.Migrations
                     b.ToTable("AuditLogs", (string)null);
                 });
 
+            modelBuilder.Entity("SpecEdu.Domain.Entities.DiaryAttachment", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("ContentType")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CreatedBy")
+                        .HasMaxLength(450)
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<Guid>("DiaryEntryId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<byte[]>("FileData")
+                        .IsRequired()
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<string>("FileName")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<long>("FileSize")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime?>("ModifiedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("ModifiedBy")
+                        .HasMaxLength(450)
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DiaryEntryId");
+
+                    b.ToTable("DiaryAttachments", (string)null);
+                });
+
+            modelBuilder.Entity("SpecEdu.Domain.Entities.DiaryEntry", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Content")
+                        .IsRequired()
+                        .HasMaxLength(4000)
+                        .HasColumnType("nvarchar(4000)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CreatedBy")
+                        .HasMaxLength(450)
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<bool>("IsActive")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(true);
+
+                    b.Property<DateTime?>("ModifiedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("ModifiedBy")
+                        .HasMaxLength(450)
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime?>("OccurredAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("StudentId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<int>("Type")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Visibility")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CreatedBy");
+
+                    b.HasIndex("IsActive");
+
+                    b.HasIndex("StudentId");
+
+                    b.HasIndex("StudentId", "CreatedAt");
+
+                    b.HasIndex("StudentId", "Type");
+
+                    b.HasIndex("StudentId", "Visibility");
+
+                    b.ToTable("DiaryEntries", (string)null);
+                });
+
             modelBuilder.Entity("SpecEdu.Domain.Entities.School", b =>
                 {
                     b.Property<Guid>("Id")
@@ -594,6 +705,28 @@ namespace SpecEdu.Infrastructure.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("SpecEdu.Domain.Entities.DiaryAttachment", b =>
+                {
+                    b.HasOne("SpecEdu.Domain.Entities.DiaryEntry", "DiaryEntry")
+                        .WithMany("Attachments")
+                        .HasForeignKey("DiaryEntryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("DiaryEntry");
+                });
+
+            modelBuilder.Entity("SpecEdu.Domain.Entities.DiaryEntry", b =>
+                {
+                    b.HasOne("SpecEdu.Domain.Entities.Student", "Student")
+                        .WithMany("DiaryEntries")
+                        .HasForeignKey("StudentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Student");
+                });
+
             modelBuilder.Entity("SpecEdu.Domain.Entities.Student", b =>
                 {
                     b.HasOne("SpecEdu.Domain.Entities.School", "School")
@@ -637,8 +770,15 @@ namespace SpecEdu.Infrastructure.Migrations
                     b.Navigation("School");
                 });
 
+            modelBuilder.Entity("SpecEdu.Domain.Entities.DiaryEntry", b =>
+                {
+                    b.Navigation("Attachments");
+                });
+
             modelBuilder.Entity("SpecEdu.Domain.Entities.Student", b =>
                 {
+                    b.Navigation("DiaryEntries");
+
                     b.Navigation("Guardians");
 
                     b.Navigation("StaffLinks");

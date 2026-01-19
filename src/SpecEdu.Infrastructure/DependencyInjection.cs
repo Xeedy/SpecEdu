@@ -75,6 +75,7 @@ public static class DependencyInjection
         services.AddScoped<IStudentService, StudentService>();
         services.AddScoped<IStudentAccessService, StudentAccessService>();
         services.AddScoped<IAuditService, AuditService>();
+        services.AddScoped<IDiaryService, DiaryService>();
 
         services.AddSingleton<IAuthorizationHandler, PermissionAuthorizationHandler>();
         services.AddScoped<IAuthorizationHandler, StudentAccessAuthorizationHandler>();
