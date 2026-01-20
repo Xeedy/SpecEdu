@@ -34,6 +34,16 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser, IdentityR
 
     public DbSet<DiaryAttachment> DiaryAttachments => Set<DiaryAttachment>();
 
+    public DbSet<Reminder> Reminders => Set<Reminder>();
+
+    public DbSet<Plpp> Plpps => Set<Plpp>();
+
+    public DbSet<PlppGoal> PlppGoals => Set<PlppGoal>();
+
+    public DbSet<PlppEvaluation> PlppEvaluations => Set<PlppEvaluation>();
+
+    public DbSet<PlppVersion> PlppVersions => Set<PlppVersion>();
+
     public override int SaveChanges()
     {
         UpdateAuditFields();

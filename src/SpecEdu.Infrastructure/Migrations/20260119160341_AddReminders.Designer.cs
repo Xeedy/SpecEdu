@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SpecEdu.Infrastructure.Data;
 
@@ -11,9 +12,11 @@ using SpecEdu.Infrastructure.Data;
 namespace SpecEdu.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260119160341_AddReminders")]
+    partial class AddReminders
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -328,322 +331,6 @@ namespace SpecEdu.Infrastructure.Migrations
                     b.HasIndex("StudentId", "Visibility");
 
                     b.ToTable("DiaryEntries", (string)null);
-                });
-
-            modelBuilder.Entity("SpecEdu.Domain.Entities.Plpp", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime?>("ActivatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("ActivatedBy")
-                        .HasMaxLength(450)
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("AreasNeedingSupport")
-                        .HasMaxLength(4000)
-                        .HasColumnType("nvarchar(4000)");
-
-                    b.Property<string>("AssessmentMethods")
-                        .HasMaxLength(4000)
-                        .HasColumnType("nvarchar(4000)");
-
-                    b.Property<string>("ContentAdjustments")
-                        .HasMaxLength(4000)
-                        .HasColumnType("nvarchar(4000)");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("CreatedBy")
-                        .HasMaxLength(450)
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("InternalNotes")
-                        .HasMaxLength(4000)
-                        .HasColumnType("nvarchar(4000)");
-
-                    b.Property<bool>("IsActive")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValue(true);
-
-                    b.Property<bool>("IsVisibleToParents")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValue(true);
-
-                    b.Property<DateTime?>("ModifiedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("ModifiedBy")
-                        .HasMaxLength(450)
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("OrganizationalAdjustments")
-                        .HasMaxLength(4000)
-                        .HasColumnType("nvarchar(4000)");
-
-                    b.Property<string>("ParentCollaboration")
-                        .HasMaxLength(4000)
-                        .HasColumnType("nvarchar(4000)");
-
-                    b.Property<string>("RecommendedMethods")
-                        .HasMaxLength(4000)
-                        .HasColumnType("nvarchar(4000)");
-
-                    b.Property<string>("SchoolYear")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
-
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Strengths")
-                        .HasMaxLength(4000)
-                        .HasColumnType("nvarchar(4000)");
-
-                    b.Property<Guid>("StudentId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<int>("SupportLevel")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("ValidFrom")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("ValidTo")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("IsActive");
-
-                    b.HasIndex("Status");
-
-                    b.HasIndex("StudentId");
-
-                    b.HasIndex("StudentId", "SchoolYear");
-
-                    b.HasIndex("StudentId", "Status");
-
-                    b.HasIndex("ValidFrom", "ValidTo");
-
-                    b.ToTable("Plpps", (string)null);
-                });
-
-            modelBuilder.Entity("SpecEdu.Domain.Entities.PlppEvaluation", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("CreatedBy")
-                        .HasMaxLength(450)
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<DateTime>("EvaluationMonth")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsActive")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValue(true);
-
-                    b.Property<DateTime?>("ModifiedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("ModifiedBy")
-                        .HasMaxLength(450)
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Notes")
-                        .HasMaxLength(4000)
-                        .HasColumnType("nvarchar(4000)");
-
-                    b.Property<string>("ParentConsultationNotes")
-                        .HasMaxLength(4000)
-                        .HasColumnType("nvarchar(4000)");
-
-                    b.Property<bool>("ParentsNotified")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValue(false);
-
-                    b.Property<DateTime?>("ParentsNotifiedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid>("PlppId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<int?>("ProgressRating")
-                        .HasColumnType("int");
-
-                    b.Property<string>("RecommendedAdjustments")
-                        .HasMaxLength(4000)
-                        .HasColumnType("nvarchar(4000)");
-
-                    b.Property<string>("WhatNeedsImprovement")
-                        .HasMaxLength(4000)
-                        .HasColumnType("nvarchar(4000)");
-
-                    b.Property<string>("WhatStudentManages")
-                        .HasMaxLength(4000)
-                        .HasColumnType("nvarchar(4000)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("EvaluationMonth");
-
-                    b.HasIndex("IsActive");
-
-                    b.HasIndex("ParentsNotified");
-
-                    b.HasIndex("PlppId");
-
-                    b.HasIndex("PlppId", "EvaluationMonth");
-
-                    b.ToTable("PlppEvaluations", (string)null);
-                });
-
-            modelBuilder.Entity("SpecEdu.Domain.Entities.PlppGoal", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime?>("CompletedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("CreatedBy")
-                        .HasMaxLength(450)
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasMaxLength(2000)
-                        .HasColumnType("nvarchar(2000)");
-
-                    b.Property<bool>("IsActive")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValue(true);
-
-                    b.Property<string>("Methods")
-                        .HasMaxLength(2000)
-                        .HasColumnType("nvarchar(2000)");
-
-                    b.Property<DateTime?>("ModifiedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("ModifiedBy")
-                        .HasMaxLength(450)
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("Order")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasDefaultValue(1);
-
-                    b.Property<Guid>("PlppId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("ProgressNotes")
-                        .HasMaxLength(4000)
-                        .HasColumnType("nvarchar(4000)");
-
-                    b.Property<string>("ResponsiblePerson")
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
-
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Subject")
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
-
-                    b.Property<string>("SuccessCriteria")
-                        .HasMaxLength(2000)
-                        .HasColumnType("nvarchar(2000)");
-
-                    b.Property<DateTime?>("TargetDate")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("IsActive");
-
-                    b.HasIndex("PlppId");
-
-                    b.HasIndex("Status");
-
-                    b.HasIndex("PlppId", "Order");
-
-                    b.HasIndex("PlppId", "Status");
-
-                    b.ToTable("PlppGoals", (string)null);
-                });
-
-            modelBuilder.Entity("SpecEdu.Domain.Entities.PlppVersion", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("ChangeSummary")
-                        .HasMaxLength(1000)
-                        .HasColumnType("nvarchar(1000)");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("CreatedBy")
-                        .HasMaxLength(450)
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<DateTime?>("ModifiedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("ModifiedBy")
-                        .HasMaxLength(450)
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<Guid>("PlppId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Snapshot")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Source")
-                        .HasColumnType("int");
-
-                    b.Property<int>("VersionNumber")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CreatedAt");
-
-                    b.HasIndex("PlppId");
-
-                    b.HasIndex("Source");
-
-                    b.HasIndex("PlppId", "VersionNumber")
-                        .IsUnique();
-
-                    b.ToTable("PlppVersions", (string)null);
                 });
 
             modelBuilder.Entity("SpecEdu.Domain.Entities.Reminder", b =>
@@ -1121,50 +808,6 @@ namespace SpecEdu.Infrastructure.Migrations
                     b.Navigation("Student");
                 });
 
-            modelBuilder.Entity("SpecEdu.Domain.Entities.Plpp", b =>
-                {
-                    b.HasOne("SpecEdu.Domain.Entities.Student", "Student")
-                        .WithMany("Plpps")
-                        .HasForeignKey("StudentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Student");
-                });
-
-            modelBuilder.Entity("SpecEdu.Domain.Entities.PlppEvaluation", b =>
-                {
-                    b.HasOne("SpecEdu.Domain.Entities.Plpp", "Plpp")
-                        .WithMany("Evaluations")
-                        .HasForeignKey("PlppId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Plpp");
-                });
-
-            modelBuilder.Entity("SpecEdu.Domain.Entities.PlppGoal", b =>
-                {
-                    b.HasOne("SpecEdu.Domain.Entities.Plpp", "Plpp")
-                        .WithMany("Goals")
-                        .HasForeignKey("PlppId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Plpp");
-                });
-
-            modelBuilder.Entity("SpecEdu.Domain.Entities.PlppVersion", b =>
-                {
-                    b.HasOne("SpecEdu.Domain.Entities.Plpp", "Plpp")
-                        .WithMany("Versions")
-                        .HasForeignKey("PlppId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Plpp");
-                });
-
             modelBuilder.Entity("SpecEdu.Domain.Entities.Reminder", b =>
                 {
                     b.HasOne("SpecEdu.Domain.Entities.Student", "Student")
@@ -1224,22 +867,11 @@ namespace SpecEdu.Infrastructure.Migrations
                     b.Navigation("Attachments");
                 });
 
-            modelBuilder.Entity("SpecEdu.Domain.Entities.Plpp", b =>
-                {
-                    b.Navigation("Evaluations");
-
-                    b.Navigation("Goals");
-
-                    b.Navigation("Versions");
-                });
-
             modelBuilder.Entity("SpecEdu.Domain.Entities.Student", b =>
                 {
                     b.Navigation("DiaryEntries");
 
                     b.Navigation("Guardians");
-
-                    b.Navigation("Plpps");
 
                     b.Navigation("StaffLinks");
                 });

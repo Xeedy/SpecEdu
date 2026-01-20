@@ -253,4 +253,58 @@
   <data name="ContactPage.Address" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
+  <data name="Common.Create" xml:space="preserve">
+    <value>Create</value>
+  </data>
+  <data name="Common.Delete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="Common.ConfirmCancel" xml:space="preserve">
+    <value>Are you sure you want to cancel this item?</value>
+  </data>
+  <data name="Common.ConfirmDelete" xml:space="preserve">
+    <value>Are you sure you want to delete this item?</value>
+  </data>
+  <data name="Common.Optional" xml:space="preserve">
+    <value>Optional</value>
+  </data>
+  <data name="StudentsPage.Reminders" xml:space="preserve">
+    <value>Reminders</value>
+  </data>
+  <data name="StudentsPage.RemindersInfo" xml:space="preserve">
+    <value>Manage reminders for control examinations and other important dates.</value>
+  </data>
+  <data name="StudentsPage.CreateReminder" xml:space="preserve">
+    <value>Create Reminder</value>
+  </data>
+  <data name="StudentsPage.RemindersList" xml:space="preserve">
+    <value>Reminders List</value>
+  </data>
+  <data name="StudentsPage.ReminderTitle" xml:space="preserve">
+    <value>Title</value>
+  </data>
+  <data name="StudentsPage.ReminderDueDate" xml:space="preserve">
+    <value>Due Date</value>
+  </data>
+  <data name="StudentsPage.ReminderNotifyAt" xml:space="preserve">
+    <value>Notification Date</value>
+  </data>
+  <data name="StudentsPage.ReminderSentAt" xml:space="preserve">
+    <value>Sent At</value>
+  </data>
+  <data name="StudentsPage.ReminderDescription" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="StudentsPage.ReminderNotifyInfo" xml:space="preserve">
+    <value>Notification will be sent to guardians 2 months before the due date.</value>
+  </data>
+  <data name="StudentsPage.NoReminders" xml:space="preserve">
+    <value>No reminders have been created yet.</value>
+  </data>
+  <data name="StudentsPage.Plpp" xml:space="preserve">
+    <value>Pedagogical Support Plans</value>
+  </data>
+  <data name="StudentsPage.PlppInfo" xml:space="preserve">
+    <value>Manage pedagogical support plans (PLPP) for the student.</value>
+  </data>
 </root>

@@ -7,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using SpecEdu.Application.Common.Interfaces;
+using SpecEdu.Application.Common.Models;
 using SpecEdu.Infrastructure.Authorization;
 using SpecEdu.Infrastructure.Data;
 using SpecEdu.Infrastructure.Identity;
@@ -69,6 +70,8 @@ public static class DependencyInjection
                 };
             });
 
+        services.Configure<EmailSettings>(configuration.GetSection(EmailSettings.SectionName));
+
         services.AddScoped<IJwtTokenService, JwtTokenService>();
         services.AddScoped<IIdentityService, IdentityService>();
         services.AddScoped<ISchoolService, SchoolService>();
@@ -76,6 +79,15 @@ public static class DependencyInjection
         services.AddScoped<IStudentAccessService, StudentAccessService>();
         services.AddScoped<IAuditService, AuditService>();
         services.AddScoped<IDiaryService, DiaryService>();
+        services.AddScoped<IEmailService, EmailService>();
+        services.AddScoped<IReminderService, ReminderService>();
+        services.AddScoped<IPlppService, PlppService>();
+        services.AddScoped<IPlppVersionService, PlppVersionService>();
+        services.AddScoped<IPdfService, PdfService>();
+
+        services.AddTransient(typeof(Lazy<>), typeof(LazyResolver<>));
+
+        services.AddHostedService<ReminderBackgroundService>();
 
         services.AddSingleton<IAuthorizationHandler, PermissionAuthorizationHandler>();
         services.AddScoped<IAuthorizationHandler, StudentAccessAuthorizationHandler>();
@@ -83,5 +95,13 @@ public static class DependencyInjection
         services.AddAuthorization(AuthorizationPolicies.AddPolicies);
 
         return services;
+    }
+}
+
+internal class LazyResolver<T> : Lazy<T> where T : class
+{
+    public LazyResolver(IServiceProvider serviceProvider)
+        : base(serviceProvider.GetRequiredService<T>)
+    {
     }
 }

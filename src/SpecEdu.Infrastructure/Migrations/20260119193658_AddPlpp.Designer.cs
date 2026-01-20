@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SpecEdu.Infrastructure.Data;
 
@@ -11,9 +12,11 @@ using SpecEdu.Infrastructure.Data;
 namespace SpecEdu.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260119193658_AddPlpp")]
+    partial class AddPlpp
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -595,57 +598,6 @@ namespace SpecEdu.Infrastructure.Migrations
                     b.ToTable("PlppGoals", (string)null);
                 });
 
-            modelBuilder.Entity("SpecEdu.Domain.Entities.PlppVersion", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("ChangeSummary")
-                        .HasMaxLength(1000)
-                        .HasColumnType("nvarchar(1000)");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("CreatedBy")
-                        .HasMaxLength(450)
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<DateTime?>("ModifiedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("ModifiedBy")
-                        .HasMaxLength(450)
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<Guid>("PlppId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Snapshot")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Source")
-                        .HasColumnType("int");
-
-                    b.Property<int>("VersionNumber")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CreatedAt");
-
-                    b.HasIndex("PlppId");
-
-                    b.HasIndex("Source");
-
-                    b.HasIndex("PlppId", "VersionNumber")
-                        .IsUnique();
-
-                    b.ToTable("PlppVersions", (string)null);
-                });
-
             modelBuilder.Entity("SpecEdu.Domain.Entities.Reminder", b =>
                 {
                     b.Property<Guid>("Id")
@@ -1154,17 +1106,6 @@ namespace SpecEdu.Infrastructure.Migrations
                     b.Navigation("Plpp");
                 });
 
-            modelBuilder.Entity("SpecEdu.Domain.Entities.PlppVersion", b =>
-                {
-                    b.HasOne("SpecEdu.Domain.Entities.Plpp", "Plpp")
-                        .WithMany("Versions")
-                        .HasForeignKey("PlppId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Plpp");
-                });
-
             modelBuilder.Entity("SpecEdu.Domain.Entities.Reminder", b =>
                 {
                     b.HasOne("SpecEdu.Domain.Entities.Student", "Student")
@@ -1229,8 +1170,6 @@ namespace SpecEdu.Infrastructure.Migrations
                     b.Navigation("Evaluations");
 
                     b.Navigation("Goals");
-
-                    b.Navigation("Versions");
                 });
 
             modelBuilder.Entity("SpecEdu.Domain.Entities.Student", b =>

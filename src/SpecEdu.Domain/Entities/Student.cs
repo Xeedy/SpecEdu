@@ -26,5 +26,7 @@ public class Student : AuditableEntity
 
     public ICollection<DiaryEntry> DiaryEntries { get; set; } = new List<DiaryEntry>();
 
+    public ICollection<Plpp> Plpps { get; set; } = new List<Plpp>();
+
     public string FullName => $"{FirstName} {LastName}".Trim();
 }
