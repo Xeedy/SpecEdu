@@ -1752,4 +1752,58 @@
   <data name="Common.BackToDetails" xml:space="preserve">
     <value>Zpět na detail</value>
   </data>
+  <data name="Common.Create" xml:space="preserve">
+    <value>Vytvořit</value>
+  </data>
+  <data name="Common.Delete" xml:space="preserve">
+    <value>Smazat</value>
+  </data>
+  <data name="Common.ConfirmCancel" xml:space="preserve">
+    <value>Opravdu chcete zrušit tuto položku?</value>
+  </data>
+  <data name="Common.ConfirmDelete" xml:space="preserve">
+    <value>Opravdu chcete smazat tuto položku?</value>
+  </data>
+  <data name="Common.Optional" xml:space="preserve">
+    <value>Nepovinné</value>
+  </data>
+  <data name="StudentsPage.Reminders" xml:space="preserve">
+    <value>Připomínky</value>
+  </data>
+  <data name="StudentsPage.RemindersInfo" xml:space="preserve">
+    <value>Správa připomínek na kontrolní vyšetření a další důležité termíny.</value>
+  </data>
+  <data name="StudentsPage.CreateReminder" xml:space="preserve">
+    <value>Vytvořit připomínku</value>
+  </data>
+  <data name="StudentsPage.RemindersList" xml:space="preserve">
+    <value>Seznam připomínek</value>
+  </data>
+  <data name="StudentsPage.ReminderTitle" xml:space="preserve">
+    <value>Název</value>
+  </data>
+  <data name="StudentsPage.ReminderDueDate" xml:space="preserve">
+    <value>Termín</value>
+  </data>
+  <data name="StudentsPage.ReminderNotifyAt" xml:space="preserve">
+    <value>Datum notifikace</value>
+  </data>
+  <data name="StudentsPage.ReminderSentAt" xml:space="preserve">
+    <value>Odesláno</value>
+  </data>
+  <data name="StudentsPage.ReminderDescription" xml:space="preserve">
+    <value>Popis</value>
+  </data>
+  <data name="StudentsPage.ReminderNotifyInfo" xml:space="preserve">
+    <value>Notifikace bude odeslána zákonným zástupcům 2 měsíce před termínem.</value>
+  </data>
+  <data name="StudentsPage.NoReminders" xml:space="preserve">
+    <value>Zatím nejsou vytvořeny žádné připomínky.</value>
+  </data>
+  <data name="StudentsPage.Plpp" xml:space="preserve">
+    <value>Plány pedagogické podpory</value>
+  </data>
+  <data name="StudentsPage.PlppInfo" xml:space="preserve">
+    <value>Správa plánů pedagogické podpory (PLPP) pro žáka.</value>
+  </data>
 </root>

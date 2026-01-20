@@ -1,0 +1,470 @@
+@page "{id:guid}"
+@model SpecEdu.Web.Pages.SchoolAdmin.Students.PlppEditModel
+@using SpecEdu.Web.Pages.SchoolAdmin.Students
+@inject IStringLocalizer<SharedResource> L
+@{
+    ViewData["Title"] = $"PLPP - {Model.Student.FullName}";
+}
+
+<div class="container py-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h1><i class="bi bi-file-earmark-text me-2"></i>Plan pedagogicke podpory</h1>
+            <p class="text-muted mb-0">
+                @Model.Student.FullName
+                <span class="badge @PlppEditModel.GetStatusBadgeClass(Model.Plpp.Status) ms-2">
+                    @PlppEditModel.GetStatusName(Model.Plpp.Status)
+                </span>
+            </p>
+        </div>
+        <div class="btn-group">
+            <a asp-page="PlppDownload" asp-route-id="@Model.Id" class="btn btn-outline-primary" title="Stahnout PDF">
+                <i class="bi bi-file-pdf me-2"></i>PDF
+            </a>
+            <a asp-page="PlppDownload" asp-route-id="@Model.Id" asp-route-includeInternalNotes="true" class="btn btn-outline-secondary" title="Stahnout PDF vcetne internich poznamek">
+                <i class="bi bi-file-pdf me-2"></i>PDF (s poznamkami)
+            </a>
+            <a asp-page="PlppVersions" asp-route-id="@Model.Id" class="btn btn-outline-info" title="Historie verzi">
+                <i class="bi bi-clock-history me-2"></i>Historie
+            </a>
+        </div>
+    </div>
+
+    @if (!string.IsNullOrWhiteSpace(Model.SuccessMessage))
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            @Model.SuccessMessage
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+
+    @if (!string.IsNullOrWhiteSpace(Model.ErrorMessage))
+    {
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            @Model.ErrorMessage
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+
+    <!-- Tabs -->
+    <ul class="nav nav-tabs mb-4" id="plppTabs" role="tablist">
+        <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="info-tab" data-bs-toggle="tab" data-bs-target="#info" type="button" role="tab">
+                <i class="bi bi-info-circle me-2"></i>Zakladni udaje
+            </button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="goals-tab" data-bs-toggle="tab" data-bs-target="#goals" type="button" role="tab">
+                <i class="bi bi-bullseye me-2"></i>Cile (@Model.Plpp.Goals.Count)
+            </button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="evaluations-tab" data-bs-toggle="tab" data-bs-target="#evaluations" type="button" role="tab">
+                <i class="bi bi-clipboard-check me-2"></i>Hodnoceni (@Model.Plpp.Evaluations.Count)
+            </button>
+        </li>
+    </ul>
+
+    <div class="tab-content" id="plppTabContent">
+        <!-- Info Tab -->
+        <div class="tab-pane fade show active" id="info" role="tabpanel">
+            <form method="post">
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="spec-card mb-4">
+                            <div class="spec-card-header">
+                                <h5 class="mb-0"><i class="bi bi-info-circle me-2"></i>Zakladni udaje</h5>
+                            </div>
+                            <div class="spec-card-body">
+                                <div class="mb-3">
+                                    <label asp-for="Input.SchoolYear" class="form-label"></label>
+                                    <input asp-for="Input.SchoolYear" class="form-control" />
+                                    <span asp-validation-for="Input.SchoolYear" class="text-danger"></span>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label asp-for="Input.SupportLevel" class="form-label"></label>
+                                    <select asp-for="Input.SupportLevel" class="form-select" asp-items="Model.SupportLevelOptions"></select>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label asp-for="Input.ValidFrom" class="form-label"></label>
+                                    <input asp-for="Input.ValidFrom" type="date" class="form-control" />
+                                    <span asp-validation-for="Input.ValidFrom" class="text-danger"></span>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label asp-for="Input.ValidTo" class="form-label"></label>
+                                    <input asp-for="Input.ValidTo" type="date" class="form-control" />
+                                    <span asp-validation-for="Input.ValidTo" class="text-danger"></span>
+                                </div>
+
+                                <div class="form-check mb-3">
+                                    <input asp-for="Input.IsVisibleToParents" class="form-check-input" type="checkbox" />
+                                    <label asp-for="Input.IsVisibleToParents" class="form-check-label"></label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-8">
+                        <div class="spec-card mb-4">
+                            <div class="spec-card-header">
+                                <h5 class="mb-0"><i class="bi bi-person-check me-2"></i>Charakteristika zaka</h5>
+                            </div>
+                            <div class="spec-card-body">
+                                <div class="mb-3">
+                                    <label asp-for="Input.Strengths" class="form-label"></label>
+                                    <textarea asp-for="Input.Strengths" class="form-control" rows="3"></textarea>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label asp-for="Input.AreasNeedingSupport" class="form-label"></label>
+                                    <textarea asp-for="Input.AreasNeedingSupport" class="form-control" rows="3"></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="spec-card mb-4">
+                            <div class="spec-card-header">
+                                <h5 class="mb-0"><i class="bi bi-gear me-2"></i>Podpurna opatreni</h5>
+                            </div>
+                            <div class="spec-card-body">
+                                <div class="mb-3">
+                                    <label asp-for="Input.RecommendedMethods" class="form-label"></label>
+                                    <textarea asp-for="Input.RecommendedMethods" class="form-control" rows="3"></textarea>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label asp-for="Input.OrganizationalAdjustments" class="form-label"></label>
+                                    <textarea asp-for="Input.OrganizationalAdjustments" class="form-control" rows="3"></textarea>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label asp-for="Input.ContentAdjustments" class="form-label"></label>
+                                    <textarea asp-for="Input.ContentAdjustments" class="form-control" rows="3"></textarea>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label asp-for="Input.AssessmentMethods" class="form-label"></label>
+                                    <textarea asp-for="Input.AssessmentMethods" class="form-control" rows="3"></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="spec-card mb-4">
+                            <div class="spec-card-header">
+                                <h5 class="mb-0"><i class="bi bi-people me-2"></i>Spoluprace</h5>
+                            </div>
+                            <div class="spec-card-body">
+                                <div class="mb-3">
+                                    <label asp-for="Input.ParentCollaboration" class="form-label"></label>
+                                    <textarea asp-for="Input.ParentCollaboration" class="form-control" rows="3"></textarea>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label asp-for="Input.InternalNotes" class="form-label"></label>
+                                    <textarea asp-for="Input.InternalNotes" class="form-control" rows="3"></textarea>
+                                    <small class="text-muted">Tyto poznamky nebudou viditelne pro rodice.</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="d-flex justify-content-end">
+                    <button type="submit" class="btn btn-spec-primary">
+                        <i class="bi bi-check-lg me-2"></i>Ulozit zmeny
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Goals Tab -->
+        <div class="tab-pane fade" id="goals" role="tabpanel">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="spec-card mb-4">
+                        <div class="spec-card-header d-flex justify-content-between align-items-center">
+                            <h5 class="mb-0"><i class="bi bi-bullseye me-2"></i>Cile PLPP</h5>
+                        </div>
+                        <div class="spec-card-body">
+                            @if (Model.Plpp.Goals.Any())
+                            {
+                                @foreach (var goal in Model.Plpp.Goals.OrderBy(g => g.Order))
+                                {
+                                    <div class="border rounded p-3 mb-3">
+                                        <div class="d-flex justify-content-between align-items-start mb-2">
+                                            <div>
+                                                <h6 class="mb-1">
+                                                    @if (!string.IsNullOrEmpty(goal.Subject))
+                                                    {
+                                                        <span class="badge bg-info me-2">@goal.Subject</span>
+                                                    }
+                                                    @goal.Description
+                                                </h6>
+                                                <span class="badge @PlppEditModel.GetGoalStatusBadgeClass(goal.Status)">
+                                                    @PlppEditModel.GetGoalStatusName(goal.Status)
+                                                </span>
+                                            </div>
+                                            <div class="btn-group btn-group-sm">
+                                                <div class="dropdown">
+                                                    <button class="btn btn-outline-primary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                                                        Stav
+                                                    </button>
+                                                    <ul class="dropdown-menu">
+                                                        @foreach (SpecEdu.Domain.Enums.GoalStatus status in Enum.GetValues(typeof(SpecEdu.Domain.Enums.GoalStatus)))
+                                                        {
+                                                            <li>
+                                                                <form method="post" asp-page-handler="UpdateGoalStatus" asp-route-goalId="@goal.Id" asp-route-status="@status">
+                                                                    <button type="submit" class="dropdown-item">
+                                                                        @PlppEditModel.GetGoalStatusName(status)
+                                                                    </button>
+                                                                </form>
+                                                            </li>
+                                                        }
+                                                    </ul>
+                                                </div>
+                                                <form method="post" asp-page-handler="DeleteGoal" asp-route-goalId="@goal.Id" class="d-inline">
+                                                    <button type="submit" class="btn btn-outline-danger" onclick="return confirm('Opravdu chcete smazat tento cil?')">
+                                                        <i class="bi bi-trash"></i>
+                                                    </button>
+                                                </form>
+                                            </div>
+                                        </div>
+
+                                        @if (!string.IsNullOrEmpty(goal.SuccessCriteria))
+                                        {
+                                            <p class="mb-1 small"><strong>Kriteria uspechu:</strong> @goal.SuccessCriteria</p>
+                                        }
+                                        @if (!string.IsNullOrEmpty(goal.Methods))
+                                        {
+                                            <p class="mb-1 small"><strong>Metody:</strong> @goal.Methods</p>
+                                        }
+                                        @if (!string.IsNullOrEmpty(goal.ResponsiblePerson))
+                                        {
+                                            <p class="mb-1 small"><strong>Odpovedna osoba:</strong> @goal.ResponsiblePerson</p>
+                                        }
+                                        @if (goal.TargetDate.HasValue)
+                                        {
+                                            <p class="mb-1 small"><strong>Cilove datum:</strong> @goal.TargetDate.Value.ToString("dd.MM.yyyy")</p>
+                                        }
+                                        @if (!string.IsNullOrEmpty(goal.ProgressNotes))
+                                        {
+                                            <p class="mb-0 small text-muted"><strong>Poznamky:</strong> @goal.ProgressNotes</p>
+                                        }
+                                    </div>
+                                }
+                            }
+                            else
+                            {
+                                <div class="text-center py-4 text-muted">
+                                    <i class="bi bi-bullseye display-4"></i>
+                                    <p class="mt-2">Zatim zadne cile. Pridejte prvni cil.</p>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="spec-card">
+                        <div class="spec-card-header">
+                            <h5 class="mb-0"><i class="bi bi-plus-circle me-2"></i>Pridat cil</h5>
+                        </div>
+                        <div class="spec-card-body">
+                            <form method="post" asp-page-handler="AddGoal">
+                                <div class="mb-3">
+                                    <label asp-for="GoalInput.Subject" class="form-label"></label>
+                                    <input asp-for="GoalInput.Subject" class="form-control" placeholder="napr. Matematika, Cteni..." />
+                                </div>
+
+                                <div class="mb-3">
+                                    <label asp-for="GoalInput.Description" class="form-label"></label>
+                                    <textarea asp-for="GoalInput.Description" class="form-control" rows="2" required></textarea>
+                                    <span asp-validation-for="GoalInput.Description" class="text-danger"></span>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label asp-for="GoalInput.SuccessCriteria" class="form-label"></label>
+                                    <textarea asp-for="GoalInput.SuccessCriteria" class="form-control" rows="2"></textarea>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label asp-for="GoalInput.Methods" class="form-label"></label>
+                                    <textarea asp-for="GoalInput.Methods" class="form-control" rows="2"></textarea>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label asp-for="GoalInput.ResponsiblePerson" class="form-label"></label>
+                                    <input asp-for="GoalInput.ResponsiblePerson" class="form-control" />
+                                </div>
+
+                                <div class="mb-3">
+                                    <label asp-for="GoalInput.TargetDate" class="form-label"></label>
+                                    <input asp-for="GoalInput.TargetDate" type="date" class="form-control" />
+                                </div>
+
+                                <button type="submit" class="btn btn-spec-primary w-100">
+                                    <i class="bi bi-plus-lg me-2"></i>Pridat cil
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Evaluations Tab -->
+        <div class="tab-pane fade" id="evaluations" role="tabpanel">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="spec-card mb-4">
+                        <div class="spec-card-header">
+                            <h5 class="mb-0"><i class="bi bi-clipboard-check me-2"></i>Mesicni hodnoceni</h5>
+                        </div>
+                        <div class="spec-card-body">
+                            @if (Model.Plpp.Evaluations.Any())
+                            {
+                                @foreach (var eval in Model.Plpp.Evaluations.OrderByDescending(e => e.EvaluationMonth))
+                                {
+                                    <div class="border rounded p-3 mb-3">
+                                        <div class="d-flex justify-content-between align-items-start mb-2">
+                                            <div>
+                                                <h6 class="mb-1">
+                                                    <i class="bi bi-calendar-month me-2"></i>
+                                                    @eval.EvaluationMonth.ToString("MM/yyyy")
+                                                </h6>
+                                                @if (eval.ProgressRating.HasValue)
+                                                {
+                                                    <span class="badge bg-primary">Hodnoceni: @eval.ProgressRating/5</span>
+                                                }
+                                                @if (eval.ParentsNotified)
+                                                {
+                                                    <span class="badge bg-success ms-1">
+                                                        <i class="bi bi-check-circle me-1"></i>Rodice seznameni
+                                                    </span>
+                                                }
+                                            </div>
+                                            <div class="btn-group btn-group-sm">
+                                                @if (!eval.ParentsNotified)
+                                                {
+                                                    <form method="post" asp-page-handler="MarkParentsNotified" asp-route-evaluationId="@eval.Id" class="d-inline">
+                                                        <button type="submit" class="btn btn-outline-success" title="Oznacit rodice jako seznamene">
+                                                            <i class="bi bi-check-lg"></i>
+                                                        </button>
+                                                    </form>
+                                                }
+                                                <form method="post" asp-page-handler="DeleteEvaluation" asp-route-evaluationId="@eval.Id" class="d-inline">
+                                                    <button type="submit" class="btn btn-outline-danger" onclick="return confirm('Opravdu chcete smazat toto hodnoceni?')">
+                                                        <i class="bi bi-trash"></i>
+                                                    </button>
+                                                </form>
+                                            </div>
+                                        </div>
+
+                                        @if (!string.IsNullOrEmpty(eval.WhatStudentManages))
+                                        {
+                                            <p class="mb-1 small"><strong>Co zak zvlada:</strong> @eval.WhatStudentManages</p>
+                                        }
+                                        @if (!string.IsNullOrEmpty(eval.WhatNeedsImprovement))
+                                        {
+                                            <p class="mb-1 small"><strong>Co potrebuje zlepsit:</strong> @eval.WhatNeedsImprovement</p>
+                                        }
+                                        @if (!string.IsNullOrEmpty(eval.RecommendedAdjustments))
+                                        {
+                                            <p class="mb-1 small"><strong>Doporucene upravy:</strong> @eval.RecommendedAdjustments</p>
+                                        }
+                                        @if (!string.IsNullOrEmpty(eval.ParentConsultationNotes))
+                                        {
+                                            <p class="mb-1 small"><strong>Konzultace s rodici:</strong> @eval.ParentConsultationNotes</p>
+                                        }
+                                        @if (!string.IsNullOrEmpty(eval.Notes))
+                                        {
+                                            <p class="mb-0 small text-muted"><strong>Poznamky:</strong> @eval.Notes</p>
+                                        }
+                                    </div>
+                                }
+                            }
+                            else
+                            {
+                                <div class="text-center py-4 text-muted">
+                                    <i class="bi bi-clipboard-x display-4"></i>
+                                    <p class="mt-2">Zatim zadna hodnoceni. Pridejte prvni mesicni hodnoceni.</p>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="spec-card">
+                        <div class="spec-card-header">
+                            <h5 class="mb-0"><i class="bi bi-plus-circle me-2"></i>Pridat hodnoceni</h5>
+                        </div>
+                        <div class="spec-card-body">
+                            <form method="post" asp-page-handler="AddEvaluation">
+                                <div class="mb-3">
+                                    <label asp-for="EvaluationInput.EvaluationMonth" class="form-label"></label>
+                                    <input asp-for="EvaluationInput.EvaluationMonth" type="month" class="form-control" required />
+                                    <span asp-validation-for="EvaluationInput.EvaluationMonth" class="text-danger"></span>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label asp-for="EvaluationInput.WhatStudentManages" class="form-label"></label>
+                                    <textarea asp-for="EvaluationInput.WhatStudentManages" class="form-control" rows="2"></textarea>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label asp-for="EvaluationInput.WhatNeedsImprovement" class="form-label"></label>
+                                    <textarea asp-for="EvaluationInput.WhatNeedsImprovement" class="form-control" rows="2"></textarea>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label asp-for="EvaluationInput.RecommendedAdjustments" class="form-label"></label>
+                                    <textarea asp-for="EvaluationInput.RecommendedAdjustments" class="form-control" rows="2"></textarea>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label asp-for="EvaluationInput.ParentConsultationNotes" class="form-label"></label>
+                                    <textarea asp-for="EvaluationInput.ParentConsultationNotes" class="form-control" rows="2"></textarea>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label asp-for="EvaluationInput.ProgressRating" class="form-label"></label>
+                                    <select asp-for="EvaluationInput.ProgressRating" class="form-select">
+                                        <option value="">-- Vyberte --</option>
+                                        <option value="1">1 - Nedostatecne</option>
+                                        <option value="2">2 - Dostatecne</option>
+                                        <option value="3">3 - Dobre</option>
+                                        <option value="4">4 - Velmi dobre</option>
+                                        <option value="5">5 - Vyborne</option>
+                                    </select>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label asp-for="EvaluationInput.Notes" class="form-label"></label>
+                                    <textarea asp-for="EvaluationInput.Notes" class="form-control" rows="2"></textarea>
+                                </div>
+
+                                <button type="submit" class="btn btn-spec-primary w-100">
+                                    <i class="bi bi-plus-lg me-2"></i>Pridat hodnoceni
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-4">
+        <a asp-page="Plpps" asp-route-id="@Model.Plpp.StudentId" class="btn btn-outline-secondary">
+            <i class="bi bi-arrow-left me-2"></i>Zpet na seznam PLPP
+        </a>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

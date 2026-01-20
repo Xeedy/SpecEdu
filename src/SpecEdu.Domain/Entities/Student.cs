@@ -72,6 +72,12 @@ public class Student : AuditableEntity
     public ICollection<DiaryEntry> DiaryEntries { get; set; } = new List<DiaryEntry>();
 
     /// <summary>
+    /// Navigation property to pedagogical support plans.
+    /// Czech: Plány pedagogické podpory
+    /// </summary>
+    public ICollection<Plpp> Plpps { get; set; } = new List<Plpp>();
+
+    /// <summary>
     /// Gets the student's full name.
     /// </summary>
     public string FullName => $"{FirstName} {LastName}".Trim();

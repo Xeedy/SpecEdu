@@ -61,6 +61,36 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser, IdentityR
     public DbSet<DiaryAttachment> DiaryAttachments => Set<DiaryAttachment>();
 
     /// <summary>
+    /// Reminders for upcoming events (e.g., control examinations).
+    /// Czech: Připomínky na nadcházející události
+    /// </summary>
+    public DbSet<Reminder> Reminders => Set<Reminder>();
+
+    /// <summary>
+    /// Pedagogical support plans (PLPP) for students.
+    /// Czech: Plány pedagogické podpory
+    /// </summary>
+    public DbSet<Plpp> Plpps => Set<Plpp>();
+
+    /// <summary>
+    /// Goals within pedagogical support plans.
+    /// Czech: Cíle PLPP
+    /// </summary>
+    public DbSet<PlppGoal> PlppGoals => Set<PlppGoal>();
+
+    /// <summary>
+    /// Monthly evaluations of pedagogical support plans.
+    /// Czech: Měsíční hodnocení PLPP
+    /// </summary>
+    public DbSet<PlppEvaluation> PlppEvaluations => Set<PlppEvaluation>();
+
+    /// <summary>
+    /// Version history of pedagogical support plans.
+    /// Czech: Historie verzí PLPP
+    /// </summary>
+    public DbSet<PlppVersion> PlppVersions => Set<PlppVersion>();
+
+    /// <summary>
     /// Saves changes and automatically populates audit fields.
     /// </summary>
     public override int SaveChanges()

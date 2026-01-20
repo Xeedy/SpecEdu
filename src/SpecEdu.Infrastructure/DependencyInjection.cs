@@ -7,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using SpecEdu.Application.Common.Interfaces;
+using SpecEdu.Application.Common.Models;
 using SpecEdu.Infrastructure.Authorization;
 using SpecEdu.Infrastructure.Data;
 using SpecEdu.Infrastructure.Identity;
@@ -79,6 +80,9 @@ public static class DependencyInjection
                 };
             });
 
+        // Email settings
+        services.Configure<EmailSettings>(configuration.GetSection(EmailSettings.SectionName));
+
         services.AddScoped<IJwtTokenService, JwtTokenService>();
         services.AddScoped<IIdentityService, IdentityService>();
         services.AddScoped<ISchoolService, SchoolService>();
@@ -86,6 +90,17 @@ public static class DependencyInjection
         services.AddScoped<IStudentAccessService, StudentAccessService>();
         services.AddScoped<IAuditService, AuditService>();
         services.AddScoped<IDiaryService, DiaryService>();
+        services.AddScoped<IEmailService, EmailService>();
+        services.AddScoped<IReminderService, ReminderService>();
+        services.AddScoped<IPlppService, PlppService>();
+        services.AddScoped<IPlppVersionService, PlppVersionService>();
+        services.AddScoped<IPdfService, PdfService>();
+
+        // Register Lazy<T> for services with circular dependencies
+        services.AddTransient(typeof(Lazy<>), typeof(LazyResolver<>));
+
+        // Background service for processing reminders
+        services.AddHostedService<ReminderBackgroundService>();
 
         // Register authorization handlers
         services.AddSingleton<IAuthorizationHandler, PermissionAuthorizationHandler>();
@@ -95,5 +110,17 @@ public static class DependencyInjection
         services.AddAuthorization(AuthorizationPolicies.AddPolicies);
 
         return services;
+    }
+}
+
+/// <summary>
+/// Helper class for resolving Lazy<T> dependencies.
+/// Allows breaking circular dependencies by deferring service resolution.
+/// </summary>
+internal class LazyResolver<T> : Lazy<T> where T : class
+{
+    public LazyResolver(IServiceProvider serviceProvider)
+        : base(serviceProvider.GetRequiredService<T>)
+    {
     }
 }

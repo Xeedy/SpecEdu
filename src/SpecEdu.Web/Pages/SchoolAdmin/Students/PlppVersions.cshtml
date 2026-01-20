@@ -1,0 +1,115 @@
+@page "{id:guid}"
+@model SpecEdu.Web.Pages.SchoolAdmin.Students.PlppVersionsModel
+@using SpecEdu.Web.Pages.SchoolAdmin.Students
+@inject IStringLocalizer<SharedResource> L
+@{
+    ViewData["Title"] = $"Historie verzi PLPP - {Model.Student.FullName}";
+}
+
+<div class="container py-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h1><i class="bi bi-clock-history me-2"></i>Historie verzi PLPP</h1>
+            <p class="text-muted mb-0">
+                @Model.Student.FullName - @Model.Plpp.SchoolYear
+            </p>
+        </div>
+        <div>
+            <a asp-page="PlppEdit" asp-route-id="@Model.Id" class="btn btn-outline-primary">
+                <i class="bi bi-pencil me-2"></i>Zpet na upravu
+            </a>
+        </div>
+    </div>
+
+    @if (!string.IsNullOrWhiteSpace(Model.SuccessMessage))
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            @Model.SuccessMessage
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+
+    @if (!string.IsNullOrWhiteSpace(Model.ErrorMessage))
+    {
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            @Model.ErrorMessage
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+
+    <div class="spec-card">
+        <div class="spec-card-body">
+            @if (Model.Versions.Any())
+            {
+                <div class="table-responsive">
+                    <table class="table table-hover mb-0">
+                        <thead>
+                            <tr>
+                                <th style="width: 80px;">Verze</th>
+                                <th>Datum</th>
+                                <th>Zdroj</th>
+                                <th>Stav PLPP</th>
+                                <th>Popis zmeny</th>
+                                <th>Autor</th>
+                                <th class="text-end">Akce</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var version in Model.Versions)
+                            {
+                                <tr>
+                                    <td>
+                                        <strong>#@version.VersionNumber</strong>
+                                    </td>
+                                    <td>
+                                        <small>@version.CreatedAt.ToString("dd.MM.yyyy HH:mm")</small>
+                                    </td>
+                                    <td>
+                                        <span class="badge @PlppVersionsModel.GetSourceBadgeClass(version.Source)">
+                                            @PlppVersionsModel.GetSourceName(version.Source)
+                                        </span>
+                                    </td>
+                                    <td>
+                                        @PlppVersionsModel.GetStatusName(version.PlppStatus)
+                                    </td>
+                                    <td>
+                                        <small>@(version.ChangeSummary ?? "-")</small>
+                                    </td>
+                                    <td>
+                                        <small>@(version.CreatedByName ?? "-")</small>
+                                    </td>
+                                    <td class="text-end">
+                                        <div class="btn-group btn-group-sm">
+                                            <a asp-page="PlppVersionDownload" asp-route-id="@version.Id" class="btn btn-outline-primary" title="Stahnout PDF">
+                                                <i class="bi bi-file-pdf"></i>
+                                            </a>
+                                            <form method="post" asp-page-handler="Restore" asp-route-versionId="@version.Id" class="d-inline">
+                                                <button type="submit" class="btn btn-outline-warning" title="Obnovit tuto verzi" onclick="return confirm('Opravdu chcete obnovit PLPP do teto verze? Aktualni stav bude ulozen jako nova verze.')">
+                                                    <i class="bi bi-arrow-counterclockwise"></i>
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+            else
+            {
+                <div class="text-center py-5">
+                    <i class="bi bi-clock-history display-1 text-muted"></i>
+                    <p class="text-muted mt-3 mb-0">Zatim zadna historie verzi.</p>
+                    <p class="text-muted small">Verze se vytvori automaticky pri kazde zmene.</p>
+                </div>
+            }
+        </div>
+    </div>
+
+    <div class="mt-3">
+        <a asp-page="PlppEdit" asp-route-id="@Model.Id" class="btn btn-outline-secondary">
+            <i class="bi bi-arrow-left me-2"></i>Zpet na upravu PLPP
+        </a>
+    </div>
+</div>
