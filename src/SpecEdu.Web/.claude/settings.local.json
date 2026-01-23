@@ -9,7 +9,8 @@
       "Bash(dir /b \"C:\\\\Users\\\\micha\\\\Documents\\\\Projekty\\\\SpecEdu\\\\src\\\\SpecEdu.Domain\")",
       "Bash(dotnet restore:*)",
       "Bash(dotnet ef migrations add:*)",
-      "Bash(Select-String \"AddPlppVersions\")"
+      "Bash(Select-String \"AddPlppVersions\")",
+      "Bash(ls:*)"
     ]
   }
 }

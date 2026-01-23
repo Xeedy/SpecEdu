@@ -44,6 +44,10 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser, IdentityR
 
     public DbSet<PlppVersion> PlppVersions => Set<PlppVersion>();
 
+    public DbSet<ConsultationEvent> ConsultationEvents => Set<ConsultationEvent>();
+
+    public DbSet<ConsultationParticipant> ConsultationParticipants => Set<ConsultationParticipant>();
+
     public override int SaveChanges()
     {
         UpdateAuditFields();
