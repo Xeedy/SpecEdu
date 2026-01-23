@@ -308,3 +308,192 @@ seed rolí a SchoolAdmin
 policy CanViewStudent a vazební tabulky
 
 A tím se rozjedeš bez chaosu a bez toho, aby ses později musel vracet a přepisovat základy.
+
+ I'll create a comprehensive list of documentation needed for your application. Let me analyze what we have and
+  organize it by role and functionality.
+
+  Proposed Documentation Structure
+
+  📁 1. GENERAL DOCUMENTATION (for all users)
+
+  1.1 Getting Started
+  - 00_getting-started.md - First-time login, system overview, navigation basics
+  - 01_login-and-authentication.md - Login, logout, password reset, account activation
+  - 02_user-profile-settings.md - Changing password, language settings, notification preferences
+  - 03_glossary-terms.md - Czech-English terminology (PLPP, SVP, PPP, etc.)
+  - 04_faq-general.md - Common questions for all users
+
+  📁 2. SYSTEM ADMINISTRATOR DOCUMENTATION
+
+  2.1 System Administration
+  - 10_system-admin-overview.md - Role overview, responsibilities
+  - 11_school-management.md - Creating, editing, deactivating schools
+  - 12_user-management.md - Creating users, assigning roles, managing permissions
+  - 13_system-settings.md - Email configuration, backup, maintenance
+  - 14_troubleshooting-admin.md - Handling common admin issues
+
+  📁 3. SCHOOL ADMINISTRATOR DOCUMENTATION
+
+  3.1 School Administration
+  - 20_school-admin-quickstart.md - Overview, first steps, dashboard
+  - 21_student-management.md - Adding, editing, viewing, archiving students
+  - 22_staff-assignment.md - Assigning teachers/staff to students, access levels (Read/Edit)
+  - 23_guardian-management.md - Adding parents, managing parent accounts, access control
+  - 24_school-settings.md - School profile, contact information
+
+  3.2 PLPP Management (School Admin)
+  - 25_plpp-overview-schooladmin.md - Overview of PLPP system, statuses, workflows
+  - 26_plpp-creation-schooladmin.md - Creating PLPP, assigning to students
+  - 27_plpp-monitoring.md - Viewing all PLPPs, filtering, status tracking
+  - 28_plpp-reports.md - Generating reports, statistics
+
+  3.3 Communication
+  - 29_diary-management-schooladmin.md - Overseeing diary entries, visibility settings
+
+  📁 4. TEACHER/STAFF DOCUMENTATION
+
+  4.1 Teacher Basics
+  - 30_teacher-quickstart.md - Overview, navigation, assigned students
+  - 31_student-details-view.md - Viewing student information, what you can see
+
+  4.2 Diary/Communication
+  - 32_diary-entries-guide.md - Creating diary entries, visibility options, attachments
+  - 33_parent-communication.md - Best practices for parent-visible entries
+
+  4.3 PLPP for Teachers - Complete Guide
+  - 34_plpp-introduction.md - What is PLPP, when to use it, legal requirements
+  - 35_plpp-create-new.md - Step-by-step: Creating a new PLPP from scratch
+  - 36_plpp-edit-basic-info.md - Editing school year, validity dates, support level, visibility
+  - 37_plpp-student-characteristics.md - Filling in strengths, areas needing support
+  - 38_plpp-support-measures.md - Recommended methods, organizational/content adjustments, assessment
+  - 39_plpp-goals-management.md - Adding, editing, updating status of goals
+  - 40_plpp-evaluations.md - Monthly evaluations, progress tracking, parent notifications
+  - 41_plpp-version-history.md - Viewing versions, restoring previous versions, comparing changes
+  - 42_plpp-pdf-export.md - Generating PDF, with/without internal notes, downloading
+  - 43_plpp-activation-workflow.md - Draft → Active → Archive workflow
+  - 44_plpp-collaboration.md - Working with special educators, parent collaboration section
+  - 45_plpp-troubleshooting.md - Common issues and solutions
+
+  4.4 Reminders
+  - 46_reminders-guide.md - Setting reminders for PLPP reviews, control examinations
+
+  📁 5. SPECIAL EDUCATOR (SPECPEDAGOG) DOCUMENTATION
+
+  5.1 Specpedagog Guide
+  - 50_specpedagog-overview.md - Role overview, responsibilities
+  - 51_plpp-best-practices.md - Professional guidelines, Czech legal framework
+  - 52_support-levels-explained.md - Detailed explanation of support measure levels 1-5
+  - 53_goal-setting-guide.md - SMART goals for special education
+  - 54_evaluation-guidelines.md - How to evaluate progress effectively
+  - 55_collaboration-with-ppp.md - Working with pedagogical-psychological counseling
+
+  📁 6. PARENT DOCUMENTATION
+
+  6.1 Parent Guide
+  - 60_parent-quickstart.md - Overview, what parents can see
+  - 61_viewing-child-info.md - Accessing your child's details
+  - 62_reading-diary-entries.md - Understanding diary entries, visibility
+  - 63_plpp-for-parents.md - What is PLPP, what it means for your child
+  - 64_viewing-plpp.md - How to view PLPP, what you can see
+  - 65_downloading-plpp-pdf.md - Downloading PDF documents
+  - 66_understanding-plpp-document.md - Interpreting PLPP content, goals, evaluations
+  - 67_parent-communication.md - How to communicate with school
+  - 68_privacy-for-parents.md - What data is collected, GDPR rights
+
+  📁 7. TECHNICAL & TROUBLESHOOTING
+
+  7.1 Troubleshooting Guides
+  - 70_troubleshooting-common-issues.md - Common issues for all users
+  - 71_troubleshooting-plpp.md - PLPP-specific issues
+  - 72_troubleshooting-pdf-export.md - PDF generation issues
+  - 73_troubleshooting-access-denied.md - Permission issues
+  - 74_troubleshooting-login.md - Login and authentication issues
+
+  7.2 Technical Reference
+  - 75_data-fields-reference.md - All data fields explained with default values
+  - 76_status-and-enums.md - All statuses explained (PLPP status, goal status, etc.)
+  - 77_permissions-matrix.md - What each role can do
+  - 78_data-privacy-gdpr.md - GDPR compliance, data retention
+
+  📁 8. APPENDICES
+
+  8.1 Quick Reference
+  - 80_quick-reference-card.md - One-page quick reference for each role
+  - 81_keyboard-shortcuts.md - If applicable
+  - 82_support-contact.md - How to get help
+
+  ---
+  Summary by Priority
+
+  HIGH PRIORITY (Must have first):
+
+  1. Getting Started (00)
+  2. Login & Authentication (01)
+  3. Teacher Quickstart (30)
+  4. PLPP Complete Guide for Teachers (34-45)
+  5. Parent Guide (60-68)
+  6. Troubleshooting Common Issues (70)
+
+  MEDIUM PRIORITY (Important):
+
+  1. School Admin Documentation (20-29)
+  2. Student Management (21)
+  3. Staff Assignment (22)
+  4. Diary Guide (32)
+  5. Data Fields Reference (75)
+  6. Permissions Matrix (77)
+
+  LOWER PRIORITY (Can be added later):
+
+  1. System Admin (10-14)
+  2. Special Educator specific guides (50-55)
+  3. Advanced features
+  4. Technical deep-dives
+
+  ---
+  Document Format Structure
+
+  Each document should follow this structure:
+
+  # [Title]
+
+  **Document Version:** 1.0
+  **Last Updated:** [Date]
+  **For Role:** [Role Name]
+  **Difficulty:** Beginner/Intermediate/Advanced
+
+  ---
+
+  ## Overview
+  Brief description of what this document covers.
+
+  ## Prerequisites
+  What the user needs before following this guide.
+
+  ## Step-by-Step Instructions
+  1. Step 1 with screenshot placeholder
+  2. Step 2...
+
+  ## Default Values
+  List of default values for this feature.
+
+  ## What If It Doesn't Work?
+  Troubleshooting section.
+
+  ## Tips & Best Practices
+  Professional advice.
+
+  ## Related Documents
+  Links to related documentation.
+
+  ## Glossary (if needed)
+  Terms specific to this document.
+
+  ---
+  Would you like me to:
+  1. Start with the HIGH PRIORITY documents first?
+  2. Focus on a specific role? (Teachers seem most critical since they use PLPP most)
+  3. Begin with a specific feature? (e.g., complete PLPP guide)
+
+  Which approach would you prefer? I recommend starting with the Teacher PLPP Complete Guide (documents 34-45) since
+  that's the most complex feature we just implemented.

@@ -91,6 +91,18 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser, IdentityR
     public DbSet<PlppVersion> PlppVersions => Set<PlppVersion>();
 
     /// <summary>
+    /// Consultation events (meetings, consultations, school events).
+    /// Czech: Konzultace a schůzky
+    /// </summary>
+    public DbSet<ConsultationEvent> ConsultationEvents => Set<ConsultationEvent>();
+
+    /// <summary>
+    /// Participants of consultation events.
+    /// Czech: Účastníci konzultací
+    /// </summary>
+    public DbSet<ConsultationParticipant> ConsultationParticipants => Set<ConsultationParticipant>();
+
+    /// <summary>
     /// Saves changes and automatically populates audit fields.
     /// </summary>
     public override int SaveChanges()

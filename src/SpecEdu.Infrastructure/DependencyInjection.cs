@@ -95,6 +95,7 @@ public static class DependencyInjection
         services.AddScoped<IPlppService, PlppService>();
         services.AddScoped<IPlppVersionService, PlppVersionService>();
         services.AddScoped<IPdfService, PdfService>();
+        services.AddScoped<IConsultationService, ConsultationService>();
 
         // Register Lazy<T> for services with circular dependencies
         services.AddTransient(typeof(Lazy<>), typeof(LazyResolver<>));

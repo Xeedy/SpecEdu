@@ -1,0 +1,196 @@
+@page
+@model SpecEdu.Web.Pages.SchoolAdmin.Calendar.IndexModel
+@using SpecEdu.Web.Pages.SchoolAdmin.Calendar
+@inject IStringLocalizer<SharedResource> L
+@{
+    ViewData["Title"] = "Kalendar konzultaci";
+}
+
+<div class="container-fluid py-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h1><i class="bi bi-calendar3 me-2"></i>Kalendar konzultaci</h1>
+            <p class="text-muted mb-0">Prehled vsech konzultaci a schuzek</p>
+        </div>
+        <div>
+            <a asp-page="Create" class="btn btn-spec-primary">
+                <i class="bi bi-plus-lg me-2"></i>Nova konzultace
+            </a>
+        </div>
+    </div>
+
+    @if (!string.IsNullOrWhiteSpace(Model.SuccessMessage))
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            @Model.SuccessMessage
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+
+    @if (!string.IsNullOrWhiteSpace(Model.ErrorMessage))
+    {
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            @Model.ErrorMessage
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+
+    <div class="row">
+        <!-- Calendar -->
+        <div class="col-lg-9">
+            <div class="spec-card">
+                <div class="spec-card-body">
+                    <div id="calendar"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sidebar - Upcoming Events -->
+        <div class="col-lg-3">
+            <div class="spec-card">
+                <div class="spec-card-header">
+                    <h5 class="mb-0"><i class="bi bi-clock me-2"></i>Nadchazejici akce</h5>
+                </div>
+                <div class="spec-card-body">
+                    @if (Model.UpcomingEvents.Any())
+                    {
+                        <div class="list-group list-group-flush">
+                            @foreach (var evt in Model.UpcomingEvents)
+                            {
+                                <a asp-page="Details" asp-route-id="@evt.Id" class="list-group-item list-group-item-action px-0">
+                                    <div class="d-flex justify-content-between align-items-start">
+                                        <div>
+                                            <h6 class="mb-1">@evt.Title</h6>
+                                            <small class="text-muted">
+                                                <i class="bi bi-calendar me-1"></i>@evt.StartTime.ToString("dd.MM. HH:mm")
+                                            </small>
+                                            @if (!string.IsNullOrEmpty(evt.StudentName))
+                                            {
+                                                <br />
+                                                <small class="text-muted">
+                                                    <i class="bi bi-person me-1"></i>@evt.StudentName
+                                                </small>
+                                            }
+                                        </div>
+                                        <span class="badge @IndexModel.GetStatusBadgeClass(evt.Status)">
+                                            @IndexModel.GetStatusName(evt.Status)
+                                        </span>
+                                    </div>
+                                </a>
+                            }
+                        </div>
+                    }
+                    else
+                    {
+                        <p class="text-muted text-center py-3 mb-0">
+                            <i class="bi bi-calendar-x display-6 d-block mb-2"></i>
+                            Zadne nadchazejici akce
+                        </p>
+                    }
+                </div>
+            </div>
+
+            <!-- Legend -->
+            <div class="spec-card mt-3">
+                <div class="spec-card-header">
+                    <h5 class="mb-0"><i class="bi bi-palette me-2"></i>Legenda</h5>
+                </div>
+                <div class="spec-card-body">
+                    <div class="d-flex align-items-center mb-2">
+                        <span class="badge me-2" style="background-color: #0d6efd;">&nbsp;&nbsp;</span>
+                        <small>Tridni schuzka</small>
+                    </div>
+                    <div class="d-flex align-items-center mb-2">
+                        <span class="badge me-2" style="background-color: #198754;">&nbsp;&nbsp;</span>
+                        <small>Individualni konzultace</small>
+                    </div>
+                    <div class="d-flex align-items-center mb-2">
+                        <span class="badge me-2" style="background-color: #dc3545;">&nbsp;&nbsp;</span>
+                        <small>Vyhodnoceni PLPP/IVP</small>
+                    </div>
+                    <div class="d-flex align-items-center mb-2">
+                        <span class="badge me-2" style="background-color: #6f42c1;">&nbsp;&nbsp;</span>
+                        <small>Schuzka s poradcem</small>
+                    </div>
+                    <div class="d-flex align-items-center mb-2">
+                        <span class="badge me-2" style="background-color: #20c997;">&nbsp;&nbsp;</span>
+                        <small>Skolni akce</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Styles {
+    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.css" rel="stylesheet" />
+    <style>
+        #calendar {
+            min-height: 600px;
+        }
+        .fc-event {
+            cursor: pointer;
+        }
+        .fc-toolbar-title {
+            font-size: 1.25rem !important;
+        }
+    </style>
+}
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var calendarEl = document.getElementById('calendar');
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'dayGridMonth',
+                locale: 'cs',
+                headerToolbar: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+                },
+                buttonText: {
+                    today: 'Dnes',
+                    month: 'Mesic',
+                    week: 'Tyden',
+                    day: 'Den',
+                    list: 'Seznam'
+                },
+                events: function(info, successCallback, failureCallback) {
+                    fetch('@Url.Page("Index", "Events")?start=' + info.startStr + '&end=' + info.endStr)
+                        .then(response => response.json())
+                        .then(data => {
+                            var events = data.map(function(evt) {
+                                return {
+                                    id: evt.id,
+                                    title: evt.title,
+                                    start: evt.start,
+                                    end: evt.end,
+                                    backgroundColor: evt.color,
+                                    borderColor: evt.borderColor,
+                                    extendedProps: {
+                                        studentName: evt.studentName,
+                                        location: evt.location
+                                    }
+                                };
+                            });
+                            successCallback(events);
+                        })
+                        .catch(function() {
+                            failureCallback();
+                        });
+                },
+                eventClick: function(info) {
+                    window.location.href = '@Url.Page("Details")/' + info.event.id;
+                },
+                eventDidMount: function(info) {
+                    if (info.event.extendedProps.studentName) {
+                        info.el.title = info.event.title + ' - ' + info.event.extendedProps.studentName;
+                    }
+                }
+            });
+            calendar.render();
+        });
+    </script>
+}
