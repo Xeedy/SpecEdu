@@ -84,3 +84,4 @@ ScaffoldingReadMe.txt
 ## SSL certificates
 *.pfx
 *.p12
+nul
