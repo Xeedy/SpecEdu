@@ -47,11 +47,29 @@
                                     @L["HeaderPage.PLLP"] <span class="badge-coming-soon">@L["Common.ComingSoon"]</span>
                                 </a>
                             </li>
-                            <li>
-                                <a class="dropdown-item disabled-item" href="#">
-                                    @L["HeaderPage.Calendar"] <span class="badge-coming-soon">@L["Common.ComingSoon"]</span>
-                                </a>
-                            </li>
+                            @if (User.Identity?.IsAuthenticated == true)
+                            {
+                                @if (User.IsInRole("SchoolAdmin"))
+                                {
+                                    <li><a class="dropdown-item" asp-area="" asp-page="/SchoolAdmin/Calendar/Index">@L["HeaderPage.Calendar"]</a></li>
+                                }
+                                else if (User.IsInRole("Parent"))
+                                {
+                                    <li><a class="dropdown-item" asp-area="" asp-page="/MyChildren/Calendar">@L["HeaderPage.Calendar"]</a></li>
+                                }
+                                else if (User.IsInRole("Teacher") || User.IsInRole("SPP"))
+                                {
+                                    <li><a class="dropdown-item" asp-area="" asp-page="/Dashboard/Calendar">@L["HeaderPage.Calendar"]</a></li>
+                                }
+                                else
+                                {
+                                    <li><a class="dropdown-item" asp-area="" asp-page="/Dashboard/Calendar">@L["HeaderPage.Calendar"]</a></li>
+                                }
+                            }
+                            else
+                            {
+                                <li><a class="dropdown-item" asp-area="" asp-page="/Functions/Notifications">@L["HeaderPage.Calendar"]</a></li>
+                            }
                             <li>
                                 <a class="dropdown-item disabled-item" href="#">
                                     @L["HeaderPage.Messages"] <span class="badge-coming-soon">@L["Common.ComingSoon"]</span>
@@ -123,10 +141,16 @@
                                 @if (User.IsInRole("SchoolAdmin"))
                                 {
                                     <li><a class="dropdown-item" asp-area="" asp-page="/SchoolAdmin/Students/Index">@L["HeaderPage.Students"]</a></li>
+                                    <li><a class="dropdown-item" asp-area="" asp-page="/SchoolAdmin/Calendar/Index">@L["HeaderPage.Calendar"]</a></li>
+                                }
+                                @if (User.IsInRole("Teacher") || User.IsInRole("SPP"))
+                                {
+                                    <li><a class="dropdown-item" asp-area="" asp-page="/Dashboard/Calendar">@L["HeaderPage.Calendar"]</a></li>
                                 }
                                 @if (User.IsInRole("Parent"))
                                 {
                                     <li><a class="dropdown-item" asp-area="" asp-page="/MyChildren/Index">@L["HeaderPage.MyChildren"]</a></li>
+                                    <li><a class="dropdown-item" asp-area="" asp-page="/MyChildren/Calendar">@L["HeaderPage.Calendar"]</a></li>
                                 }
                                 <li><hr class="dropdown-divider"></li>
                                 <li><a class="dropdown-item" asp-area="" asp-page="/Account/Settings">@L["HeaderPage.Settings"]</a></li>
