@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.Extensions.Localization;
 using SpecEdu.Application.Common.Interfaces;
 using SpecEdu.Application.Common.Models;
 using SpecEdu.Domain.Enums;
@@ -15,15 +16,18 @@ public class IndexModel : PageModel
     private readonly IConsultationService _consultationService;
     private readonly IIdentityService _identityService;
     private readonly ICurrentUserService _currentUserService;
+    private readonly IStringLocalizer<SharedResource> _localizer;
 
     public IndexModel(
         IConsultationService consultationService,
         IIdentityService identityService,
-        ICurrentUserService currentUserService)
+        ICurrentUserService currentUserService,
+        IStringLocalizer<SharedResource> localizer)
     {
         _consultationService = consultationService;
         _identityService = identityService;
         _currentUserService = currentUserService;
+        _localizer = localizer;
     }
 
     public Guid SchoolId { get; set; }
@@ -89,31 +93,31 @@ public class IndexModel : PageModel
         return new JsonResult(events);
     }
 
-    public static string GetTypeName(ConsultationType type)
+    public string GetTypeName(ConsultationType type)
     {
         return type switch
         {
-            ConsultationType.ParentTeacherMeeting => "Tridni schuzka",
-            ConsultationType.IndividualConsultation => "Individualni konzultace",
-            ConsultationType.PlppReview => "Vyhodnoceni PLPP",
-            ConsultationType.IvpReview => "Vyhodnoceni IVP",
-            ConsultationType.CounselorMeeting => "Schuzka s poradcem",
-            ConsultationType.ExternalSpecialistMeeting => "Externi specialista",
-            ConsultationType.SchoolEvent => "Skolni akce",
-            ConsultationType.Other => "Jine",
+            ConsultationType.ParentTeacherMeeting => _localizer["CalendarPage.TypeParentTeacher"],
+            ConsultationType.IndividualConsultation => _localizer["CalendarPage.TypeIndividual"],
+            ConsultationType.PlppReview => _localizer["CalendarPage.TypePlppReview"],
+            ConsultationType.IvpReview => _localizer["CalendarPage.TypeIvpReview"],
+            ConsultationType.CounselorMeeting => _localizer["CalendarPage.TypeCounselor"],
+            ConsultationType.ExternalSpecialistMeeting => _localizer["CalendarPage.TypeExternal"],
+            ConsultationType.SchoolEvent => _localizer["CalendarPage.TypeSchoolEvent"],
+            ConsultationType.Other => _localizer["CalendarPage.TypeOther"],
             _ => type.ToString()
         };
     }
 
-    public static string GetStatusName(ConsultationEventStatus status)
+    public string GetStatusName(ConsultationEventStatus status)
     {
         return status switch
         {
-            ConsultationEventStatus.Scheduled => "Naplanovano",
-            ConsultationEventStatus.Confirmed => "Potvrzeno",
-            ConsultationEventStatus.Completed => "Probehlo",
-            ConsultationEventStatus.Cancelled => "Zruseno",
-            ConsultationEventStatus.Rescheduled => "Presunuto",
+            ConsultationEventStatus.Scheduled => _localizer["CalendarPage.StatusScheduled"],
+            ConsultationEventStatus.Confirmed => _localizer["CalendarPage.StatusConfirmed"],
+            ConsultationEventStatus.Completed => _localizer["CalendarPage.StatusCompleted"],
+            ConsultationEventStatus.Cancelled => _localizer["CalendarPage.StatusCancelled"],
+            ConsultationEventStatus.Rescheduled => _localizer["CalendarPage.StatusRescheduled"],
             _ => status.ToString()
         };
     }

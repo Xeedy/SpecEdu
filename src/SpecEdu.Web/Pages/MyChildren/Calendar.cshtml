@@ -3,17 +3,17 @@
 @using SpecEdu.Web.Pages.MyChildren
 @inject IStringLocalizer<SharedResource> L
 @{
-    ViewData["Title"] = "Kalendar akci";
+    ViewData["Title"] = L["CalendarPage.ChildrenCalendar"];
 }
 
 <div class="container-fluid py-4">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <div>
-            <h1><i class="bi bi-calendar3 me-2"></i>Kalendar akci</h1>
-            <p class="text-muted mb-0">Prehled konzultaci a schuzek tykajicich se vasich deti</p>
+            <h1><i class="bi bi-calendar3 me-2"></i>@L["CalendarPage.ChildrenCalendar"]</h1>
+            <p class="text-muted mb-0">@L["CalendarPage.ChildrenCalendarSubtitle"]</p>
         </div>
         <a asp-page="Index" class="btn btn-outline-secondary">
-            <i class="bi bi-arrow-left me-2"></i>Zpet na prehled
+            <i class="bi bi-arrow-left me-2"></i>@L["CalendarPage.BackToOverview"]
         </a>
     </div>
 
@@ -37,7 +37,7 @@
     {
         <div class="alert alert-info">
             <i class="bi bi-info-circle me-2"></i>
-            Zatim nemate prirazene zadne deti.
+            @L["CalendarPage.NoChildrenAssigned"]
         </div>
     }
     else
@@ -57,7 +57,7 @@
                 <!-- Children List -->
                 <div class="spec-card mb-3">
                     <div class="spec-card-header">
-                        <h5 class="mb-0"><i class="bi bi-people me-2"></i>Vase deti</h5>
+                        <h5 class="mb-0"><i class="bi bi-people me-2"></i>@L["CalendarPage.YourChildren"]</h5>
                     </div>
                     <div class="spec-card-body">
                         @foreach (var child in Model.Children)
@@ -79,7 +79,7 @@
                 <!-- Upcoming Events -->
                 <div class="spec-card">
                     <div class="spec-card-header">
-                        <h5 class="mb-0"><i class="bi bi-clock me-2"></i>Nadchazejici akce</h5>
+                        <h5 class="mb-0"><i class="bi bi-clock me-2"></i>@L["CalendarPage.UpcomingEvents"]</h5>
                     </div>
                     <div class="spec-card-body">
                         @if (Model.UpcomingEvents.Any())
@@ -110,10 +110,10 @@
                                                 }
                                             </div>
                                             <span class="badge @CalendarModel.GetStatusBadgeClass(evt.Status)">
-                                                @CalendarModel.GetStatusName(evt.Status)
+                                                @Model.GetStatusName(evt.Status)
                                             </span>
                                         </div>
-                                        <small class="text-muted">@CalendarModel.GetTypeName(evt.Type)</small>
+                                        <small class="text-muted">@Model.GetTypeName(evt.Type)</small>
                                     </div>
                                 }
                             </div>
@@ -122,7 +122,7 @@
                         {
                             <p class="text-muted text-center py-3 mb-0">
                                 <i class="bi bi-calendar-x display-6 d-block mb-2"></i>
-                                Zadne nadchazejici akce
+                                @L["CalendarPage.NoUpcomingEvents"]
                             </p>
                         }
                     </div>
@@ -131,24 +131,24 @@
                 <!-- Legend -->
                 <div class="spec-card mt-3">
                     <div class="spec-card-header">
-                        <h5 class="mb-0"><i class="bi bi-palette me-2"></i>Legenda</h5>
+                        <h5 class="mb-0"><i class="bi bi-palette me-2"></i>@L["CalendarPage.Legend"]</h5>
                     </div>
                     <div class="spec-card-body">
                         <div class="d-flex align-items-center mb-2">
                             <span class="badge me-2" style="background-color: #0d6efd;">&nbsp;&nbsp;</span>
-                            <small>Tridni schuzka</small>
+                            <small>@L["CalendarPage.TypeParentTeacher"]</small>
                         </div>
                         <div class="d-flex align-items-center mb-2">
                             <span class="badge me-2" style="background-color: #198754;">&nbsp;&nbsp;</span>
-                            <small>Individualni konzultace</small>
+                            <small>@L["CalendarPage.TypeIndividual"]</small>
                         </div>
                         <div class="d-flex align-items-center mb-2">
                             <span class="badge me-2" style="background-color: #dc3545;">&nbsp;&nbsp;</span>
-                            <small>Vyhodnoceni PLPP/IVP</small>
+                            <small>@L["CalendarPage.TypePlppIvpReview"]</small>
                         </div>
                         <div class="d-flex align-items-center mb-2">
                             <span class="badge me-2" style="background-color: #20c997;">&nbsp;&nbsp;</span>
-                            <small>Skolni akce</small>
+                            <small>@L["CalendarPage.TypeSchoolEvent"]</small>
                         </div>
                     </div>
                 </div>
@@ -188,10 +188,10 @@
                     right: 'dayGridMonth,timeGridWeek,listWeek'
                 },
                 buttonText: {
-                    today: 'Dnes',
-                    month: 'Mesic',
-                    week: 'Tyden',
-                    list: 'Seznam'
+                    today: '@L["CalendarPage.Today"]',
+                    month: '@L["CalendarPage.Month"]',
+                    week: '@L["CalendarPage.Week"]',
+                    list: '@L["CalendarPage.List"]'
                 },
                 events: function(info, successCallback, failureCallback) {
                     fetch('@Url.Page("Calendar", "Events")?start=' + info.startStr + '&end=' + info.endStr)
@@ -221,12 +221,12 @@
                     var evt = info.event;
                     var message = evt.title;
                     if (evt.extendedProps.studentName) {
-                        message += '\nDite: ' + evt.extendedProps.studentName;
+                        message += '\n@L["CalendarPage.JsChild"]: ' + evt.extendedProps.studentName;
                     }
                     if (evt.extendedProps.location) {
-                        message += '\nMisto: ' + evt.extendedProps.location;
+                        message += '\n@L["CalendarPage.JsLocation"]: ' + evt.extendedProps.location;
                     }
-                    message += '\nCas: ' + evt.start.toLocaleString('cs-CZ');
+                    message += '\n@L["CalendarPage.JsTime"]: ' + evt.start.toLocaleString('cs-CZ');
                     if (evt.end) {
                         message += ' - ' + evt.end.toLocaleTimeString('cs-CZ');
                     }
