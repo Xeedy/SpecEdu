@@ -84,6 +84,7 @@ ScaffoldingReadMe.txt
 ## SSL certificates
 *.pfx
 *.p12
+nul
 
 ## Documentation and thesis (local only)
 Documentation_And_Materials/
