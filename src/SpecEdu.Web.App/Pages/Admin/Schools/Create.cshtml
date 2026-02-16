@@ -1,0 +1,113 @@
+@page
+@model SpecEdu.Web.App.Pages.Admin.Schools.CreateModel
+@{
+    ViewData["Title"] = "Přidat školu";
+}
+
+<div class="container py-4">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+
+            <h1 class="mb-4">Přidat školu</h1>
+
+            @if (!string.IsNullOrWhiteSpace(Model.ErrorMessage))
+            {
+                <div class="alert alert-danger" role="alert">
+                    @Model.ErrorMessage
+                </div>
+            }
+
+            <div class="spec-card">
+                <div class="spec-card-header">Údaje o škole</div>
+                <div class="spec-card-body">
+                    <form method="post" class="needs-validation" novalidate>
+                        <div class="row g-3">
+                            <div class="col-md-8">
+                                <label class="form-label">Název instituce <span class="text-danger">*</span></label>
+                                <input class="form-control" asp-for="Input.Name"
+                                       placeholder="ZŠ a MŠ … / PPP … / SPC …" required />
+                                <span class="text-danger" asp-validation-for="Input.Name"></span>
+                            </div>
+
+                            <div class="col-md-4">
+                                <label class="form-label">Typ instituce <span class="text-danger">*</span></label>
+                                <select class="form-select" asp-for="Input.InstitutionType" required>
+                                    <option value="Škola">Škola</option>
+                                    <option value="PPP">PPP</option>
+                                    <option value="SPC">SPC</option>
+                                    <option value="ŠPP">ŠPP (školní poradenské pracoviště)</option>
+                                    <option value="Jiné">Jiné</option>
+                                </select>
+                                <span class="text-danger" asp-validation-for="Input.InstitutionType"></span>
+                            </div>
+
+                            <div class="col-md-4">
+                                <label class="form-label">IČO</label>
+                                <input class="form-control" asp-for="Input.Ico"
+                                       placeholder="např. 12345678" inputmode="numeric" />
+                                <span class="text-danger" asp-validation-for="Input.Ico"></span>
+                            </div>
+
+                            <div class="col-md-8">
+                                <label class="form-label">Adresa</label>
+                                <input class="form-control" asp-for="Input.Address"
+                                       placeholder="Ulice a číslo" />
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="form-label">Město</label>
+                                <input class="form-control" asp-for="Input.City"
+                                       placeholder="např. Zlín" />
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="form-label">PSČ</label>
+                                <input class="form-control" asp-for="Input.PostalCode"
+                                       placeholder="např. 760 01" />
+                            </div>
+
+                            <hr class="my-2" />
+
+                            <div class="col-md-6">
+                                <label class="form-label">Kontaktní e-mail</label>
+                                <input type="email" class="form-control" asp-for="Input.ContactEmail"
+                                       placeholder="info@skola.cz" />
+                                <span class="text-danger" asp-validation-for="Input.ContactEmail"></span>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="form-label">Kontaktní telefon</label>
+                                <input class="form-control" asp-for="Input.ContactPhone"
+                                       placeholder="+420 777 123 456" />
+                            </div>
+
+                            <div class="col-12 d-flex gap-2 flex-wrap mt-3">
+                                <button type="submit" class="btn btn-spec-primary">Vytvořit školu</button>
+                                <a asp-page="Index" class="btn btn-outline-secondary">Zrušit</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        (function () {
+            const forms = document.querySelectorAll('.needs-validation');
+            Array.prototype.slice.call(forms).forEach(function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (!form.checkValidity()) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        })();
+    </script>
+}

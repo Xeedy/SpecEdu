@@ -1,0 +1,776 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="HeaderPage.Home" xml:space="preserve">
+    <value>Home</value>
+  </data>
+  <data name="HeaderPage.Login" xml:space="preserve">
+    <value>Login</value>
+  </data>
+  <data name="HeaderPage.Privacy" xml:space="preserve">
+    <value>Privacy</value>
+  </data>
+  <data name="HeaderPage.Register" xml:space="preserve">
+    <value>Register</value>
+  </data>
+  <data name="HeaderPage.Test" xml:space="preserve">
+    <value>Test</value>
+  </data>
+  <data name="FooterPage.Contact" xml:space="preserve">
+    <value>Contact</value>
+  </data>
+  <data name="FooterPage.Description" xml:space="preserve">
+    <value>SpecEdu - Platform for special education</value>
+  </data>
+  <data name="TestPage.ButtonsTitle" xml:space="preserve">
+    <value>Buttons</value>
+  </data>
+  <data name="TestPage.CardActionButton" xml:space="preserve">
+    <value>Action</value>
+  </data>
+  <data name="TestPage.CardOne" xml:space="preserve">
+    <value>Card 1</value>
+  </data>
+  <data name="TestPage.CardsTitle" xml:space="preserve">
+    <value>Cards</value>
+  </data>
+  <data name="TestPage.CardText" xml:space="preserve">
+    <value>Content of the first card. This is test text for displaying the card style.</value>
+  </data>
+  <data name="TestPage.CardThree" xml:space="preserve">
+    <value>Card 3</value>
+  </data>
+  <data name="TestPage.CardTwo" xml:space="preserve">
+    <value>Card 2</value>
+  </data>
+  <data name="TestPage.OutlineButton" xml:space="preserve">
+    <value>Outline button</value>
+  </data>
+  <data name="TestPage.PrimaryButton" xml:space="preserve">
+    <value>Primary button</value>
+  </data>
+  <data name="TestPage.SecondaryButton" xml:space="preserve">
+    <value>Secondary</value>
+  </data>
+  <data name="TestPage.SuccessButton" xml:space="preserve">
+    <value>Success</value>
+  </data>
+  <data name="TestPage.Title" xml:space="preserve">
+    <value>Test page</value>
+  </data>
+  <data name="TestPage.TitleDescription" xml:space="preserve">
+    <value>This test page is for testing the components and style.</value>
+  </data>
+  <data name="TestPage.WarningButton" xml:space="preserve">
+    <value>Warning</value>
+  </data>
+  <data name="FooterPage.Privacy" xml:space="preserve">
+    <value>Privacy</value>
+  </data>
+  <data name="HeaderPage.System" xml:space="preserve">
+    <value>System</value>
+  </data>
+  <data name="HeaderPage.ForClients" xml:space="preserve">
+    <value>For schools and parents</value>
+  </data>
+  <data name="HeaderPage.Security" xml:space="preserve">
+    <value>Security and GDPR</value>
+  </data>
+  <data name="HeaderPage.Documentation" xml:space="preserve">
+    <value>Documentation</value>
+  </data>
+  <data name="HeaderPage.Functions" xml:space="preserve">
+    <value>Functions</value>
+  </data>
+  <data name="HeaderPage.StudentFile" xml:space="preserve">
+    <value>Students files</value>
+  </data>
+  <data name="HeaderPage.StudentDocuments" xml:space="preserve">
+    <value>Student documents</value>
+  </data>
+  <data name="HeaderPage.CommunicationDiary" xml:space="preserve">
+    <value>Communication diary</value>
+  </data>
+  <data name="HeaderPage.Notifications" xml:space="preserve">
+    <value>Notifications</value>
+  </data>
+  <data name="HeaderPage.PLLP" xml:space="preserve">
+    <value>PLLP / IVP</value>
+  </data>
+  <data name="HeaderPage.Calendar" xml:space="preserve">
+    <value>Calendar</value>
+  </data>
+  <data name="HeaderPage.Messages" xml:space="preserve">
+    <value>Messages</value>
+  </data>
+  <data name="HeaderPage.OverView" xml:space="preserve">
+    <value>How it works</value>
+  </data>
+  <data name="HeaderPage.Price" xml:space="preserve">
+    <value>Price</value>
+  </data>
+  <data name="HeaderPage.Contact" xml:space="preserve">
+    <value>Contact</value>
+  </data>
+  <data name="HeaderPage.Admin" xml:space="preserve">
+    <value>Admin</value>
+  </data>
+  <data name="HeaderPage.Students" xml:space="preserve">
+    <value>Students</value>
+  </data>
+  <data name="HeaderPage.Dashboard" xml:space="preserve">
+    <value>Dashboard</value>
+  </data>
+  <data name="HeaderPage.MyChildren" xml:space="preserve">
+    <value>My Children</value>
+  </data>
+  <data name="HeaderPage.Logout" xml:space="preserve">
+    <value>Log out</value>
+  </data>
+  <data name="Common.ComingSoon" xml:space="preserve">
+    <value>Soon</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="Common.TryFree" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="ContactPage.Address" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="Common.Create" xml:space="preserve">
+    <value>Create</value>
+  </data>
+  <data name="Common.Delete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="Common.ConfirmCancel" xml:space="preserve">
+    <value>Are you sure you want to cancel this item?</value>
+  </data>
+  <data name="Common.ConfirmDelete" xml:space="preserve">
+    <value>Are you sure you want to delete this item?</value>
+  </data>
+  <data name="Common.Optional" xml:space="preserve">
+    <value>Optional</value>
+  </data>
+  <data name="StudentsPage.Reminders" xml:space="preserve">
+    <value>Reminders</value>
+  </data>
+  <data name="StudentsPage.RemindersInfo" xml:space="preserve">
+    <value>Manage reminders for control examinations and other important dates.</value>
+  </data>
+  <data name="StudentsPage.CreateReminder" xml:space="preserve">
+    <value>Create Reminder</value>
+  </data>
+  <data name="StudentsPage.RemindersList" xml:space="preserve">
+    <value>Reminders List</value>
+  </data>
+  <data name="StudentsPage.ReminderTitle" xml:space="preserve">
+    <value>Title</value>
+  </data>
+  <data name="StudentsPage.ReminderDueDate" xml:space="preserve">
+    <value>Due Date</value>
+  </data>
+  <data name="StudentsPage.ReminderNotifyAt" xml:space="preserve">
+    <value>Notification Date</value>
+  </data>
+  <data name="StudentsPage.ReminderSentAt" xml:space="preserve">
+    <value>Sent At</value>
+  </data>
+  <data name="StudentsPage.ReminderDescription" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="StudentsPage.ReminderNotifyInfo" xml:space="preserve">
+    <value>Notification will be sent to guardians 2 months before the due date.</value>
+  </data>
+  <data name="StudentsPage.NoReminders" xml:space="preserve">
+    <value>No reminders have been created yet.</value>
+  </data>
+  <data name="StudentsPage.Plpp" xml:space="preserve">
+    <value>Pedagogical Support Plans</value>
+  </data>
+  <data name="StudentsPage.PlppInfo" xml:space="preserve">
+    <value>Manage pedagogical support plans (PLPP) for the student.</value>
+  </data>
+  <!-- Calendar / Consultation -->
+  <data name="CalendarPage.Title" xml:space="preserve">
+    <value>Consultation Calendar</value>
+  </data>
+  <data name="CalendarPage.Subtitle" xml:space="preserve">
+    <value>Overview of all consultations and meetings</value>
+  </data>
+  <data name="CalendarPage.NewEvent" xml:space="preserve">
+    <value>New Consultation</value>
+  </data>
+  <data name="CalendarPage.UpcomingEvents" xml:space="preserve">
+    <value>Upcoming Events</value>
+  </data>
+  <data name="CalendarPage.NoUpcomingEvents" xml:space="preserve">
+    <value>No upcoming events</value>
+  </data>
+  <data name="CalendarPage.Legend" xml:space="preserve">
+    <value>Legend</value>
+  </data>
+  <data name="CalendarPage.BackToCalendar" xml:space="preserve">
+    <value>Back to Calendar</value>
+  </data>
+  <data name="CalendarPage.Today" xml:space="preserve">
+    <value>Today</value>
+  </data>
+  <data name="CalendarPage.Month" xml:space="preserve">
+    <value>Month</value>
+  </data>
+  <data name="CalendarPage.Week" xml:space="preserve">
+    <value>Week</value>
+  </data>
+  <data name="CalendarPage.Day" xml:space="preserve">
+    <value>Day</value>
+  </data>
+  <data name="CalendarPage.List" xml:space="preserve">
+    <value>List</value>
+  </data>
+  <data name="CalendarPage.JsChild" xml:space="preserve">
+    <value>Child</value>
+  </data>
+  <data name="CalendarPage.JsStudent" xml:space="preserve">
+    <value>Student</value>
+  </data>
+  <data name="CalendarPage.JsLocation" xml:space="preserve">
+    <value>Location</value>
+  </data>
+  <data name="CalendarPage.JsTime" xml:space="preserve">
+    <value>Time</value>
+  </data>
+  <data name="CalendarPage.MyCalendar" xml:space="preserve">
+    <value>My Calendar</value>
+  </data>
+  <data name="CalendarPage.MyCalendarSubtitle" xml:space="preserve">
+    <value>Overview of your consultations and meetings</value>
+  </data>
+  <data name="CalendarPage.ChildrenCalendar" xml:space="preserve">
+    <value>Events Calendar</value>
+  </data>
+  <data name="CalendarPage.ChildrenCalendarSubtitle" xml:space="preserve">
+    <value>Overview of consultations and meetings regarding your children</value>
+  </data>
+  <data name="CalendarPage.BackToOverview" xml:space="preserve">
+    <value>Back to Overview</value>
+  </data>
+  <data name="CalendarPage.YourChildren" xml:space="preserve">
+    <value>Your Children</value>
+  </data>
+  <data name="CalendarPage.NoChildrenAssigned" xml:space="preserve">
+    <value>No children have been assigned to you yet.</value>
+  </data>
+  <data name="CalendarPage.CreateTitle" xml:space="preserve">
+    <value>New Consultation</value>
+  </data>
+  <data name="CalendarPage.CreateSubtitle" xml:space="preserve">
+    <value>Create a new consultation or meeting</value>
+  </data>
+  <data name="CalendarPage.EditTitle" xml:space="preserve">
+    <value>Edit Consultation</value>
+  </data>
+  <data name="CalendarPage.BasicInfo" xml:space="preserve">
+    <value>Basic Information</value>
+  </data>
+  <data name="CalendarPage.DateAndTime" xml:space="preserve">
+    <value>Date and Time</value>
+  </data>
+  <data name="CalendarPage.LocationSection" xml:space="preserve">
+    <value>Location</value>
+  </data>
+  <data name="CalendarPage.Settings" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="CalendarPage.AutoInvite" xml:space="preserve">
+    <value>Automatic Invitations</value>
+  </data>
+  <data name="CalendarPage.CreateButton" xml:space="preserve">
+    <value>Create Consultation</value>
+  </data>
+  <data name="CalendarPage.SaveButton" xml:space="preserve">
+    <value>Save Changes</value>
+  </data>
+  <data name="CalendarPage.CancelButton" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="CalendarPage.NotesSection" xml:space="preserve">
+    <value>Meeting Notes</value>
+  </data>
+  <data name="CalendarPage.NotesHint" xml:space="preserve">
+    <value>You can record notes from the consultation here.</value>
+  </data>
+  <data name="CalendarPage.NoReminder" xml:space="preserve">
+    <value>No reminders</value>
+  </data>
+  <data name="CalendarPage.Reminder1h" xml:space="preserve">
+    <value>1 hour before</value>
+  </data>
+  <data name="CalendarPage.Reminder2h" xml:space="preserve">
+    <value>2 hours before</value>
+  </data>
+  <data name="CalendarPage.Reminder1d" xml:space="preserve">
+    <value>1 day before</value>
+  </data>
+  <data name="CalendarPage.Reminder2d" xml:space="preserve">
+    <value>2 days before</value>
+  </data>
+  <data name="CalendarPage.Reminder1w" xml:space="preserve">
+    <value>1 week before</value>
+  </data>
+  <data name="CalendarPage.StudentOptional" xml:space="preserve">
+    <value>Optional - select a student if the consultation relates to a specific student.</value>
+  </data>
+  <data name="CalendarPage.NoStudentBinding" xml:space="preserve">
+    <value>-- No student binding --</value>
+  </data>
+  <data name="CalendarPage.OnlineLinkHint" xml:space="preserve">
+    <value>Optional - link to an online meeting (Teams, Zoom, etc.)</value>
+  </data>
+  <data name="CalendarPage.InviteGuardiansHint" xml:space="preserve">
+    <value>Automatically invite legal guardians of the selected student.</value>
+  </data>
+  <data name="CalendarPage.InviteStaffHint" xml:space="preserve">
+    <value>Automatically invite teachers assigned to the student.</value>
+  </data>
+  <data name="CalendarPage.EventDetails" xml:space="preserve">
+    <value>Consultation Details</value>
+  </data>
+  <data name="CalendarPage.DateTimeLabel" xml:space="preserve">
+    <value>Date and Time:</value>
+  </data>
+  <data name="CalendarPage.LocationLabel" xml:space="preserve">
+    <value>Location:</value>
+  </data>
+  <data name="CalendarPage.NotSpecified" xml:space="preserve">
+    <value>Not specified</value>
+  </data>
+  <data name="CalendarPage.JoinOnline" xml:space="preserve">
+    <value>Join Online</value>
+  </data>
+  <data name="CalendarPage.StudentLabel" xml:space="preserve">
+    <value>Student:</value>
+  </data>
+  <data name="CalendarPage.DescriptionLabel" xml:space="preserve">
+    <value>Description / Agenda:</value>
+  </data>
+  <data name="CalendarPage.NotesLabel" xml:space="preserve">
+    <value>Meeting Notes:</value>
+  </data>
+  <data name="CalendarPage.OrganizerLabel" xml:space="preserve">
+    <value>Organizer:</value>
+  </data>
+  <data name="CalendarPage.VisibilityLabel" xml:space="preserve">
+    <value>Visibility:</value>
+  </data>
+  <data name="CalendarPage.VisibleToParents" xml:space="preserve">
+    <value>Visible to Parents</value>
+  </data>
+  <data name="CalendarPage.StaffOnly" xml:space="preserve">
+    <value>Staff Only</value>
+  </data>
+  <data name="CalendarPage.Participants" xml:space="preserve">
+    <value>Participants</value>
+  </data>
+  <data name="CalendarPage.InviteParents" xml:space="preserve">
+    <value>Invite Parents</value>
+  </data>
+  <data name="CalendarPage.InviteTeachers" xml:space="preserve">
+    <value>Invite Teachers</value>
+  </data>
+  <data name="CalendarPage.ParticipantName" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="CalendarPage.ParticipantRole" xml:space="preserve">
+    <value>Role</value>
+  </data>
+  <data name="CalendarPage.ParticipantStatus" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="CalendarPage.ParticipantActions" xml:space="preserve">
+    <value>Actions</value>
+  </data>
+  <data name="CalendarPage.Organizer" xml:space="preserve">
+    <value>Organizer</value>
+  </data>
+  <data name="CalendarPage.External" xml:space="preserve">
+    <value>External</value>
+  </data>
+  <data name="CalendarPage.NoParticipants" xml:space="preserve">
+    <value>No participants yet.</value>
+  </data>
+  <data name="CalendarPage.Accepted" xml:space="preserve">
+    <value>accepted</value>
+  </data>
+  <data name="CalendarPage.Declined" xml:space="preserve">
+    <value>declined</value>
+  </data>
+  <data name="CalendarPage.PendingResponse" xml:space="preserve">
+    <value>pending response</value>
+  </data>
+  <data name="CalendarPage.ConfirmRemoveParticipant" xml:space="preserve">
+    <value>Are you sure you want to remove this participant?</value>
+  </data>
+  <data name="CalendarPage.Actions" xml:space="preserve">
+    <value>Actions</value>
+  </data>
+  <data name="CalendarPage.Edit" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="CalendarPage.ConfirmEvent" xml:space="preserve">
+    <value>Confirm Consultation</value>
+  </data>
+  <data name="CalendarPage.CancelEvent" xml:space="preserve">
+    <value>Cancel Consultation</value>
+  </data>
+  <data name="CalendarPage.ConfirmCancelEvent" xml:space="preserve">
+    <value>Are you sure you want to cancel this consultation?</value>
+  </data>
+  <data name="CalendarPage.MarkCompleted" xml:space="preserve">
+    <value>Mark as Completed</value>
+  </data>
+  <data name="CalendarPage.Delete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="CalendarPage.ConfirmDelete" xml:space="preserve">
+    <value>Are you sure you want to delete this consultation? This action is irreversible.</value>
+  </data>
+  <data name="CalendarPage.SendNotifications" xml:space="preserve">
+    <value>Send Invitations</value>
+  </data>
+  <data name="CalendarPage.Info" xml:space="preserve">
+    <value>Information</value>
+  </data>
+  <data name="CalendarPage.CreatedAt" xml:space="preserve">
+    <value>Created:</value>
+  </data>
+  <data name="CalendarPage.ModifiedAt" xml:space="preserve">
+    <value>Modified:</value>
+  </data>
+  <data name="CalendarPage.ReminderSent" xml:space="preserve">
+    <value>Sent</value>
+  </data>
+  <data name="CalendarPage.ReminderBefore" xml:space="preserve">
+    <value>hours before</value>
+  </data>
+  <data name="CalendarPage.Reminder" xml:space="preserve">
+    <value>Reminder:</value>
+  </data>
+  <data name="CalendarPage.TypeParentTeacher" xml:space="preserve">
+    <value>Parent-Teacher Meeting</value>
+  </data>
+  <data name="CalendarPage.TypeIndividual" xml:space="preserve">
+    <value>Individual Consultation</value>
+  </data>
+  <data name="CalendarPage.TypePlppReview" xml:space="preserve">
+    <value>PLPP Review</value>
+  </data>
+  <data name="CalendarPage.TypeIvpReview" xml:space="preserve">
+    <value>IVP Review</value>
+  </data>
+  <data name="CalendarPage.TypeCounselor" xml:space="preserve">
+    <value>Counselor Meeting</value>
+  </data>
+  <data name="CalendarPage.TypeExternal" xml:space="preserve">
+    <value>External Specialist</value>
+  </data>
+  <data name="CalendarPage.TypeSchoolEvent" xml:space="preserve">
+    <value>School Event</value>
+  </data>
+  <data name="CalendarPage.TypeOther" xml:space="preserve">
+    <value>Other</value>
+  </data>
+  <data name="CalendarPage.TypePlppIvpReview" xml:space="preserve">
+    <value>PLPP/IVP Review</value>
+  </data>
+  <data name="CalendarPage.StatusScheduled" xml:space="preserve">
+    <value>Scheduled</value>
+  </data>
+  <data name="CalendarPage.StatusConfirmed" xml:space="preserve">
+    <value>Confirmed</value>
+  </data>
+  <data name="CalendarPage.StatusCompleted" xml:space="preserve">
+    <value>Completed</value>
+  </data>
+  <data name="CalendarPage.StatusCancelled" xml:space="preserve">
+    <value>Cancelled</value>
+  </data>
+  <data name="CalendarPage.StatusRescheduled" xml:space="preserve">
+    <value>Rescheduled</value>
+  </data>
+  <data name="CalendarPage.ResponsePending" xml:space="preserve">
+    <value>Pending</value>
+  </data>
+  <data name="CalendarPage.ResponseAccepted" xml:space="preserve">
+    <value>Accepted</value>
+  </data>
+  <data name="CalendarPage.ResponseDeclined" xml:space="preserve">
+    <value>Declined</value>
+  </data>
+  <data name="CalendarPage.ResponseTentative" xml:space="preserve">
+    <value>Tentative</value>
+  </data>
+  <data name="CalendarPage.MsgEventCreated" xml:space="preserve">
+    <value>Consultation was created.</value>
+  </data>
+  <data name="CalendarPage.MsgEventUpdated" xml:space="preserve">
+    <value>Consultation was updated.</value>
+  </data>
+  <data name="CalendarPage.MsgEventCancelled" xml:space="preserve">
+    <value>Consultation was cancelled.</value>
+  </data>
+  <data name="CalendarPage.MsgEventCancelFailed" xml:space="preserve">
+    <value>Failed to cancel consultation.</value>
+  </data>
+  <data name="CalendarPage.MsgEventConfirmed" xml:space="preserve">
+    <value>Consultation was confirmed.</value>
+  </data>
+  <data name="CalendarPage.MsgEventConfirmFailed" xml:space="preserve">
+    <value>Failed to confirm consultation.</value>
+  </data>
+  <data name="CalendarPage.MsgEventCompleted" xml:space="preserve">
+    <value>Consultation was marked as completed.</value>
+  </data>
+  <data name="CalendarPage.MsgEventCompleteFailed" xml:space="preserve">
+    <value>Failed to mark consultation as completed.</value>
+  </data>
+  <data name="CalendarPage.MsgEventDeleted" xml:space="preserve">
+    <value>Consultation was deleted.</value>
+  </data>
+  <data name="CalendarPage.MsgEventDeleteFailed" xml:space="preserve">
+    <value>Failed to delete consultation.</value>
+  </data>
+  <data name="CalendarPage.MsgParticipantRemoved" xml:space="preserve">
+    <value>Participant was removed.</value>
+  </data>
+  <data name="CalendarPage.MsgParticipantRemoveFailed" xml:space="preserve">
+    <value>Failed to remove participant.</value>
+  </data>
+  <data name="CalendarPage.MsgGuardiansInvited" xml:space="preserve">
+    <value>Invited {0} guardians.</value>
+  </data>
+  <data name="CalendarPage.MsgNoGuardiansToInvite" xml:space="preserve">
+    <value>No more guardians to invite.</value>
+  </data>
+  <data name="CalendarPage.MsgStaffInvited" xml:space="preserve">
+    <value>Invited {0} teachers.</value>
+  </data>
+  <data name="CalendarPage.MsgNoStaffToInvite" xml:space="preserve">
+    <value>No more teachers to invite.</value>
+  </data>
+  <data name="CalendarPage.MsgNoStudentForEvent" xml:space="preserve">
+    <value>Consultation is not assigned to any student.</value>
+  </data>
+  <data name="CalendarPage.MsgNotificationsSent" xml:space="preserve">
+    <value>Invitations sent to {0} participants.</value>
+  </data>
+  <data name="CalendarPage.MsgNotificationsSendFailed" xml:space="preserve">
+    <value>Failed to send invitations.</value>
+  </data>
+  <data name="CalendarPage.MsgEndAfterStart" xml:space="preserve">
+    <value>End time must be after start time.</value>
+  </data>
+  <data name="CalendarPage.MsgCancelledByOrganizer" xml:space="preserve">
+    <value>Cancelled by organizer</value>
+  </data>
+  <data name="CalendarPage.MsgResponseAccepted" xml:space="preserve">
+    <value>Invitation accepted.</value>
+  </data>
+  <data name="CalendarPage.MsgResponseDeclined" xml:space="preserve">
+    <value>Invitation declined.</value>
+  </data>
+  <data name="CalendarPage.MsgResponseTentative" xml:space="preserve">
+    <value>Response recorded as 'tentative'.</value>
+  </data>
+  <data name="CalendarPage.MsgResponseRecorded" xml:space="preserve">
+    <value>Response recorded.</value>
+  </data>
+  <data name="CalendarPage.MsgResponseFailed" xml:space="preserve">
+    <value>Failed to record response.</value>
+  </data>
+  <data name="CalendarPage.TitleRequired" xml:space="preserve">
+    <value>Title is required.</value>
+  </data>
+  <data name="CalendarPage.TypeRequired" xml:space="preserve">
+    <value>Type is required.</value>
+  </data>
+  <data name="CalendarPage.StartRequired" xml:space="preserve">
+    <value>Start date and time is required.</value>
+  </data>
+  <data name="CalendarPage.EndRequired" xml:space="preserve">
+    <value>End date and time is required.</value>
+  </data>
+  <data name="CalendarPage.InvalidUrl" xml:space="preserve">
+    <value>Please enter a valid URL.</value>
+  </data>
+  <data name="CalendarPage.LabelTitle" xml:space="preserve">
+    <value>Title</value>
+  </data>
+  <data name="CalendarPage.LabelDescription" xml:space="preserve">
+    <value>Description / Agenda</value>
+  </data>
+  <data name="CalendarPage.LabelType" xml:space="preserve">
+    <value>Consultation Type</value>
+  </data>
+  <data name="CalendarPage.LabelStudent" xml:space="preserve">
+    <value>Student (optional)</value>
+  </data>
+  <data name="CalendarPage.LabelStart" xml:space="preserve">
+    <value>Start</value>
+  </data>
+  <data name="CalendarPage.LabelEnd" xml:space="preserve">
+    <value>End</value>
+  </data>
+  <data name="CalendarPage.LabelLocation" xml:space="preserve">
+    <value>Location</value>
+  </data>
+  <data name="CalendarPage.LabelOnlineLink" xml:space="preserve">
+    <value>Online Meeting Link</value>
+  </data>
+  <data name="CalendarPage.LabelVisibleToParents" xml:space="preserve">
+    <value>Visible to Parents</value>
+  </data>
+  <data name="CalendarPage.LabelAllowResponses" xml:space="preserve">
+    <value>Allow Responses</value>
+  </data>
+  <data name="CalendarPage.LabelReminder" xml:space="preserve">
+    <value>Remind before (minutes)</value>
+  </data>
+  <data name="CalendarPage.LabelInviteGuardians" xml:space="preserve">
+    <value>Invite Student's Parents</value>
+  </data>
+  <data name="CalendarPage.LabelInviteStaff" xml:space="preserve">
+    <value>Invite Assigned Teachers</value>
+  </data>
+  <data name="CalendarPage.LabelNotes" xml:space="preserve">
+    <value>Meeting Notes</value>
+  </data>
+  <data name="DashboardPage.ViewCalendar" xml:space="preserve">
+    <value>View Calendar</value>
+  </data>
+  <data name="DashboardPage.CreateConsultation" xml:space="preserve">
+    <value>New Consultation</value>
+  </data>
+  <data name="StudentsPage.ViewCalendar" xml:space="preserve">
+    <value>Consultation Calendar</value>
+  </data>
+  <data name="MyChildrenPage.ViewCalendar" xml:space="preserve">
+    <value>Events Calendar</value>
+  </data>
+</root>

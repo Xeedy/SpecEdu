@@ -1,0 +1,54 @@
+@using Microsoft.Extensions.Configuration
+@inject IConfiguration Configuration
+@{
+    var currentCulture = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
+    var returnUrl = Context.Request.Path + Context.Request.QueryString;
+    var publicUrl = Configuration["PublicUrl"] ?? "https://localhost:5000";
+}
+
+<header class="app-topbar">
+    <div class="topbar-left">
+        <button class="btn-sidebar-toggle d-lg-none" id="sidebarToggle" aria-label="Toggle sidebar">
+            <i class="bi bi-list"></i>
+        </button>
+        <nav aria-label="breadcrumb" class="topbar-breadcrumb">
+            <span class="text-muted">@ViewData["Title"]</span>
+        </nav>
+    </div>
+
+    <div class="topbar-right">
+        <!-- Language switch -->
+        <div class="lang-switch d-flex align-items-center gap-1 me-2">
+            <a class="lang-pill-sm @(currentCulture == "cs" ? "active" : "")"
+               asp-page="/Culture/Set"
+               asp-route-culture="cs"
+               asp-route-returnUrl="@returnUrl"
+               title="Čeština">
+                <img src="~/img/cs.svg" alt="CS" />
+            </a>
+            <a class="lang-pill-sm @(currentCulture == "en" ? "active" : "")"
+               asp-page="/Culture/Set"
+               asp-route-culture="en"
+               asp-route-returnUrl="@returnUrl"
+               title="English">
+                <img src="~/img/en.svg" alt="EN" />
+            </a>
+        </div>
+
+        <!-- User dropdown -->
+        <div class="dropdown">
+            <button class="btn btn-topbar-user dropdown-toggle" type="button" id="userDropdown"
+                    data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="bi bi-person-circle me-1"></i>
+                <span class="d-none d-md-inline">@User.Identity?.Name</span>
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                <li><a class="dropdown-item" asp-page="/Account/Profile"><i class="bi bi-person me-2"></i>@L["TopBar.Profile"]</a></li>
+                <li><a class="dropdown-item" asp-page="/Account/Settings"><i class="bi bi-gear me-2"></i>@L["TopBar.Settings"]</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="@publicUrl"><i class="bi bi-globe me-2"></i>@L["TopBar.PublicSite"]</a></li>
+                <li><a class="dropdown-item" asp-page="/Account/Logout"><i class="bi bi-box-arrow-right me-2"></i>@L["TopBar.Logout"]</a></li>
+            </ul>
+        </div>
+    </div>
+</header>

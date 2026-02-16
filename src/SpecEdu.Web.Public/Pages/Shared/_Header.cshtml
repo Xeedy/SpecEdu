@@ -1,0 +1,101 @@
+@using Microsoft.Extensions.Configuration
+@inject IConfiguration Configuration
+@{
+    var currentCulture = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
+    var returnUrl = Context.Request.Path + Context.Request.QueryString;
+    var appUrl = Configuration["AppUrl"] ?? "https://localhost:5001";
+}
+
+<header class="spec-header">
+    <nav class="navbar navbar-expand-lg spec-navbar">
+        <div class="container">
+            <a class="navbar-brand spec-brand" asp-area="" asp-page="/Index" aria-label="SpecEdu">
+                <span class="spec-brand-spec">Spec</span><span class="spec-brand-edu">Edu</span>
+            </a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain"
+                    aria-controls="navbarMain" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarMain">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <!-- O systému dropdown -->
+                    <li class="nav-item dropdown spec-hover-dropdown">
+                        <a class="nav-link spec-nav-link dropdown-toggle" href="#" id="systemDropdown"
+                           role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            @L["HeaderPage.System"]
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="systemDropdown">
+                            <li><a class="dropdown-item" asp-area="" asp-page="/System/Index">@L["HeaderPage.SystemOverview"]</a></li>
+                            <li><a class="dropdown-item" asp-area="" asp-page="/System/ForClients">@L["HeaderPage.ForClients"]</a></li>
+                            <li><a class="dropdown-item" asp-area="" asp-page="/System/Security">@L["HeaderPage.Security"]</a></li>
+                            <li><a class="dropdown-item" asp-area="" asp-page="/System/Documentation">@L["HeaderPage.Documentation"]</a></li>
+                        </ul>
+                    </li>
+
+                    <!-- Funkce dropdown -->
+                    <li class="nav-item dropdown spec-hover-dropdown">
+                        <a class="nav-link spec-nav-link dropdown-toggle" href="#" id="functionsDropdown"
+                           role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            @L["HeaderPage.Functions"]
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="functionsDropdown">
+                            <li><a class="dropdown-item" asp-area="" asp-page="/Functions/StudentFiles">@L["HeaderPage.StudentFile"]</a></li>
+                            <li><a class="dropdown-item" asp-area="" asp-page="/Functions/Documents">@L["HeaderPage.StudentDocuments"]</a></li>
+                            <li><a class="dropdown-item" asp-area="" asp-page="/Functions/Diary">@L["HeaderPage.CommunicationDiary"]</a></li>
+                            <li><a class="dropdown-item" asp-area="" asp-page="/Functions/Notifications">@L["HeaderPage.Notifications"]</a></li>
+                        </ul>
+                    </li>
+
+                    <!-- Jak to funguje -->
+                    <li class="nav-item">
+                        <a class="nav-link spec-nav-link" asp-area="" asp-page="/HowItWorks">@L["HeaderPage.HowItWorks"]</a>
+                    </li>
+
+                    <!-- Ceník -->
+                    <li class="nav-item">
+                        <a class="nav-link spec-nav-link" asp-area="" asp-page="/Pricing">@L["HeaderPage.Price"]</a>
+                    </li>
+
+                    <!-- Kontakt -->
+                    <li class="nav-item">
+                        <a class="nav-link spec-nav-link" asp-area="" asp-page="/Contact">@L["HeaderPage.Contact"]</a>
+                    </li>
+                </ul>
+
+                <div class="d-flex align-items-center gap-2">
+                    <!-- Language switch -->
+                    <div class="lang-switch d-flex align-items-center gap-2 me-2">
+                        <a class="lang-pill @(currentCulture == "cs" ? "active" : "")"
+                           asp-page="/Culture/Set"
+                           asp-route-culture="cs"
+                           asp-route-returnUrl="@returnUrl"
+                           title="Čeština"
+                           aria-label="Čeština">
+                            <img src="~/img/cs.svg" alt="CS" />
+                        </a>
+
+                        <a class="lang-pill @(currentCulture == "en" ? "active" : "")"
+                           asp-page="/Culture/Set"
+                           asp-route-culture="en"
+                           asp-route-returnUrl="@returnUrl"
+                           title="English"
+                           aria-label="English">
+                            <img src="~/img/en.svg" alt="EN" />
+                        </a>
+                    </div>
+                    @if (User.Identity?.IsAuthenticated == true)
+                    {
+                        <a class="btn btn-spec-primary" href="@appUrl/Dashboard">@L["HeaderPage.Dashboard"]</a>
+                        <a class="btn btn-spec-outline" asp-area="" asp-page="/Account/Logout">@L["HeaderPage.Logout"]</a>
+                    }
+                    else
+                    {
+                        <a class="btn btn-spec-outline" asp-area="" asp-page="/Account/Login">@L["HeaderPage.Login"]</a>
+                        <a class="btn btn-spec-primary" asp-area="" asp-page="/Account/Register">@L["HeaderPage.Register"]</a>
+                    }
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>

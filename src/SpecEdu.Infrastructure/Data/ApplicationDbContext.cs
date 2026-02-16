@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.DataProtection.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -8,7 +9,7 @@ using SpecEdu.Infrastructure.Identity;
 
 namespace SpecEdu.Infrastructure.Data;
 
-public class ApplicationDbContext : IdentityDbContext<ApplicationUser, IdentityRole, string>
+public class ApplicationDbContext : IdentityDbContext<ApplicationUser, IdentityRole, string>, IDataProtectionKeyContext
 {
     private readonly ICurrentUserService? _currentUserService;
 
@@ -19,6 +20,8 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser, IdentityR
     {
         _currentUserService = currentUserService;
     }
+
+    public DbSet<DataProtectionKey> DataProtectionKeys { get; set; } = null!;
 
     public DbSet<School> Schools => Set<School>();
 

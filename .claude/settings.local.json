@@ -13,7 +13,8 @@
       "Bash(git -C \"C:\\\\Users\\\\micha\\\\Documents\\\\SpecEdu\" log e5d5de2 -1 --format=fuller)",
       "Bash(git -C \"C:\\\\Users\\\\micha\\\\Documents\\\\SpecEdu\" log 2143e77 -1 --format=fuller)",
       "Bash(git -C \"C:\\\\Users\\\\micha\\\\Documents\\\\SpecEdu\" log b144e12 -1 --format=fuller)",
-      "Bash(git -C \"C:\\\\Users\\\\micha\\\\Documents\\\\SpecEdu\" show e5d5de2 --stat)"
+      "Bash(git -C \"C:\\\\Users\\\\micha\\\\Documents\\\\SpecEdu\" show e5d5de2 --stat)",
+      "Bash(dotnet sln:*)"
     ]
   }
 }

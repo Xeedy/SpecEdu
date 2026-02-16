@@ -1,0 +1,129 @@
+@page
+@model SpecEdu.Web.App.Pages.SchoolAdmin.Students.IndexModel
+@inject IStringLocalizer<SpecEdu.Web.App.SharedResource> L
+@{
+    ViewData["Title"] = L["StudentsPage.Title"];
+}
+
+<div class="container py-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1>@L["StudentsPage.Title"]</h1>
+        <a asp-page="Create" class="btn btn-spec-primary">
+            <i class="bi bi-plus-lg me-2"></i>@L["StudentsPage.AddStudent"]
+        </a>
+    </div>
+
+    @if (!string.IsNullOrWhiteSpace(Model.SuccessMessage))
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            @Model.SuccessMessage
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Zavřít"></button>
+        </div>
+    }
+
+    @if (!string.IsNullOrWhiteSpace(Model.ErrorMessage))
+    {
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            @Model.ErrorMessage
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Zavřít"></button>
+        </div>
+    }
+
+    <!-- Search -->
+    <div class="spec-card mb-4">
+        <div class="spec-card-body">
+            <form method="get" class="row g-3">
+                <div class="col-md-8">
+                    <input type="text" class="form-control" name="SearchTerm" value="@Model.SearchTerm" placeholder="@L["StudentsPage.SearchPlaceholder"]">
+                </div>
+                <div class="col-md-4">
+                    <button type="submit" class="btn btn-spec-primary w-100">@L["Common.Search"]</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Students Table -->
+    <div class="spec-card">
+        <div class="spec-card-body">
+            @if (Model.Students.Any())
+            {
+                <div class="table-responsive">
+                    <table class="table table-hover mb-0">
+                        <thead>
+                            <tr>
+                                <th>@L["StudentsPage.Name"]</th>
+                                <th>@L["StudentsPage.Class"]</th>
+                                <th>@L["StudentsPage.BirthDate"]</th>
+                                <th>@L["StudentsPage.Status"]</th>
+                                <th class="text-end">@L["Common.Actions"]</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var student in Model.Students)
+                            {
+                                <tr>
+                                    <td>
+                                        <strong>@student.FullName</strong>
+                                    </td>
+                                    <td>@(student.Class ?? "-")</td>
+                                    <td>@(student.BirthDate?.ToString("dd.MM.yyyy") ?? "-")</td>
+                                    <td>
+                                        @if (student.IsActive)
+                                        {
+                                            <span class="badge bg-success">@L["Common.Active"]</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="badge bg-secondary">@L["Common.Inactive"]</span>
+                                        }
+                                    </td>
+                                    <td class="text-end">
+                                        <a asp-page="Details" asp-route-id="@student.Id" class="btn btn-sm btn-outline-primary">
+                                            @L["Common.View"]
+                                        </a>
+                                        <a asp-page="Edit" asp-route-id="@student.Id" class="btn btn-sm btn-outline-secondary">
+                                            @L["Common.Edit"]
+                                        </a>
+                                        <a asp-page="Guardians" asp-route-id="@student.Id" class="btn btn-sm btn-outline-info">
+                                            @L["StudentsPage.Guardians"]
+                                        </a>
+                                        <a asp-page="StaffLinks" asp-route-id="@student.Id" class="btn btn-sm btn-outline-warning">
+                                            @L["StudentsPage.Staff"]
+                                        </a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Pagination -->
+                @if (Model.TotalPages > 1)
+                {
+                    <nav aria-label="Page navigation" class="mt-4">
+                        <ul class="pagination justify-content-center mb-0">
+                            @for (var i = 1; i <= Model.TotalPages; i++)
+                            {
+                                <li class="page-item @(i == Model.CurrentPage ? "active" : "")">
+                                    <a class="page-link" asp-page="Index" asp-route-page="@i" asp-route-searchterm="@Model.SearchTerm">@i</a>
+                                </li>
+                            }
+                        </ul>
+                    </nav>
+                }
+            }
+            else
+            {
+                <div class="text-center py-4">
+                    <p class="text-muted mb-3">@L["StudentsPage.NoStudents"]</p>
+                    <a asp-page="Create" class="btn btn-spec-primary">@L["StudentsPage.AddFirstStudent"]</a>
+                </div>
+            }
+        </div>
+    </div>
+
+    <div class="mt-3">
+        <a asp-page="/Dashboard/Index" class="btn btn-outline-secondary">@L["Common.BackToDashboard"]</a>
+    </div>
+</div>

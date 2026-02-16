@@ -1,0 +1,144 @@
+@page "{studentId:guid}"
+@model SpecEdu.Web.App.Pages.SchoolAdmin.Students.PlppCreateModel
+@inject IStringLocalizer<SpecEdu.Web.App.SharedResource> L
+@{
+    ViewData["Title"] = $"Novy PLPP - {Model.Student.FullName}";
+}
+
+<div class="container py-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h1><i class="bi bi-file-earmark-plus me-2"></i>Novy plan pedagogicke podpory</h1>
+            <p class="text-muted mb-0">@Model.Student.FullName</p>
+        </div>
+    </div>
+
+    <form method="post">
+        <div class="row">
+            <!-- Left Column - Basic Info -->
+            <div class="col-lg-4">
+                <div class="spec-card mb-4">
+                    <div class="spec-card-header">
+                        <h5 class="mb-0"><i class="bi bi-info-circle me-2"></i>Zakladni udaje</h5>
+                    </div>
+                    <div class="spec-card-body">
+                        <div class="mb-3">
+                            <label asp-for="Input.SchoolYear" class="form-label"></label>
+                            <input asp-for="Input.SchoolYear" class="form-control" />
+                            <span asp-validation-for="Input.SchoolYear" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Input.SupportLevel" class="form-label"></label>
+                            <select asp-for="Input.SupportLevel" class="form-select" asp-items="Model.SupportLevelOptions"></select>
+                            <span asp-validation-for="Input.SupportLevel" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Input.ValidFrom" class="form-label"></label>
+                            <input asp-for="Input.ValidFrom" type="date" class="form-control" />
+                            <span asp-validation-for="Input.ValidFrom" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Input.ValidTo" class="form-label"></label>
+                            <input asp-for="Input.ValidTo" type="date" class="form-control" />
+                            <span asp-validation-for="Input.ValidTo" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-check mb-3">
+                            <input asp-for="Input.IsVisibleToParents" class="form-check-input" type="checkbox" />
+                            <label asp-for="Input.IsVisibleToParents" class="form-check-label"></label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column - Content -->
+            <div class="col-lg-8">
+                <div class="spec-card mb-4">
+                    <div class="spec-card-header">
+                        <h5 class="mb-0"><i class="bi bi-person-check me-2"></i>Charakteristika zaka</h5>
+                    </div>
+                    <div class="spec-card-body">
+                        <div class="mb-3">
+                            <label asp-for="Input.Strengths" class="form-label"></label>
+                            <textarea asp-for="Input.Strengths" class="form-control" rows="3" placeholder="Popiste silne stranky zaka..."></textarea>
+                            <span asp-validation-for="Input.Strengths" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Input.AreasNeedingSupport" class="form-label"></label>
+                            <textarea asp-for="Input.AreasNeedingSupport" class="form-control" rows="3" placeholder="Popiste oblasti, kde zak potrebuje podporu..."></textarea>
+                            <span asp-validation-for="Input.AreasNeedingSupport" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="spec-card mb-4">
+                    <div class="spec-card-header">
+                        <h5 class="mb-0"><i class="bi bi-gear me-2"></i>Podpurna opatreni</h5>
+                    </div>
+                    <div class="spec-card-body">
+                        <div class="mb-3">
+                            <label asp-for="Input.RecommendedMethods" class="form-label"></label>
+                            <textarea asp-for="Input.RecommendedMethods" class="form-control" rows="3" placeholder="Doporucene vyucovaci metody a pristupy..."></textarea>
+                            <span asp-validation-for="Input.RecommendedMethods" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Input.OrganizationalAdjustments" class="form-label"></label>
+                            <textarea asp-for="Input.OrganizationalAdjustments" class="form-control" rows="3" placeholder="Napr. misto v lavici, casove upravy..."></textarea>
+                            <span asp-validation-for="Input.OrganizationalAdjustments" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Input.ContentAdjustments" class="form-label"></label>
+                            <textarea asp-for="Input.ContentAdjustments" class="form-control" rows="3" placeholder="Upravy obsahu vyuky..."></textarea>
+                            <span asp-validation-for="Input.ContentAdjustments" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Input.AssessmentMethods" class="form-label"></label>
+                            <textarea asp-for="Input.AssessmentMethods" class="form-control" rows="3" placeholder="Zpusob hodnoceni a zkoušeni..."></textarea>
+                            <span asp-validation-for="Input.AssessmentMethods" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="spec-card mb-4">
+                    <div class="spec-card-header">
+                        <h5 class="mb-0"><i class="bi bi-people me-2"></i>Spoluprace</h5>
+                    </div>
+                    <div class="spec-card-body">
+                        <div class="mb-3">
+                            <label asp-for="Input.ParentCollaboration" class="form-label"></label>
+                            <textarea asp-for="Input.ParentCollaboration" class="form-control" rows="3" placeholder="Plan spoluprace s rodici..."></textarea>
+                            <span asp-validation-for="Input.ParentCollaboration" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Input.InternalNotes" class="form-label"></label>
+                            <textarea asp-for="Input.InternalNotes" class="form-control" rows="3" placeholder="Interni poznamky (neviditelne pro rodice)..."></textarea>
+                            <span asp-validation-for="Input.InternalNotes" class="text-danger"></span>
+                            <small class="text-muted">Tyto poznamky nebudou viditelne pro rodice.</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-between">
+            <a asp-page="Plpps" asp-route-id="@Model.StudentId" class="btn btn-outline-secondary">
+                <i class="bi bi-arrow-left me-2"></i>Zpet na seznam
+            </a>
+            <button type="submit" class="btn btn-spec-primary">
+                <i class="bi bi-check-lg me-2"></i>Vytvorit PLPP
+            </button>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
