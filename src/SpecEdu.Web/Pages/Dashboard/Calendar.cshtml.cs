@@ -1,10 +1,10 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.Extensions.Localization;
 using SpecEdu.Application.Common.Interfaces;
 using SpecEdu.Application.Common.Models;
 using SpecEdu.Domain.Enums;
-
 namespace SpecEdu.Web.Pages.Dashboard;
 
 [Authorize(Policy = "CanViewStudent")]
@@ -13,15 +13,18 @@ public class CalendarModel : PageModel
     private readonly IConsultationService _consultationService;
     private readonly ICurrentUserService _currentUserService;
     private readonly IIdentityService _identityService;
+    private readonly IStringLocalizer<SharedResource> _localizer;
 
     public CalendarModel(
         IConsultationService consultationService,
         ICurrentUserService currentUserService,
-        IIdentityService identityService)
+        IIdentityService identityService,
+        IStringLocalizer<SharedResource> localizer)
     {
         _consultationService = consultationService;
         _currentUserService = currentUserService;
         _identityService = identityService;
+        _localizer = localizer;
     }
 
     public Guid? SchoolId { get; set; }
@@ -93,45 +96,45 @@ public class CalendarModel : PageModel
         {
             SuccessMessage = response switch
             {
-                ParticipantResponseStatus.Accepted => "Pozvanka prijata.",
-                ParticipantResponseStatus.Declined => "Pozvanka odmitnuta.",
-                ParticipantResponseStatus.Tentative => "Odpoved zaznamenana jako 'mozna'.",
-                _ => "Odpoved zaznamenana."
+                ParticipantResponseStatus.Accepted => _localizer["CalendarPage.MsgResponseAccepted"],
+                ParticipantResponseStatus.Declined => _localizer["CalendarPage.MsgResponseDeclined"],
+                ParticipantResponseStatus.Tentative => _localizer["CalendarPage.MsgResponseTentative"],
+                _ => _localizer["CalendarPage.MsgResponseRecorded"]
             };
         }
         else
         {
-            ErrorMessage = "Nepodarilo se zaznamenat odpoved.";
+            ErrorMessage = _localizer["CalendarPage.MsgResponseFailed"];
         }
 
         return RedirectToPage();
     }
 
-    public static string GetTypeName(ConsultationType type)
+    public string GetTypeName(ConsultationType type)
     {
         return type switch
         {
-            ConsultationType.ParentTeacherMeeting => "Tridni schuzka",
-            ConsultationType.IndividualConsultation => "Individualni konzultace",
-            ConsultationType.PlppReview => "Vyhodnoceni PLPP",
-            ConsultationType.IvpReview => "Vyhodnoceni IVP",
-            ConsultationType.CounselorMeeting => "Schuzka s poradcem",
-            ConsultationType.ExternalSpecialistMeeting => "Externi specialista",
-            ConsultationType.SchoolEvent => "Skolni akce",
-            ConsultationType.Other => "Jine",
+            ConsultationType.ParentTeacherMeeting => _localizer["CalendarPage.TypeParentTeacher"],
+            ConsultationType.IndividualConsultation => _localizer["CalendarPage.TypeIndividual"],
+            ConsultationType.PlppReview => _localizer["CalendarPage.TypePlppReview"],
+            ConsultationType.IvpReview => _localizer["CalendarPage.TypeIvpReview"],
+            ConsultationType.CounselorMeeting => _localizer["CalendarPage.TypeCounselor"],
+            ConsultationType.ExternalSpecialistMeeting => _localizer["CalendarPage.TypeExternal"],
+            ConsultationType.SchoolEvent => _localizer["CalendarPage.TypeSchoolEvent"],
+            ConsultationType.Other => _localizer["CalendarPage.TypeOther"],
             _ => type.ToString()
         };
     }
 
-    public static string GetStatusName(ConsultationEventStatus status)
+    public string GetStatusName(ConsultationEventStatus status)
     {
         return status switch
         {
-            ConsultationEventStatus.Scheduled => "Naplanovano",
-            ConsultationEventStatus.Confirmed => "Potvrzeno",
-            ConsultationEventStatus.Completed => "Probehlo",
-            ConsultationEventStatus.Cancelled => "Zruseno",
-            ConsultationEventStatus.Rescheduled => "Presunuto",
+            ConsultationEventStatus.Scheduled => _localizer["CalendarPage.StatusScheduled"],
+            ConsultationEventStatus.Confirmed => _localizer["CalendarPage.StatusConfirmed"],
+            ConsultationEventStatus.Completed => _localizer["CalendarPage.StatusCompleted"],
+            ConsultationEventStatus.Cancelled => _localizer["CalendarPage.StatusCancelled"],
+            ConsultationEventStatus.Rescheduled => _localizer["CalendarPage.StatusRescheduled"],
             _ => status.ToString()
         };
     }

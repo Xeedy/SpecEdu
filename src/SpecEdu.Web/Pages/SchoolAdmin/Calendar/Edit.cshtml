@@ -2,12 +2,12 @@
 @model SpecEdu.Web.Pages.SchoolAdmin.Calendar.EditModel
 @inject IStringLocalizer<SharedResource> L
 @{
-    ViewData["Title"] = $"Upravit: {Model.Event.Title}";
+    ViewData["Title"] = L["CalendarPage.EditTitle"];
 }
 
 <div class="container py-4">
     <div class="mb-4">
-        <h1><i class="bi bi-pencil me-2"></i>Upravit konzultaci</h1>
+        <h1><i class="bi bi-pencil me-2"></i>@L["CalendarPage.EditTitle"]</h1>
         <p class="text-muted mb-0">@Model.Event.Title</p>
     </div>
 
@@ -25,7 +25,7 @@
                 <!-- Basic Info -->
                 <div class="spec-card mb-4">
                     <div class="spec-card-header">
-                        <h5 class="mb-0"><i class="bi bi-info-circle me-2"></i>Zakladni udaje</h5>
+                        <h5 class="mb-0"><i class="bi bi-info-circle me-2"></i>@L["CalendarPage.BasicInfo"]</h5>
                     </div>
                     <div class="spec-card-body">
                         <div class="row">
@@ -50,7 +50,7 @@
                 <!-- Date & Time -->
                 <div class="spec-card mb-4">
                     <div class="spec-card-header">
-                        <h5 class="mb-0"><i class="bi bi-clock me-2"></i>Datum a cas</h5>
+                        <h5 class="mb-0"><i class="bi bi-clock me-2"></i>@L["CalendarPage.DateAndTime"]</h5>
                     </div>
                     <div class="spec-card-body">
                         <div class="row">
@@ -71,7 +71,7 @@
                 <!-- Location -->
                 <div class="spec-card mb-4">
                     <div class="spec-card-header">
-                        <h5 class="mb-0"><i class="bi bi-geo-alt me-2"></i>Misto konani</h5>
+                        <h5 class="mb-0"><i class="bi bi-geo-alt me-2"></i>@L["CalendarPage.LocationSection"]</h5>
                     </div>
                     <div class="spec-card-body">
                         <div class="mb-3">
@@ -90,13 +90,13 @@
                 <!-- Notes -->
                 <div class="spec-card mb-4">
                     <div class="spec-card-header">
-                        <h5 class="mb-0"><i class="bi bi-sticky me-2"></i>Poznamky z prubehu</h5>
+                        <h5 class="mb-0"><i class="bi bi-sticky me-2"></i>@L["CalendarPage.NotesSection"]</h5>
                     </div>
                     <div class="spec-card-body">
                         <div class="mb-3">
                             <label asp-for="Input.Notes" class="form-label"></label>
                             <textarea asp-for="Input.Notes" class="form-control" rows="4"></textarea>
-                            <small class="text-muted">Zde muzete zaznamenat poznamky z prubehu konzultace.</small>
+                            <small class="text-muted">@L["CalendarPage.NotesHint"]</small>
                         </div>
                     </div>
                 </div>
@@ -106,7 +106,7 @@
                 <!-- Settings -->
                 <div class="spec-card mb-4">
                     <div class="spec-card-header">
-                        <h5 class="mb-0"><i class="bi bi-gear me-2"></i>Nastaveni</h5>
+                        <h5 class="mb-0"><i class="bi bi-gear me-2"></i>@L["CalendarPage.Settings"]</h5>
                     </div>
                     <div class="spec-card-body">
                         <div class="form-check mb-3">
@@ -122,12 +122,12 @@
                         <div class="mb-3">
                             <label asp-for="Input.ReminderMinutesBefore" class="form-label"></label>
                             <select asp-for="Input.ReminderMinutesBefore" class="form-select">
-                                <option value="">Bez pripominek</option>
-                                <option value="60">1 hodina pred</option>
-                                <option value="120">2 hodiny pred</option>
-                                <option value="1440">1 den pred</option>
-                                <option value="2880">2 dny pred</option>
-                                <option value="10080">1 tyden pred</option>
+                                <option value="">@L["CalendarPage.NoReminder"]</option>
+                                <option value="60">@L["CalendarPage.Reminder1h"]</option>
+                                <option value="120">@L["CalendarPage.Reminder2h"]</option>
+                                <option value="1440">@L["CalendarPage.Reminder1d"]</option>
+                                <option value="2880">@L["CalendarPage.Reminder2d"]</option>
+                                <option value="10080">@L["CalendarPage.Reminder1w"]</option>
                             </select>
                         </div>
                     </div>
@@ -136,10 +136,10 @@
                 <!-- Actions -->
                 <div class="d-grid gap-2">
                     <button type="submit" class="btn btn-spec-primary">
-                        <i class="bi bi-check-lg me-2"></i>Ulozit zmeny
+                        <i class="bi bi-check-lg me-2"></i>@L["CalendarPage.SaveButton"]
                     </button>
                     <a asp-page="Details" asp-route-id="@Model.Id" class="btn btn-outline-secondary">
-                        <i class="bi bi-x-lg me-2"></i>Zrusit
+                        <i class="bi bi-x-lg me-2"></i>@L["CalendarPage.CancelButton"]
                     </a>
                 </div>
             </div>

@@ -54,6 +54,9 @@
                             <div class="d-flex gap-2">
                                 <a asp-page="ChildDetails" asp-route-id="@child.Id" class="btn btn-spec-primary btn-sm flex-fill">@L["MyChildrenPage.ViewDetails"]</a>
                                 <a asp-page="ChildDiary" asp-route-id="@child.Id" class="btn btn-spec-outline btn-sm flex-fill">@L["StudentsPage.Diary"]</a>
+                                <a asp-page="Calendar" class="btn btn-spec-outline btn-sm flex-fill">
+                                    <i class="bi bi-calendar3 me-1"></i>@L["MyChildrenPage.ViewCalendar"]
+                                </a>
                             </div>
                         </div>
                     </div>

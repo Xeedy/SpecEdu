@@ -143,6 +143,27 @@
                         {
                             <button class="btn btn-spec-primary" disabled>@L["DashboardPage.AddStudent"]</button>
                         }
+                        @if (User.IsInRole("SchoolAdmin"))
+                        {
+                            <a asp-page="/SchoolAdmin/Calendar/Index" class="btn btn-spec-outline">
+                                <i class="bi bi-calendar3 me-1"></i>@L["DashboardPage.ViewCalendar"]
+                            </a>
+                            <a asp-page="/SchoolAdmin/Calendar/Create" class="btn btn-spec-outline">
+                                <i class="bi bi-plus-lg me-1"></i>@L["DashboardPage.CreateConsultation"]
+                            </a>
+                        }
+                        else if (User.IsInRole("Parent"))
+                        {
+                            <a asp-page="/MyChildren/Calendar" class="btn btn-spec-outline">
+                                <i class="bi bi-calendar3 me-1"></i>@L["DashboardPage.ViewCalendar"]
+                            </a>
+                        }
+                        else
+                        {
+                            <a asp-page="/Dashboard/Calendar" class="btn btn-spec-outline">
+                                <i class="bi bi-calendar3 me-1"></i>@L["DashboardPage.ViewCalendar"]
+                            </a>
+                        }
                         <button class="btn btn-spec-outline" disabled>@L["DashboardPage.CreateDocument"]</button>
                         <button class="btn btn-spec-outline" disabled>@L["DashboardPage.SendMessage"]</button>
                     </div>

@@ -14,14 +14,14 @@
             <h1><i class="bi bi-calendar-event me-2"></i>@Model.Event.Title</h1>
             <p class="text-muted mb-0">
                 <span class="badge @DetailsModel.GetStatusBadgeClass(Model.Event.Status) me-2">
-                    @DetailsModel.GetStatusName(Model.Event.Status)
+                    @Model.GetStatusName(Model.Event.Status)
                 </span>
-                @DetailsModel.GetTypeName(Model.Event.Type)
+                @Model.GetTypeName(Model.Event.Type)
             </p>
         </div>
         <div>
             <a asp-page="Index" class="btn btn-outline-secondary">
-                <i class="bi bi-arrow-left me-2"></i>Zpet na kalendar
+                <i class="bi bi-arrow-left me-2"></i>@L["CalendarPage.BackToCalendar"]
             </a>
         </div>
     </div>
@@ -47,24 +47,24 @@
             <!-- Event Details -->
             <div class="spec-card mb-4">
                 <div class="spec-card-header">
-                    <h5 class="mb-0"><i class="bi bi-info-circle me-2"></i>Detaily konzultace</h5>
+                    <h5 class="mb-0"><i class="bi bi-info-circle me-2"></i>@L["CalendarPage.EventDetails"]</h5>
                 </div>
                 <div class="spec-card-body">
                     <div class="row mb-3">
                         <div class="col-md-6">
-                            <strong><i class="bi bi-calendar me-2"></i>Datum a cas:</strong>
+                            <strong><i class="bi bi-calendar me-2"></i>@L["CalendarPage.DateTimeLabel"]</strong>
                             <p class="mb-0">
                                 @Model.Event.StartTime.ToString("dddd d. MMMM yyyy", new global::System.Globalization.CultureInfo("cs-CZ"))<br />
                                 @Model.Event.StartTime.ToString("HH:mm") - @Model.Event.EndTime.ToString("HH:mm")
                             </p>
                         </div>
                         <div class="col-md-6">
-                            <strong><i class="bi bi-geo-alt me-2"></i>Misto:</strong>
-                            <p class="mb-0">@(Model.Event.Location ?? "Neuvedeno")</p>
+                            <strong><i class="bi bi-geo-alt me-2"></i>@L["CalendarPage.LocationLabel"]</strong>
+                            <p class="mb-0">@(Model.Event.Location ?? L["CalendarPage.NotSpecified"].Value)</p>
                             @if (!string.IsNullOrEmpty(Model.Event.OnlineMeetingLink))
                             {
                                 <a href="@Model.Event.OnlineMeetingLink" target="_blank" class="btn btn-sm btn-outline-primary mt-1">
-                                    <i class="bi bi-camera-video me-1"></i>Pripojit se online
+                                    <i class="bi bi-camera-video me-1"></i>@L["CalendarPage.JoinOnline"]
                                 </a>
                             }
                         </div>
@@ -73,7 +73,7 @@
                     @if (Model.Event.StudentId.HasValue)
                     {
                         <div class="mb-3">
-                            <strong><i class="bi bi-person me-2"></i>Zak:</strong>
+                            <strong><i class="bi bi-person me-2"></i>@L["CalendarPage.StudentLabel"]</strong>
                             <p class="mb-0">
                                 <a asp-page="/SchoolAdmin/Students/Details" asp-route-id="@Model.Event.StudentId">
                                     @Model.Event.StudentName
@@ -85,7 +85,7 @@
                     @if (!string.IsNullOrEmpty(Model.Event.Description))
                     {
                         <div class="mb-3">
-                            <strong><i class="bi bi-text-paragraph me-2"></i>Popis / program:</strong>
+                            <strong><i class="bi bi-text-paragraph me-2"></i>@L["CalendarPage.DescriptionLabel"]</strong>
                             <p class="mb-0">@Model.Event.Description</p>
                         </div>
                     }
@@ -93,26 +93,26 @@
                     @if (!string.IsNullOrEmpty(Model.Event.Notes))
                     {
                         <div class="mb-3">
-                            <strong><i class="bi bi-sticky me-2"></i>Poznamky z prubehu:</strong>
+                            <strong><i class="bi bi-sticky me-2"></i>@L["CalendarPage.NotesLabel"]</strong>
                             <p class="mb-0">@Model.Event.Notes</p>
                         </div>
                     }
 
                     <div class="row">
                         <div class="col-md-6">
-                            <strong><i class="bi bi-person-badge me-2"></i>Organizator:</strong>
-                            <p class="mb-0">@(Model.Event.OrganizerName ?? "Neuveden")</p>
+                            <strong><i class="bi bi-person-badge me-2"></i>@L["CalendarPage.OrganizerLabel"]</strong>
+                            <p class="mb-0">@(Model.Event.OrganizerName ?? L["CalendarPage.NotSpecified"].Value)</p>
                         </div>
                         <div class="col-md-6">
-                            <strong><i class="bi bi-eye me-2"></i>Viditelnost:</strong>
+                            <strong><i class="bi bi-eye me-2"></i>@L["CalendarPage.VisibilityLabel"]</strong>
                             <p class="mb-0">
                                 @if (Model.Event.IsVisibleToParents)
                                 {
-                                    <span class="badge bg-success">Viditelne pro rodice</span>
+                                    <span class="badge bg-success">@L["CalendarPage.VisibleToParents"]</span>
                                 }
                                 else
                                 {
-                                    <span class="badge bg-secondary">Pouze pro personal</span>
+                                    <span class="badge bg-secondary">@L["CalendarPage.StaffOnly"]</span>
                                 }
                             </p>
                         </div>
@@ -124,19 +124,19 @@
             <div class="spec-card mb-4">
                 <div class="spec-card-header d-flex justify-content-between align-items-center">
                     <h5 class="mb-0">
-                        <i class="bi bi-people me-2"></i>Ucastnici (@Model.Event.Participants.Count)
+                        <i class="bi bi-people me-2"></i>@L["CalendarPage.Participants"] (@Model.Event.Participants.Count)
                     </h5>
                     @if (!isCancelled && Model.Event.StudentId.HasValue)
                     {
                         <div class="btn-group btn-group-sm">
                             <form method="post" asp-page-handler="InviteGuardians" class="d-inline">
                                 <button type="submit" class="btn btn-outline-primary">
-                                    <i class="bi bi-person-plus me-1"></i>Pozvat rodice
+                                    <i class="bi bi-person-plus me-1"></i>@L["CalendarPage.InviteParents"]
                                 </button>
                             </form>
                             <form method="post" asp-page-handler="InviteStaff" class="d-inline ms-1">
                                 <button type="submit" class="btn btn-outline-secondary">
-                                    <i class="bi bi-person-plus me-1"></i>Pozvat ucitele
+                                    <i class="bi bi-person-plus me-1"></i>@L["CalendarPage.InviteTeachers"]
                                 </button>
                             </form>
                         </div>
@@ -149,10 +149,10 @@
                             <table class="table table-hover mb-0">
                                 <thead>
                                     <tr>
-                                        <th>Jmeno</th>
-                                        <th>Role</th>
-                                        <th>Stav</th>
-                                        <th class="text-end">Akce</th>
+                                        <th>@L["CalendarPage.ParticipantName"]</th>
+                                        <th>@L["CalendarPage.ParticipantRole"]</th>
+                                        <th>@L["CalendarPage.ParticipantStatus"]</th>
+                                        <th class="text-end">@L["CalendarPage.ParticipantActions"]</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -163,24 +163,24 @@
                                                 @participant.DisplayName
                                                 @if (participant.IsOrganizer)
                                                 {
-                                                    <span class="badge bg-primary ms-1">Organizator</span>
+                                                    <span class="badge bg-primary ms-1">@L["CalendarPage.Organizer"]</span>
                                                 }
                                                 @if (participant.IsExternal)
                                                 {
-                                                    <span class="badge bg-info ms-1">Externi</span>
+                                                    <span class="badge bg-info ms-1">@L["CalendarPage.External"]</span>
                                                 }
                                             </td>
                                             <td>@(participant.RoleDescription ?? "-")</td>
                                             <td>
                                                 <span class="badge @DetailsModel.GetResponseStatusBadgeClass(participant.ResponseStatus)">
-                                                    @DetailsModel.GetResponseStatusName(participant.ResponseStatus)
+                                                    @Model.GetResponseStatusName(participant.ResponseStatus)
                                                 </span>
                                             </td>
                                             <td class="text-end">
                                                 @if (!participant.IsOrganizer && !isCancelled)
                                                 {
                                                     <form method="post" asp-page-handler="RemoveParticipant" asp-route-participantId="@participant.Id" class="d-inline">
-                                                        <button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm('Opravdu chcete odebrat tohoto ucastnika?')">
+                                                        <button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm('@L["CalendarPage.ConfirmRemoveParticipant"]')">
                                                             <i class="bi bi-x"></i>
                                                         </button>
                                                     </form>
@@ -194,15 +194,15 @@
 
                         <div class="mt-3">
                             <small class="text-muted">
-                                <span class="badge bg-success me-1">@Model.Event.AcceptedCount</span> prijalo
-                                <span class="badge bg-danger mx-1">@Model.Event.DeclinedCount</span> odmitnulo
-                                <span class="badge bg-secondary mx-1">@Model.Event.PendingCount</span> ceka na odpoved
+                                <span class="badge bg-success me-1">@Model.Event.AcceptedCount</span> @L["CalendarPage.Accepted"]
+                                <span class="badge bg-danger mx-1">@Model.Event.DeclinedCount</span> @L["CalendarPage.Declined"]
+                                <span class="badge bg-secondary mx-1">@Model.Event.PendingCount</span> @L["CalendarPage.PendingResponse"]
                             </small>
                         </div>
                     }
                     else
                     {
-                        <p class="text-muted text-center py-3 mb-0">Zatim zadni ucastnici.</p>
+                        <p class="text-muted text-center py-3 mb-0">@L["CalendarPage.NoParticipants"]</p>
                     }
                 </div>
             </div>
@@ -212,27 +212,33 @@
             <!-- Actions -->
             <div class="spec-card mb-4">
                 <div class="spec-card-header">
-                    <h5 class="mb-0"><i class="bi bi-lightning me-2"></i>Akce</h5>
+                    <h5 class="mb-0"><i class="bi bi-lightning me-2"></i>@L["CalendarPage.Actions"]</h5>
                 </div>
                 <div class="spec-card-body d-grid gap-2">
                     @if (!isCancelled && !isPast)
                     {
                         <a asp-page="Edit" asp-route-id="@Model.Id" class="btn btn-outline-primary">
-                            <i class="bi bi-pencil me-2"></i>Upravit
+                            <i class="bi bi-pencil me-2"></i>@L["CalendarPage.Edit"]
                         </a>
 
                         @if (Model.Event.Status == SpecEdu.Domain.Enums.ConsultationEventStatus.Scheduled)
                         {
                             <form method="post" asp-page-handler="Confirm">
                                 <button type="submit" class="btn btn-success w-100">
-                                    <i class="bi bi-check-lg me-2"></i>Potvrdit konzultaci
+                                    <i class="bi bi-check-lg me-2"></i>@L["CalendarPage.ConfirmEvent"]
                                 </button>
                             </form>
                         }
 
+                        <form method="post" asp-page-handler="SendNotifications">
+                            <button type="submit" class="btn btn-outline-info w-100">
+                                <i class="bi bi-bell me-2"></i>@L["CalendarPage.SendNotifications"]
+                            </button>
+                        </form>
+
                         <form method="post" asp-page-handler="Cancel">
-                            <button type="submit" class="btn btn-outline-danger w-100" onclick="return confirm('Opravdu chcete zrusit tuto konzultaci?')">
-                                <i class="bi bi-x-lg me-2"></i>Zrusit konzultaci
+                            <button type="submit" class="btn btn-outline-danger w-100" onclick="return confirm('@L["CalendarPage.ConfirmCancelEvent"]')">
+                                <i class="bi bi-x-lg me-2"></i>@L["CalendarPage.CancelEvent"]
                             </button>
                         </form>
                     }
@@ -241,7 +247,7 @@
                     {
                         <form method="post" asp-page-handler="Complete">
                             <button type="submit" class="btn btn-success w-100">
-                                <i class="bi bi-check-circle me-2"></i>Oznacit jako probehle
+                                <i class="bi bi-check-circle me-2"></i>@L["CalendarPage.MarkCompleted"]
                             </button>
                         </form>
                     }
@@ -249,8 +255,8 @@
                     <hr />
 
                     <form method="post" asp-page-handler="Delete">
-                        <button type="submit" class="btn btn-danger w-100" onclick="return confirm('Opravdu chcete smazat tuto konzultaci? Tato akce je nevratna.')">
-                            <i class="bi bi-trash me-2"></i>Smazat
+                        <button type="submit" class="btn btn-danger w-100" onclick="return confirm('@L["CalendarPage.ConfirmDelete"]')">
+                            <i class="bi bi-trash me-2"></i>@L["CalendarPage.Delete"]
                         </button>
                     </form>
                 </div>
@@ -259,23 +265,23 @@
             <!-- Info -->
             <div class="spec-card">
                 <div class="spec-card-header">
-                    <h5 class="mb-0"><i class="bi bi-clock-history me-2"></i>Informace</h5>
+                    <h5 class="mb-0"><i class="bi bi-clock-history me-2"></i>@L["CalendarPage.Info"]</h5>
                 </div>
                 <div class="spec-card-body">
                     <p class="mb-1">
-                        <small class="text-muted">Vytvoreno: @Model.Event.CreatedAt.ToString("dd.MM.yyyy HH:mm")</small>
+                        <small class="text-muted">@L["CalendarPage.CreatedAt"] @Model.Event.CreatedAt.ToString("dd.MM.yyyy HH:mm")</small>
                     </p>
                     @if (Model.Event.ModifiedAt.HasValue)
                     {
                         <p class="mb-1">
-                            <small class="text-muted">Upraveno: @Model.Event.ModifiedAt.Value.ToString("dd.MM.yyyy HH:mm")</small>
+                            <small class="text-muted">@L["CalendarPage.ModifiedAt"] @Model.Event.ModifiedAt.Value.ToString("dd.MM.yyyy HH:mm")</small>
                         </p>
                     }
                     @if (Model.Event.ReminderMinutesBefore.HasValue)
                     {
                         <p class="mb-0">
                             <small class="text-muted">
-                                Pripominka: @(Model.Event.ReminderSent ? "Odeslana" : $"{Model.Event.ReminderMinutesBefore / 60} hodin pred")
+                                @L["CalendarPage.Reminder"] @(Model.Event.ReminderSent ? L["CalendarPage.ReminderSent"].Value : $"{Model.Event.ReminderMinutesBefore / 60} hodin pred")
                             </small>
                         </p>
                     }

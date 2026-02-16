@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.Extensions.Localization;
 using SpecEdu.Application.Common.Interfaces;
 using SpecEdu.Application.Common.Models;
 using SpecEdu.Domain.Enums;
@@ -14,15 +15,18 @@ public class DetailsModel : PageModel
     private readonly IConsultationService _consultationService;
     private readonly IStudentAccessService _studentAccessService;
     private readonly ICurrentUserService _currentUserService;
+    private readonly IStringLocalizer<SharedResource> _localizer;
 
     public DetailsModel(
         IConsultationService consultationService,
         IStudentAccessService studentAccessService,
-        ICurrentUserService currentUserService)
+        ICurrentUserService currentUserService,
+        IStringLocalizer<SharedResource> localizer)
     {
         _consultationService = consultationService;
         _studentAccessService = studentAccessService;
         _currentUserService = currentUserService;
+        _localizer = localizer;
     }
 
     public ConsultationEventDto Event { get; set; } = null!;
@@ -50,14 +54,14 @@ public class DetailsModel : PageModel
 
     public async Task<IActionResult> OnPostCancelAsync()
     {
-        var success = await _consultationService.CancelEventAsync(Id, "Zruseno organizatorem");
+        var success = await _consultationService.CancelEventAsync(Id, _localizer["CalendarPage.MsgCancelledByOrganizer"]);
         if (success)
         {
-            SuccessMessage = "Konzultace byla zrusena.";
+            SuccessMessage = _localizer["CalendarPage.MsgEventCancelled"];
         }
         else
         {
-            ErrorMessage = "Nepodarilo se zrusit konzultaci.";
+            ErrorMessage = _localizer["CalendarPage.MsgEventCancelFailed"];
         }
 
         return RedirectToPage(new { Id });
@@ -68,11 +72,11 @@ public class DetailsModel : PageModel
         var success = await _consultationService.ChangeEventStatusAsync(Id, ConsultationEventStatus.Confirmed);
         if (success)
         {
-            SuccessMessage = "Konzultace byla potvrzena.";
+            SuccessMessage = _localizer["CalendarPage.MsgEventConfirmed"];
         }
         else
         {
-            ErrorMessage = "Nepodarilo se potvrdit konzultaci.";
+            ErrorMessage = _localizer["CalendarPage.MsgEventConfirmFailed"];
         }
 
         return RedirectToPage(new { Id });
@@ -83,11 +87,11 @@ public class DetailsModel : PageModel
         var success = await _consultationService.CompleteEventAsync(Id);
         if (success)
         {
-            SuccessMessage = "Konzultace byla oznacena jako probehla.";
+            SuccessMessage = _localizer["CalendarPage.MsgEventCompleted"];
         }
         else
         {
-            ErrorMessage = "Nepodarilo se oznacit konzultaci jako probehlou.";
+            ErrorMessage = _localizer["CalendarPage.MsgEventCompleteFailed"];
         }
 
         return RedirectToPage(new { Id });
@@ -98,12 +102,12 @@ public class DetailsModel : PageModel
         var success = await _consultationService.DeleteEventAsync(Id);
         if (success)
         {
-            TempData["SuccessMessage"] = "Konzultace byla smazana.";
+            TempData["SuccessMessage"] = _localizer["CalendarPage.MsgEventDeleted"].Value;
             return RedirectToPage("Index");
         }
         else
         {
-            ErrorMessage = "Nepodarilo se smazat konzultaci.";
+            ErrorMessage = _localizer["CalendarPage.MsgEventDeleteFailed"];
             return RedirectToPage(new { Id });
         }
     }
@@ -113,11 +117,11 @@ public class DetailsModel : PageModel
         var success = await _consultationService.RemoveParticipantAsync(participantId);
         if (success)
         {
-            SuccessMessage = "Ucastnik byl odebran.";
+            SuccessMessage = _localizer["CalendarPage.MsgParticipantRemoved"];
         }
         else
         {
-            ErrorMessage = "Nepodarilo se odebrat ucastnika.";
+            ErrorMessage = _localizer["CalendarPage.MsgParticipantRemoveFailed"];
         }
 
         return RedirectToPage(new { Id });
@@ -128,18 +132,18 @@ public class DetailsModel : PageModel
         var evt = await _consultationService.GetEventByIdAsync(Id);
         if (evt?.StudentId == null)
         {
-            ErrorMessage = "Konzultace neni prirazena zadnemu zakovi.";
+            ErrorMessage = _localizer["CalendarPage.MsgNoStudentForEvent"];
             return RedirectToPage(new { Id });
         }
 
         var count = await _consultationService.InviteStudentGuardiansAsync(Id, evt.StudentId.Value);
         if (count > 0)
         {
-            SuccessMessage = $"Pozváno {count} zakonnych zastupcu.";
+            SuccessMessage = string.Format(_localizer["CalendarPage.MsgGuardiansInvited"], count);
         }
         else
         {
-            ErrorMessage = "Zadni dalsi zakonni zastupci k pozvani.";
+            ErrorMessage = _localizer["CalendarPage.MsgNoGuardiansToInvite"];
         }
 
         return RedirectToPage(new { Id });
@@ -150,48 +154,63 @@ public class DetailsModel : PageModel
         var evt = await _consultationService.GetEventByIdAsync(Id);
         if (evt?.StudentId == null)
         {
-            ErrorMessage = "Konzultace neni prirazena zadnemu zakovi.";
+            ErrorMessage = _localizer["CalendarPage.MsgNoStudentForEvent"];
             return RedirectToPage(new { Id });
         }
 
         var count = await _consultationService.InviteStudentStaffAsync(Id, evt.StudentId.Value);
         if (count > 0)
         {
-            SuccessMessage = $"Pozváno {count} ucitelu.";
+            SuccessMessage = string.Format(_localizer["CalendarPage.MsgStaffInvited"], count);
         }
         else
         {
-            ErrorMessage = "Zadni dalsi ucitele k pozvani.";
+            ErrorMessage = _localizer["CalendarPage.MsgNoStaffToInvite"];
         }
 
         return RedirectToPage(new { Id });
     }
 
-    public static string GetTypeName(ConsultationType type)
+    public async Task<IActionResult> OnPostSendNotificationsAsync()
+    {
+        var count = await _consultationService.SendInvitationNotificationsAsync(Id);
+        if (count > 0)
+        {
+            SuccessMessage = string.Format(_localizer["CalendarPage.MsgNotificationsSent"], count);
+        }
+        else
+        {
+            ErrorMessage = _localizer["CalendarPage.MsgNotificationsSendFailed"];
+        }
+
+        return RedirectToPage(new { Id });
+    }
+
+    public string GetTypeName(ConsultationType type)
     {
         return type switch
         {
-            ConsultationType.ParentTeacherMeeting => "Tridni schuzka",
-            ConsultationType.IndividualConsultation => "Individualni konzultace",
-            ConsultationType.PlppReview => "Vyhodnoceni PLPP",
-            ConsultationType.IvpReview => "Vyhodnoceni IVP",
-            ConsultationType.CounselorMeeting => "Schuzka s poradcem",
-            ConsultationType.ExternalSpecialistMeeting => "Externi specialista",
-            ConsultationType.SchoolEvent => "Skolni akce",
-            ConsultationType.Other => "Jine",
+            ConsultationType.ParentTeacherMeeting => _localizer["CalendarPage.TypeParentTeacher"],
+            ConsultationType.IndividualConsultation => _localizer["CalendarPage.TypeIndividual"],
+            ConsultationType.PlppReview => _localizer["CalendarPage.TypePlppReview"],
+            ConsultationType.IvpReview => _localizer["CalendarPage.TypeIvpReview"],
+            ConsultationType.CounselorMeeting => _localizer["CalendarPage.TypeCounselor"],
+            ConsultationType.ExternalSpecialistMeeting => _localizer["CalendarPage.TypeExternal"],
+            ConsultationType.SchoolEvent => _localizer["CalendarPage.TypeSchoolEvent"],
+            ConsultationType.Other => _localizer["CalendarPage.TypeOther"],
             _ => type.ToString()
         };
     }
 
-    public static string GetStatusName(ConsultationEventStatus status)
+    public string GetStatusName(ConsultationEventStatus status)
     {
         return status switch
         {
-            ConsultationEventStatus.Scheduled => "Naplanovano",
-            ConsultationEventStatus.Confirmed => "Potvrzeno",
-            ConsultationEventStatus.Completed => "Probehlo",
-            ConsultationEventStatus.Cancelled => "Zruseno",
-            ConsultationEventStatus.Rescheduled => "Presunuto",
+            ConsultationEventStatus.Scheduled => _localizer["CalendarPage.StatusScheduled"],
+            ConsultationEventStatus.Confirmed => _localizer["CalendarPage.StatusConfirmed"],
+            ConsultationEventStatus.Completed => _localizer["CalendarPage.StatusCompleted"],
+            ConsultationEventStatus.Cancelled => _localizer["CalendarPage.StatusCancelled"],
+            ConsultationEventStatus.Rescheduled => _localizer["CalendarPage.StatusRescheduled"],
             _ => status.ToString()
         };
     }
@@ -209,14 +228,14 @@ public class DetailsModel : PageModel
         };
     }
 
-    public static string GetResponseStatusName(ParticipantResponseStatus status)
+    public string GetResponseStatusName(ParticipantResponseStatus status)
     {
         return status switch
         {
-            ParticipantResponseStatus.Pending => "Ceka na odpoved",
-            ParticipantResponseStatus.Accepted => "Prijato",
-            ParticipantResponseStatus.Declined => "Odmitnuto",
-            ParticipantResponseStatus.Tentative => "Mozna",
+            ParticipantResponseStatus.Pending => _localizer["CalendarPage.ResponsePending"],
+            ParticipantResponseStatus.Accepted => _localizer["CalendarPage.ResponseAccepted"],
+            ParticipantResponseStatus.Declined => _localizer["CalendarPage.ResponseDeclined"],
+            ParticipantResponseStatus.Tentative => _localizer["CalendarPage.ResponseTentative"],
             _ => status.ToString()
         };
     }

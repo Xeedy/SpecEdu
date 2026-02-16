@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.Extensions.Localization;
 using SpecEdu.Application.Common.Interfaces;
 using SpecEdu.Application.Common.Models;
 using SpecEdu.Domain.Enums;
@@ -17,17 +18,20 @@ public class CreateModel : PageModel
     private readonly IStudentService _studentService;
     private readonly IIdentityService _identityService;
     private readonly ICurrentUserService _currentUserService;
+    private readonly IStringLocalizer<SharedResource> _localizer;
 
     public CreateModel(
         IConsultationService consultationService,
         IStudentService studentService,
         IIdentityService identityService,
-        ICurrentUserService currentUserService)
+        ICurrentUserService currentUserService,
+        IStringLocalizer<SharedResource> localizer)
     {
         _consultationService = consultationService;
         _studentService = studentService;
         _identityService = identityService;
         _currentUserService = currentUserService;
+        _localizer = localizer;
     }
 
     [BindProperty]
@@ -40,54 +44,54 @@ public class CreateModel : PageModel
 
     public class InputModel
     {
-        [Required(ErrorMessage = "Nazev je povinny.")]
-        [Display(Name = "Nazev")]
+        [Required(ErrorMessage = "CalendarPage.TitleRequired")]
+        [Display(Name = "CalendarPage.LabelTitle")]
         [StringLength(200)]
         public string Title { get; set; } = string.Empty;
 
-        [Display(Name = "Popis / program")]
+        [Display(Name = "CalendarPage.LabelDescription")]
         [StringLength(4000)]
         public string? Description { get; set; }
 
-        [Required(ErrorMessage = "Typ je povinny.")]
-        [Display(Name = "Typ konzultace")]
+        [Required(ErrorMessage = "CalendarPage.TypeRequired")]
+        [Display(Name = "CalendarPage.LabelType")]
         public ConsultationType Type { get; set; } = ConsultationType.IndividualConsultation;
 
-        [Display(Name = "Zak (volitelne)")]
+        [Display(Name = "CalendarPage.LabelStudent")]
         public Guid? StudentId { get; set; }
 
-        [Required(ErrorMessage = "Datum a cas zacatku je povinny.")]
-        [Display(Name = "Zacatek")]
+        [Required(ErrorMessage = "CalendarPage.StartRequired")]
+        [Display(Name = "CalendarPage.LabelStart")]
         [DataType(DataType.DateTime)]
         public DateTime StartTime { get; set; }
 
-        [Required(ErrorMessage = "Datum a cas konce je povinny.")]
-        [Display(Name = "Konec")]
+        [Required(ErrorMessage = "CalendarPage.EndRequired")]
+        [Display(Name = "CalendarPage.LabelEnd")]
         [DataType(DataType.DateTime)]
         public DateTime EndTime { get; set; }
 
-        [Display(Name = "Misto konani")]
+        [Display(Name = "CalendarPage.LabelLocation")]
         [StringLength(500)]
         public string? Location { get; set; }
 
-        [Display(Name = "Odkaz na online schuzku")]
+        [Display(Name = "CalendarPage.LabelOnlineLink")]
         [StringLength(1000)]
-        [Url(ErrorMessage = "Zadejte platnou URL adresu.")]
+        [Url(ErrorMessage = "CalendarPage.InvalidUrl")]
         public string? OnlineMeetingLink { get; set; }
 
-        [Display(Name = "Viditelne pro rodice")]
+        [Display(Name = "CalendarPage.LabelVisibleToParents")]
         public bool IsVisibleToParents { get; set; } = true;
 
-        [Display(Name = "Umoznit odpovedi")]
+        [Display(Name = "CalendarPage.LabelAllowResponses")]
         public bool AllowResponses { get; set; } = true;
 
-        [Display(Name = "Pripomenout pred (minuty)")]
+        [Display(Name = "CalendarPage.LabelReminder")]
         public int? ReminderMinutesBefore { get; set; } = 1440;
 
-        [Display(Name = "Pozvat rodice zaka")]
+        [Display(Name = "CalendarPage.LabelInviteGuardians")]
         public bool InviteGuardians { get; set; } = true;
 
-        [Display(Name = "Pozvat prirazene ucitele")]
+        [Display(Name = "CalendarPage.LabelInviteStaff")]
         public bool InviteStaff { get; set; } = false;
     }
 
@@ -145,7 +149,7 @@ public class CreateModel : PageModel
 
         if (Input.StartTime >= Input.EndTime)
         {
-            ModelState.AddModelError("Input.EndTime", "Cas konce musi byt po casu zacatku.");
+            ModelState.AddModelError("Input.EndTime", _localizer["CalendarPage.MsgEndAfterStart"]);
             await PopulateOptions();
             return Page();
         }
@@ -180,7 +184,7 @@ public class CreateModel : PageModel
             await _consultationService.InviteStudentStaffAsync(evt.Id, Input.StudentId.Value);
         }
 
-        TempData["SuccessMessage"] = "Konzultace byla vytvorena.";
+        TempData["SuccessMessage"] = _localizer["CalendarPage.MsgEventCreated"].Value;
         return RedirectToPage("Details", new { id = evt.Id });
     }
 
@@ -188,20 +192,20 @@ public class CreateModel : PageModel
     {
         TypeOptions = new List<SelectListItem>
         {
-            new SelectListItem("Tridni schuzka", ((int)ConsultationType.ParentTeacherMeeting).ToString()),
-            new SelectListItem("Individualni konzultace", ((int)ConsultationType.IndividualConsultation).ToString()),
-            new SelectListItem("Vyhodnoceni PLPP", ((int)ConsultationType.PlppReview).ToString()),
-            new SelectListItem("Vyhodnoceni IVP", ((int)ConsultationType.IvpReview).ToString()),
-            new SelectListItem("Schuzka s poradcem", ((int)ConsultationType.CounselorMeeting).ToString()),
-            new SelectListItem("Externi specialista", ((int)ConsultationType.ExternalSpecialistMeeting).ToString()),
-            new SelectListItem("Skolni akce", ((int)ConsultationType.SchoolEvent).ToString()),
-            new SelectListItem("Jine", ((int)ConsultationType.Other).ToString())
+            new SelectListItem(_localizer["CalendarPage.TypeParentTeacher"], ((int)ConsultationType.ParentTeacherMeeting).ToString()),
+            new SelectListItem(_localizer["CalendarPage.TypeIndividual"], ((int)ConsultationType.IndividualConsultation).ToString()),
+            new SelectListItem(_localizer["CalendarPage.TypePlppReview"], ((int)ConsultationType.PlppReview).ToString()),
+            new SelectListItem(_localizer["CalendarPage.TypeIvpReview"], ((int)ConsultationType.IvpReview).ToString()),
+            new SelectListItem(_localizer["CalendarPage.TypeCounselor"], ((int)ConsultationType.CounselorMeeting).ToString()),
+            new SelectListItem(_localizer["CalendarPage.TypeExternal"], ((int)ConsultationType.ExternalSpecialistMeeting).ToString()),
+            new SelectListItem(_localizer["CalendarPage.TypeSchoolEvent"], ((int)ConsultationType.SchoolEvent).ToString()),
+            new SelectListItem(_localizer["CalendarPage.TypeOther"], ((int)ConsultationType.Other).ToString())
         };
 
         var students = await _studentService.GetBySchoolAsync(SchoolId);
         StudentOptions = new List<SelectListItem>
         {
-            new SelectListItem("-- Bez vazby na zaka --", "")
+            new SelectListItem(_localizer["CalendarPage.NoStudentBinding"], "")
         };
         StudentOptions.AddRange(students
             .OrderBy(s => s.LastName)
