@@ -1,0 +1,51 @@
+@page
+@model SpecEdu.Web.Public.Pages.Legal.CookiesModel
+@inject IStringLocalizer<SharedResource> L
+@{
+    ViewData["Title"] = L["CookiesPage.Title"];
+}
+
+<section class="py-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <h1 class="fw-bold mb-4">@L["CookiesPage.Title"]</h1>
+                <p class="text-muted mb-4">@L["CookiesPage.LastUpdated"]: 1. 1. 2026</p>
+
+                <div class="spec-card p-4 mb-4">
+                    <h4 class="fw-bold">@L["CookiesPage.WhatAreCookies"]</h4>
+                    <p class="text-muted">@L["CookiesPage.WhatAreCookiesContent"]</p>
+                </div>
+
+                <div class="spec-card p-4 mb-4">
+                    <h4 class="fw-bold">@L["CookiesPage.TypesTitle"]</h4>
+
+                    <div class="border-bottom pb-3 mb-3">
+                        <h6 class="fw-bold text-spec-primary">@L["CookiesPage.EssentialTitle"]</h6>
+                        <p class="text-muted small mb-0">@L["CookiesPage.EssentialDesc"]</p>
+                    </div>
+
+                    <div class="border-bottom pb-3 mb-3">
+                        <h6 class="fw-bold text-spec-primary">@L["CookiesPage.FunctionalTitle"]</h6>
+                        <p class="text-muted small mb-0">@L["CookiesPage.FunctionalDesc"]</p>
+                    </div>
+
+                    <div>
+                        <h6 class="fw-bold text-spec-primary">@L["CookiesPage.AnalyticsTitle"]</h6>
+                        <p class="text-muted small mb-0">@L["CookiesPage.AnalyticsDesc"]</p>
+                    </div>
+                </div>
+
+                <div class="spec-card p-4 mb-4">
+                    <h4 class="fw-bold">@L["CookiesPage.ManageTitle"]</h4>
+                    <p class="text-muted">@L["CookiesPage.ManageContent"]</p>
+                </div>
+
+                <div class="spec-card p-4">
+                    <h4 class="fw-bold">@L["CookiesPage.ContactTitle"]</h4>
+                    <p class="text-muted mb-0">@L["CookiesPage.ContactContent"]</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

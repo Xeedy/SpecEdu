@@ -1,0 +1,306 @@
+@page
+@model SpecEdu.Web.Public.Pages.HowItWorksModel
+@inject IStringLocalizer<SharedResource> L
+@{
+    ViewData["Title"] = L["HowItWorksPage.Title"];
+}
+
+<!-- Hero -->
+<section class="bg-spec-primary-light py-5">
+    <div class="container">
+        <h1 class="display-5 fw-bold text-center mb-3">@L["HowItWorksPage.Title"]</h1>
+        <p class="lead text-center text-muted mb-0">@L["HowItWorksPage.Subtitle"]</p>
+    </div>
+</section>
+
+<!-- Sub Navigation -->
+<section class="bg-white border-bottom sticky-top">
+    <div class="container">
+        <nav class="d-flex gap-3 py-3 overflow-auto">
+            <a href="#overview" class="btn btn-sm btn-spec-outline">@L["HowItWorksPage.NavOverview"]</a>
+            <a href="#roles" class="btn btn-sm btn-spec-outline">@L["HowItWorksPage.NavRoles"]</a>
+            <a href="#scenarios" class="btn btn-sm btn-spec-outline">@L["HowItWorksPage.NavScenarios"]</a>
+            <a href="#documents" class="btn btn-sm btn-spec-outline">@L["HowItWorksPage.NavDocuments"]</a>
+            <a href="#screenshots" class="btn btn-sm btn-spec-outline">@L["HowItWorksPage.NavScreenshots"]</a>
+        </nav>
+    </div>
+</section>
+
+<!-- 3 Steps Overview -->
+<section id="overview" class="py-5">
+    <div class="container">
+        <h2 class="fw-bold text-center mb-5">@L["HowItWorksPage.StepsTitle"]</h2>
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="text-center">
+                    <div class="bg-spec-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 80px; height: 80px;">
+                        <span class="display-6 fw-bold">1</span>
+                    </div>
+                    <h4 class="fw-bold">@L["HowItWorksPage.Step1Title"]</h4>
+                    <p class="text-muted">@L["HowItWorksPage.Step1Desc"]</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="text-center">
+                    <div class="bg-spec-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 80px; height: 80px;">
+                        <span class="display-6 fw-bold">2</span>
+                    </div>
+                    <h4 class="fw-bold">@L["HowItWorksPage.Step2Title"]</h4>
+                    <p class="text-muted">@L["HowItWorksPage.Step2Desc"]</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="text-center">
+                    <div class="bg-spec-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 80px; height: 80px;">
+                        <span class="display-6 fw-bold">3</span>
+                    </div>
+                    <h4 class="fw-bold">@L["HowItWorksPage.Step3Title"]</h4>
+                    <p class="text-muted">@L["HowItWorksPage.Step3Desc"]</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Roles & Permissions -->
+<section id="roles" class="bg-white py-5">
+    <div class="container">
+        <h2 class="fw-bold text-center mb-5">@L["HowItWorksPage.RolesTitle"]</h2>
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead class="table-light">
+                    <tr>
+                        <th>@L["HowItWorksPage.RoleColumn"]</th>
+                        <th class="text-center">@L["HowItWorksPage.ViewStudents"]</th>
+                        <th class="text-center">@L["HowItWorksPage.EditStudents"]</th>
+                        <th class="text-center">@L["HowItWorksPage.ViewDocuments"]</th>
+                        <th class="text-center">@L["HowItWorksPage.CreateDocuments"]</th>
+                        <th class="text-center">@L["HowItWorksPage.ManageSchool"]</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Admin</strong></td>
+                        <td class="text-center text-success">&#10003;</td>
+                        <td class="text-center text-success">&#10003;</td>
+                        <td class="text-center text-success">&#10003;</td>
+                        <td class="text-center text-success">&#10003;</td>
+                        <td class="text-center text-success">&#10003;</td>
+                    </tr>
+                    <tr>
+                        <td><strong>@L["HowItWorksPage.RoleSchoolAdmin"]</strong></td>
+                        <td class="text-center text-success">&#10003;</td>
+                        <td class="text-center text-success">&#10003;</td>
+                        <td class="text-center text-success">&#10003;</td>
+                        <td class="text-center text-success">&#10003;</td>
+                        <td class="text-center text-success">&#10003;</td>
+                    </tr>
+                    <tr>
+                        <td><strong>@L["HowItWorksPage.RoleTeacher"]</strong></td>
+                        <td class="text-center text-success">&#10003;</td>
+                        <td class="text-center text-success">&#10003;</td>
+                        <td class="text-center text-success">&#10003;</td>
+                        <td class="text-center text-success">&#10003;</td>
+                        <td class="text-center text-muted">-</td>
+                    </tr>
+                    <tr>
+                        <td><strong>@L["HowItWorksPage.RoleSPP"]</strong></td>
+                        <td class="text-center text-success">&#10003;</td>
+                        <td class="text-center text-success">&#10003;</td>
+                        <td class="text-center text-success">&#10003;</td>
+                        <td class="text-center text-success">&#10003;</td>
+                        <td class="text-center text-muted">-</td>
+                    </tr>
+                    <tr>
+                        <td><strong>@L["HowItWorksPage.RolePPP"]</strong></td>
+                        <td class="text-center text-success">&#10003;</td>
+                        <td class="text-center text-muted">-</td>
+                        <td class="text-center text-success">&#10003;</td>
+                        <td class="text-center text-success">&#10003;</td>
+                        <td class="text-center text-muted">-</td>
+                    </tr>
+                    <tr>
+                        <td><strong>@L["HowItWorksPage.RoleSPC"]</strong></td>
+                        <td class="text-center text-success">&#10003;</td>
+                        <td class="text-center text-muted">-</td>
+                        <td class="text-center text-success">&#10003;</td>
+                        <td class="text-center text-success">&#10003;</td>
+                        <td class="text-center text-muted">-</td>
+                    </tr>
+                    <tr>
+                        <td><strong>@L["HowItWorksPage.RoleParent"]</strong></td>
+                        <td class="text-center text-success">&#10003;*</td>
+                        <td class="text-center text-muted">-</td>
+                        <td class="text-center text-success">&#10003;*</td>
+                        <td class="text-center text-muted">-</td>
+                        <td class="text-center text-muted">-</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p class="text-muted small">* @L["HowItWorksPage.ParentNote"]</p>
+        </div>
+    </div>
+</section>
+
+<!-- Scenarios -->
+<section id="scenarios" class="py-5">
+    <div class="container">
+        <h2 class="fw-bold text-center mb-5">@L["HowItWorksPage.ScenariosTitle"]</h2>
+        <div class="row g-4">
+            <div class="col-md-6">
+                <div class="spec-card p-4 h-100">
+                    <h5 class="fw-bold mb-3">
+                        <span class="badge bg-spec-primary me-2">@L["HowItWorksPage.RoleParent"]</span>
+                        @L["HowItWorksPage.ScenarioParentTitle"]
+                    </h5>
+                    <ol class="text-muted mb-0">
+                        <li class="mb-2">@L["HowItWorksPage.ScenarioParent1"]</li>
+                        <li class="mb-2">@L["HowItWorksPage.ScenarioParent2"]</li>
+                        <li class="mb-2">@L["HowItWorksPage.ScenarioParent3"]</li>
+                        <li>@L["HowItWorksPage.ScenarioParent4"]</li>
+                    </ol>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="spec-card p-4 h-100">
+                    <h5 class="fw-bold mb-3">
+                        <span class="badge bg-spec-primary me-2">@L["HowItWorksPage.RoleTeacher"]</span>
+                        @L["HowItWorksPage.ScenarioTeacherTitle"]
+                    </h5>
+                    <ol class="text-muted mb-0">
+                        <li class="mb-2">@L["HowItWorksPage.ScenarioTeacher1"]</li>
+                        <li class="mb-2">@L["HowItWorksPage.ScenarioTeacher2"]</li>
+                        <li class="mb-2">@L["HowItWorksPage.ScenarioTeacher3"]</li>
+                        <li>@L["HowItWorksPage.ScenarioTeacher4"]</li>
+                    </ol>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="spec-card p-4 h-100">
+                    <h5 class="fw-bold mb-3">
+                        <span class="badge bg-spec-primary me-2">SPP</span>
+                        @L["HowItWorksPage.ScenarioSppTitle"]
+                    </h5>
+                    <ol class="text-muted mb-0">
+                        <li class="mb-2">@L["HowItWorksPage.ScenarioSpp1"]</li>
+                        <li class="mb-2">@L["HowItWorksPage.ScenarioSpp2"]</li>
+                        <li class="mb-2">@L["HowItWorksPage.ScenarioSpp3"]</li>
+                        <li>@L["HowItWorksPage.ScenarioSpp4"]</li>
+                    </ol>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="spec-card p-4 h-100">
+                    <h5 class="fw-bold mb-3">
+                        <span class="badge bg-spec-primary me-2">PPP/SPC</span>
+                        @L["HowItWorksPage.ScenarioPppTitle"]
+                    </h5>
+                    <ol class="text-muted mb-0">
+                        <li class="mb-2">@L["HowItWorksPage.ScenarioPpp1"]</li>
+                        <li class="mb-2">@L["HowItWorksPage.ScenarioPpp2"]</li>
+                        <li class="mb-2">@L["HowItWorksPage.ScenarioPpp3"]</li>
+                        <li>@L["HowItWorksPage.ScenarioPpp4"]</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Document Flow -->
+<section id="documents" class="bg-white py-5">
+    <div class="container">
+        <h2 class="fw-bold text-center mb-5">@L["HowItWorksPage.DocumentFlowTitle"]</h2>
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="d-flex flex-column flex-lg-row align-items-center justify-content-between">
+                    <div class="text-center mb-4 mb-lg-0">
+                        <div class="bg-spec-primary-light rounded-circle d-inline-flex align-items-center justify-content-center mb-2" style="width: 64px; height: 64px;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="var(--spec-primary)" viewBox="0 0 16 16">
+                                <path d="M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0z"/>
+                            </svg>
+                        </div>
+                        <div class="fw-bold">@L["HowItWorksPage.Flow1"]</div>
+                    </div>
+                    <div class="d-none d-lg-block">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="var(--spec-gray-400)" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/>
+                        </svg>
+                    </div>
+                    <div class="text-center mb-4 mb-lg-0">
+                        <div class="bg-spec-primary-light rounded-circle d-inline-flex align-items-center justify-content-center mb-2" style="width: 64px; height: 64px;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="var(--spec-primary)" viewBox="0 0 16 16">
+                                <path d="M4 .5a.5.5 0 0 0-1 0V1H2a2 2 0 0 0-2 2v1h16V3a2 2 0 0 0-2-2h-1V.5a.5.5 0 0 0-1 0V1H4V.5z"/>
+                            </svg>
+                        </div>
+                        <div class="fw-bold">@L["HowItWorksPage.Flow2"]</div>
+                    </div>
+                    <div class="d-none d-lg-block">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="var(--spec-gray-400)" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/>
+                        </svg>
+                    </div>
+                    <div class="text-center mb-4 mb-lg-0">
+                        <div class="bg-spec-primary-light rounded-circle d-inline-flex align-items-center justify-content-center mb-2" style="width: 64px; height: 64px;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="var(--spec-primary)" viewBox="0 0 16 16">
+                                <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zM8 1.918l-.797.161A4.002 4.002 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4.002 4.002 0 0 0-3.203-3.92L8 1.917z"/>
+                            </svg>
+                        </div>
+                        <div class="fw-bold">@L["HowItWorksPage.Flow3"]</div>
+                    </div>
+                    <div class="d-none d-lg-block">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="var(--spec-gray-400)" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/>
+                        </svg>
+                    </div>
+                    <div class="text-center">
+                        <div class="bg-success rounded-circle d-inline-flex align-items-center justify-content-center mb-2" style="width: 64px; height: 64px;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="white" viewBox="0 0 16 16">
+                                <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z"/>
+                            </svg>
+                        </div>
+                        <div class="fw-bold">@L["HowItWorksPage.Flow4"]</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Screenshots -->
+<section id="screenshots" class="py-5">
+    <div class="container">
+        <h2 class="fw-bold text-center mb-5">@L["HowItWorksPage.ScreenshotsTitle"]</h2>
+        <div class="row g-4">
+            <div class="col-md-6">
+                <div class="spec-card overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=400&fit=crop"
+                         alt="Dashboard" class="img-fluid">
+                    <div class="p-3">
+                        <h6 class="fw-bold mb-1">@L["HowItWorksPage.Screenshot1Title"]</h6>
+                        <p class="text-muted small mb-0">@L["HowItWorksPage.Screenshot1Desc"]</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="spec-card overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=600&h=400&fit=crop"
+                         alt="Student detail" class="img-fluid">
+                    <div class="p-3">
+                        <h6 class="fw-bold mb-1">@L["HowItWorksPage.Screenshot2Title"]</h6>
+                        <p class="text-muted small mb-0">@L["HowItWorksPage.Screenshot2Desc"]</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA -->
+<section class="bg-spec-primary text-white py-5">
+    <div class="container text-center">
+        <h2 class="fw-bold mb-3">@L["HowItWorksPage.CtaTitle"]</h2>
+        <p class="mb-4 opacity-75">@L["HowItWorksPage.CtaDesc"]</p>
+        <a asp-page="/Account/Register" class="btn btn-light btn-lg">@L["HowItWorksPage.CtaButton"]</a>
+    </div>
+</section>

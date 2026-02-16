@@ -1,0 +1,307 @@
+@font-face {
+    font-family: 'Google Sans';
+    src: url('../fonts/GoogleSans-VariableFont_GRAD,opsz,wght.woff2') format('woff2');
+    font-weight: 100 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+:root {
+    --spec-primary: #4A90D9;
+    --spec-primary-dark: #357ABD;
+    --spec-primary-light: #E8F4FD;
+    --spec-primary-rgb: 74, 144, 217;
+
+    --spec-secondary: #6C757D;
+    --spec-secondary-light: #ADB5BD;
+
+    --spec-success: #28A745;
+    --spec-warning: #FFC107;
+    --spec-danger: #DC3545;
+    --spec-info: #17A2B8;
+
+    --spec-white: #FFFFFF;
+    --spec-black: #212529;
+    --spec-gray-100: #F8F9FA;
+    --spec-gray-200: #E9ECEF;
+    --spec-gray-300: #DEE2E6;
+    --spec-gray-400: #CED4DA;
+    --spec-gray-500: #ADB5BD;
+    --spec-gray-600: #6C757D;
+    --spec-gray-700: #495057;
+    --spec-gray-800: #343A40;
+    --spec-gray-900: #212529;
+
+    --spec-font-family: 'Google Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --spec-font-size-base: 1rem;
+    --spec-line-height-base: 1.5;
+
+    --spec-spacing-xs: 0.25rem;
+    --spec-spacing-sm: 0.5rem;
+    --spec-spacing-md: 1rem;
+    --spec-spacing-lg: 1.5rem;
+    --spec-spacing-xl: 3rem;
+
+    --spec-border-radius: 0.375rem;
+    --spec-border-radius-lg: 0.5rem;
+
+    --spec-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+    --spec-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
+    --spec-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+
+    --spec-transition: all 0.2s ease-in-out;
+}
+
+html {
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+body {
+    font-family: var(--spec-font-family);
+    color: var(--spec-gray-800);
+    background-color: var(--spec-gray-100);
+    line-height: var(--spec-line-height-base);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+}
+/* Desktop: hover to open dropdown */
+@media (min-width: 992px) {
+    .spec-hover-dropdown:hover > .dropdown-menu {
+        display: block;
+        margin-top: 0;
+    }
+
+    .spec-hover-dropdown > .dropdown-toggle::after {
+        transition: transform 0.2s ease;
+    }
+
+    .spec-hover-dropdown:hover > .dropdown-toggle::after {
+        transform: rotate(180deg);
+    }
+}
+
+/* Mobile: click to open dropdown, full width items */
+@media (max-width: 991.98px) {
+    .spec-hover-dropdown .dropdown-menu {
+        border: none;
+        box-shadow: none;
+        padding-left: 1rem;
+        background: transparent;
+    }
+
+    .spec-hover-dropdown .dropdown-menu .dropdown-item {
+        padding: 0.5rem 1rem;
+        color: var(--spec-gray-600);
+    }
+
+    .spec-hover-dropdown .dropdown-menu .dropdown-item:hover {
+        background-color: var(--spec-primary-light);
+        color: var(--spec-primary);
+    }
+
+    .navbar-collapse .navbar-nav {
+        padding: 1rem 0;
+    }
+
+    .navbar-collapse .d-flex {
+        flex-direction: column;
+        gap: 0.5rem;
+        padding-top: 1rem;
+        border-top: 1px solid var(--spec-gray-200);
+        margin-top: 1rem;
+    }
+
+    .navbar-collapse .d-flex .btn {
+        width: 100%;
+    }
+}
+
+/* Badge for "coming soon" items */
+.badge-coming-soon {
+    font-size: 0.65rem;
+    padding: 0.2em 0.5em;
+    background-color: var(--spec-gray-400);
+    color: var(--spec-white);
+    border-radius: 0.25rem;
+    margin-left: 0.5rem;
+    vertical-align: middle;
+}
+
+.dropdown-item.disabled-item {
+    color: var(--spec-gray-500);
+    pointer-events: none;
+}
+
+.spec-header {
+    background-color: var(--spec-white);
+    box-shadow: var(--spec-shadow);
+}
+
+.spec-navbar {
+    padding: var(--spec-spacing-sm) 0;
+}
+
+.spec-brand {
+    font-weight: 700;
+    font-size: 1.5rem;
+    /* color: var(--spec-primary) !important; */
+    text-decoration: none;
+    transition: var(--spec-transition);
+}
+
+/* This is just for test purposes */
+.spec-brand {
+    font-weight: 800;
+    letter-spacing: .2px;
+    text-decoration: none;
+}
+
+.spec-brand-spec {
+    color: var(--spec-blue);
+}
+
+.spec-brand-edu {
+    color: #000;
+}
+
+.spec-brand:hover {
+    color: var(--spec-primary-dark) !important;
+}
+
+.spec-nav-link {
+    color: var(--spec-gray-700) !important;
+    font-weight: 500;
+    padding: var(--spec-spacing-sm) var(--spec-spacing-md) !important;
+    border-radius: var(--spec-border-radius);
+    transition: var(--spec-transition);
+}
+
+.spec-nav-link:hover {
+    color: var(--spec-primary) !important;
+    background-color: var(--spec-primary-light);
+}
+
+.spec-nav-link.active {
+    color: var(--spec-primary) !important;
+    background-color: var(--spec-primary-light);
+}
+
+.spec-content-wrapper {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.spec-main {
+    padding: var(--spec-spacing-lg) 0;
+    flex: 1;
+}
+
+.spec-footer {
+    background-color: var(--spec-white);
+    border-top: 1px solid var(--spec-gray-200);
+    padding: var(--spec-spacing-lg) 0;
+    color: var(--spec-gray-600);
+}
+
+.spec-footer a {
+    color: var(--spec-primary);
+    text-decoration: none;
+    transition: var(--spec-transition);
+}
+
+.spec-footer a:hover {
+    color: var(--spec-primary-dark);
+    text-decoration: underline;
+}
+
+.btn-spec-primary {
+    background-color: var(--spec-primary);
+    border-color: var(--spec-primary);
+    color: var(--spec-white);
+    transition: var(--spec-transition);
+}
+
+.btn-spec-primary:hover {
+    background-color: var(--spec-primary-dark);
+    border-color: var(--spec-primary-dark);
+    color: var(--spec-white);
+}
+
+.btn-spec-outline {
+    background-color: transparent;
+    border-color: var(--spec-primary);
+    color: var(--spec-primary);
+    transition: var(--spec-transition);
+}
+
+.btn-spec-outline:hover {
+    background-color: var(--spec-primary);
+    color: var(--spec-white);
+}
+
+.spec-card {
+    background-color: var(--spec-white);
+    border: 1px solid var(--spec-gray-200);
+    border-radius: var(--spec-border-radius-lg);
+    box-shadow: var(--spec-shadow-sm);
+    transition: var(--spec-transition);
+}
+
+.spec-card:hover {
+    box-shadow: var(--spec-shadow);
+}
+
+.spec-card-header {
+    background-color: var(--spec-gray-100);
+    border-bottom: 1px solid var(--spec-gray-200);
+    padding: var(--spec-spacing-md);
+    font-weight: 600;
+}
+
+.spec-card-body {
+    padding: var(--spec-spacing-md);
+}
+
+.btn:focus,
+.btn:active:focus,
+.btn-link.nav-link:focus,
+.form-control:focus,
+.form-check-input:focus {
+    box-shadow: 0 0 0 0.1rem var(--spec-white), 0 0 0 0.25rem var(--spec-primary);
+}
+
+.form-control:focus {
+    border-color: var(--spec-primary);
+}
+
+.text-spec-primary {
+    color: var(--spec-primary) !important;
+}
+
+.bg-spec-primary {
+    background-color: var(--spec-primary) !important;
+}
+
+.bg-spec-primary-light {
+    background-color: var(--spec-primary-light) !important;
+}
+
+.form-floating > .form-control-plaintext::placeholder,
+.form-floating > .form-control::placeholder {
+    color: var(--bs-secondary-color);
+    text-align: end;
+}
+
+.form-floating > .form-control-plaintext:focus::placeholder,
+.form-floating > .form-control:focus::placeholder {
+    text-align: start;
+}

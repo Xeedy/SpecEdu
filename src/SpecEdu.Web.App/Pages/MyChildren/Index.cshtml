@@ -1,0 +1,85 @@
+@page
+@model SpecEdu.Web.App.Pages.MyChildren.IndexModel
+@inject IStringLocalizer<SpecEdu.Web.App.SharedResource> L
+@{
+    ViewData["Title"] = L["MyChildrenPage.Title"];
+}
+
+<section class="py-4">
+    <div class="container">
+        <h1 class="fw-bold mb-4">@L["MyChildrenPage.Title"]</h1>
+
+        @if (Model.Children.Any())
+        {
+            <!-- Children Cards -->
+            <div class="row g-4">
+                @foreach (var child in Model.Children)
+                {
+                    var initials = $"{child.FirstName.FirstOrDefault()}{child.LastName.FirstOrDefault()}".ToUpper();
+                    <div class="col-md-6">
+                        <div class="spec-card p-4">
+                            <div class="d-flex align-items-start">
+                                <div class="bg-spec-primary rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 64px; height: 64px;">
+                                    <span class="text-white fw-bold fs-4">@initials</span>
+                                </div>
+                                <div class="flex-grow-1">
+                                    <h5 class="fw-bold mb-1">@child.FullName</h5>
+                                    <p class="text-muted mb-2">@(child.SchoolName ?? ""), @(child.Class ?? "-")</p>
+                                    @if (child.IsActive)
+                                    {
+                                        <span class="badge bg-success">@L["MyChildrenPage.Active"]</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge bg-secondary">@L["Common.Inactive"]</span>
+                                    }
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row g-3 text-center">
+                                <div class="col-4">
+                                    <p class="text-muted small mb-1">@L["MyChildrenPage.Documents"]</p>
+                                    <h5 class="fw-bold mb-0">-</h5>
+                                </div>
+                                <div class="col-4">
+                                    <p class="text-muted small mb-1">@L["MyChildrenPage.Messages"]</p>
+                                    <h5 class="fw-bold mb-0">-</h5>
+                                </div>
+                                <div class="col-4">
+                                    <p class="text-muted small mb-1">@L["MyChildrenPage.Notifications"]</p>
+                                    <h5 class="fw-bold mb-0">-</h5>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="d-flex gap-2">
+                                <a asp-page="ChildDetails" asp-route-id="@child.Id" class="btn btn-spec-primary btn-sm flex-fill">@L["MyChildrenPage.ViewDetails"]</a>
+                                <a asp-page="ChildDiary" asp-route-id="@child.Id" class="btn btn-spec-outline btn-sm flex-fill">@L["StudentsPage.Diary"]</a>
+                                <a asp-page="Calendar" class="btn btn-spec-outline btn-sm flex-fill">
+                                    <i class="bi bi-calendar3 me-1"></i>@L["MyChildrenPage.ViewCalendar"]
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+        else
+        {
+            <div class="spec-card p-4">
+                <div class="text-center py-4">
+                    <p class="text-muted mb-0">@L["MyChildrenPage.NoChildren"]</p>
+                </div>
+            </div>
+        }
+
+        <!-- Recent Updates -->
+        <div class="spec-card p-4 mt-4">
+            <h5 class="fw-bold mb-4">@L["MyChildrenPage.RecentUpdates"]</h5>
+            <div class="list-group list-group-flush">
+                <div class="text-center py-2">
+                    <p class="text-muted mb-0">@L["Common.NoRecentActivity"]</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

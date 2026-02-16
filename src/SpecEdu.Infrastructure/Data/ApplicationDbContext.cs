@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.DataProtection.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -13,7 +14,7 @@ namespace SpecEdu.Infrastructure.Data;
 /// Inherits from IdentityDbContext for user/role management.
 /// Handles automatic population of audit fields on save.
 /// </summary>
-public class ApplicationDbContext : IdentityDbContext<ApplicationUser, IdentityRole, string>
+public class ApplicationDbContext : IdentityDbContext<ApplicationUser, IdentityRole, string>, IDataProtectionKeyContext
 {
     private readonly ICurrentUserService? _currentUserService;
 
@@ -24,6 +25,11 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser, IdentityR
     {
         _currentUserService = currentUserService;
     }
+
+    /// <summary>
+    /// Data protection keys for cross-app authentication.
+    /// </summary>
+    public DbSet<DataProtectionKey> DataProtectionKeys { get; set; } = null!;
 
     /// <summary>
     /// Schools/institutions (tenants) in the system.

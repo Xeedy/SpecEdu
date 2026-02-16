@@ -1,0 +1,161 @@
+@page "{id:guid}"
+@model SpecEdu.Web.App.Pages.SchoolAdmin.Students.RemindersModel
+@using SpecEdu.Domain.Enums
+@using SpecEdu.Web.App.Pages.SchoolAdmin.Students
+@inject IStringLocalizer<SpecEdu.Web.App.SharedResource> L
+@{
+    ViewData["Title"] = $"{L["StudentsPage.Reminders"]} - {Model.Student.FullName}";
+}
+
+<div class="container py-4">
+    <h1 class="mb-4">@L["StudentsPage.Reminders"] - @Model.Student.FullName</h1>
+
+    @if (!string.IsNullOrWhiteSpace(Model.SuccessMessage))
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            @Model.SuccessMessage
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Zavřít"></button>
+        </div>
+    }
+
+    @if (!string.IsNullOrWhiteSpace(Model.ErrorMessage))
+    {
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            @Model.ErrorMessage
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Zavřít"></button>
+        </div>
+    }
+
+    <!-- Create Reminder Form -->
+    <div class="spec-card mb-4">
+        <div class="spec-card-header">
+            <h5 class="mb-0">@L["StudentsPage.CreateReminder"]</h5>
+        </div>
+        <div class="spec-card-body">
+            <form method="post" asp-page-handler="Create" asp-route-id="@Model.Student.Id">
+                <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+                <div class="row g-3">
+                    <div class="col-md-4">
+                        <label asp-for="CreateInput.Title" class="form-label">@L["StudentsPage.ReminderTitle"]</label>
+                        <input asp-for="CreateInput.Title" class="form-control" />
+                        <span asp-validation-for="CreateInput.Title" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-3">
+                        <label asp-for="CreateInput.DueDate" class="form-label">@L["StudentsPage.ReminderDueDate"]</label>
+                        <input asp-for="CreateInput.DueDate" type="date" class="form-control" />
+                        <span asp-validation-for="CreateInput.DueDate" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-5">
+                        <label asp-for="CreateInput.Description" class="form-label">@L["StudentsPage.ReminderDescription"]</label>
+                        <input asp-for="CreateInput.Description" class="form-control" placeholder="@L["Common.Optional"]" />
+                        <span asp-validation-for="CreateInput.Description" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-12">
+                        <small class="text-muted">
+                            @L["StudentsPage.ReminderNotifyInfo"]
+                        </small>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-12">
+                        <button type="submit" class="btn btn-spec-primary">@L["Common.Create"]</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Reminders List -->
+    <div class="spec-card">
+        <div class="spec-card-header">
+            <h5 class="mb-0">@L["StudentsPage.RemindersList"]</h5>
+        </div>
+        <div class="spec-card-body">
+            @if (Model.Reminders.Any())
+            {
+                <div class="table-responsive">
+                    <table class="table table-hover mb-0">
+                        <thead>
+                            <tr>
+                                <th>@L["StudentsPage.ReminderTitle"]</th>
+                                <th>@L["StudentsPage.ReminderDueDate"]</th>
+                                <th>@L["StudentsPage.ReminderNotifyAt"]</th>
+                                <th>@L["StudentsPage.Status"]</th>
+                                <th>@L["StudentsPage.ReminderSentAt"]</th>
+                                <th class="text-end">@L["Common.Actions"]</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var reminder in Model.Reminders)
+                            {
+                                <tr class="@(reminder.IsActive ? "" : "table-secondary")">
+                                    <td>
+                                        <strong>@reminder.Title</strong>
+                                        @if (!string.IsNullOrEmpty(reminder.Description))
+                                        {
+                                            <br /><small class="text-muted">@reminder.Description</small>
+                                        }
+                                    </td>
+                                    <td>@reminder.DueDate.ToString("d. M. yyyy")</td>
+                                    <td>@reminder.NotifyAt.ToString("d. M. yyyy")</td>
+                                    <td>
+                                        <span class="badge @RemindersModel.GetStatusBadgeClass(reminder.Status)">
+                                            @RemindersModel.GetStatusName(reminder.Status)
+                                        </span>
+                                        @if (reminder.Status == ReminderStatus.Failed && !string.IsNullOrEmpty(reminder.LastError))
+                                        {
+                                            <br /><small class="text-danger">@reminder.LastError</small>
+                                        }
+                                        @if (reminder.RetryCount > 0)
+                                        {
+                                            <br /><small class="text-muted">Pokusů: @reminder.RetryCount</small>
+                                        }
+                                    </td>
+                                    <td>
+                                        @if (reminder.SentAt.HasValue)
+                                        {
+                                            @reminder.SentAt.Value.ToString("d. M. yyyy HH:mm")
+                                        }
+                                        else
+                                        {
+                                            <span class="text-muted">-</span>
+                                        }
+                                    </td>
+                                    <td class="text-end">
+                                        @if (reminder.Status == ReminderStatus.Pending && reminder.IsActive)
+                                        {
+                                            <form method="post" asp-page-handler="Cancel" asp-route-id="@Model.Student.Id" asp-route-reminderId="@reminder.Id" class="d-inline">
+                                                <button type="submit" class="btn btn-sm btn-outline-warning" onclick="return confirm('@L["Common.ConfirmCancel"]')">
+                                                    @L["Common.Cancel"]
+                                                </button>
+                                            </form>
+                                        }
+                                        <form method="post" asp-page-handler="Delete" asp-route-id="@Model.Student.Id" asp-route-reminderId="@reminder.Id" class="d-inline">
+                                            <button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm('@L["Common.ConfirmDelete"]')">
+                                                @L["Common.Delete"]
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+            else
+            {
+                <p class="text-muted mb-0">@L["StudentsPage.NoReminders"]</p>
+            }
+        </div>
+    </div>
+
+    <div class="mt-3">
+        <a asp-page="Details" asp-route-id="@Model.Student.Id" class="btn btn-outline-secondary">@L["Common.Back"]</a>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

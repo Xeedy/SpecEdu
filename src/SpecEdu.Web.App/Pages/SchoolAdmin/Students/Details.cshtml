@@ -1,0 +1,202 @@
+@page "{id:guid}"
+@model SpecEdu.Web.App.Pages.SchoolAdmin.Students.DetailsModel
+@inject IStringLocalizer<SpecEdu.Web.App.SharedResource> L
+@{
+    ViewData["Title"] = Model.Student.FullName;
+}
+
+<div class="container py-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1>@Model.Student.FullName</h1>
+        <div>
+            <a asp-page="Diary" asp-route-id="@Model.Student.Id" class="btn btn-outline-primary me-2">
+                <i class="bi bi-journal-text me-1"></i>@L["StudentsPage.Diary"]
+            </a>
+            <a asp-page="Edit" asp-route-id="@Model.Student.Id" class="btn btn-spec-primary">
+                @L["Common.Edit"]
+            </a>
+            @if (Model.Student.IsActive)
+            {
+                <form method="post" asp-page-handler="Delete" asp-route-id="@Model.Student.Id" class="d-inline">
+                    <button type="submit" class="btn btn-outline-danger" onclick="return confirm('@L["StudentsPage.ConfirmDelete"]')">
+                        @L["Common.Deactivate"]
+                    </button>
+                </form>
+            }
+        </div>
+    </div>
+
+    <!-- Basic Info -->
+    <div class="spec-card mb-4">
+        <div class="spec-card-header">
+            <h5 class="mb-0">@L["StudentsPage.BasicInfo"]</h5>
+        </div>
+        <div class="spec-card-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <dl class="row mb-0">
+                        <dt class="col-sm-4">@L["StudentsPage.Name"]</dt>
+                        <dd class="col-sm-8">@Model.Student.FullName</dd>
+
+                        <dt class="col-sm-4">@L["StudentsPage.Class"]</dt>
+                        <dd class="col-sm-8">@(Model.Student.Class ?? "-")</dd>
+
+                        <dt class="col-sm-4">@L["StudentsPage.BirthDate"]</dt>
+                        <dd class="col-sm-8">@(Model.Student.BirthDate?.ToString("dd.MM.yyyy") ?? "-")</dd>
+                    </dl>
+                </div>
+                <div class="col-md-6">
+                    <dl class="row mb-0">
+                        <dt class="col-sm-4">@L["StudentsPage.School"]</dt>
+                        <dd class="col-sm-8">@Model.Student.SchoolName</dd>
+
+                        <dt class="col-sm-4">@L["StudentsPage.Status"]</dt>
+                        <dd class="col-sm-8">
+                            @if (Model.Student.IsActive)
+                            {
+                                <span class="badge bg-success">@L["Common.Active"]</span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-secondary">@L["Common.Inactive"]</span>
+                            }
+                        </dd>
+
+                        <dt class="col-sm-4">@L["StudentsPage.Created"]</dt>
+                        <dd class="col-sm-8">@Model.Student.CreatedAt.ToString("dd.MM.yyyy")</dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <!-- Guardians -->
+        <div class="col-md-6">
+            <div class="spec-card mb-4">
+                <div class="spec-card-header d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0">@L["StudentsPage.Guardians"]</h5>
+                    <a asp-page="Guardians" asp-route-id="@Model.Student.Id" class="btn btn-sm btn-outline-primary">
+                        @L["Common.Manage"]
+                    </a>
+                </div>
+                <div class="spec-card-body">
+                    @if (Model.Guardians.Any())
+                    {
+                        <ul class="list-group list-group-flush">
+                            @foreach (var guardian in Model.Guardians)
+                            {
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <strong>@(guardian.ParentName ?? guardian.ParentUserId)</strong>
+                                        <br />
+                                        <small class="text-muted">@guardian.RelationshipTypeName</small>
+                                    </div>
+                                    @if (guardian.IsActive)
+                                    {
+                                        <span class="badge bg-success">@L["Common.Active"]</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge bg-secondary">@L["Common.Inactive"]</span>
+                                    }
+                                </li>
+                            }
+                        </ul>
+                    }
+                    else
+                    {
+                        <p class="text-muted mb-0">@L["StudentsPage.NoGuardians"]</p>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <!-- Staff Links -->
+        <div class="col-md-6">
+            <div class="spec-card mb-4">
+                <div class="spec-card-header d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0">@L["StudentsPage.Staff"]</h5>
+                    <a asp-page="StaffLinks" asp-route-id="@Model.Student.Id" class="btn btn-sm btn-outline-primary">
+                        @L["Common.Manage"]
+                    </a>
+                </div>
+                <div class="spec-card-body">
+                    @if (Model.StaffLinks.Any())
+                    {
+                        <ul class="list-group list-group-flush">
+                            @foreach (var link in Model.StaffLinks)
+                            {
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <strong>@(link.UserName ?? link.UserId)</strong>
+                                        <br />
+                                        <small class="text-muted">@link.LinkTypeName - @link.AccessLevelName</small>
+                                    </div>
+                                    @if (link.IsActive)
+                                    {
+                                        <span class="badge bg-success">@L["Common.Active"]</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge bg-secondary">@L["Common.Inactive"]</span>
+                                    }
+                                </li>
+                            }
+                        </ul>
+                    }
+                    else
+                    {
+                        <p class="text-muted mb-0">@L["StudentsPage.NoStaffLinks"]</p>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Calendar -->
+    <div class="spec-card mb-4">
+        <div class="spec-card-header d-flex justify-content-between align-items-center">
+            <h5 class="mb-0"><i class="bi bi-calendar3 me-2"></i>@L["StudentsPage.ViewCalendar"]</h5>
+            <a asp-page="/SchoolAdmin/Calendar/Index" class="btn btn-sm btn-outline-primary">
+                <i class="bi bi-calendar3 me-1"></i>@L["StudentsPage.ViewCalendar"]
+            </a>
+        </div>
+    </div>
+
+    <div class="row">
+        <!-- PLPP -->
+        <div class="col-md-6">
+            <div class="spec-card mb-4">
+                <div class="spec-card-header d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0"><i class="bi bi-file-earmark-text me-2"></i>@L["StudentsPage.Plpp"]</h5>
+                    <a asp-page="Plpps" asp-route-id="@Model.Student.Id" class="btn btn-sm btn-outline-primary">
+                        @L["Common.Manage"]
+                    </a>
+                </div>
+                <div class="spec-card-body">
+                    <p class="text-muted mb-0">@L["StudentsPage.PlppInfo"]</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Reminders -->
+        <div class="col-md-6">
+            <div class="spec-card mb-4">
+                <div class="spec-card-header d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0"><i class="bi bi-bell me-2"></i>@L["StudentsPage.Reminders"]</h5>
+                    <a asp-page="Reminders" asp-route-id="@Model.Student.Id" class="btn btn-sm btn-outline-primary">
+                        @L["Common.Manage"]
+                    </a>
+                </div>
+                <div class="spec-card-body">
+                    <p class="text-muted mb-0">@L["StudentsPage.RemindersInfo"]</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-3">
+        <a asp-page="Index" class="btn btn-outline-secondary">@L["Common.Back"]</a>
+    </div>
+</div>

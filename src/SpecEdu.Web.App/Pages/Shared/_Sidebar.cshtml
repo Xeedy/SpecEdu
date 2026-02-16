@@ -1,0 +1,138 @@
+@using Microsoft.Extensions.Configuration
+@inject IConfiguration Configuration
+@{
+    var currentPage = ViewContext.RouteData.Values["page"]?.ToString() ?? "";
+    var publicUrl = Configuration["PublicUrl"] ?? "https://localhost:5000";
+}
+
+<aside class="app-sidebar" id="sidebar">
+    <div class="sidebar-header">
+        <a href="/" class="sidebar-brand">
+            <span class="sidebar-brand-spec">Spec</span><span class="sidebar-brand-edu">Edu</span>
+        </a>
+        <button class="btn-sidebar-close d-lg-none" id="sidebarClose" aria-label="Close sidebar">
+            <i class="bi bi-x-lg"></i>
+        </button>
+    </div>
+
+    <nav class="sidebar-nav">
+        <!-- Main -->
+        <div class="sidebar-section">
+            <span class="sidebar-section-title">@L["Sidebar.Main"]</span>
+            <ul class="sidebar-menu">
+                <li>
+                    <a class="sidebar-link @(currentPage.Contains("Dashboard/Index") ? "active" : "")" asp-page="/Dashboard/Index">
+                        <i class="bi bi-grid-1x2"></i>
+                        <span>@L["Sidebar.Dashboard"]</span>
+                    </a>
+                </li>
+                @if (User.IsInRole("SchoolAdmin"))
+                {
+                    <li>
+                        <a class="sidebar-link @(currentPage.Contains("SchoolAdmin/Calendar") ? "active" : "")" asp-page="/SchoolAdmin/Calendar/Index">
+                            <i class="bi bi-calendar3"></i>
+                            <span>@L["Sidebar.Calendar"]</span>
+                        </a>
+                    </li>
+                }
+                else if (User.IsInRole("Parent"))
+                {
+                    <li>
+                        <a class="sidebar-link @(currentPage.Contains("MyChildren/Calendar") ? "active" : "")" asp-page="/MyChildren/Calendar">
+                            <i class="bi bi-calendar3"></i>
+                            <span>@L["Sidebar.Calendar"]</span>
+                        </a>
+                    </li>
+                }
+                else
+                {
+                    <li>
+                        <a class="sidebar-link @(currentPage.Contains("Dashboard/Calendar") ? "active" : "")" asp-page="/Dashboard/Calendar">
+                            <i class="bi bi-calendar3"></i>
+                            <span>@L["Sidebar.Calendar"]</span>
+                        </a>
+                    </li>
+                }
+            </ul>
+        </div>
+
+        <!-- Management -->
+        @if (User.IsInRole("SchoolAdmin") || User.IsInRole("Teacher") || User.IsInRole("SPP") || User.IsInRole("Admin"))
+        {
+            <div class="sidebar-section">
+                <span class="sidebar-section-title">@L["Sidebar.Management"]</span>
+                <ul class="sidebar-menu">
+                    @if (User.IsInRole("SchoolAdmin"))
+                    {
+                        <li>
+                            <a class="sidebar-link @(currentPage.Contains("SchoolAdmin/Students") ? "active" : "")" asp-page="/SchoolAdmin/Students/Index">
+                                <i class="bi bi-people"></i>
+                                <span>@L["Sidebar.Students"]</span>
+                            </a>
+                        </li>
+                    }
+                </ul>
+            </div>
+        }
+
+        <!-- Parent -->
+        @if (User.IsInRole("Parent"))
+        {
+            <div class="sidebar-section">
+                <span class="sidebar-section-title">@L["Sidebar.Family"]</span>
+                <ul class="sidebar-menu">
+                    <li>
+                        <a class="sidebar-link @(currentPage.Contains("MyChildren") && !currentPage.Contains("Calendar") ? "active" : "")" asp-page="/MyChildren/Index">
+                            <i class="bi bi-person-hearts"></i>
+                            <span>@L["Sidebar.MyChildren"]</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        }
+
+        <!-- Admin -->
+        @if (User.IsInRole("Admin"))
+        {
+            <div class="sidebar-section">
+                <span class="sidebar-section-title">@L["Sidebar.Administration"]</span>
+                <ul class="sidebar-menu">
+                    <li>
+                        <a class="sidebar-link @(currentPage.Contains("Admin/Index") ? "active" : "")" asp-page="/Admin/Index">
+                            <i class="bi bi-shield-lock"></i>
+                            <span>@L["Sidebar.AdminPanel"]</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="sidebar-link @(currentPage.Contains("Admin/Schools") ? "active" : "")" asp-page="/Admin/Schools/Index">
+                            <i class="bi bi-building"></i>
+                            <span>@L["Sidebar.Schools"]</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        }
+    </nav>
+
+    <!-- User info at bottom -->
+    <div class="sidebar-footer">
+        <div class="sidebar-user">
+            <div class="sidebar-user-avatar">
+                <i class="bi bi-person-circle"></i>
+            </div>
+            <div class="sidebar-user-info">
+                <span class="sidebar-user-name">@User.Identity?.Name</span>
+                <span class="sidebar-user-role">
+                    @if (User.IsInRole("Admin")) { <text>Admin</text> }
+                    else if (User.IsInRole("SchoolAdmin")) { <text>Správce školy</text> }
+                    else if (User.IsInRole("Teacher")) { <text>Učitel</text> }
+                    else if (User.IsInRole("Parent")) { <text>Rodič</text> }
+                    else if (User.IsInRole("SPP")) { <text>ŠPP</text> }
+                </span>
+            </div>
+        </div>
+    </div>
+</aside>
+
+<!-- Sidebar overlay for mobile -->
+<div class="sidebar-overlay" id="sidebarOverlay"></div>

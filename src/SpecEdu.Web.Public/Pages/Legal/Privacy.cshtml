@@ -1,0 +1,63 @@
+@page
+@model SpecEdu.Web.Public.Pages.Legal.PrivacyModel
+@inject IStringLocalizer<SharedResource> L
+@{
+    ViewData["Title"] = L["PrivacyPage.Title"];
+}
+
+<section class="py-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <h1 class="fw-bold mb-4">@L["PrivacyPage.Title"]</h1>
+                <p class="text-muted mb-4">@L["PrivacyPage.LastUpdated"]: 1. 1. 2026</p>
+
+                <div class="alert alert-info mb-4">
+                    <strong>@L["PrivacyPage.GdprCompliant"]</strong> - @L["PrivacyPage.GdprNote"]
+                </div>
+
+                <div class="spec-card p-4 mb-4">
+                    <h4 class="fw-bold">1. @L["PrivacyPage.Section1Title"]</h4>
+                    <p class="text-muted">@L["PrivacyPage.Section1Content"]</p>
+                    <ul class="text-muted">
+                        <li>@L["PrivacyPage.Section1Point1"]</li>
+                        <li>@L["PrivacyPage.Section1Point2"]</li>
+                        <li>@L["PrivacyPage.Section1Point3"]</li>
+                    </ul>
+                </div>
+
+                <div class="spec-card p-4 mb-4">
+                    <h4 class="fw-bold">2. @L["PrivacyPage.Section2Title"]</h4>
+                    <p class="text-muted">@L["PrivacyPage.Section2Content"]</p>
+                </div>
+
+                <div class="spec-card p-4 mb-4">
+                    <h4 class="fw-bold">3. @L["PrivacyPage.Section3Title"]</h4>
+                    <p class="text-muted">@L["PrivacyPage.Section3Content"]</p>
+                </div>
+
+                <div class="spec-card p-4 mb-4">
+                    <h4 class="fw-bold">4. @L["PrivacyPage.Section4Title"]</h4>
+                    <p class="text-muted">@L["PrivacyPage.Section4Content"]</p>
+                    <ul class="text-muted">
+                        <li>@L["PrivacyPage.Section4Point1"]</li>
+                        <li>@L["PrivacyPage.Section4Point2"]</li>
+                        <li>@L["PrivacyPage.Section4Point3"]</li>
+                        <li>@L["PrivacyPage.Section4Point4"]</li>
+                    </ul>
+                </div>
+
+                <div class="spec-card p-4 mb-4">
+                    <h4 class="fw-bold">5. @L["PrivacyPage.Section5Title"]</h4>
+                    <p class="text-muted">@L["PrivacyPage.Section5Content"]</p>
+                </div>
+
+                <div class="spec-card p-4">
+                    <h4 class="fw-bold">6. @L["PrivacyPage.Section6Title"]</h4>
+                    <p class="text-muted mb-2">@L["PrivacyPage.Section6Content"]</p>
+                    <p class="mb-0"><a href="mailto:gdpr@specedu.cz">gdpr@specedu.cz</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
