@@ -22,13 +22,13 @@ A) Repo a solution
 
 .editorconfig, nullable enable, analyzéry
 
-B) UI základ (světle modrá + Roboto)
+B) UI základ (světle modrá + Google Sans)
 
 _Layout.cshtml, _Header.cshtml, _Footer.cshtml
 
 barvy do CSS variables (např. --spec-blue)
 
-Roboto přes lokální soubory (lepší pro GDPR než Google Fonts)
+Google Sans přes lokální soubory (lepší pro GDPR než Google Fonts)
 
 C) Konfigurace a provoz
 
@@ -247,7 +247,7 @@ EF Core + migrations
 
 Stored procedures jen pro reporting/složitější listy (ne hned všude)
 
-Bootstrap 5 + vlastní theme (světle modrá, Roboto)
+Bootstrap 5 + vlastní theme (světle modrá, Google Sans)
 
 Localization: resx (UI), DB pro obsah později
 
