@@ -10,5 +10,11 @@ public enum NotificationChannel
     /// Send notification via email.
     /// Czech: E-mail
     /// </summary>
-    Email = 1
+    Email = 1,
+
+    /// <summary>
+    /// In-app notification (bell icon).
+    /// Czech: Notifikace v aplikaci
+    /// </summary>
+    InApp = 2
 }

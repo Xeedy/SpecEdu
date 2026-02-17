@@ -33,10 +33,6 @@
                             </svg>
                         </div>
                     </div>
-                    <div class="mt-2">
-                        <span class="text-success small">+12%</span>
-                        <span class="text-muted small">@L["DashboardPage.FromLastMonth"]</span>
-                    </div>
                 </div>
             </div>
             <div class="col-md-6 col-lg-3">
@@ -44,7 +40,7 @@
                     <div class="d-flex justify-content-between align-items-start">
                         <div>
                             <p class="text-muted small mb-1">@L["DashboardPage.ActiveDocuments"]</p>
-                            <h3 class="fw-bold mb-0">48</h3>
+                            <h3 class="fw-bold mb-0">@Model.ActivePlppCount</h3>
                         </div>
                         <div class="bg-spec-primary-light rounded p-2">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="var(--spec-primary)" viewBox="0 0 16 16">
@@ -59,7 +55,7 @@
                     <div class="d-flex justify-content-between align-items-start">
                         <div>
                             <p class="text-muted small mb-1">@L["DashboardPage.PendingTasks"]</p>
-                            <h3 class="fw-bold mb-0">7</h3>
+                            <h3 class="fw-bold mb-0">@Model.PendingReminderCount</h3>
                         </div>
                         <div class="bg-warning bg-opacity-25 rounded p-2">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="var(--spec-warning)" viewBox="0 0 16 16">
@@ -75,7 +71,7 @@
                     <div class="d-flex justify-content-between align-items-start">
                         <div>
                             <p class="text-muted small mb-1">@L["DashboardPage.Messages"]</p>
-                            <h3 class="fw-bold mb-0">3</h3>
+                            <h3 class="fw-bold mb-0">@Model.UpcomingEventsCount</h3>
                         </div>
                         <div class="bg-spec-primary-light rounded p-2">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="var(--spec-primary)" viewBox="0 0 16 16">
@@ -93,39 +89,36 @@
                 <div class="spec-card p-4">
                     <h5 class="fw-bold mb-4">@L["DashboardPage.RecentActivity"]</h5>
                     <div class="list-group list-group-flush">
-                        <div class="list-group-item px-0 d-flex align-items-start">
-                            <div class="bg-success rounded-circle d-flex align-items-center justify-content-center me-3 flex-shrink-0" style="width: 36px; height: 36px;">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" viewBox="0 0 16 16">
-                                    <path d="M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0z"/>
-                                </svg>
+                        @if (Model.RecentActivity.Any())
+                        {
+                            @foreach (var log in Model.RecentActivity)
+                            {
+                                <div class="list-group-item px-0 d-flex align-items-start">
+                                    <div class="bg-spec-primary rounded-circle d-flex align-items-center justify-content-center me-3 flex-shrink-0" style="width: 36px; height: 36px;">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" viewBox="0 0 16 16">
+                                            <path d="M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0z"/>
+                                        </svg>
+                                    </div>
+                                    <div class="flex-grow-1">
+                                        <p class="mb-1">
+                                            <strong>@log.ActionName</strong>
+                                            <span class="text-muted">- @log.EntityType</span>
+                                            @if (!string.IsNullOrEmpty(log.Details))
+                                            {
+                                                <span class="text-muted small d-block">@log.Details</span>
+                                            }
+                                        </p>
+                                        <small class="text-muted">@GetRelativeTime(log.Timestamp)</small>
+                                    </div>
+                                </div>
+                            }
+                        }
+                        else
+                        {
+                            <div class="text-muted text-center py-3">
+                                @L["DashboardPage.NoRecentActivity"]
                             </div>
-                            <div class="flex-grow-1">
-                                <p class="mb-1"><strong>@L["DashboardPage.Activity1"]</strong></p>
-                                <small class="text-muted">2 @L["DashboardPage.HoursAgo"]</small>
-                            </div>
-                        </div>
-                        <div class="list-group-item px-0 d-flex align-items-start">
-                            <div class="bg-spec-primary rounded-circle d-flex align-items-center justify-content-center me-3 flex-shrink-0" style="width: 36px; height: 36px;">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" viewBox="0 0 16 16">
-                                    <path d="M14 1a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H4.414A2 2 0 0 0 3 11.586l-2 2V2a1 1 0 0 1 1-1h12z"/>
-                                </svg>
-                            </div>
-                            <div class="flex-grow-1">
-                                <p class="mb-1"><strong>@L["DashboardPage.Activity2"]</strong></p>
-                                <small class="text-muted">5 @L["DashboardPage.HoursAgo"]</small>
-                            </div>
-                        </div>
-                        <div class="list-group-item px-0 d-flex align-items-start">
-                            <div class="bg-warning rounded-circle d-flex align-items-center justify-content-center me-3 flex-shrink-0" style="width: 36px; height: 36px;">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" viewBox="0 0 16 16">
-                                    <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2z"/>
-                                </svg>
-                            </div>
-                            <div class="flex-grow-1">
-                                <p class="mb-1"><strong>@L["DashboardPage.Activity3"]</strong></p>
-                                <small class="text-muted">1 @L["DashboardPage.DayAgo"]</small>
-                            </div>
-                        </div>
+                        }
                     </div>
                 </div>
             </div>
@@ -164,11 +157,23 @@
                                 <i class="bi bi-calendar3 me-1"></i>@L["DashboardPage.ViewCalendar"]
                             </a>
                         }
-                        <button class="btn btn-spec-outline" disabled>@L["DashboardPage.CreateDocument"]</button>
-                        <button class="btn btn-spec-outline" disabled>@L["DashboardPage.SendMessage"]</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
+
+@functions {
+    string GetRelativeTime(DateTime utcTimestamp)
+    {
+        var now = DateTime.UtcNow;
+        var diff = now - utcTimestamp;
+
+        if (diff.TotalMinutes < 1) return L["DashboardPage.JustNow"];
+        if (diff.TotalMinutes < 60) return $"{(int)diff.TotalMinutes} min";
+        if (diff.TotalHours < 24) return $"{(int)diff.TotalHours} {L["DashboardPage.HoursAgo"]}";
+        if (diff.TotalDays < 7) return $"{(int)diff.TotalDays} {L["DashboardPage.DayAgo"]}";
+        return utcTimestamp.ToLocalTime().ToString("dd.MM.yyyy");
+    }
+}

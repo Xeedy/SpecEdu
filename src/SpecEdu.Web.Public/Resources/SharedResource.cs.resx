@@ -2282,4 +2282,16 @@
   <data name="MyChildrenPage.ViewCalendar" xml:space="preserve">
     <value>Kalendář akcí</value>
   </data>
+  <data name="CookieConsent.Message" xml:space="preserve">
+    <value>Tento web používá cookies pro zajištění správného fungování. Některé cookies jsou nezbytné, jiné nám pomáhají zlepšovat služby.</value>
+  </data>
+  <data name="CookieConsent.LearnMore" xml:space="preserve">
+    <value>Více informací</value>
+  </data>
+  <data name="CookieConsent.AcceptAll" xml:space="preserve">
+    <value>Přijmout vše</value>
+  </data>
+  <data name="CookieConsent.RejectOptional" xml:space="preserve">
+    <value>Pouze nezbytné</value>
+  </data>
 </root>

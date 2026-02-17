@@ -79,19 +79,19 @@ public class ConsultationEventConfiguration : IEntityTypeConfiguration<Consultat
         builder.HasOne(e => e.School)
             .WithMany()
             .HasForeignKey(e => e.SchoolId)
-            .OnDelete(DeleteBehavior.Cascade);
+            .OnDelete(DeleteBehavior.Restrict);
 
         // Relationship to Student (optional)
         builder.HasOne(e => e.Student)
             .WithMany()
             .HasForeignKey(e => e.StudentId)
-            .OnDelete(DeleteBehavior.SetNull);
+            .OnDelete(DeleteBehavior.Restrict);
 
         // Relationship to Plpp (optional)
         builder.HasOne(e => e.Plpp)
             .WithMany()
             .HasForeignKey(e => e.PlppId)
-            .OnDelete(DeleteBehavior.SetNull);
+            .OnDelete(DeleteBehavior.Restrict);
 
         // Indexes
         builder.HasIndex(e => e.SchoolId);

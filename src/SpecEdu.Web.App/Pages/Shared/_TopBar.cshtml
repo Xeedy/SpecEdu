@@ -17,6 +17,9 @@
     </div>
 
     <div class="topbar-right">
+        <!-- Notification bell -->
+        @await Component.InvokeAsync("NotificationBell")
+
         <!-- Language switch -->
         <div class="lang-switch d-flex align-items-center gap-1 me-2">
             <a class="lang-pill-sm @(currentCulture == "cs" ? "active" : "")"

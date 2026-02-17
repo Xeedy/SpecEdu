@@ -3,23 +3,46 @@
 @inject IStringLocalizer<SpecEdu.Web.App.SharedResource> L
 @{
     ViewData["Title"] = L["ProfilePage.Title"];
+    var currentCulture = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
 }
 
 <section class="py-5">
     <div class="container">
+
+        @if (TempData["SuccessMessage"] is string successMsg)
+        {
+            <div class="alert alert-success alert-dismissible fade show mb-4" role="alert">
+                @L[successMsg]
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        }
+        @if (TempData["ErrorMessage"] is string errorMsg)
+        {
+            <div class="alert alert-danger alert-dismissible fade show mb-4" role="alert">
+                @L[errorMsg]
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        }
+
         <div class="row">
             <div class="col-lg-4 mb-4 mb-lg-0">
                 <!-- Profile Card -->
                 <div class="spec-card p-4 text-center">
                     <div class="bg-spec-primary rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 100px; height: 100px;">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="white" viewBox="0 0 16 16">
-                            <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
-                            <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
-                        </svg>
+                        <span class="text-white fw-bold" style="font-size: 2rem;">@Model.Initials</span>
                     </div>
-                    <h4 class="fw-bold mb-1">@User.Identity?.Name</h4>
-                    <p class="text-muted mb-3">@L["ProfilePage.Role"]: Admin</p>
-                    <span class="badge bg-success">@L["ProfilePage.Active"]</span>
+                    <h4 class="fw-bold mb-1">@Model.Input.FirstName @Model.Input.LastName</h4>
+                    <p class="text-muted mb-3">
+                        @L["ProfilePage.Role"]: @string.Join(", ", Model.Roles)
+                    </p>
+                    @if (Model.IsActive)
+                    {
+                        <span class="badge bg-success">@L["ProfilePage.Active"]</span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-secondary">@L["ProfilePage.Inactive"]</span>
+                    }
                 </div>
 
                 <!-- Quick Stats -->
@@ -27,16 +50,15 @@
                     <h6 class="fw-bold mb-3">@L["ProfilePage.QuickStats"]</h6>
                     <div class="d-flex justify-content-between mb-2">
                         <span class="text-muted">@L["ProfilePage.MemberSince"]</span>
-                        <span>1. 1. 2026</span>
+                        <span>@Model.CreatedAt.ToString("d. M. yyyy")</span>
                     </div>
-                    <div class="d-flex justify-content-between mb-2">
-                        <span class="text-muted">@L["ProfilePage.LastLogin"]</span>
-                        <span>@L["ProfilePage.Today"]</span>
-                    </div>
-                    <div class="d-flex justify-content-between">
-                        <span class="text-muted">@L["ProfilePage.School"]</span>
-                        <span>ZS Demo</span>
-                    </div>
+                    @if (!string.IsNullOrEmpty(Model.SchoolName))
+                    {
+                        <div class="d-flex justify-content-between">
+                            <span class="text-muted">@L["ProfilePage.School"]</span>
+                            <span>@Model.SchoolName</span>
+                        </div>
+                    }
                 </div>
             </div>
 
@@ -44,26 +66,29 @@
                 <!-- Profile Form -->
                 <div class="spec-card p-4">
                     <h4 class="fw-bold mb-4">@L["ProfilePage.PersonalInfo"]</h4>
-                    <form>
+                    <form method="post">
+                        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
                         <div class="row g-3">
                             <div class="col-md-6">
-                                <label class="form-label">@L["ProfilePage.FirstName"]</label>
-                                <input type="text" class="form-control" value="Jan" disabled>
+                                <label asp-for="Input.FirstName" class="form-label">@L["ProfilePage.FirstName"]</label>
+                                <input asp-for="Input.FirstName" class="form-control" />
+                                <span asp-validation-for="Input.FirstName" class="text-danger"></span>
                             </div>
                             <div class="col-md-6">
-                                <label class="form-label">@L["ProfilePage.LastName"]</label>
-                                <input type="text" class="form-control" value="Novak" disabled>
+                                <label asp-for="Input.LastName" class="form-label">@L["ProfilePage.LastName"]</label>
+                                <input asp-for="Input.LastName" class="form-control" />
+                                <span asp-validation-for="Input.LastName" class="text-danger"></span>
                             </div>
                             <div class="col-md-6">
                                 <label class="form-label">Email</label>
-                                <input type="email" class="form-control" value="admin@specedu.cz" disabled>
+                                <input type="email" class="form-control" value="@Model.Email" disabled>
                             </div>
                             <div class="col-md-6">
                                 <label class="form-label">@L["ProfilePage.Phone"]</label>
-                                <input type="tel" class="form-control" placeholder="+420 123 456 789" disabled>
+                                <input type="tel" class="form-control" value="@Model.Phone" placeholder="+420 123 456 789" disabled>
                             </div>
                             <div class="col-12">
-                                <button type="button" class="btn btn-spec-outline" disabled>@L["ProfilePage.EditProfile"]</button>
+                                <button type="submit" class="btn btn-spec-primary">@L["ProfilePage.SaveChanges"]</button>
                             </div>
                         </div>
                     </form>
@@ -75,9 +100,9 @@
                     <div class="d-flex justify-content-between align-items-center mb-3 pb-3 border-bottom">
                         <div>
                             <h6 class="fw-bold mb-1">@L["ProfilePage.Password"]</h6>
-                            <small class="text-muted">@L["ProfilePage.PasswordLastChanged"]: 1. 1. 2026</small>
+                            <small class="text-muted">@L["ProfilePage.PasswordChangeHint"]</small>
                         </div>
-                        <button class="btn btn-spec-outline btn-sm" disabled>@L["ProfilePage.ChangePassword"]</button>
+                        <a asp-page="/Account/Settings" class="btn btn-spec-outline btn-sm">@L["ProfilePage.ChangePassword"]</a>
                     </div>
                     <div class="d-flex justify-content-between align-items-center">
                         <div>
@@ -91,3 +116,7 @@
         </div>
     </div>
 </section>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

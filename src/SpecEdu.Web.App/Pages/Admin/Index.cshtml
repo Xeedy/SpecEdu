@@ -25,7 +25,7 @@
                 <div class="spec-card-body">
                     <p class="display-4 mb-2">@Model.UserCount</p>
                     <p class="text-muted mb-3">Celkem uživatelů v systému</p>
-                    <button class="btn btn-outline-secondary" disabled>Spravovat uživatele</button>
+                    <a asp-page="/Admin/Users/Index" class="btn btn-spec-primary">Spravovat uživatele</a>
                 </div>
             </div>
         </div>
@@ -49,7 +49,7 @@
                 <div class="spec-card-body">
                     <div class="d-flex gap-2 flex-wrap">
                         <a asp-page="/Admin/Schools/Create" class="btn btn-spec-outline">Přidat školu</a>
-                        <button class="btn btn-outline-secondary" disabled>Audit log</button>
+                        <a asp-page="/Admin/AuditLog/Index" class="btn btn-spec-outline">Audit log</a>
                         <button class="btn btn-outline-secondary" disabled>Nastavení</button>
                     </div>
                 </div>

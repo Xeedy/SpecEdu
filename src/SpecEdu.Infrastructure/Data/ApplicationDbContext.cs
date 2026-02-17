@@ -109,6 +109,18 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser, IdentityR
     public DbSet<ConsultationParticipant> ConsultationParticipants => Set<ConsultationParticipant>();
 
     /// <summary>
+    /// In-app notifications for users.
+    /// Czech: Notifikace v aplikaci
+    /// </summary>
+    public DbSet<Notification> Notifications => Set<Notification>();
+
+    /// <summary>
+    /// GDPR user consent records.
+    /// Czech: GDPR souhlasy uživatelů
+    /// </summary>
+    public DbSet<UserConsent> UserConsents => Set<UserConsent>();
+
+    /// <summary>
     /// Saves changes and automatically populates audit fields.
     /// </summary>
     public override int SaveChanges()

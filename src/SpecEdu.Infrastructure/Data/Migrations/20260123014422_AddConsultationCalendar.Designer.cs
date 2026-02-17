@@ -1309,18 +1309,18 @@ namespace SpecEdu.Infrastructure.Data.Migrations
                     b.HasOne("SpecEdu.Domain.Entities.Plpp", "Plpp")
                         .WithMany()
                         .HasForeignKey("PlppId")
-                        .OnDelete(DeleteBehavior.SetNull);
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("SpecEdu.Domain.Entities.School", "School")
                         .WithMany()
                         .HasForeignKey("SchoolId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("SpecEdu.Domain.Entities.Student", "Student")
                         .WithMany()
                         .HasForeignKey("StudentId")
-                        .OnDelete(DeleteBehavior.SetNull);
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.Navigation("Plpp");
 

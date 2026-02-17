@@ -1,0 +1,19 @@
+@inject IStringLocalizer<SpecEdu.Web.App.SharedResource> L
+
+<div id="cookieConsent" class="cookie-consent" style="display:none;">
+    <div class="cookie-consent-inner">
+        <div class="cookie-consent-text">
+            <i class="bi bi-shield-lock me-2"></i>
+            <span>@L["CookieConsent.Message"]</span>
+            <a href="/Privacy" class="cookie-consent-link">@L["CookieConsent.LearnMore"]</a>
+        </div>
+        <div class="cookie-consent-actions">
+            <button type="button" class="btn btn-sm btn-outline-light" onclick="setCookieConsent('essential')">
+                @L["CookieConsent.RejectOptional"]
+            </button>
+            <button type="button" class="btn btn-sm btn-light" onclick="setCookieConsent('all')">
+                @L["CookieConsent.AcceptAll"]
+            </button>
+        </div>
+    </div>
+</div>

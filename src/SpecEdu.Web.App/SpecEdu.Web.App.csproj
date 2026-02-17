@@ -5,6 +5,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <RootNamespace>SpecEdu.Web.App</RootNamespace>
+    <UserSecretsId>99b84057-1eb0-4ee1-8e19-51943fd68937</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>

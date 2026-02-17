@@ -1806,7 +1806,6 @@
   <data name="StudentsPage.PlppInfo" xml:space="preserve">
     <value>Správa plánů pedagogické podpory (PLPP) pro žáka.</value>
   </data>
-  <!-- Calendar / Consultation -->
   <data name="CalendarPage.Title" xml:space="preserve">
     <value>Kalendář konzultací</value>
   </data>
@@ -1876,7 +1875,6 @@
   <data name="CalendarPage.NoChildrenAssigned" xml:space="preserve">
     <value>Zatím nemáte přiřazené žádné děti.</value>
   </data>
-  <!-- Calendar Create / Edit -->
   <data name="CalendarPage.CreateTitle" xml:space="preserve">
     <value>Nová konzultace</value>
   </data>
@@ -1949,7 +1947,6 @@
   <data name="CalendarPage.InviteStaffHint" xml:space="preserve">
     <value>Automaticky pozve učitele přiřazené k žákovi.</value>
   </data>
-  <!-- Calendar Details -->
   <data name="CalendarPage.EventDetails" xml:space="preserve">
     <value>Detaily konzultace</value>
   </data>
@@ -2028,7 +2025,6 @@
   <data name="CalendarPage.ConfirmRemoveParticipant" xml:space="preserve">
     <value>Opravdu chcete odebrat tohoto účastníka?</value>
   </data>
-  <!-- Calendar Actions -->
   <data name="CalendarPage.Actions" xml:space="preserve">
     <value>Akce</value>
   </data>
@@ -2074,7 +2070,6 @@
   <data name="CalendarPage.Reminder" xml:space="preserve">
     <value>Připomínka:</value>
   </data>
-  <!-- Calendar Types -->
   <data name="CalendarPage.TypeParentTeacher" xml:space="preserve">
     <value>Třídní schůzka</value>
   </data>
@@ -2102,7 +2097,6 @@
   <data name="CalendarPage.TypePlppIvpReview" xml:space="preserve">
     <value>Vyhodnocení PLPP/IVP</value>
   </data>
-  <!-- Calendar Statuses -->
   <data name="CalendarPage.StatusScheduled" xml:space="preserve">
     <value>Naplánováno</value>
   </data>
@@ -2118,7 +2112,6 @@
   <data name="CalendarPage.StatusRescheduled" xml:space="preserve">
     <value>Přesunuto</value>
   </data>
-  <!-- Calendar Response Statuses -->
   <data name="CalendarPage.ResponsePending" xml:space="preserve">
     <value>Čeká na odpověď</value>
   </data>
@@ -2131,7 +2124,6 @@
   <data name="CalendarPage.ResponseTentative" xml:space="preserve">
     <value>Možná</value>
   </data>
-  <!-- Calendar Messages -->
   <data name="CalendarPage.MsgEventCreated" xml:space="preserve">
     <value>Konzultace byla vytvořena.</value>
   </data>
@@ -2210,7 +2202,6 @@
   <data name="CalendarPage.MsgResponseFailed" xml:space="preserve">
     <value>Nepodařilo se zaznamenat odpověď.</value>
   </data>
-  <!-- Calendar Form Validation -->
   <data name="CalendarPage.TitleRequired" xml:space="preserve">
     <value>Název je povinný.</value>
   </data>
@@ -2226,7 +2217,6 @@
   <data name="CalendarPage.InvalidUrl" xml:space="preserve">
     <value>Zadejte platnou URL adresu.</value>
   </data>
-  <!-- Calendar Form Labels -->
   <data name="CalendarPage.LabelTitle" xml:space="preserve">
     <value>Název</value>
   </data>
@@ -2269,7 +2259,6 @@
   <data name="CalendarPage.LabelNotes" xml:space="preserve">
     <value>Poznámky z průběhu</value>
   </data>
-  <!-- Dashboard Calendar Link -->
   <data name="DashboardPage.ViewCalendar" xml:space="preserve">
     <value>Zobrazit kalendář</value>
   </data>
@@ -2281,5 +2270,155 @@
   </data>
   <data name="MyChildrenPage.ViewCalendar" xml:space="preserve">
     <value>Kalendář akcí</value>
+  </data>
+  <data name="Sidebar.Dashboard" xml:space="preserve">
+    <value>Nástěnka</value>
+  </data>
+  <data name="Sidebar.Main" xml:space="preserve">
+    <value>Hlavní</value>
+  </data>
+  <data name="Sidebar.Calendar" xml:space="preserve">
+    <value>Kalendář</value>
+  </data>
+  <data name="Sidebar.Management" xml:space="preserve">
+    <value>Správa</value>
+  </data>
+  <data name="Sidebar.Students" xml:space="preserve">
+    <value>Studenti</value>
+  </data>
+  <data name="Sidebar.Family" xml:space="preserve">
+    <value>Rodina</value>
+  </data>
+  <data name="Sidebar.MyChildren" xml:space="preserve">
+    <value>Moje děti</value>
+  </data>
+  <data name="Sidebar.Administration" xml:space="preserve">
+    <value>Administrace</value>
+  </data>
+  <data name="Sidebar.AdminPanel" xml:space="preserve">
+    <value>Admin panel</value>
+  </data>
+  <data name="Sidebar.Schools" xml:space="preserve">
+    <value>Školy</value>
+  </data>
+  <data name="Sidebar.Users" xml:space="preserve">
+    <value>Uživatelé</value>
+  </data>
+  <data name="Sidebar.AuditLog" xml:space="preserve">
+    <value>Audit log</value>
+  </data>
+  <data name="Role.Admin" xml:space="preserve">
+    <value>Admin</value>
+  </data>
+  <data name="Role.SchoolAdmin" xml:space="preserve">
+    <value>Správce školy</value>
+  </data>
+  <data name="Role.Teacher" xml:space="preserve">
+    <value>Učitel</value>
+  </data>
+  <data name="Role.Parent" xml:space="preserve">
+    <value>Rodič</value>
+  </data>
+  <data name="Role.SPP" xml:space="preserve">
+    <value>ŠPP</value>
+  </data>
+  <data name="TopBar.Profile" xml:space="preserve">
+    <value>Profil</value>
+  </data>
+  <data name="TopBar.Settings" xml:space="preserve">
+    <value>Nastavení</value>
+  </data>
+  <data name="TopBar.PublicSite" xml:space="preserve">
+    <value>Veřejný web</value>
+  </data>
+  <data name="TopBar.Logout" xml:space="preserve">
+    <value>Odhlásit se</value>
+  </data>
+  <data name="Notifications.Title" xml:space="preserve">
+    <value>Oznámení</value>
+  </data>
+  <data name="Notifications.MarkAllRead" xml:space="preserve">
+    <value>Označit vše jako přečtené</value>
+  </data>
+  <data name="Notifications.MarkRead" xml:space="preserve">
+    <value>Označit jako přečtené</value>
+  </data>
+  <data name="Notifications.NoNew" xml:space="preserve">
+    <value>Žádná nová oznámení</value>
+  </data>
+  <data name="Notifications.ViewAll" xml:space="preserve">
+    <value>Zobrazit všechna oznámení</value>
+  </data>
+  <data name="Notifications.Empty" xml:space="preserve">
+    <value>Nemáte žádná oznámení.</value>
+  </data>
+  <data name="Notifications.LoadMore" xml:space="preserve">
+    <value>Načíst další</value>
+  </data>
+  <data name="WhatsNew.Title" xml:space="preserve">
+    <value>Co je nového</value>
+  </data>
+  <data name="WhatsNew.Subtitle" xml:space="preserve">
+    <value>Přehled změn a novinek v aplikaci SpecEdu.</value>
+  </data>
+  <data name="CookieConsent.Message" xml:space="preserve">
+    <value>Tato aplikace používá cookies pro zajištění správného fungování. Některé cookies jsou nezbytné, jiné nám pomáhají zlepšovat služby.</value>
+  </data>
+  <data name="CookieConsent.LearnMore" xml:space="preserve">
+    <value>Více informací</value>
+  </data>
+  <data name="CookieConsent.AcceptAll" xml:space="preserve">
+    <value>Přijmout vše</value>
+  </data>
+  <data name="CookieConsent.RejectOptional" xml:space="preserve">
+    <value>Pouze nezbytné</value>
+  </data>
+  <data name="DataExport.Title" xml:space="preserve">
+    <value>Ochrana osobních údajů</value>
+  </data>
+  <data name="DataExport.DownloadTitle" xml:space="preserve">
+    <value>Stáhnout moje data</value>
+  </data>
+  <data name="DataExport.DownloadDesc" xml:space="preserve">
+    <value>Stáhněte si kopii všech vašich osobních údajů ve formátu JSON v souladu s GDPR (čl. 20).</value>
+  </data>
+  <data name="DataExport.DownloadBtn" xml:space="preserve">
+    <value>Stáhnout data</value>
+  </data>
+  <data name="DataExport.RetentionTitle" xml:space="preserve">
+    <value>Doba uchovávání dat</value>
+  </data>
+  <data name="DataExport.RetentionDesc" xml:space="preserve">
+    <value>Přehled doby uchovávání různých typů dat.</value>
+  </data>
+  <data name="DataExport.DataType" xml:space="preserve">
+    <value>Typ dat</value>
+  </data>
+  <data name="DataExport.RetentionPeriod" xml:space="preserve">
+    <value>Doba uchovávání</value>
+  </data>
+  <data name="DataExport.RightsTitle" xml:space="preserve">
+    <value>Vaše práva</value>
+  </data>
+  <data name="DataExport.RightAccess" xml:space="preserve">
+    <value>Právo na přístup k osobním údajům (čl. 15 GDPR)</value>
+  </data>
+  <data name="DataExport.RightRectification" xml:space="preserve">
+    <value>Právo na opravu nepřesných údajů (čl. 16 GDPR)</value>
+  </data>
+  <data name="DataExport.RightErasure" xml:space="preserve">
+    <value>Právo na výmaz údajů (čl. 17 GDPR)</value>
+  </data>
+  <data name="DataExport.RightPortability" xml:space="preserve">
+    <value>Právo na přenositelnost údajů (čl. 20 GDPR)</value>
+  </data>
+  <data name="SettingsPage.PrivacyTitle" xml:space="preserve">
+    <value>Soukromí a ochrana dat</value>
+  </data>
+  <data name="SettingsPage.PrivacyDesc" xml:space="preserve">
+    <value>Spravujte svá osobní data v souladu s GDPR. Můžete si stáhnout kopii svých dat.</value>
+  </data>
+  <data name="SettingsPage.DownloadMyData" xml:space="preserve">
+    <value>Stáhnout moje data</value>
   </data>
 </root>

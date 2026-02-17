@@ -1,0 +1,33 @@
+@page
+@model SpecEdu.Web.App.Pages.WhatsNew.IndexModel
+@inject IStringLocalizer<SpecEdu.Web.App.SharedResource> L
+@{
+    ViewData["Title"] = L["WhatsNew.Title"];
+}
+
+<section class="py-4">
+    <div class="container-fluid">
+        <h1 class="fw-bold mb-2">@L["WhatsNew.Title"]</h1>
+        <p class="text-muted mb-4">@L["WhatsNew.Subtitle"]</p>
+
+        <div class="changelog-timeline">
+            @foreach (var entry in Model.Entries)
+            {
+                <div class="changelog-entry spec-card p-4 mb-3">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h4 class="fw-bold mb-0">
+                            <span class="badge bg-primary me-2">v@(entry.Version)</span>
+                        </h4>
+                        <span class="text-muted">@entry.Date</span>
+                    </div>
+                    <ul class="mb-0">
+                        @foreach (var change in entry.Changes)
+                        {
+                            <li class="mb-1">@change</li>
+                        }
+                    </ul>
+                </div>
+            }
+        </div>
+    </div>
+</section>

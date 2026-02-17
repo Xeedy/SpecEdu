@@ -234,4 +234,16 @@
   <data name="HeaderPage.Logout" xml:space="preserve">
     <value>Log out</value>
   </data>
+  <data name="CookieConsent.Message" xml:space="preserve">
+    <value>This website uses cookies to ensure proper functionality. Some cookies are essential, others help us improve our services.</value>
+  </data>
+  <data name="CookieConsent.LearnMore" xml:space="preserve">
+    <value>Learn more</value>
+  </data>
+  <data name="CookieConsent.AcceptAll" xml:space="preserve">
+    <value>Accept All</value>
+  </data>
+  <data name="CookieConsent.RejectOptional" xml:space="preserve">
+    <value>Essential Only</value>
+  </data>
 </root>

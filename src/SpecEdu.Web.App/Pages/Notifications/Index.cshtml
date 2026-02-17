@@ -1,0 +1,109 @@
+@page
+@model SpecEdu.Web.App.Pages.Notifications.IndexModel
+@inject IStringLocalizer<SpecEdu.Web.App.SharedResource> L
+@{
+    ViewData["Title"] = L["Notifications.Title"];
+}
+
+<section class="py-4">
+    <div class="container-fluid">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h1 class="fw-bold mb-0">@L["Notifications.Title"]</h1>
+            @if (Model.Notifications.Any(n => !n.IsRead))
+            {
+                <form method="post" asp-page-handler="MarkAllRead">
+                    <button type="submit" class="btn btn-spec-outline">
+                        <i class="bi bi-check2-all me-1"></i> @L["Notifications.MarkAllRead"]
+                    </button>
+                </form>
+            }
+        </div>
+
+        @if (Model.Notifications.Count == 0)
+        {
+            <div class="spec-card p-5 text-center">
+                <i class="bi bi-bell-slash display-4 text-muted mb-3 d-block"></i>
+                <p class="text-muted mb-0">@L["Notifications.Empty"]</p>
+            </div>
+        }
+        else
+        {
+            <div class="spec-card p-0">
+                @foreach (var notification in Model.Notifications)
+                {
+                    <div class="notification-list-item @(notification.IsRead ? "" : "unread")">
+                        <div class="notification-list-icon">
+                            @switch (notification.Type)
+                            {
+                                case SpecEdu.Domain.Enums.NotificationType.DiaryEntry:
+                                    <i class="bi bi-journal-text text-info"></i>
+                                    break;
+                                case SpecEdu.Domain.Enums.NotificationType.PlppUpdate:
+                                    <i class="bi bi-file-earmark-text text-success"></i>
+                                    break;
+                                case SpecEdu.Domain.Enums.NotificationType.ConsultationInvite:
+                                    <i class="bi bi-calendar-event text-primary"></i>
+                                    break;
+                                case SpecEdu.Domain.Enums.NotificationType.ReminderDue:
+                                    <i class="bi bi-alarm text-warning"></i>
+                                    break;
+                                case SpecEdu.Domain.Enums.NotificationType.SystemAnnouncement:
+                                    <i class="bi bi-megaphone text-danger"></i>
+                                    break;
+                                default:
+                                    <i class="bi bi-info-circle text-secondary"></i>
+                                    break;
+                            }
+                        </div>
+                        <div class="notification-list-content">
+                            <div class="notification-list-title">@notification.Title</div>
+                            <div class="notification-list-message text-muted">@notification.Message</div>
+                            <div class="notification-list-time text-muted small">
+                                @notification.CreatedAt.ToString("dd.MM.yyyy HH:mm")
+                            </div>
+                        </div>
+                        <div class="notification-list-actions">
+                            @if (!notification.IsRead)
+                            {
+                                <form method="post" asp-page-handler="MarkRead" class="d-inline">
+                                    <input type="hidden" name="id" value="@notification.Id" />
+                                    <button type="submit" class="btn btn-sm btn-spec-outline" title="@L["Notifications.MarkRead"]">
+                                        <i class="bi bi-check2"></i>
+                                    </button>
+                                </form>
+                            }
+                            @if (notification.Link != null)
+                            {
+                                <a href="@notification.Link" class="btn btn-sm btn-spec-primary">
+                                    <i class="bi bi-arrow-right"></i>
+                                </a>
+                            }
+                        </div>
+                    </div>
+                }
+            </div>
+
+            <!-- Pagination -->
+            <div class="d-flex justify-content-between mt-3">
+                @if (Model.CurrentPage > 1)
+                {
+                    <a asp-page="/Notifications/Index" asp-route-page="@(Model.CurrentPage - 1)"
+                       class="btn btn-spec-outline">
+                        <i class="bi bi-chevron-left me-1"></i> @L["Common.Back"]
+                    </a>
+                }
+                else
+                {
+                    <div></div>
+                }
+                @if (Model.HasMore)
+                {
+                    <a asp-page="/Notifications/Index" asp-route-page="@(Model.CurrentPage + 1)"
+                       class="btn btn-spec-outline">
+                        @L["Notifications.LoadMore"] <i class="bi bi-chevron-right ms-1"></i>
+                    </a>
+                }
+            </div>
+        }
+    </div>
+</section>
