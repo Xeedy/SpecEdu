@@ -306,3 +306,237 @@
 body {
     background-color: var(--content-bg);
 }
+
+/* ============================================
+   Notification Bell
+   ============================================ */
+
+.btn-topbar-notification {
+    background: none;
+    border: none;
+    position: relative;
+    font-size: 1.2rem;
+    color: var(--spec-gray-600);
+    padding: 0.35rem 0.5rem;
+    cursor: pointer;
+}
+
+.btn-topbar-notification:hover {
+    color: var(--spec-gray-800);
+}
+
+.btn-topbar-notification::after {
+    display: none;
+}
+
+.notification-badge {
+    position: absolute;
+    top: 2px;
+    right: 0;
+    background: #dc3545;
+    color: #fff;
+    font-size: 0.65rem;
+    font-weight: 700;
+    border-radius: 999px;
+    min-width: 16px;
+    height: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 4px;
+    line-height: 1;
+}
+
+.notification-dropdown {
+    width: 340px;
+    padding: 0;
+    border: 1px solid var(--topbar-border);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.notification-dropdown-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid var(--topbar-border);
+    font-size: 0.9rem;
+}
+
+.notification-empty {
+    padding: 2rem 1rem;
+    text-align: center;
+}
+
+.notification-empty i {
+    font-size: 2rem;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.notification-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    text-decoration: none;
+    color: inherit;
+    border-bottom: 1px solid var(--topbar-border);
+    transition: background 0.15s;
+}
+
+.notification-item:hover {
+    background: var(--spec-gray-100);
+    color: inherit;
+}
+
+.notification-item-icon {
+    font-size: 1.1rem;
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.notification-item-content {
+    flex: 1;
+    min-width: 0;
+}
+
+.notification-item-title {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.notification-item-time {
+    display: block;
+    font-size: 0.75rem;
+    color: var(--spec-gray-500);
+}
+
+.notification-dropdown-footer {
+    padding: 0.5rem;
+    text-align: center;
+    border-top: 1px solid var(--topbar-border);
+}
+
+/* Notification list page */
+.notification-list-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1rem 1.25rem;
+    border-bottom: 1px solid var(--topbar-border);
+}
+
+.notification-list-item.unread {
+    background: rgba(74, 144, 217, 0.05);
+    border-left: 3px solid var(--spec-primary);
+}
+
+.notification-list-icon {
+    font-size: 1.3rem;
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.notification-list-content {
+    flex: 1;
+    min-width: 0;
+}
+
+.notification-list-title {
+    font-weight: 600;
+    font-size: 0.95rem;
+    margin-bottom: 0.15rem;
+}
+
+.notification-list-message {
+    font-size: 0.85rem;
+    margin-bottom: 0.25rem;
+}
+
+.notification-list-actions {
+    display: flex;
+    gap: 0.5rem;
+    flex-shrink: 0;
+    align-items: center;
+}
+
+/* ============================================
+   Version Display in Sidebar
+   ============================================ */
+
+.sidebar-version {
+    text-align: center;
+    padding-bottom: 0.75rem;
+}
+
+.sidebar-version-link {
+    font-size: 0.7rem;
+    color: var(--sidebar-section-text);
+    text-decoration: none;
+    opacity: 0.7;
+    transition: opacity 0.15s;
+}
+
+.sidebar-version-link:hover {
+    opacity: 1;
+    color: var(--sidebar-text-hover);
+}
+
+/* ============================================
+   Cookie Consent Banner
+   ============================================ */
+
+.cookie-consent {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 9999;
+    background: #1e293b;
+    color: #f1f5f9;
+    padding: 1rem;
+    display: flex;
+    justify-content: center;
+}
+
+.cookie-consent-inner {
+    max-width: 960px;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.cookie-consent-text {
+    font-size: 0.9rem;
+}
+
+.cookie-consent-link {
+    color: #93c5fd;
+    margin-left: 0.25rem;
+}
+
+.cookie-consent-actions {
+    display: flex;
+    gap: 0.5rem;
+    flex-shrink: 0;
+}
+
+/* ============================================
+   Changelog / What's New
+   ============================================ */
+
+.changelog-entry ul {
+    padding-left: 1.25rem;
+}
+
+.changelog-entry li {
+    font-size: 0.95rem;
+    color: var(--spec-gray-700);
+}

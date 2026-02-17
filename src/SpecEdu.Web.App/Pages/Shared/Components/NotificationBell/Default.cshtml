@@ -1,0 +1,72 @@
+@model SpecEdu.Web.App.ViewComponents.NotificationBellViewModel
+@inject IStringLocalizer<SpecEdu.Web.App.SharedResource> L
+
+<div class="notification-bell-wrapper">
+    <div class="dropdown">
+        <button class="btn btn-topbar-notification dropdown-toggle" type="button"
+                id="notificationDropdown" data-bs-toggle="dropdown" aria-expanded="false"
+                data-bs-auto-close="outside">
+            <i class="bi bi-bell"></i>
+            @if (Model.UnreadCount > 0)
+            {
+                <span class="notification-badge">@(Model.UnreadCount > 99 ? "99+" : Model.UnreadCount.ToString())</span>
+            }
+        </button>
+        <div class="dropdown-menu dropdown-menu-end notification-dropdown" aria-labelledby="notificationDropdown">
+            <div class="notification-dropdown-header">
+                <span class="fw-bold">@L["Notifications.Title"]</span>
+                @if (Model.UnreadCount > 0)
+                {
+                    <form method="post" asp-page="/Notifications/Index" asp-page-handler="MarkAllRead" class="d-inline">
+                        <button type="submit" class="btn btn-sm btn-link p-0">@L["Notifications.MarkAllRead"]</button>
+                    </form>
+                }
+            </div>
+            @if (Model.RecentNotifications.Count == 0)
+            {
+                <div class="notification-empty">
+                    <i class="bi bi-bell-slash text-muted"></i>
+                    <p class="text-muted mb-0">@L["Notifications.NoNew"]</p>
+                </div>
+            }
+            else
+            {
+                @foreach (var item in Model.RecentNotifications)
+                {
+                    <a href="@(item.Link ?? "/Notifications")" class="notification-item">
+                        <div class="notification-item-icon">
+                            @switch (item.Type)
+                            {
+                                case SpecEdu.Domain.Enums.NotificationType.DiaryEntry:
+                                    <i class="bi bi-journal-text text-info"></i>
+                                    break;
+                                case SpecEdu.Domain.Enums.NotificationType.PlppUpdate:
+                                    <i class="bi bi-file-earmark-text text-success"></i>
+                                    break;
+                                case SpecEdu.Domain.Enums.NotificationType.ConsultationInvite:
+                                    <i class="bi bi-calendar-event text-primary"></i>
+                                    break;
+                                case SpecEdu.Domain.Enums.NotificationType.ReminderDue:
+                                    <i class="bi bi-alarm text-warning"></i>
+                                    break;
+                                case SpecEdu.Domain.Enums.NotificationType.SystemAnnouncement:
+                                    <i class="bi bi-megaphone text-danger"></i>
+                                    break;
+                                default:
+                                    <i class="bi bi-info-circle text-secondary"></i>
+                                    break;
+                            }
+                        </div>
+                        <div class="notification-item-content">
+                            <span class="notification-item-title">@item.Title</span>
+                            <span class="notification-item-time">@item.CreatedAt.ToString("dd.MM. HH:mm")</span>
+                        </div>
+                    </a>
+                }
+            }
+            <div class="notification-dropdown-footer">
+                <a href="/Notifications" class="btn btn-sm btn-link w-100">@L["Notifications.ViewAll"]</a>
+            </div>
+        </div>
+    </div>
+</div>

@@ -90,6 +90,8 @@ public static class DependencyInjection
         services.AddScoped<IPlppVersionService, PlppVersionService>();
         services.AddScoped<IPdfService, PdfService>();
         services.AddScoped<IConsultationService, ConsultationService>();
+        services.AddScoped<INotificationService, NotificationService>();
+        services.AddScoped<IGdprService, GdprService>();
 
         services.AddTransient(typeof(Lazy<>), typeof(LazyResolver<>));
 

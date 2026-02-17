@@ -51,6 +51,10 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser, IdentityR
 
     public DbSet<ConsultationParticipant> ConsultationParticipants => Set<ConsultationParticipant>();
 
+    public DbSet<Notification> Notifications => Set<Notification>();
+
+    public DbSet<UserConsent> UserConsents => Set<UserConsent>();
+
     public override int SaveChanges()
     {
         UpdateAuditFields();

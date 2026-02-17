@@ -4,6 +4,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <RootNamespace>SpecEdu.Web.Public</RootNamespace>
+    <UserSecretsId>15639074-7ab4-4d1e-bdad-836177e97a44</UserSecretsId>
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\SpecEdu.Application\SpecEdu.Application.csproj" />

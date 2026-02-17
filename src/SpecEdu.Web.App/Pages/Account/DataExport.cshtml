@@ -1,0 +1,61 @@
+@page
+@model SpecEdu.Web.App.Pages.Account.DataExportModel
+@inject IStringLocalizer<SpecEdu.Web.App.SharedResource> L
+@{
+    ViewData["Title"] = L["DataExport.Title"];
+}
+
+<section class="py-5">
+    <div class="container">
+        <h1 class="fw-bold mb-4">@L["DataExport.Title"]</h1>
+
+        <div class="row">
+            <div class="col-lg-8">
+                <!-- Data Export -->
+                <div class="spec-card p-4 mb-4">
+                    <h4 class="fw-bold mb-3">@L["DataExport.DownloadTitle"]</h4>
+                    <p class="text-muted mb-3">@L["DataExport.DownloadDesc"]</p>
+                    <form method="post" asp-page-handler="Download">
+                        <button type="submit" class="btn btn-spec-primary">
+                            <i class="bi bi-download me-2"></i>@L["DataExport.DownloadBtn"]
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Data Retention -->
+                <div class="spec-card p-4 mb-4">
+                    <h4 class="fw-bold mb-3">@L["DataExport.RetentionTitle"]</h4>
+                    <p class="text-muted mb-3">@L["DataExport.RetentionDesc"]</p>
+                    <table class="table table-sm">
+                        <thead>
+                            <tr>
+                                <th>@L["DataExport.DataType"]</th>
+                                <th>@L["DataExport.RetentionPeriod"]</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.RetentionPolicy)
+                            {
+                                <tr>
+                                    <td>@item.Key</td>
+                                    <td>@item.Value</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Rights Info -->
+                <div class="spec-card p-4">
+                    <h4 class="fw-bold mb-3">@L["DataExport.RightsTitle"]</h4>
+                    <ul class="mb-0">
+                        <li class="mb-2">@L["DataExport.RightAccess"]</li>
+                        <li class="mb-2">@L["DataExport.RightRectification"]</li>
+                        <li class="mb-2">@L["DataExport.RightErasure"]</li>
+                        <li class="mb-2">@L["DataExport.RightPortability"]</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

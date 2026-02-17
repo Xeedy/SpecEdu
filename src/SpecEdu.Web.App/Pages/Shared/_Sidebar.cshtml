@@ -109,6 +109,18 @@
                             <span>@L["Sidebar.Schools"]</span>
                         </a>
                     </li>
+                    <li>
+                        <a class="sidebar-link @(currentPage.Contains("Admin/Users") ? "active" : "")" asp-page="/Admin/Users/Index">
+                            <i class="bi bi-people"></i>
+                            <span>@L["Sidebar.Users"]</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="sidebar-link @(currentPage.Contains("Admin/AuditLog") ? "active" : "")" asp-page="/Admin/AuditLog/Index">
+                            <i class="bi bi-journal-text"></i>
+                            <span>@L["Sidebar.AuditLog"]</span>
+                        </a>
+                    </li>
                 </ul>
             </div>
         }
@@ -116,6 +128,9 @@
 
     <!-- User info at bottom -->
     <div class="sidebar-footer">
+        <div class="sidebar-version">
+            <a href="/WhatsNew" class="sidebar-version-link">v@(SpecEdu.Application.Common.AppVersion.Version)</a>
+        </div>
         <div class="sidebar-user">
             <div class="sidebar-user-avatar">
                 <i class="bi bi-person-circle"></i>
@@ -123,11 +138,11 @@
             <div class="sidebar-user-info">
                 <span class="sidebar-user-name">@User.Identity?.Name</span>
                 <span class="sidebar-user-role">
-                    @if (User.IsInRole("Admin")) { <text>Admin</text> }
-                    else if (User.IsInRole("SchoolAdmin")) { <text>Správce školy</text> }
-                    else if (User.IsInRole("Teacher")) { <text>Učitel</text> }
-                    else if (User.IsInRole("Parent")) { <text>Rodič</text> }
-                    else if (User.IsInRole("SPP")) { <text>ŠPP</text> }
+                    @if (User.IsInRole("Admin")) { @L["Role.Admin"] }
+                    else if (User.IsInRole("SchoolAdmin")) { @L["Role.SchoolAdmin"] }
+                    else if (User.IsInRole("Teacher")) { @L["Role.Teacher"] }
+                    else if (User.IsInRole("Parent")) { @L["Role.Parent"] }
+                    else if (User.IsInRole("SPP")) { @L["Role.SPP"] }
                 </span>
             </div>
         </div>

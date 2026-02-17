@@ -231,17 +231,221 @@
   <data name="HeaderPage.Admin" xml:space="preserve">
     <value>Admin</value>
   </data>
-  <data name="HeaderPage.Students" xml:space="preserve">
-    <value>Students</value>
+  <data name="HeaderPage.Logout" xml:space="preserve">
+    <value>Log out</value>
   </data>
   <data name="HeaderPage.Dashboard" xml:space="preserve">
     <value>Dashboard</value>
   </data>
+  <data name="HeaderPage.Students" xml:space="preserve">
+    <value>Students</value>
+  </data>
   <data name="HeaderPage.MyChildren" xml:space="preserve">
     <value>My Children</value>
   </data>
-  <data name="HeaderPage.Logout" xml:space="preserve">
-    <value>Log out</value>
+  <data name="Sidebar.Dashboard" xml:space="preserve">
+    <value>Dashboard</value>
+  </data>
+  <data name="Sidebar.Main" xml:space="preserve">
+    <value>Main</value>
+  </data>
+  <data name="Sidebar.Calendar" xml:space="preserve">
+    <value>Calendar</value>
+  </data>
+  <data name="Sidebar.Management" xml:space="preserve">
+    <value>Management</value>
+  </data>
+  <data name="Sidebar.Students" xml:space="preserve">
+    <value>Students</value>
+  </data>
+  <data name="Sidebar.Family" xml:space="preserve">
+    <value>Family</value>
+  </data>
+  <data name="Sidebar.MyChildren" xml:space="preserve">
+    <value>My Children</value>
+  </data>
+  <data name="Sidebar.Administration" xml:space="preserve">
+    <value>Administration</value>
+  </data>
+  <data name="Sidebar.AdminPanel" xml:space="preserve">
+    <value>Admin Panel</value>
+  </data>
+  <data name="Sidebar.Schools" xml:space="preserve">
+    <value>Schools</value>
+  </data>
+  <data name="Sidebar.Users" xml:space="preserve">
+    <value>Users</value>
+  </data>
+  <data name="Sidebar.AuditLog" xml:space="preserve">
+    <value>Audit Log</value>
+  </data>
+  <data name="Role.Admin" xml:space="preserve">
+    <value>Admin</value>
+  </data>
+  <data name="Role.SchoolAdmin" xml:space="preserve">
+    <value>School Admin</value>
+  </data>
+  <data name="Role.Teacher" xml:space="preserve">
+    <value>Teacher</value>
+  </data>
+  <data name="Role.Parent" xml:space="preserve">
+    <value>Parent</value>
+  </data>
+  <data name="Role.SPP" xml:space="preserve">
+    <value>SPP</value>
+  </data>
+  <data name="TopBar.Profile" xml:space="preserve">
+    <value>Profile</value>
+  </data>
+  <data name="TopBar.Settings" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="TopBar.PublicSite" xml:space="preserve">
+    <value>Public Site</value>
+  </data>
+  <data name="TopBar.Logout" xml:space="preserve">
+    <value>Log Out</value>
+  </data>
+  <data name="Notifications.Title" xml:space="preserve">
+    <value>Notifications</value>
+  </data>
+  <data name="Notifications.MarkAllRead" xml:space="preserve">
+    <value>Mark all as read</value>
+  </data>
+  <data name="Notifications.MarkRead" xml:space="preserve">
+    <value>Mark as read</value>
+  </data>
+  <data name="Notifications.NoNew" xml:space="preserve">
+    <value>No new notifications</value>
+  </data>
+  <data name="Notifications.ViewAll" xml:space="preserve">
+    <value>View all notifications</value>
+  </data>
+  <data name="Notifications.Empty" xml:space="preserve">
+    <value>You have no notifications.</value>
+  </data>
+  <data name="Notifications.LoadMore" xml:space="preserve">
+    <value>Load more</value>
+  </data>
+  <data name="WhatsNew.Title" xml:space="preserve">
+    <value>What's New</value>
+  </data>
+  <data name="WhatsNew.Subtitle" xml:space="preserve">
+    <value>Overview of changes and new features in SpecEdu.</value>
+  </data>
+  <data name="CookieConsent.Message" xml:space="preserve">
+    <value>This application uses cookies to ensure proper functionality. Some cookies are essential, others help us improve our services.</value>
+  </data>
+  <data name="CookieConsent.LearnMore" xml:space="preserve">
+    <value>Learn more</value>
+  </data>
+  <data name="CookieConsent.AcceptAll" xml:space="preserve">
+    <value>Accept All</value>
+  </data>
+  <data name="CookieConsent.RejectOptional" xml:space="preserve">
+    <value>Essential Only</value>
+  </data>
+  <data name="DataExport.Title" xml:space="preserve">
+    <value>Privacy &amp; Data</value>
+  </data>
+  <data name="DataExport.DownloadTitle" xml:space="preserve">
+    <value>Download My Data</value>
+  </data>
+  <data name="DataExport.DownloadDesc" xml:space="preserve">
+    <value>Download a copy of all your personal data in JSON format in accordance with GDPR (Art. 20).</value>
+  </data>
+  <data name="DataExport.DownloadBtn" xml:space="preserve">
+    <value>Download Data</value>
+  </data>
+  <data name="DataExport.RetentionTitle" xml:space="preserve">
+    <value>Data Retention Policy</value>
+  </data>
+  <data name="DataExport.RetentionDesc" xml:space="preserve">
+    <value>Overview of retention periods for different data types.</value>
+  </data>
+  <data name="DataExport.DataType" xml:space="preserve">
+    <value>Data Type</value>
+  </data>
+  <data name="DataExport.RetentionPeriod" xml:space="preserve">
+    <value>Retention Period</value>
+  </data>
+  <data name="DataExport.RightsTitle" xml:space="preserve">
+    <value>Your Rights</value>
+  </data>
+  <data name="DataExport.RightAccess" xml:space="preserve">
+    <value>Right of access to personal data (Art. 15 GDPR)</value>
+  </data>
+  <data name="DataExport.RightRectification" xml:space="preserve">
+    <value>Right to rectification of inaccurate data (Art. 16 GDPR)</value>
+  </data>
+  <data name="DataExport.RightErasure" xml:space="preserve">
+    <value>Right to erasure of data (Art. 17 GDPR)</value>
+  </data>
+  <data name="DataExport.RightPortability" xml:space="preserve">
+    <value>Right to data portability (Art. 20 GDPR)</value>
+  </data>
+  <data name="SettingsPage.Title" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="SettingsPage.PasswordChange" xml:space="preserve">
+    <value>Change Password</value>
+  </data>
+  <data name="SettingsPage.Language" xml:space="preserve">
+    <value>Language</value>
+  </data>
+  <data name="SettingsPage.General" xml:space="preserve">
+    <value>General</value>
+  </data>
+  <data name="SettingsPage.Notifications" xml:space="preserve">
+    <value>Notifications</value>
+  </data>
+  <data name="SettingsPage.Privacy" xml:space="preserve">
+    <value>Privacy &amp; Data</value>
+  </data>
+  <data name="SettingsPage.CurrentPassword" xml:space="preserve">
+    <value>Current Password</value>
+  </data>
+  <data name="SettingsPage.NewPassword" xml:space="preserve">
+    <value>New Password</value>
+  </data>
+  <data name="SettingsPage.ConfirmPassword" xml:space="preserve">
+    <value>Confirm Password</value>
+  </data>
+  <data name="SettingsPage.ChangePasswordBtn" xml:space="preserve">
+    <value>Change Password</value>
+  </data>
+  <data name="SettingsPage.PasswordChangeSuccess" xml:space="preserve">
+    <value>Password changed successfully.</value>
+  </data>
+  <data name="SettingsPage.LanguageSettings" xml:space="preserve">
+    <value>Language Settings</value>
+  </data>
+  <data name="SettingsPage.Timezone" xml:space="preserve">
+    <value>Timezone</value>
+  </data>
+  <data name="SettingsPage.DateFormat" xml:space="preserve">
+    <value>Date Format</value>
+  </data>
+  <data name="SettingsPage.NotificationSettings" xml:space="preserve">
+    <value>Notification Settings</value>
+  </data>
+  <data name="SettingsPage.EmailNotifications" xml:space="preserve">
+    <value>Email Notifications</value>
+  </data>
+  <data name="SettingsPage.DocumentNotifications" xml:space="preserve">
+    <value>Document Notifications</value>
+  </data>
+  <data name="SettingsPage.MarketingNotifications" xml:space="preserve">
+    <value>Marketing Notifications</value>
+  </data>
+  <data name="SettingsPage.PrivacyTitle" xml:space="preserve">
+    <value>Privacy &amp; Data Protection</value>
+  </data>
+  <data name="SettingsPage.PrivacyDesc" xml:space="preserve">
+    <value>Manage your personal data in accordance with GDPR. You can download a copy of your data.</value>
+  </data>
+  <data name="SettingsPage.DownloadMyData" xml:space="preserve">
+    <value>Download My Data</value>
   </data>
   <data name="Common.ComingSoon" xml:space="preserve">
     <value>Soon</value>
@@ -252,6 +456,93 @@
   </data>
   <data name="ContactPage.Address" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
+  </data>
+  <data name="TermsPage.Title" xml:space="preserve">
+    <value>Terms of service</value>
+  </data>
+  <data name="TermsPage.Section3Title" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="TermsPage.Section4Title" xml:space="preserve">
+    <value>User responsible for the damages caused by service:</value>
+  </data>
+  <data name="TermsPage.Section4Content" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="TermsPage.Section5Title" xml:space="preserve">
+    <value>Service termination</value>
+  </data>
+  <data name="TermsPage.Section5Content" xml:space="preserve">
+    <value>User can whenever ask for account removal</value>
+  </data>
+  <data name="TermsPage.Section6Title" xml:space="preserve">
+    <value>Final resolution</value>
+  </data>
+  <data name="TermsPage.Section6Content" xml:space="preserve">
+    <value>These validations are according to Cezch law.</value>
+  </data>
+  <data name="DashboardPage.Welcome" xml:space="preserve">
+    <value>Welcome</value>
+  </data>
+  <data name="DashboardPage.WelcomeDesc" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="Common.Search" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="Common.Actions" xml:space="preserve">
+    <value>Actions</value>
+  </data>
+  <data name="Common.Active" xml:space="preserve">
+    <value>Active</value>
+  </data>
+  <data name="Common.Inactive" xml:space="preserve">
+    <value>Inactive</value>
+  </data>
+  <data name="Common.View" xml:space="preserve">
+    <value>Show</value>
+  </data>
+  <data name="Common.Edit" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="Common.Save" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="Common.Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="Common.Back" xml:space="preserve">
+    <value>Back</value>
+  </data>
+  <data name="Common.BackToDashboard" xml:space="preserve">
+    <value>To dashboard</value>
+  </data>
+  <data name="Common.Manage" xml:space="preserve">
+    <value>Manage</value>
+  </data>
+  <data name="Common.Deactivate" xml:space="preserve">
+    <value>Deactivate</value>
+  </data>
+  <data name="Common.Select" xml:space="preserve">
+    <value>Choose</value>
+  </data>
+  <data name="Common.Add" xml:space="preserve">
+    <value>Add</value>
+  </data>
+  <data name="Common.Remove" xml:space="preserve">
+    <value>Remove</value>
+  </data>
+  <data name="Common.ConfirmRemove" xml:space="preserve">
+    <value>Do you really want to delete this connection?</value>
+  </data>
+  <data name="Common.NoRecentActivity" xml:space="preserve">
+    <value>No recent activity.</value>
+  </data>
+  <data name="Common.Filter" xml:space="preserve">
+    <value>Filter</value>
+  </data>
+  <data name="Common.BackToDetails" xml:space="preserve">
+    <value>Back to detail</value>
   </data>
   <data name="Common.Create" xml:space="preserve">
     <value>Create</value>
@@ -307,7 +598,6 @@
   <data name="StudentsPage.PlppInfo" xml:space="preserve">
     <value>Manage pedagogical support plans (PLPP) for the student.</value>
   </data>
-  <!-- Calendar / Consultation -->
   <data name="CalendarPage.Title" xml:space="preserve">
     <value>Consultation Calendar</value>
   </data>

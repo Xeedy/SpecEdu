@@ -2,5 +2,7 @@ namespace SpecEdu.Domain.Enums;
 
 public enum NotificationChannel
 {
-    Email = 1
+    Email = 1,
+
+    InApp = 2
 }

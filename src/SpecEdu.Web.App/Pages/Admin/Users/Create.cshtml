@@ -1,0 +1,113 @@
+@page
+@model SpecEdu.Web.App.Pages.Admin.Users.CreateModel
+@{
+    ViewData["Title"] = "Přidat uživatele";
+}
+
+<div class="container py-4">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+
+            <h1 class="mb-4">Přidat uživatele</h1>
+
+            @if (!string.IsNullOrWhiteSpace(Model.ErrorMessage))
+            {
+                <div class="alert alert-danger" role="alert">
+                    @Model.ErrorMessage
+                </div>
+            }
+
+            <div asp-validation-summary="All" class="text-danger mb-3"></div>
+
+            <div class="spec-card">
+                <div class="spec-card-header">Údaje o uživateli</div>
+                <div class="spec-card-body">
+                    <form method="post" class="needs-validation" novalidate>
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label class="form-label">E-mail <span class="text-danger">*</span></label>
+                                <input type="email" class="form-control" asp-for="Input.Email"
+                                       placeholder="uzivatel@skola.cz" required />
+                                <span class="text-danger" asp-validation-for="Input.Email"></span>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="form-label">Heslo <span class="text-danger">*</span></label>
+                                <input type="password" class="form-control" asp-for="Input.Password"
+                                       placeholder="Minimálně 6 znaků" required />
+                                <span class="text-danger" asp-validation-for="Input.Password"></span>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="form-label">Jméno <span class="text-danger">*</span></label>
+                                <input class="form-control" asp-for="Input.FirstName"
+                                       placeholder="Jan" required />
+                                <span class="text-danger" asp-validation-for="Input.FirstName"></span>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="form-label">Příjmení <span class="text-danger">*</span></label>
+                                <input class="form-control" asp-for="Input.LastName"
+                                       placeholder="Novák" required />
+                                <span class="text-danger" asp-validation-for="Input.LastName"></span>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="form-label">Škola</label>
+                                <select class="form-select" asp-for="Input.SchoolId">
+                                    <option value="">-- Bez školy (globální) --</option>
+                                    @foreach (var school in Model.Schools)
+                                    {
+                                        <option value="@school.Id">@school.Name</option>
+                                    }
+                                </select>
+                            </div>
+
+                            <hr class="my-2" />
+
+                            <div class="col-12">
+                                <label class="form-label">Role <span class="text-danger">*</span></label>
+                                <div class="d-flex flex-wrap gap-3">
+                                    @foreach (var role in Model.AvailableRoles)
+                                    {
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox"
+                                                   name="SelectedRoles" value="@role.Value"
+                                                   id="role_@role.Value"
+                                                   @(Model.SelectedRoles.Contains(role.Value) ? "checked" : "") />
+                                            <label class="form-check-label" for="role_@role.Value">@role.Label</label>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+
+                            <div class="col-12 d-flex gap-2 flex-wrap mt-3">
+                                <button type="submit" class="btn btn-spec-primary">Vytvořit uživatele</button>
+                                <a asp-page="Index" class="btn btn-outline-secondary">Zrušit</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        (function () {
+            const forms = document.querySelectorAll('.needs-validation');
+            Array.prototype.slice.call(forms).forEach(function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (!form.checkValidity()) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        })();
+    </script>
+}

@@ -1,0 +1,57 @@
+@inject IStringLocalizer<SpecEdu.Web.Public.SharedResource> L
+
+<div id="cookieConsent" class="cookie-consent" style="display:none;">
+    <div class="cookie-consent-inner">
+        <div class="cookie-consent-text">
+            <i class="bi bi-shield-lock me-2"></i>
+            <span>@L["CookieConsent.Message"]</span>
+            <a href="/Privacy" class="cookie-consent-link">@L["CookieConsent.LearnMore"]</a>
+        </div>
+        <div class="cookie-consent-actions">
+            <button type="button" class="btn btn-sm btn-outline-light" onclick="setCookieConsent('essential')">
+                @L["CookieConsent.RejectOptional"]
+            </button>
+            <button type="button" class="btn btn-sm btn-light" onclick="setCookieConsent('all')">
+                @L["CookieConsent.AcceptAll"]
+            </button>
+        </div>
+    </div>
+</div>
+
+<script>
+    function setCookieConsent(level) {
+        document.cookie = "cookie_consent=" + level + ";path=/;max-age=31536000;SameSite=Lax";
+        document.getElementById('cookieConsent').style.display = 'none';
+    }
+    (function () {
+        if (!document.cookie.split(';').some(function (c) { return c.trim().startsWith('cookie_consent='); })) {
+            document.getElementById('cookieConsent').style.display = 'flex';
+        }
+    })();
+</script>
+
+<style>
+    .cookie-consent {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 9999;
+        background: #1e293b;
+        color: #f1f5f9;
+        padding: 1rem;
+        display: flex;
+        justify-content: center;
+    }
+    .cookie-consent-inner {
+        max-width: 960px;
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .cookie-consent-text { font-size: 0.9rem; }
+    .cookie-consent-link { color: #93c5fd; margin-left: 0.25rem; }
+    .cookie-consent-actions { display: flex; gap: 0.5rem; flex-shrink: 0; }
+</style>
