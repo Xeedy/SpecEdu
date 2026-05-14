@@ -1,0 +1,88 @@
+# MSSQL Server for SpecEdu
+# Apply manually (NOT managed by helm):
+#   kubectl create namespace specedu --dry-run=client -o yaml | kubectl apply -f -
+#   kubectl -n specedu create secret generic mssql-sa --from-literal=SA_PASSWORD='<StrongP@ssw0rd>'
+#   kubectl apply -f k8s/mssql.yaml
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mssql
+  namespace: specedu
+  labels:
+    app: mssql
+spec:
+  type: ClusterIP
+  ports:
+    - port: 1433
+      targetPort: 1433
+      protocol: TCP
+      name: tds
+  selector:
+    app: mssql
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: mssql
+  namespace: specedu
+  labels:
+    app: mssql
+spec:
+  serviceName: mssql
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mssql
+  template:
+    metadata:
+      labels:
+        app: mssql
+    spec:
+      terminationGracePeriodSeconds: 30
+      securityContext:
+        fsGroup: 10001
+      containers:
+        - name: mssql
+          image: mcr.microsoft.com/mssql/server:2022-latest
+          ports:
+            - containerPort: 1433
+              name: tds
+          env:
+            - name: ACCEPT_EULA
+              value: "Y"
+            - name: MSSQL_PID
+              value: "Developer"
+            - name: MSSQL_SA_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mssql-sa
+                  key: SA_PASSWORD
+          resources:
+            requests:
+              memory: "2Gi"
+              cpu: "500m"
+            limits:
+              memory: "4Gi"
+              cpu: "2"
+          volumeMounts:
+            - name: data
+              mountPath: /var/opt/mssql
+          livenessProbe:
+            tcpSocket:
+              port: 1433
+            initialDelaySeconds: 60
+            periodSeconds: 20
+          readinessProbe:
+            tcpSocket:
+              port: 1433
+            initialDelaySeconds: 30
+            periodSeconds: 10
+  volumeClaimTemplates:
+    - metadata:
+        name: data
+      spec:
+        accessModes: [ReadWriteOnce]
+        resources:
+          requests:
+            storage: 10Gi

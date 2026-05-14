@@ -86,5 +86,7 @@ jobs:
             $EXTRA_VALUES \
             --set webPublic.image.tag=${{ github.sha }} \
             --set webApp.image.tag=${{ github.sha }} \
+            --set-string secrets.dbConnection="${{ secrets.SPECEDU_DB_CONNECTION }}" \
+            --set-string secrets.jwtSecret="${{ secrets.SPECEDU_JWT_SECRET }}" \
             --wait \
             --timeout 5m
