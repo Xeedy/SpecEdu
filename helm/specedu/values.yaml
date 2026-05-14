@@ -55,10 +55,8 @@ environment: Production
 
 healthChecks:
   liveness:
-    path: /health
     initialDelaySeconds: 30
     periodSeconds: 10
   readiness:
-    path: /health
     initialDelaySeconds: 5
     periodSeconds: 5
