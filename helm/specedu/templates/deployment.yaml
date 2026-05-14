@@ -1,223 +1,91 @@
----
-# Main branch - Web Public
 {{- if .Values.webPublic.enabled }}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: web-public-main
-  namespace: {{ .Values.namespace }}
+  name: web-public
   labels:
     app: specedu
     component: web-public
-    branch: main
 spec:
-  replicas: {{ .Values.webPublic.replicas.main }}
+  replicas: {{ .Values.webPublic.replicas }}
   selector:
     matchLabels:
       app: specedu
       component: web-public
-      branch: main
   template:
     metadata:
       labels:
         app: specedu
         component: web-public
-        branch: main
     spec:
       containers:
-      - name: web-public
-        image: "{{ .Values.webPublic.image.repository }}:main"
-        imagePullPolicy: Always
-        ports:
-        - containerPort: {{ .Values.webPublic.service.port }}
-          name: http
-        env:
-        - name: ASPNETCORE_ENVIRONMENT
-          value: {{ .Values.environment }}
-        resources:
-          requests:
-            memory: {{ .Values.webPublic.resources.requests.memory }}
-            cpu: {{ .Values.webPublic.resources.requests.cpu }}
-          limits:
-            memory: {{ .Values.webPublic.resources.limits.memory }}
-            cpu: {{ .Values.webPublic.resources.limits.cpu }}
-        livenessProbe:
-          httpGet:
-            path: {{ .Values.healthChecks.liveness.path }}
-            port: {{ .Values.webPublic.service.port }}
-          initialDelaySeconds: {{ .Values.healthChecks.liveness.initialDelaySeconds }}
-          periodSeconds: {{ .Values.healthChecks.liveness.periodSeconds }}
-        readinessProbe:
-          httpGet:
-            path: {{ .Values.healthChecks.readiness.path }}
-            port: {{ .Values.webPublic.service.port }}
-          initialDelaySeconds: {{ .Values.healthChecks.readiness.initialDelaySeconds }}
-          periodSeconds: {{ .Values.healthChecks.readiness.periodSeconds }}
-
----
-# Test branch - Web Public
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: web-public-test
-  namespace: {{ .Values.namespace }}
-  labels:
-    app: specedu
-    component: web-public
-    branch: test
-spec:
-  replicas: {{ .Values.webPublic.replicas.test }}
-  selector:
-    matchLabels:
-      app: specedu
-      component: web-public
-      branch: test
-  template:
-    metadata:
-      labels:
-        app: specedu
-        component: web-public
-        branch: test
-    spec:
-      containers:
-      - name: web-public
-        image: "{{ .Values.webPublic.image.repository }}:test"
-        imagePullPolicy: Always
-        ports:
-        - containerPort: {{ .Values.webPublic.service.port }}
-          name: http
-        env:
-        - name: ASPNETCORE_ENVIRONMENT
-          value: {{ .Values.environment }}
-        resources:
-          requests:
-            memory: {{ .Values.webPublic.resources.requests.memory }}
-            cpu: {{ .Values.webPublic.resources.requests.cpu }}
-          limits:
-            memory: {{ .Values.webPublic.resources.limits.memory }}
-            cpu: {{ .Values.webPublic.resources.limits.cpu }}
-        livenessProbe:
-          httpGet:
-            path: {{ .Values.healthChecks.liveness.path }}
-            port: {{ .Values.webPublic.service.port }}
-          initialDelaySeconds: {{ .Values.healthChecks.liveness.initialDelaySeconds }}
-          periodSeconds: {{ .Values.healthChecks.liveness.periodSeconds }}
-        readinessProbe:
-          httpGet:
-            path: {{ .Values.healthChecks.readiness.path }}
-            port: {{ .Values.webPublic.service.port }}
-          initialDelaySeconds: {{ .Values.healthChecks.readiness.initialDelaySeconds }}
-          periodSeconds: {{ .Values.healthChecks.readiness.periodSeconds }}
+        - name: web-public
+          image: "{{ .Values.webPublic.image.repository }}:{{ .Values.webPublic.image.tag }}"
+          imagePullPolicy: {{ .Values.webPublic.image.pullPolicy }}
+          ports:
+            - containerPort: {{ .Values.webPublic.service.port }}
+              name: http
+          env:
+            - name: ASPNETCORE_ENVIRONMENT
+              value: {{ .Values.environment | quote }}
+          resources:
+            {{- toYaml .Values.webPublic.resources | nindent 12 }}
+          livenessProbe:
+            httpGet:
+              path: {{ .Values.healthChecks.liveness.path }}
+              port: {{ .Values.webPublic.service.port }}
+            initialDelaySeconds: {{ .Values.healthChecks.liveness.initialDelaySeconds }}
+            periodSeconds: {{ .Values.healthChecks.liveness.periodSeconds }}
+          readinessProbe:
+            httpGet:
+              path: {{ .Values.healthChecks.readiness.path }}
+              port: {{ .Values.webPublic.service.port }}
+            initialDelaySeconds: {{ .Values.healthChecks.readiness.initialDelaySeconds }}
+            periodSeconds: {{ .Values.healthChecks.readiness.periodSeconds }}
 {{- end }}
-
----
-# Main branch - Web App
 {{- if .Values.webApp.enabled }}
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: web-app-main
-  namespace: {{ .Values.namespace }}
-  labels:
-    app: specedu
-    component: web-app
-    branch: main
-spec:
-  replicas: {{ .Values.webApp.replicas.main }}
-  selector:
-    matchLabels:
-      app: specedu
-      component: web-app
-      branch: main
-  template:
-    metadata:
-      labels:
-        app: specedu
-        component: web-app
-        branch: main
-    spec:
-      containers:
-      - name: web-app
-        image: "{{ .Values.webApp.image.repository }}:main"
-        imagePullPolicy: Always
-        ports:
-        - containerPort: {{ .Values.webApp.service.port }}
-          name: http
-        env:
-        - name: ASPNETCORE_ENVIRONMENT
-          value: {{ .Values.environment }}
-        resources:
-          requests:
-            memory: {{ .Values.webApp.resources.requests.memory }}
-            cpu: {{ .Values.webApp.resources.requests.cpu }}
-          limits:
-            memory: {{ .Values.webApp.resources.limits.memory }}
-            cpu: {{ .Values.webApp.resources.limits.cpu }}
-        livenessProbe:
-          httpGet:
-            path: {{ .Values.healthChecks.liveness.path }}
-            port: {{ .Values.webApp.service.port }}
-          initialDelaySeconds: {{ .Values.healthChecks.liveness.initialDelaySeconds }}
-          periodSeconds: {{ .Values.healthChecks.liveness.periodSeconds }}
-        readinessProbe:
-          httpGet:
-            path: {{ .Values.healthChecks.readiness.path }}
-            port: {{ .Values.webApp.service.port }}
-          initialDelaySeconds: {{ .Values.healthChecks.readiness.initialDelaySeconds }}
-          periodSeconds: {{ .Values.healthChecks.readiness.periodSeconds }}
-
 ---
-# Test branch - Web App
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: web-app-test
-  namespace: {{ .Values.namespace }}
+  name: web-app
   labels:
     app: specedu
     component: web-app
-    branch: test
 spec:
-  replicas: {{ .Values.webApp.replicas.test }}
+  replicas: {{ .Values.webApp.replicas }}
   selector:
     matchLabels:
       app: specedu
       component: web-app
-      branch: test
   template:
     metadata:
       labels:
         app: specedu
         component: web-app
-        branch: test
     spec:
       containers:
-      - name: web-app
-        image: "{{ .Values.webApp.image.repository }}:test"
-        imagePullPolicy: Always
-        ports:
-        - containerPort: {{ .Values.webApp.service.port }}
-          name: http
-        env:
-        - name: ASPNETCORE_ENVIRONMENT
-          value: {{ .Values.environment }}
-        resources:
-          requests:
-            memory: {{ .Values.webApp.resources.requests.memory }}
-            cpu: {{ .Values.webApp.resources.requests.cpu }}
-          limits:
-            memory: {{ .Values.webApp.resources.limits.memory }}
-            cpu: {{ .Values.webApp.resources.limits.cpu }}
-        livenessProbe:
-          httpGet:
-            path: {{ .Values.healthChecks.liveness.path }}
-            port: {{ .Values.webApp.service.port }}
-          initialDelaySeconds: {{ .Values.healthChecks.liveness.initialDelaySeconds }}
-          periodSeconds: {{ .Values.healthChecks.liveness.periodSeconds }}
-        readinessProbe:
-          httpGet:
-            path: {{ .Values.healthChecks.readiness.path }}
-            port: {{ .Values.webApp.service.port }}
-          initialDelaySeconds: {{ .Values.healthChecks.readiness.initialDelaySeconds }}
-          periodSeconds: {{ .Values.healthChecks.readiness.periodSeconds }}
+        - name: web-app
+          image: "{{ .Values.webApp.image.repository }}:{{ .Values.webApp.image.tag }}"
+          imagePullPolicy: {{ .Values.webApp.image.pullPolicy }}
+          ports:
+            - containerPort: {{ .Values.webApp.service.port }}
+              name: http
+          env:
+            - name: ASPNETCORE_ENVIRONMENT
+              value: {{ .Values.environment | quote }}
+          resources:
+            {{- toYaml .Values.webApp.resources | nindent 12 }}
+          livenessProbe:
+            httpGet:
+              path: {{ .Values.healthChecks.liveness.path }}
+              port: {{ .Values.webApp.service.port }}
+            initialDelaySeconds: {{ .Values.healthChecks.liveness.initialDelaySeconds }}
+            periodSeconds: {{ .Values.healthChecks.liveness.periodSeconds }}
+          readinessProbe:
+            httpGet:
+              path: {{ .Values.healthChecks.readiness.path }}
+              port: {{ .Values.webApp.service.port }}
+            initialDelaySeconds: {{ .Values.healthChecks.readiness.initialDelaySeconds }}
+            periodSeconds: {{ .Values.healthChecks.readiness.periodSeconds }}
 {{- end }}

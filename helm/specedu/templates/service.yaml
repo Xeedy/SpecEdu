@@ -1,95 +1,39 @@
----
 {{- if .Values.webPublic.enabled }}
-# Web Public Main Service
 apiVersion: v1
 kind: Service
 metadata:
-  name: web-public-main
-  namespace: {{ .Values.namespace }}
+  name: web-public
   labels:
     app: specedu
     component: web-public
-    branch: main
 spec:
   type: ClusterIP
   ports:
-  - port: {{ .Values.webPublic.service.port }}
-    targetPort: {{ .Values.webPublic.service.port }}
-    protocol: TCP
-    name: http
+    - port: {{ .Values.webPublic.service.port }}
+      targetPort: {{ .Values.webPublic.service.port }}
+      protocol: TCP
+      name: http
   selector:
     app: specedu
     component: web-public
-    branch: main
-
----
-# Web Public Test Service
-apiVersion: v1
-kind: Service
-metadata:
-  name: web-public-test
-  namespace: {{ .Values.namespace }}
-  labels:
-    app: specedu
-    component: web-public
-    branch: test
-spec:
-  type: ClusterIP
-  ports:
-  - port: {{ .Values.webPublic.service.port }}
-    targetPort: {{ .Values.webPublic.service.port }}
-    protocol: TCP
-    name: http
-  selector:
-    app: specedu
-    component: web-public
-    branch: test
 {{- end }}
-
----
 {{- if .Values.webApp.enabled }}
-# Web App Main Service
-apiVersion: v1
-kind: Service
-metadata:
-  name: web-app-main
-  namespace: {{ .Values.namespace }}
-  labels:
-    app: specedu
-    component: web-app
-    branch: main
-spec:
-  type: ClusterIP
-  ports:
-  - port: {{ .Values.webApp.service.port }}
-    targetPort: {{ .Values.webApp.service.port }}
-    protocol: TCP
-    name: http
-  selector:
-    app: specedu
-    component: web-app
-    branch: main
-
 ---
-# Web App Test Service
 apiVersion: v1
 kind: Service
 metadata:
-  name: web-app-test
-  namespace: {{ .Values.namespace }}
+  name: web-app
   labels:
     app: specedu
     component: web-app
-    branch: test
 spec:
   type: ClusterIP
   ports:
-  - port: {{ .Values.webApp.service.port }}
-    targetPort: {{ .Values.webApp.service.port }}
-    protocol: TCP
-    name: http
+    - port: {{ .Values.webApp.service.port }}
+      targetPort: {{ .Values.webApp.service.port }}
+      protocol: TCP
+      name: http
   selector:
     app: specedu
     component: web-app
-    branch: test
 {{- end }}
