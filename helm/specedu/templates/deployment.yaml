@@ -31,14 +31,12 @@ spec:
           resources:
             {{- toYaml .Values.webPublic.resources | nindent 12 }}
           livenessProbe:
-            httpGet:
-              path: {{ .Values.healthChecks.liveness.path }}
+            tcpSocket:
               port: {{ .Values.webPublic.service.port }}
             initialDelaySeconds: {{ .Values.healthChecks.liveness.initialDelaySeconds }}
             periodSeconds: {{ .Values.healthChecks.liveness.periodSeconds }}
           readinessProbe:
-            httpGet:
-              path: {{ .Values.healthChecks.readiness.path }}
+            tcpSocket:
               port: {{ .Values.webPublic.service.port }}
             initialDelaySeconds: {{ .Values.healthChecks.readiness.initialDelaySeconds }}
             periodSeconds: {{ .Values.healthChecks.readiness.periodSeconds }}
@@ -77,14 +75,12 @@ spec:
           resources:
             {{- toYaml .Values.webApp.resources | nindent 12 }}
           livenessProbe:
-            httpGet:
-              path: {{ .Values.healthChecks.liveness.path }}
+            tcpSocket:
               port: {{ .Values.webApp.service.port }}
             initialDelaySeconds: {{ .Values.healthChecks.liveness.initialDelaySeconds }}
             periodSeconds: {{ .Values.healthChecks.liveness.periodSeconds }}
           readinessProbe:
-            httpGet:
-              path: {{ .Values.healthChecks.readiness.path }}
+            tcpSocket:
               port: {{ .Values.webApp.service.port }}
             initialDelaySeconds: {{ .Values.healthChecks.readiness.initialDelaySeconds }}
             periodSeconds: {{ .Values.healthChecks.readiness.periodSeconds }}
