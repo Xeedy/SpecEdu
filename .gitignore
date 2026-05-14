@@ -86,6 +86,11 @@ ScaffoldingReadMe.txt
 *.p12
 nul
 
+## Deployment documentation (local only)
+DEPLOYMENT.md
+SETUP_CHECKLIST.md
+GITHUB_SETUP.md
+
 ## Documentation and thesis (local only)
 Documentation_And_Materials/
 Thesis/

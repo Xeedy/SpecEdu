@@ -1,0 +1,81 @@
+namespace: specedu
+
+# Web Public Configuration
+webPublic:
+  enabled: true
+  replicas:
+    main: 2
+    test: 1
+  image:
+    repository: ghcr.io/xeedy/specedu-web-public
+    tag: "main"
+  service:
+    port: 8080
+  resources:
+    requests:
+      memory: "128Mi"
+      cpu: "100m"
+    limits:
+      memory: "512Mi"
+      cpu: "500m"
+  ingress:
+    main:
+      hosts:
+        - specedu.cz
+        - www.specedu.cz
+    test:
+      hosts:
+        - test.specedu.cz
+
+# Web App Configuration
+webApp:
+  enabled: true
+  replicas:
+    main: 2
+    test: 1
+  image:
+    repository: ghcr.io/xeedy/specedu-web-app
+    tag: "main"
+  service:
+    port: 8080
+  resources:
+    requests:
+      memory: "128Mi"
+      cpu: "100m"
+    limits:
+      memory: "512Mi"
+      cpu: "500m"
+  ingress:
+    main:
+      hosts:
+        - app.specedu.cz
+    test:
+      hosts:
+        - test-app.specedu.cz
+
+# Ingress Configuration
+ingress:
+  className: traefik
+  annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+    traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+    traefik.ingress.kubernetes.io/router.tls: "true"
+
+# Certificate Configuration
+certificates:
+  email: michal.tesik1@gmail.com
+  issuer: letsencrypt-prod
+
+# Environment
+environment: Production
+
+# Health checks
+healthChecks:
+  liveness:
+    path: /health
+    initialDelaySeconds: 30
+    periodSeconds: 10
+  readiness:
+    path: /health
+    initialDelaySeconds: 5
+    periodSeconds: 5

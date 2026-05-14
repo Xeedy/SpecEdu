@@ -1,0 +1,84 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: specedu-ingress
+  namespace: specedu
+  annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+    traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+    traefik.ingress.kubernetes.io/router.tls: "true"
+spec:
+  ingressClassName: traefik
+  tls:
+  - hosts:
+    - specedu.cz
+    - www.specedu.cz
+    secretName: specedu-tls-main
+  - hosts:
+    - app.specedu.cz
+    secretName: specedu-app-tls-main
+  - hosts:
+    - test.specedu.cz
+    secretName: specedu-tls-test
+  - hosts:
+    - test-app.specedu.cz
+    secretName: specedu-app-tls-test
+  rules:
+  # Main branch - Public Web
+  - host: specedu.cz
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: web-public-main
+            port:
+              number: 8080
+  - host: www.specedu.cz
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: web-public-main
+            port:
+              number: 8080
+
+  # Main branch - App
+  - host: app.specedu.cz
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: web-app-main
+            port:
+              number: 8080
+
+  # Test branch - Public Web
+  - host: test.specedu.cz
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: web-public-test
+            port:
+              number: 8080
+
+  # Test branch - App
+  - host: test-app.specedu.cz
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: web-app-test
+            port:
+              number: 8080

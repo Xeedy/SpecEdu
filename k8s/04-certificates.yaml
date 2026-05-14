@@ -1,0 +1,77 @@
+---
+# Let's Encrypt Issuer (Production)
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: letsencrypt-prod
+spec:
+  acme:
+    server: https://acme-v02.api.letsencrypt.org/directory
+    email: michal.tesik1@gmail.com
+    privateKeySecretRef:
+      name: letsencrypt-prod-key
+    solvers:
+    - http01:
+        ingress:
+          class: traefik
+
+---
+# Certificate for main branch domains
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: specedu-cert-main
+  namespace: specedu
+spec:
+  secretName: specedu-tls-main
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer
+  dnsNames:
+  - specedu.cz
+  - www.specedu.cz
+
+---
+# Certificate for main branch app
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: specedu-app-cert-main
+  namespace: specedu
+spec:
+  secretName: specedu-app-tls-main
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer
+  dnsNames:
+  - app.specedu.cz
+
+---
+# Certificate for test branch domains
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: specedu-cert-test
+  namespace: specedu
+spec:
+  secretName: specedu-tls-test
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer
+  dnsNames:
+  - test.specedu.cz
+
+---
+# Certificate for test branch app
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: specedu-app-cert-test
+  namespace: specedu
+spec:
+  secretName: specedu-app-tls-test
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer
+  dnsNames:
+  - test-app.specedu.cz
