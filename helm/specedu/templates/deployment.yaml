@@ -25,6 +25,9 @@ spec:
           ports:
             - containerPort: {{ .Values.webPublic.service.port }}
               name: http
+          envFrom:
+            - secretRef:
+                name: specedu-app
           env:
             - name: ASPNETCORE_ENVIRONMENT
               value: {{ .Values.environment | quote }}
@@ -69,6 +72,9 @@ spec:
           ports:
             - containerPort: {{ .Values.webApp.service.port }}
               name: http
+          envFrom:
+            - secretRef:
+                name: specedu-app
           env:
             - name: ASPNETCORE_ENVIRONMENT
               value: {{ .Values.environment | quote }}

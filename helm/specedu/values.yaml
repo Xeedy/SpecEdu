@@ -1,6 +1,11 @@
 # Default values = Production (main branch)
 # For test environment, override with -f values-test.yaml
 
+# Secrets — must be provided via --set from CI (see .github/workflows/deploy.yml)
+secrets:
+  dbConnection: ""  # ConnectionStrings__SpecEduConnectionString
+  jwtSecret: ""     # JwtSettings__Secret
+
 webPublic:
   enabled: true
   replicas: 2
