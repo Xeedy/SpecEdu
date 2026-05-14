@@ -75,10 +75,12 @@ jobs:
             RELEASE=specedu
             NAMESPACE=specedu
             EXTRA_VALUES=""
+            DB_CONNECTION='${{ secrets.SPECEDU_DB_CONNECTION }}'
           else
             RELEASE=specedu-test
             NAMESPACE=specedu-test
             EXTRA_VALUES="-f helm/specedu/values-test.yaml"
+            DB_CONNECTION='${{ secrets.SPECEDU_DB_CONNECTION_TEST }}'
           fi
           helm upgrade --install "$RELEASE" ./helm/specedu \
             --namespace "$NAMESPACE" \
@@ -86,7 +88,7 @@ jobs:
             $EXTRA_VALUES \
             --set webPublic.image.tag=${{ github.sha }} \
             --set webApp.image.tag=${{ github.sha }} \
-            --set-string secrets.dbConnection="${{ secrets.SPECEDU_DB_CONNECTION }}" \
+            --set-string secrets.dbConnection="$DB_CONNECTION" \
             --set-string secrets.jwtSecret="${{ secrets.SPECEDU_JWT_SECRET }}" \
             --wait \
             --timeout 5m
