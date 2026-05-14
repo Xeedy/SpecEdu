@@ -33,6 +33,8 @@ spec:
               value: {{ .Values.environment | quote }}
             - name: ASPNETCORE_FORWARDEDHEADERS_ENABLED
               value: "true"
+            - name: AppUrl
+              value: "https://{{ index .Values.webApp.ingress.hosts 0 }}"
           resources:
             {{- toYaml .Values.webPublic.resources | nindent 12 }}
           livenessProbe:
@@ -82,6 +84,8 @@ spec:
               value: {{ .Values.environment | quote }}
             - name: ASPNETCORE_FORWARDEDHEADERS_ENABLED
               value: "true"
+            - name: PublicUrl
+              value: "https://{{ index .Values.webPublic.ingress.hosts 0 }}"
           resources:
             {{- toYaml .Values.webApp.resources | nindent 12 }}
           livenessProbe:
