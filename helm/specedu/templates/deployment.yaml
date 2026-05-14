@@ -31,6 +31,8 @@ spec:
           env:
             - name: ASPNETCORE_ENVIRONMENT
               value: {{ .Values.environment | quote }}
+            - name: ASPNETCORE_FORWARDEDHEADERS_ENABLED
+              value: "true"
           resources:
             {{- toYaml .Values.webPublic.resources | nindent 12 }}
           livenessProbe:
@@ -78,6 +80,8 @@ spec:
           env:
             - name: ASPNETCORE_ENVIRONMENT
               value: {{ .Values.environment | quote }}
+            - name: ASPNETCORE_FORWARDEDHEADERS_ENABLED
+              value: "true"
           resources:
             {{- toYaml .Values.webApp.resources | nindent 12 }}
           livenessProbe:
