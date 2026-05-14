@@ -1,4 +1,4 @@
-name: Build & Deploy
+name: Build & Push
 
 on:
   push:
@@ -51,31 +51,3 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/test'
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Set up kubeconfig
-        run: |
-          mkdir -p ~/.kube
-          echo "${{ secrets.KUBECONFIG_DATA }}" | base64 -d > ~/.kube/config
-          chmod 600 ~/.kube/config
-
-      - name: Install Helm
-        uses: azure/setup-helm@v4
-
-      - name: Deploy with Helm
-        run: |
-          helm upgrade --install specedu ./helm/specedu \
-            --namespace specedu \
-            --create-namespace \
-            --set webPublic.image.tag=${{ github.ref_name }} \
-            --set webApp.image.tag=${{ github.ref_name }} \
-            --wait \
-            --timeout 5m
