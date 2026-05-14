@@ -1,0 +1,219 @@
+---
+# Main branch - SpecEdu.Web.Public
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-public-main
+  namespace: specedu
+  labels:
+    app: specedu
+    component: web-public
+    branch: main
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: specedu
+      component: web-public
+      branch: main
+  template:
+    metadata:
+      labels:
+        app: specedu
+        component: web-public
+        branch: main
+    spec:
+      containers:
+      - name: web-public
+        image: ghcr.io/xeedy/specedu-web-public:main
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
+          name: http
+        env:
+        - name: ASPNETCORE_ENVIRONMENT
+          value: "Production"
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "100m"
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8080
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 8080
+          initialDelaySeconds: 5
+          periodSeconds: 5
+
+---
+# Main branch - SpecEdu.Web.App
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-app-main
+  namespace: specedu
+  labels:
+    app: specedu
+    component: web-app
+    branch: main
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: specedu
+      component: web-app
+      branch: main
+  template:
+    metadata:
+      labels:
+        app: specedu
+        component: web-app
+        branch: main
+    spec:
+      containers:
+      - name: web-app
+        image: ghcr.io/xeedy/specedu-web-app:main
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
+          name: http
+        env:
+        - name: ASPNETCORE_ENVIRONMENT
+          value: "Production"
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "100m"
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8080
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 8080
+          initialDelaySeconds: 5
+          periodSeconds: 5
+
+---
+# Test branch - SpecEdu.Web.Public
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-public-test
+  namespace: specedu
+  labels:
+    app: specedu
+    component: web-public
+    branch: test
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: specedu
+      component: web-public
+      branch: test
+  template:
+    metadata:
+      labels:
+        app: specedu
+        component: web-public
+        branch: test
+    spec:
+      containers:
+      - name: web-public
+        image: ghcr.io/xeedy/specedu-web-public:test
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
+          name: http
+        env:
+        - name: ASPNETCORE_ENVIRONMENT
+          value: "Production"
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "100m"
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8080
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 8080
+          initialDelaySeconds: 5
+          periodSeconds: 5
+
+---
+# Test branch - SpecEdu.Web.App
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-app-test
+  namespace: specedu
+  labels:
+    app: specedu
+    component: web-app
+    branch: test
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: specedu
+      component: web-app
+      branch: test
+  template:
+    metadata:
+      labels:
+        app: specedu
+        component: web-app
+        branch: test
+    spec:
+      containers:
+      - name: web-app
+        image: ghcr.io/xeedy/specedu-web-app:test
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
+          name: http
+        env:
+        - name: ASPNETCORE_ENVIRONMENT
+          value: "Production"
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "100m"
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8080
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 8080
+          initialDelaySeconds: 5
+          periodSeconds: 5

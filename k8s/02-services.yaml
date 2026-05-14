@@ -1,0 +1,91 @@
+---
+# Main branch - SpecEdu.Web.Public Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: web-public-main
+  namespace: specedu
+  labels:
+    app: specedu
+    component: web-public
+    branch: main
+spec:
+  type: ClusterIP
+  ports:
+  - port: 8080
+    targetPort: 8080
+    protocol: TCP
+    name: http
+  selector:
+    app: specedu
+    component: web-public
+    branch: main
+
+---
+# Main branch - SpecEdu.Web.App Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: web-app-main
+  namespace: specedu
+  labels:
+    app: specedu
+    component: web-app
+    branch: main
+spec:
+  type: ClusterIP
+  ports:
+  - port: 8080
+    targetPort: 8080
+    protocol: TCP
+    name: http
+  selector:
+    app: specedu
+    component: web-app
+    branch: main
+
+---
+# Test branch - SpecEdu.Web.Public Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: web-public-test
+  namespace: specedu
+  labels:
+    app: specedu
+    component: web-public
+    branch: test
+spec:
+  type: ClusterIP
+  ports:
+  - port: 8080
+    targetPort: 8080
+    protocol: TCP
+    name: http
+  selector:
+    app: specedu
+    component: web-public
+    branch: test
+
+---
+# Test branch - SpecEdu.Web.App Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: web-app-test
+  namespace: specedu
+  labels:
+    app: specedu
+    component: web-app
+    branch: test
+spec:
+  type: ClusterIP
+  ports:
+  - port: 8080
+    targetPort: 8080
+    protocol: TCP
+    name: http
+  selector:
+    app: specedu
+    component: web-app
+    branch: test
