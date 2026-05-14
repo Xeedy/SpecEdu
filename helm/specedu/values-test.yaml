@@ -1,0 +1,17 @@
+# Test environment overrides (test branch → specedu-test namespace)
+
+webPublic:
+  replicas: 1
+  ingress:
+    hosts:
+      - test.specedu.cz
+    tlsSecretName: specedu-tls
+
+webApp:
+  replicas: 1
+  ingress:
+    hosts:
+      - test-app.specedu.cz
+    tlsSecretName: specedu-app-tls
+
+environment: Staging

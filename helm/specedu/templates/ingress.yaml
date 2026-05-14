@@ -1,91 +1,63 @@
----
+{{- if .Values.webPublic.enabled }}
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: specedu-ingress
-  namespace: {{ .Values.namespace }}
+  name: web-public
   annotations:
-    cert-manager.io/cluster-issuer: {{ .Values.certificates.issuer }}
     {{- with .Values.ingress.annotations }}
     {{- toYaml . | nindent 4 }}
     {{- end }}
 spec:
   ingressClassName: {{ .Values.ingress.className }}
   tls:
-  {{- if .Values.webPublic.enabled }}
-  - hosts:
-    {{- range .Values.webPublic.ingress.main.hosts }}
-    - {{ . }}
-    {{- end }}
-    secretName: specedu-tls-main
-  - hosts:
-    {{- range .Values.webPublic.ingress.test.hosts }}
-    - {{ . }}
-    {{- end }}
-    secretName: specedu-tls-test
-  {{- end }}
-  {{- if .Values.webApp.enabled }}
-  - hosts:
-    {{- range .Values.webApp.ingress.main.hosts }}
-    - {{ . }}
-    {{- end }}
-    secretName: specedu-app-tls-main
-  - hosts:
-    {{- range .Values.webApp.ingress.test.hosts }}
-    - {{ . }}
-    {{- end }}
-    secretName: specedu-app-tls-test
-  {{- end }}
+    - hosts:
+        {{- range .Values.webPublic.ingress.hosts }}
+        - {{ . }}
+        {{- end }}
+      secretName: {{ .Values.webPublic.ingress.tlsSecretName }}
   rules:
-  {{- if .Values.webPublic.enabled }}
-  {{- range .Values.webPublic.ingress.main.hosts }}
-  - host: {{ . }}
-    http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: web-public-main
-            port:
-              number: {{ $.Values.webPublic.service.port }}
-  {{- end }}
-  {{- range .Values.webPublic.ingress.test.hosts }}
-  - host: {{ . }}
-    http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: web-public-test
-            port:
-              number: {{ $.Values.webPublic.service.port }}
-  {{- end }}
-  {{- end }}
-  {{- if .Values.webApp.enabled }}
-  {{- range .Values.webApp.ingress.main.hosts }}
-  - host: {{ . }}
-    http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: web-app-main
-            port:
-              number: {{ $.Values.webApp.service.port }}
-  {{- end }}
-  {{- range .Values.webApp.ingress.test.hosts }}
-  - host: {{ . }}
-    http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: web-app-test
-            port:
-              number: {{ $.Values.webApp.service.port }}
-  {{- end }}
-  {{- end }}
+    {{- range .Values.webPublic.ingress.hosts }}
+    - host: {{ . }}
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: web-public
+                port:
+                  number: {{ $.Values.webPublic.service.port }}
+    {{- end }}
+{{- end }}
+{{- if .Values.webApp.enabled }}
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: web-app
+  annotations:
+    {{- with .Values.ingress.annotations }}
+    {{- toYaml . | nindent 4 }}
+    {{- end }}
+spec:
+  ingressClassName: {{ .Values.ingress.className }}
+  tls:
+    - hosts:
+        {{- range .Values.webApp.ingress.hosts }}
+        - {{ . }}
+        {{- end }}
+      secretName: {{ .Values.webApp.ingress.tlsSecretName }}
+  rules:
+    {{- range .Values.webApp.ingress.hosts }}
+    - host: {{ . }}
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: web-app
+                port:
+                  number: {{ $.Values.webApp.service.port }}
+    {{- end }}
+{{- end }}

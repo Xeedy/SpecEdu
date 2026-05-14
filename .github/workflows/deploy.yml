@@ -1,4 +1,4 @@
-name: Build & Push
+name: Build & Deploy
 
 on:
   push:
@@ -6,7 +6,6 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ github.repository }}
 
 jobs:
   build:
@@ -41,13 +40,51 @@ jobs:
           images: ${{ env.REGISTRY }}/xeedy/${{ matrix.app.image }}
           tags: |
             type=ref,event=branch
-            type=sha
+            type=sha,format=long,prefix=
 
       - name: Build and push Docker image
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@v6
         with:
           context: .
           file: ./${{ matrix.app.dockerfile }}
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up kubeconfig
+        run: |
+          mkdir -p ~/.kube
+          echo "${{ secrets.KUBECONFIG_DATA }}" | base64 -d > ~/.kube/config
+          chmod 600 ~/.kube/config
+
+      - name: Install Helm
+        uses: azure/setup-helm@v4
+
+      - name: Deploy with Helm
+        run: |
+          BRANCH="${GITHUB_REF_NAME}"
+          if [ "$BRANCH" = "main" ]; then
+            RELEASE=specedu
+            NAMESPACE=specedu
+            EXTRA_VALUES=""
+          else
+            RELEASE=specedu-test
+            NAMESPACE=specedu-test
+            EXTRA_VALUES="-f helm/specedu/values-test.yaml"
+          fi
+          helm upgrade --install "$RELEASE" ./helm/specedu \
+            --namespace "$NAMESPACE" \
+            --create-namespace \
+            $EXTRA_VALUES \
+            --set webPublic.image.tag=${{ github.sha }} \
+            --set webApp.image.tag=${{ github.sha }} \
+            --wait \
+            --timeout 5m
