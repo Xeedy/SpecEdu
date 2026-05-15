@@ -2,6 +2,9 @@
 @model SpecEdu.Web.Public.Pages.System.ForClientsModel
 @inject IStringLocalizer<SharedResource> L
 @{
+    ViewData["Description"] = "SpecEdu pro školy, učitele, rodiče a poradenská zařízení (PPP, SPC). Přehled výhod pro každou cílovou skupinu.";
+}
+@{
     ViewData["Title"] = L["ForClientsPage.Title"];
 }
 
@@ -55,8 +58,8 @@
                         <a asp-page="/Contact" class="btn btn-spec-primary mt-3">@L["ForClientsPage.ContactUs"]</a>
                     </div>
                     <div class="col-lg-6 mt-4 mt-lg-0">
-                        <img src="https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=600&h=400&fit=crop"
-                             alt="School" class="img-fluid rounded shadow">
+                        <img src="~/img/client-school.jpg"
+                             alt="@L["ForClientsPage.SchoolTitle"]" class="img-fluid rounded shadow" loading="lazy" width="600" height="400">
                     </div>
                 </div>
             </div>
@@ -75,8 +78,8 @@
                         </ul>
                     </div>
                     <div class="col-lg-6 mt-4 mt-lg-0">
-                        <img src="https://images.unsplash.com/photo-1544717305-2782549b5136?w=600&h=400&fit=crop"
-                             alt="Teacher" class="img-fluid rounded shadow">
+                        <img src="~/img/client-teacher.jpg"
+                             alt="@L["ForClientsPage.TeacherTitle"]" class="img-fluid rounded shadow" loading="lazy" width="600" height="400">
                     </div>
                 </div>
             </div>
@@ -95,8 +98,8 @@
                         </ul>
                     </div>
                     <div class="col-lg-6 mt-4 mt-lg-0">
-                        <img src="https://images.unsplash.com/photo-1591123120675-6f7f1aae0e5b?w=600&h=400&fit=crop"
-                             alt="Parent" class="img-fluid rounded shadow">
+                        <img src="~/img/client-parent.jpg"
+                             alt="@L["ForClientsPage.ParentTitle"]" class="img-fluid rounded shadow" loading="lazy" width="600" height="400">
                     </div>
                 </div>
             </div>
@@ -115,8 +118,8 @@
                         </ul>
                     </div>
                     <div class="col-lg-6 mt-4 mt-lg-0">
-                        <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=600&h=400&fit=crop"
-                             alt="Counseling" class="img-fluid rounded shadow">
+                        <img src="~/img/client-counseling.jpg"
+                             alt="@L["ForClientsPage.CounselingTitle"]" class="img-fluid rounded shadow" loading="lazy" width="600" height="400">
                     </div>
                 </div>
             </div>

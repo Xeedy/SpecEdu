@@ -55,6 +55,18 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser, IdentityR
 
     public DbSet<UserConsent> UserConsents => Set<UserConsent>();
 
+    public DbSet<Conversation> Conversations => Set<Conversation>();
+
+    public DbSet<ConversationParticipant> ConversationParticipants => Set<ConversationParticipant>();
+
+    public DbSet<ChatMessage> ChatMessages => Set<ChatMessage>();
+
+    public DbSet<ChatAttachment> ChatAttachments => Set<ChatAttachment>();
+
+    public DbSet<IntegrationEndpoint> IntegrationEndpoints => Set<IntegrationEndpoint>();
+
+    public DbSet<DataExchangeRecord> DataExchangeRecords => Set<DataExchangeRecord>();
+
     public override int SaveChanges()
     {
         UpdateAuditFields();

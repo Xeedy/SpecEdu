@@ -1,0 +1,179 @@
+/* ============================================================
+   SpecEdu animations
+   - Subtle scroll-triggered reveals via .fade-up / .fade-up-stagger
+   - Card hover lift, smooth in-page anchor scrolling
+   - Fully disabled on mobile (<= 767.98px) and on prefers-reduced-motion
+   ============================================================ */
+
+html {
+    scroll-behavior: smooth;
+}
+
+/* --- Initial hidden state for scroll-reveal elements --- */
+.fade-up {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s cubic-bezier(0.22, 0.61, 0.36, 1),
+                transform 0.7s cubic-bezier(0.22, 0.61, 0.36, 1);
+    will-change: opacity, transform;
+}
+
+.fade-up.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.fade-in {
+    opacity: 0;
+    transition: opacity 0.6s ease-out;
+    will-change: opacity;
+}
+
+.fade-in.is-visible {
+    opacity: 1;
+}
+
+/* --- Staggered children inside a .fade-up-stagger parent --- */
+.fade-up-stagger > * {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s cubic-bezier(0.22, 0.61, 0.36, 1),
+                transform 0.6s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.fade-up-stagger.is-visible > * {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.fade-up-stagger.is-visible > *:nth-child(1) { transition-delay: 0s; }
+.fade-up-stagger.is-visible > *:nth-child(2) { transition-delay: 0.08s; }
+.fade-up-stagger.is-visible > *:nth-child(3) { transition-delay: 0.16s; }
+.fade-up-stagger.is-visible > *:nth-child(4) { transition-delay: 0.24s; }
+.fade-up-stagger.is-visible > *:nth-child(5) { transition-delay: 0.32s; }
+.fade-up-stagger.is-visible > *:nth-child(6) { transition-delay: 0.40s; }
+.fade-up-stagger.is-visible > *:nth-child(7) { transition-delay: 0.48s; }
+.fade-up-stagger.is-visible > *:nth-child(8) { transition-delay: 0.56s; }
+
+/* --- Card hover lift (devices that actually have hover) --- */
+.spec-card,
+.spec-mini-card {
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .spec-card:hover,
+    .spec-mini-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.10),
+                    0 8px 10px -6px rgba(0, 0, 0, 0.05);
+    }
+}
+
+/* --- Subtle button press feedback --- */
+.btn {
+    transition: transform 0.15s ease, box-shadow 0.15s ease, background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .btn:active {
+        transform: translateY(1px);
+    }
+}
+
+/* --- Initial hero entrance (plays once on page load) --- */
+@keyframes spec-hero-rise {
+    from {
+        opacity: 0;
+        transform: translateY(16px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.spec-hero-caption .spec-hero-badge,
+.spec-hero-caption .spec-hero-title,
+.spec-hero-caption .spec-hero-text,
+.spec-hero-caption .spec-hero-actions {
+    animation: spec-hero-rise 0.7s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+}
+
+.spec-hero-caption .spec-hero-title { animation-delay: 0.10s; }
+.spec-hero-caption .spec-hero-text  { animation-delay: 0.20s; }
+.spec-hero-caption .spec-hero-actions { animation-delay: 0.30s; }
+
+/* --- Anchor link underline animation in header (modern look) --- */
+.spec-nav-link {
+    position: relative;
+}
+
+@media (min-width: 992px) and (hover: hover) and (pointer: fine) {
+    .spec-nav-link::after {
+        content: "";
+        position: absolute;
+        left: 12px;
+        right: 12px;
+        bottom: 6px;
+        height: 2px;
+        background-color: var(--spec-primary);
+        transform: scaleX(0);
+        transform-origin: left center;
+        transition: transform 0.25s ease;
+    }
+
+    .spec-nav-link:hover::after,
+    .spec-nav-link.active::after {
+        transform: scaleX(1);
+    }
+}
+
+/* ============================================================
+   Mobile: disable scroll-triggered animations entirely.
+   Elements remain visible from the start so there's no flash
+   or perceived jank on small touch screens.
+   ============================================================ */
+@media (max-width: 767.98px) {
+    .fade-up,
+    .fade-in,
+    .fade-up-stagger > * {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+        animation: none !important;
+    }
+
+    .spec-hero-caption .spec-hero-badge,
+    .spec-hero-caption .spec-hero-title,
+    .spec-hero-caption .spec-hero-text,
+    .spec-hero-caption .spec-hero-actions {
+        animation: none !important;
+    }
+}
+
+/* ============================================================
+   Accessibility: respect user preference for reduced motion.
+   Disables every motion on every breakpoint.
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+        scroll-behavior: auto !important;
+    }
+
+    .fade-up,
+    .fade-in,
+    .fade-up-stagger > * {
+        opacity: 1 !important;
+        transform: none !important;
+    }
+}

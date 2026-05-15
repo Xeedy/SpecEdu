@@ -238,6 +238,82 @@ namespace SpecEdu.Infrastructure.Migrations
                     b.ToTable("AuditLogs", (string)null);
                 });
 
+            modelBuilder.Entity("SpecEdu.Domain.Entities.ChatAttachment", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("ContentType")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("FileName")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<long>("FileSizeBytes")
+                        .HasColumnType("bigint");
+
+                    b.Property<Guid>("MessageId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("StoragePath")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<DateTime>("UploadedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MessageId")
+                        .HasDatabaseName("IX_ChatAttachments_MessageId");
+
+                    b.ToTable("ChatAttachments", (string)null);
+                });
+
+            modelBuilder.Entity("SpecEdu.Domain.Entities.ChatMessage", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Content")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("ConversationId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid?>("ParentMessageId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("SenderId")
+                        .IsRequired()
+                        .HasMaxLength(450)
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("SentAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SenderId")
+                        .HasDatabaseName("IX_ChatMessages_SenderId");
+
+                    b.HasIndex("ConversationId", "SentAt")
+                        .HasDatabaseName("IX_ChatMessages_ConvId_SentAt");
+
+                    b.ToTable("ChatMessages", (string)null);
+                });
+
             modelBuilder.Entity("SpecEdu.Domain.Entities.ConsultationEvent", b =>
                 {
                     b.Property<Guid>("Id")
@@ -440,6 +516,145 @@ namespace SpecEdu.Infrastructure.Migrations
                     b.ToTable("ConsultationParticipants", (string)null);
                 });
 
+            modelBuilder.Entity("SpecEdu.Domain.Entities.Conversation", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsGroup")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("LastMessageAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("LastMessagePreview")
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<DateTime?>("ModifiedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("ModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title")
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("LastMessageAt")
+                        .IsDescending()
+                        .HasDatabaseName("IX_Conversations_LastMessageAt");
+
+                    b.ToTable("Conversations", (string)null);
+                });
+
+            modelBuilder.Entity("SpecEdu.Domain.Entities.ConversationParticipant", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("ConversationId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("JoinedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("LastReadAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasMaxLength(450)
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ConversationId", "IsActive")
+                        .HasDatabaseName("IX_ConvParticipants_ConvId_IsActive");
+
+                    b.HasIndex("UserId", "IsActive")
+                        .HasDatabaseName("IX_ConvParticipants_UserId_IsActive");
+
+                    b.ToTable("ConversationParticipants", (string)null);
+                });
+
+            modelBuilder.Entity("SpecEdu.Domain.Entities.DataExchangeRecord", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("CompletedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Direction")
+                        .HasColumnType("int");
+
+                    b.Property<Guid>("EndpointId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("EntityId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("EntityType")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("InitiatedBy")
+                        .HasMaxLength(450)
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("RequestSummary")
+                        .HasMaxLength(2000)
+                        .HasColumnType("nvarchar(2000)");
+
+                    b.Property<string>("ResponseSummary")
+                        .HasMaxLength(2000)
+                        .HasColumnType("nvarchar(2000)");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CreatedAt")
+                        .HasDatabaseName("IX_DataExchangeRecords_CreatedAt");
+
+                    b.HasIndex("EndpointId")
+                        .HasDatabaseName("IX_DataExchangeRecords_EndpointId");
+
+                    b.HasIndex("Status")
+                        .HasDatabaseName("IX_DataExchangeRecords_Status_NonTerminal")
+                        .HasFilter("[Status] IN (1, 2)");
+
+                    b.HasIndex("EndpointId", "CreatedAt")
+                        .HasDatabaseName("IX_DataExchangeRecords_EndpointId_CreatedAt");
+
+                    b.HasIndex("EndpointId", "Status")
+                        .HasDatabaseName("IX_DataExchangeRecords_EndpointId_Status");
+
+                    b.ToTable("DataExchangeRecords", (string)null);
+                });
+
             modelBuilder.Entity("SpecEdu.Domain.Entities.DiaryAttachment", b =>
                 {
                     b.Property<Guid>("Id")
@@ -549,6 +764,64 @@ namespace SpecEdu.Infrastructure.Migrations
                     b.HasIndex("StudentId", "Visibility");
 
                     b.ToTable("DiaryEntries", (string)null);
+                });
+
+            modelBuilder.Entity("SpecEdu.Domain.Entities.IntegrationEndpoint", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("ApiKeyPlaceholder")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<string>("BaseUrl")
+                        .HasMaxLength(1000)
+                        .HasColumnType("nvarchar(1000)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("LastTestResult")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<DateTime?>("LastTestedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("ModifiedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("ModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<int>("SystemType")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IsActive")
+                        .HasDatabaseName("IX_IntegrationEndpoints_IsActive");
+
+                    b.HasIndex("SystemType")
+                        .HasDatabaseName("IX_IntegrationEndpoints_SystemType");
+
+                    b.HasIndex("SystemType", "IsActive")
+                        .HasDatabaseName("IX_IntegrationEndpoints_SystemType_IsActive");
+
+                    b.ToTable("IntegrationEndpoints", (string)null);
                 });
 
             modelBuilder.Entity("SpecEdu.Domain.Entities.Notification", b =>
@@ -1419,6 +1692,28 @@ namespace SpecEdu.Infrastructure.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("SpecEdu.Domain.Entities.ChatAttachment", b =>
+                {
+                    b.HasOne("SpecEdu.Domain.Entities.ChatMessage", "Message")
+                        .WithMany("Attachments")
+                        .HasForeignKey("MessageId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Message");
+                });
+
+            modelBuilder.Entity("SpecEdu.Domain.Entities.ChatMessage", b =>
+                {
+                    b.HasOne("SpecEdu.Domain.Entities.Conversation", "Conversation")
+                        .WithMany("Messages")
+                        .HasForeignKey("ConversationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Conversation");
+                });
+
             modelBuilder.Entity("SpecEdu.Domain.Entities.ConsultationEvent", b =>
                 {
                     b.HasOne("SpecEdu.Domain.Entities.Plpp", "Plpp")
@@ -1453,6 +1748,28 @@ namespace SpecEdu.Infrastructure.Migrations
                         .IsRequired();
 
                     b.Navigation("ConsultationEvent");
+                });
+
+            modelBuilder.Entity("SpecEdu.Domain.Entities.ConversationParticipant", b =>
+                {
+                    b.HasOne("SpecEdu.Domain.Entities.Conversation", "Conversation")
+                        .WithMany("Participants")
+                        .HasForeignKey("ConversationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Conversation");
+                });
+
+            modelBuilder.Entity("SpecEdu.Domain.Entities.DataExchangeRecord", b =>
+                {
+                    b.HasOne("SpecEdu.Domain.Entities.IntegrationEndpoint", "Endpoint")
+                        .WithMany("ExchangeRecords")
+                        .HasForeignKey("EndpointId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Endpoint");
                 });
 
             modelBuilder.Entity("SpecEdu.Domain.Entities.DiaryAttachment", b =>
@@ -1575,14 +1892,31 @@ namespace SpecEdu.Infrastructure.Migrations
                     b.Navigation("School");
                 });
 
+            modelBuilder.Entity("SpecEdu.Domain.Entities.ChatMessage", b =>
+                {
+                    b.Navigation("Attachments");
+                });
+
             modelBuilder.Entity("SpecEdu.Domain.Entities.ConsultationEvent", b =>
                 {
+                    b.Navigation("Participants");
+                });
+
+            modelBuilder.Entity("SpecEdu.Domain.Entities.Conversation", b =>
+                {
+                    b.Navigation("Messages");
+
                     b.Navigation("Participants");
                 });
 
             modelBuilder.Entity("SpecEdu.Domain.Entities.DiaryEntry", b =>
                 {
                     b.Navigation("Attachments");
+                });
+
+            modelBuilder.Entity("SpecEdu.Domain.Entities.IntegrationEndpoint", b =>
+                {
+                    b.Navigation("ExchangeRecords");
                 });
 
             modelBuilder.Entity("SpecEdu.Domain.Entities.Plpp", b =>

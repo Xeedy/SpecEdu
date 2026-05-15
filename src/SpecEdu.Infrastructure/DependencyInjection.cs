@@ -92,6 +92,8 @@ public static class DependencyInjection
         services.AddScoped<IConsultationService, ConsultationService>();
         services.AddScoped<INotificationService, NotificationService>();
         services.AddScoped<IGdprService, GdprService>();
+        services.AddScoped<IChatService, ChatService>();
+        services.AddScoped<IExternalIntegrationService, ExternalIntegrationService>();
 
         services.AddTransient(typeof(Lazy<>), typeof(LazyResolver<>));
 

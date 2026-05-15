@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /Account/
+Disallow: /Culture/
+
+Sitemap: https://specedu.cz/sitemap.xml

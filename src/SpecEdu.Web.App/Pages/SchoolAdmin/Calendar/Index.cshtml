@@ -12,7 +12,11 @@
             <h1><i class="bi bi-calendar3 me-2"></i>@L["CalendarPage.Title"]</h1>
             <p class="text-muted mb-0">@L["CalendarPage.Subtitle"]</p>
         </div>
-        <div>
+        <div class="d-flex gap-2">
+            <!-- Sidebar toggle for tablet/mobile -->
+            <button class="btn btn-outline-secondary btn-calendar-sidebar-toggle" type="button" data-bs-toggle="offcanvas" data-bs-target="#calendarSidebar">
+                <i class="bi bi-layout-sidebar-reverse"></i>
+            </button>
             <a asp-page="Create" class="btn btn-spec-primary">
                 <i class="bi bi-plus-lg me-2"></i>@L["CalendarPage.NewEvent"]
             </a>
@@ -40,157 +44,74 @@
         <div class="col-lg-9">
             <div class="spec-card">
                 <div class="spec-card-body">
-                    <div id="calendar"></div>
+                    <div class="calendar-wrapper">
+                        <div id="calendar"></div>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- Sidebar - Upcoming Events -->
-        <div class="col-lg-3">
-            <div class="spec-card">
-                <div class="spec-card-header">
-                    <h5 class="mb-0"><i class="bi bi-clock me-2"></i>@L["CalendarPage.UpcomingEvents"]</h5>
-                </div>
-                <div class="spec-card-body">
-                    @if (Model.UpcomingEvents.Any())
-                    {
-                        <div class="list-group list-group-flush">
-                            @foreach (var evt in Model.UpcomingEvents)
-                            {
-                                <a asp-page="Details" asp-route-id="@evt.Id" class="list-group-item list-group-item-action px-0">
-                                    <div class="d-flex justify-content-between align-items-start">
-                                        <div>
-                                            <h6 class="mb-1">@evt.Title</h6>
-                                            <small class="text-muted">
-                                                <i class="bi bi-calendar me-1"></i>@evt.StartTime.ToString("dd.MM. HH:mm")
-                                            </small>
-                                            @if (!string.IsNullOrEmpty(evt.StudentName))
-                                            {
-                                                <br />
-                                                <small class="text-muted">
-                                                    <i class="bi bi-person me-1"></i>@evt.StudentName
-                                                </small>
-                                            }
-                                        </div>
-                                        <span class="badge @IndexModel.GetStatusBadgeClass(evt.Status)">
-                                            @Model.GetStatusName(evt.Status)
-                                        </span>
-                                    </div>
-                                </a>
-                            }
-                        </div>
-                    }
-                    else
-                    {
-                        <p class="text-muted text-center py-3 mb-0">
-                            <i class="bi bi-calendar-x display-6 d-block mb-2"></i>
-                            @L["CalendarPage.NoUpcomingEvents"]
-                        </p>
-                    }
-                </div>
-            </div>
-
-            <!-- Legend -->
-            <div class="spec-card mt-3">
-                <div class="spec-card-header">
-                    <h5 class="mb-0"><i class="bi bi-palette me-2"></i>@L["CalendarPage.Legend"]</h5>
-                </div>
-                <div class="spec-card-body">
-                    <div class="d-flex align-items-center mb-2">
-                        <span class="badge me-2" style="background-color: #0d6efd;">&nbsp;&nbsp;</span>
-                        <small>@L["CalendarPage.TypeParentTeacher"]</small>
-                    </div>
-                    <div class="d-flex align-items-center mb-2">
-                        <span class="badge me-2" style="background-color: #198754;">&nbsp;&nbsp;</span>
-                        <small>@L["CalendarPage.TypeIndividual"]</small>
-                    </div>
-                    <div class="d-flex align-items-center mb-2">
-                        <span class="badge me-2" style="background-color: #dc3545;">&nbsp;&nbsp;</span>
-                        <small>@L["CalendarPage.TypePlppIvpReview"]</small>
-                    </div>
-                    <div class="d-flex align-items-center mb-2">
-                        <span class="badge me-2" style="background-color: #6f42c1;">&nbsp;&nbsp;</span>
-                        <small>@L["CalendarPage.TypeCounselor"]</small>
-                    </div>
-                    <div class="d-flex align-items-center mb-2">
-                        <span class="badge me-2" style="background-color: #20c997;">&nbsp;&nbsp;</span>
-                        <small>@L["CalendarPage.TypeSchoolEvent"]</small>
-                    </div>
-                </div>
-            </div>
+        <!-- Sidebar - Desktop (lg+) -->
+        <div class="col-lg-3 d-none d-lg-block">
+            @await Html.PartialAsync("_CalendarSidebarContent", Model)
         </div>
     </div>
 </div>
 
+<!-- Sidebar - Offcanvas (tablet/mobile) -->
+<div class="offcanvas offcanvas-end d-lg-none" tabindex="-1" id="calendarSidebar" aria-labelledby="calendarSidebarLabel">
+    <div class="offcanvas-header">
+        <h5 id="calendarSidebarLabel">@L["CalendarPage.UpcomingAndLegend"]</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+    </div>
+    <div class="offcanvas-body">
+        @await Html.PartialAsync("_CalendarSidebarContent", Model)
+    </div>
+</div>
+
+@await Html.PartialAsync("_CalendarEventModal")
+
 @section Styles {
-    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.css" rel="stylesheet" />
     <style>
-        #calendar {
-            min-height: 600px;
-        }
-        .fc-event {
-            cursor: pointer;
-        }
-        .fc-toolbar-title {
-            font-size: 1.25rem !important;
-        }
+        /* Purple badge for Counselor type (not in Bootstrap) */
+        .text-bg-purple { background-color: #6f42c1 !important; color: #fff !important; }
     </style>
 }
 
 @section Scripts {
-    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js"></script>
+    <script src="~/js/calendar-common.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            var calendarEl = document.getElementById('calendar');
-            var calendar = new FullCalendar.Calendar(calendarEl, {
-                initialView: 'dayGridMonth',
-                locale: 'cs',
-                headerToolbar: {
-                    left: 'prev,next today',
-                    center: 'title',
-                    right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
-                },
-                buttonText: {
+        document.addEventListener('DOMContentLoaded', function () {
+            SpecEduCalendar.init({
+                elementId: 'calendar',
+                eventsUrl: '@Url.Page("Index", "Events")',
+                locale: '@System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName',
+                isAdmin: true,
+                detailsBaseUrl: '@Url.Page("Details")',
+                editBaseUrl: '@Url.Page("Edit")',
+                createUrl: '@Url.Page("Create")',
+                labels: {
                     today: '@L["CalendarPage.Today"]',
                     month: '@L["CalendarPage.Month"]',
-                    week: '@L["CalendarPage.Week"]',
-                    day: '@L["CalendarPage.Day"]',
-                    list: '@L["CalendarPage.List"]'
-                },
-                events: function(info, successCallback, failureCallback) {
-                    fetch('@Url.Page("Index", "Events")?start=' + info.startStr + '&end=' + info.endStr)
-                        .then(response => response.json())
-                        .then(data => {
-                            var events = data.map(function(evt) {
-                                return {
-                                    id: evt.id,
-                                    title: evt.title,
-                                    start: evt.start,
-                                    end: evt.end,
-                                    backgroundColor: evt.color,
-                                    borderColor: evt.borderColor,
-                                    extendedProps: {
-                                        studentName: evt.studentName,
-                                        location: evt.location
-                                    }
-                                };
-                            });
-                            successCallback(events);
-                        })
-                        .catch(function() {
-                            failureCallback();
-                        });
-                },
-                eventClick: function(info) {
-                    window.location.href = '@Url.Page("Details")/' + info.event.id;
-                },
-                eventDidMount: function(info) {
-                    if (info.event.extendedProps.studentName) {
-                        info.el.title = info.event.title + ' - ' + info.event.extendedProps.studentName;
-                    }
+                    week:  '@L["CalendarPage.Week"]',
+                    day:   '@L["CalendarPage.Day"]',
+                    list:  '@L["CalendarPage.List"]',
+                    type_0: '@L["CalendarPage.TypeParentTeacher"]',
+                    type_1: '@L["CalendarPage.TypeIndividual"]',
+                    type_2: '@L["CalendarPage.TypePlppReview"]',
+                    type_3: '@L["CalendarPage.TypeIvpReview"]',
+                    type_4: '@L["CalendarPage.TypeCounselor"]',
+                    type_5: '@L["CalendarPage.TypeExternal"]',
+                    type_6: '@L["CalendarPage.TypeSchoolEvent"]',
+                    type_7: '@L["CalendarPage.TypeOther"]',
+                    status_0: '@L["CalendarPage.StatusScheduled"]',
+                    status_1: '@L["CalendarPage.StatusConfirmed"]',
+                    status_2: '@L["CalendarPage.StatusCompleted"]',
+                    status_3: '@L["CalendarPage.StatusCancelled"]',
+                    status_4: '@L["CalendarPage.StatusRescheduled"]'
                 }
             });
-            calendar.render();
         });
     </script>
 }

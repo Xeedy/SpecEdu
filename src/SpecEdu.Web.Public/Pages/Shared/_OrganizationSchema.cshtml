@@ -1,0 +1,33 @@
+@using Microsoft.Extensions.Configuration
+@inject IConfiguration Configuration
+
+@{
+    var siteUrl = (Configuration["SiteUrl"] ?? "https://specedu.cz").TrimEnd('/');
+}
+
+<script type="application/ld+json">
+{
+  "@@context": "https://schema.org",
+  "@@type": "Organization",
+  "name": "SpecEdu",
+  "url": "@siteUrl",
+  "logo": "@(siteUrl)/img/logo.png",
+  "description": "Platforma pro školy a školská poradenská zařízení. Digitální složka žáka, sdílení doporučení a bezpečná komunikace s rodiči.",
+  "sameAs": [],
+  "contactPoint": {
+    "@@type": "ContactPoint",
+    "contactType": "customer support",
+    "availableLanguage": ["cs", "en", "de"]
+  }
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@@context": "https://schema.org",
+  "@@type": "WebSite",
+  "name": "SpecEdu",
+  "url": "@siteUrl",
+  "inLanguage": ["cs", "en", "de"]
+}
+</script>

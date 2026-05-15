@@ -95,7 +95,7 @@ public class CreateModel : PageModel
         public bool InviteStaff { get; set; } = false;
     }
 
-    public async Task<IActionResult> OnGetAsync(Guid? studentId = null)
+    public async Task<IActionResult> OnGetAsync(Guid? studentId = null, DateTime? date = null)
     {
         var userId = _currentUserService.UserId;
         if (string.IsNullOrEmpty(userId))
@@ -112,9 +112,17 @@ public class CreateModel : PageModel
         SchoolId = user.SchoolId.Value;
         await PopulateOptions();
 
-        var now = DateTime.UtcNow;
-        Input.StartTime = new DateTime(now.Year, now.Month, now.Day, 14, 0, 0).AddDays(1);
-        Input.EndTime = Input.StartTime.AddHours(1);
+        if (date.HasValue)
+        {
+            Input.StartTime = date.Value.Date.AddHours(9);
+            Input.EndTime = date.Value.Date.AddHours(10);
+        }
+        else
+        {
+            var now = DateTime.UtcNow;
+            Input.StartTime = new DateTime(now.Year, now.Month, now.Day, 14, 0, 0).AddDays(1);
+            Input.EndTime = Input.StartTime.AddHours(1);
+        }
 
         if (studentId.HasValue)
         {

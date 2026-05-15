@@ -2421,4 +2421,169 @@
   <data name="SettingsPage.DownloadMyData" xml:space="preserve">
     <value>Stáhnout moje data</value>
   </data>
+  <!-- Chat -->
+  <data name="Sidebar.Chat" xml:space="preserve">
+    <value>Chat</value>
+  </data>
+  <data name="Chat.Title" xml:space="preserve">
+    <value>Chat</value>
+  </data>
+  <data name="Chat.NewMessage" xml:space="preserve">
+    <value>Nová zpráva</value>
+  </data>
+  <data name="Chat.NoMessages" xml:space="preserve">
+    <value>Zatím žádné zprávy</value>
+  </data>
+  <data name="Chat.SelectConversation" xml:space="preserve">
+    <value>Vyberte konverzaci</value>
+  </data>
+  <data name="Chat.SelectConversationHint" xml:space="preserve">
+    <value>Vyberte konverzaci ze seznamu nebo zahajte novou</value>
+  </data>
+  <data name="Chat.TypeMessage" xml:space="preserve">
+    <value>Napište zprávu</value>
+  </data>
+  <data name="Chat.AttachFile" xml:space="preserve">
+    <value>Připojit soubor</value>
+  </data>
+  <data name="Chat.NewConversation" xml:space="preserve">
+    <value>Nová konverzace</value>
+  </data>
+  <data name="Chat.SearchContacts" xml:space="preserve">
+    <value>Hledat kontakty</value>
+  </data>
+  <data name="Chat.Selected" xml:space="preserve">
+    <value>Vybráno</value>
+  </data>
+  <data name="Chat.GroupTitle" xml:space="preserve">
+    <value>Název skupiny</value>
+  </data>
+  <data name="Chat.GroupTitlePlaceholder" xml:space="preserve">
+    <value>Zadejte název skupiny</value>
+  </data>
+  <data name="Chat.StartConversation" xml:space="preserve">
+    <value>Zahájit konverzaci</value>
+  </data>
+  <data name="Chat.Unknown" xml:space="preserve">
+    <value>Neznámý</value>
+  </data>
+  <!-- Integrace -->
+  <data name="Sidebar.Integrations" xml:space="preserve">
+    <value>Integrace</value>
+  </data>
+  <data name="Integrations.Title" xml:space="preserve">
+    <value>Integrace PPP/SPC</value>
+  </data>
+  <data name="Integrations.StubNotice" xml:space="preserve">
+    <value>Integrační vrstva je připravena. Skutečná volání API budou doplněna po obdržení specifikace externího rozhraní.</value>
+  </data>
+  <data name="Integrations.Endpoints" xml:space="preserve">
+    <value>Konfigurované endpointy</value>
+  </data>
+  <data name="Integrations.AddEndpoint" xml:space="preserve">
+    <value>Přidat endpoint</value>
+  </data>
+  <data name="Integrations.ExchangeHistory" xml:space="preserve">
+    <value>Historie výměny dat</value>
+  </data>
+  <data name="Integrations.NoEndpoints" xml:space="preserve">
+    <value>Zatím nejsou nakonfigurovány žádné integrační endpointy.</value>
+  </data>
+  <data name="Integrations.NoRecords" xml:space="preserve">
+    <value>Zatím žádné záznamy o výměně dat.</value>
+  </data>
+  <data name="Integrations.NeverTested" xml:space="preserve">
+    <value>Netestováno</value>
+  </data>
+  <data name="Integrations.Status.Active" xml:space="preserve">
+    <value>Aktivní</value>
+  </data>
+  <data name="Integrations.Status.Inactive" xml:space="preserve">
+    <value>Neaktivní</value>
+  </data>
+  <data name="Integrations.Column.Name" xml:space="preserve">
+    <value>Název</value>
+  </data>
+  <data name="Integrations.Column.Type" xml:space="preserve">
+    <value>Typ</value>
+  </data>
+  <data name="Integrations.Column.BaseUrl" xml:space="preserve">
+    <value>Základní URL</value>
+  </data>
+  <data name="Integrations.Column.Status" xml:space="preserve">
+    <value>Stav</value>
+  </data>
+  <data name="Integrations.Column.LastTested" xml:space="preserve">
+    <value>Poslední test</value>
+  </data>
+  <data name="Integrations.Column.Actions" xml:space="preserve">
+    <value>Akce</value>
+  </data>
+  <data name="Integrations.Column.Time" xml:space="preserve">
+    <value>Čas</value>
+  </data>
+  <data name="Integrations.Column.Endpoint" xml:space="preserve">
+    <value>Endpoint</value>
+  </data>
+  <data name="Integrations.Column.Direction" xml:space="preserve">
+    <value>Směr</value>
+  </data>
+  <data name="Integrations.Column.EntityType" xml:space="preserve">
+    <value>Typ entity</value>
+  </data>
+  <data name="Integrations.Column.Summary" xml:space="preserve">
+    <value>Shrnutí</value>
+  </data>
+  <data name="Integrations.Direction.Export" xml:space="preserve">
+    <value>Export</value>
+  </data>
+  <data name="Integrations.Direction.Import" xml:space="preserve">
+    <value>Import</value>
+  </data>
+  <data name="Integrations.Field.Name" xml:space="preserve">
+    <value>Název</value>
+  </data>
+  <data name="Integrations.Field.Type" xml:space="preserve">
+    <value>Typ systému</value>
+  </data>
+  <data name="Integrations.Field.BaseUrl" xml:space="preserve">
+    <value>Základní URL</value>
+  </data>
+  <data name="Integrations.Field.ApiKey" xml:space="preserve">
+    <value>API klíč</value>
+  </data>
+  <data name="Integrations.Field.Active" xml:space="preserve">
+    <value>Aktivní</value>
+  </data>
+  <data name="Integrations.Action.Test" xml:space="preserve">
+    <value>Test</value>
+  </data>
+  <data name="Integrations.Action.Deactivate" xml:space="preserve">
+    <value>Deaktivovat</value>
+  </data>
+  <data name="Integrations.Action.Add" xml:space="preserve">
+    <value>Přidat endpoint</value>
+  </data>
+  <data name="Integrations.Confirm.Deactivate" xml:space="preserve">
+    <value>Opravdu chcete tento endpoint deaktivovat?</value>
+  </data>
+  <data name="Common.BackToAdmin" xml:space="preserve">
+    <value>Zpět na administraci</value>
+  </data>
+  <!-- Calendar Modal & Responsive -->
+  <data name="CalendarPage.ViewDetails" xml:space="preserve">
+    <value>Zobrazit detail</value>
+  </data>
+  <data name="CalendarPage.EditEvent" xml:space="preserve">
+    <value>Upravit</value>
+  </data>
+  <data name="CalendarPage.Close" xml:space="preserve">
+    <value>Zavřít</value>
+  </data>
+  <data name="CalendarPage.UpcomingAndLegend" xml:space="preserve">
+    <value>Přehled a legenda</value>
+  </data>
+  <data name="CalendarPage.CreateForDate" xml:space="preserve">
+    <value>Nová událost pro tento den</value>
+  </data>
 </root>

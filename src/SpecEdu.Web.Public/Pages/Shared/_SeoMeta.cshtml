@@ -1,0 +1,68 @@
+@using global::System.Globalization
+@using Microsoft.Extensions.Configuration
+@inject IConfiguration Configuration
+
+@{
+    var siteUrl = (Configuration["SiteUrl"] ?? "https://specedu.cz").TrimEnd('/');
+    var path = Context.Request.Path.Value ?? "/";
+    var currentCulture = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
+
+    var pageTitle = ViewData["Title"] as string;
+    var fullTitle = string.IsNullOrWhiteSpace(pageTitle)
+        ? "SpecEdu – digitální složka žáka pro školy a poradenská zařízení"
+        : $"{pageTitle} – SpecEdu";
+
+    var description = ViewData["Description"] as string
+        ?? "SpecEdu je platforma pro školy a školská poradenská zařízení. Digitální složka žáka, sdílení doporučení a bezpečná komunikace s rodiči – vše s ohledem na GDPR.";
+
+    var keywords = ViewData["Keywords"] as string
+        ?? "specedu, digitální složka žáka, školská poradenská zařízení, PPP, SPC, IVP, dokumentace žáků, GDPR, vzdělávací platforma";
+
+    var ogImage = ViewData["OgImage"] as string ?? "/img/og-default.jpg";
+    var ogImageAbs = ogImage.StartsWith("http", StringComparison.OrdinalIgnoreCase) ? ogImage : siteUrl + ogImage;
+    var canonical = siteUrl + path;
+
+    var ogLocale = currentCulture switch
+    {
+        "en" => "en_US",
+        "de" => "de_DE",
+        _ => "cs_CZ"
+    };
+
+    var noindex = ViewData["NoIndex"] is bool b && b;
+}
+
+<title>@fullTitle</title>
+<meta name="description" content="@description" />
+<meta name="keywords" content="@keywords" />
+<meta name="author" content="SpecEdu" />
+<meta name="robots" content="@(noindex ? "noindex, nofollow" : "index, follow, max-image-preview:large, max-snippet:-1")" />
+
+<link rel="canonical" href="@canonical" />
+
+<link rel="alternate" hreflang="cs" href="@(siteUrl)@(path)?culture=cs" />
+<link rel="alternate" hreflang="en" href="@(siteUrl)@(path)?culture=en" />
+<link rel="alternate" hreflang="de" href="@(siteUrl)@(path)?culture=de" />
+<link rel="alternate" hreflang="x-default" href="@canonical" />
+
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="SpecEdu" />
+<meta property="og:title" content="@fullTitle" />
+<meta property="og:description" content="@description" />
+<meta property="og:url" content="@canonical" />
+<meta property="og:locale" content="@ogLocale" />
+<meta property="og:image" content="@ogImageAbs" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="SpecEdu" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="@fullTitle" />
+<meta name="twitter:description" content="@description" />
+<meta name="twitter:image" content="@ogImageAbs" />
+
+<meta name="theme-color" content="#4A90D9" />
+<meta name="format-detection" content="telephone=no" />
+
+<link rel="icon" href="~/favicon.ico" />
+<link rel="apple-touch-icon" href="~/img/apple-touch-icon.png" />
