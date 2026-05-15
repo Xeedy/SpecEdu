@@ -1,5 +1,6 @@
 @page
 @model SpecEdu.Web.Public.Pages.IndexModel
+@inject IStringLocalizer<SharedResource> L
 @{
     ViewData["Title"] = "Domů";
     ViewData["Description"] = "SpecEdu – digitální složka žáka pro školy, učitele, rodiče a poradenská zařízení (PPP, SPC). Přehledná dokumentace, sdílení doporučení, komunikační deník a notifikace v souladu s GDPR.";
@@ -35,7 +36,7 @@
 
                     <div class="carousel-caption spec-hero-caption text-start">
                         <div class="spec-hero-badge">SpecEdu</div>
-                        <h1 class="spec-hero-title">Digitální složka žáka bez chaosu</h1>
+                        <h1 class="spec-hero-title">@L["MainPage.Hero1"]</h1>
                         <p class="spec-hero-text">
                             Přehledná dokumentace, doporučení a historie poznámek – s přístupem jen pro oprávněné role.
                         </p>

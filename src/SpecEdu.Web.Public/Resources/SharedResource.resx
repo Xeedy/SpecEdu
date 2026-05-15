@@ -246,4 +246,7 @@
   <data name="CookieConsent.RejectOptional" xml:space="preserve">
     <value>Essential Only</value>
   </data>
+  <data name="MainPage.Hero1" xml:space="preserve">
+    <value />
+  </data>
 </root>

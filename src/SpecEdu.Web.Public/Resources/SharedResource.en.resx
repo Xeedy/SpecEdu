@@ -231,17 +231,29 @@
   <data name="HeaderPage.Admin" xml:space="preserve">
     <value>Admin</value>
   </data>
-  <data name="HeaderPage.Students" xml:space="preserve">
-    <value>Students</value>
+  <data name="HeaderPage.Logout" xml:space="preserve">
+    <value>Log out</value>
+  </data>
+  <data name="CookieConsent.Message" xml:space="preserve">
+    <value>This website uses cookies to ensure proper functionality. Some cookies are essential, others help us improve our services.</value>
+  </data>
+  <data name="CookieConsent.LearnMore" xml:space="preserve">
+    <value>Learn more</value>
+  </data>
+  <data name="CookieConsent.AcceptAll" xml:space="preserve">
+    <value>Accept All</value>
+  </data>
+  <data name="CookieConsent.RejectOptional" xml:space="preserve">
+    <value>Essential Only</value>
   </data>
   <data name="HeaderPage.Dashboard" xml:space="preserve">
     <value>Dashboard</value>
   </data>
+  <data name="HeaderPage.Students" xml:space="preserve">
+    <value>Students</value>
+  </data>
   <data name="HeaderPage.MyChildren" xml:space="preserve">
     <value>My Children</value>
-  </data>
-  <data name="HeaderPage.Logout" xml:space="preserve">
-    <value>Log out</value>
   </data>
   <data name="Common.ComingSoon" xml:space="preserve">
     <value>Soon</value>
@@ -251,6 +263,9 @@
     <value />
   </data>
   <data name="ContactPage.Address" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="DiaryPage.FilterType" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
   <data name="Common.Create" xml:space="preserve">
@@ -307,7 +322,6 @@
   <data name="StudentsPage.PlppInfo" xml:space="preserve">
     <value>Manage pedagogical support plans (PLPP) for the student.</value>
   </data>
-  <!-- Calendar / Consultation -->
   <data name="CalendarPage.Title" xml:space="preserve">
     <value>Consultation Calendar</value>
   </data>
@@ -773,16 +787,7 @@
   <data name="MyChildrenPage.ViewCalendar" xml:space="preserve">
     <value>Events Calendar</value>
   </data>
-  <data name="CookieConsent.Message" xml:space="preserve">
-    <value>This website uses cookies to ensure proper functionality. Some cookies are essential, others help us improve our services.</value>
-  </data>
-  <data name="CookieConsent.LearnMore" xml:space="preserve">
-    <value>Learn more</value>
-  </data>
-  <data name="CookieConsent.AcceptAll" xml:space="preserve">
-    <value>Accept All</value>
-  </data>
-  <data name="CookieConsent.RejectOptional" xml:space="preserve">
-    <value>Essential Only</value>
+  <data name="MainPage.Hero1" xml:space="preserve">
+    <value>Digital student folder without chaos</value>
   </data>
 </root>
