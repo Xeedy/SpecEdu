@@ -121,6 +121,42 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser, IdentityR
     public DbSet<UserConsent> UserConsents => Set<UserConsent>();
 
     /// <summary>
+    /// Chat conversations (1:1 and group).
+    /// Czech: Chatové konverzace
+    /// </summary>
+    public DbSet<Conversation> Conversations => Set<Conversation>();
+
+    /// <summary>
+    /// Participants of chat conversations.
+    /// Czech: Účastníci konverzací
+    /// </summary>
+    public DbSet<ConversationParticipant> ConversationParticipants => Set<ConversationParticipant>();
+
+    /// <summary>
+    /// Chat messages.
+    /// Czech: Chatové zprávy
+    /// </summary>
+    public DbSet<ChatMessage> ChatMessages => Set<ChatMessage>();
+
+    /// <summary>
+    /// File attachments on chat messages.
+    /// Czech: Přílohy chatových zpráv
+    /// </summary>
+    public DbSet<ChatAttachment> ChatAttachments => Set<ChatAttachment>();
+
+    /// <summary>
+    /// Integration endpoints for PPP/SPC data warehouse connectivity.
+    /// Czech: Integrační endpointy pro propojení s datovými sklady PPP/SPC
+    /// </summary>
+    public DbSet<IntegrationEndpoint> IntegrationEndpoints => Set<IntegrationEndpoint>();
+
+    /// <summary>
+    /// Audit trail of data exchange operations with external systems.
+    /// Czech: Protokol operací výměny dat s externími systémy
+    /// </summary>
+    public DbSet<DataExchangeRecord> DataExchangeRecords => Set<DataExchangeRecord>();
+
+    /// <summary>
     /// Saves changes and automatically populates audit fields.
     /// </summary>
     public override int SaveChanges()

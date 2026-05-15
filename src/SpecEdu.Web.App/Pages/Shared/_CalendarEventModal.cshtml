@@ -1,0 +1,57 @@
+@inject IStringLocalizer<SpecEdu.Web.App.SharedResource> L
+
+<!-- Calendar Event Details Modal -->
+<div class="modal fade" id="calendarEventModal" tabindex="-1" aria-labelledby="eventModalTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title d-flex align-items-center gap-2">
+                    <span id="eventModalColorDot" class="calendar-event-color-dot"></span>
+                    <span id="eventModalTitle"></span>
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="@L["CalendarPage.Close"]"></button>
+            </div>
+            <div class="modal-body">
+                <!-- Date -->
+                <div class="calendar-event-detail-row">
+                    <i class="bi bi-calendar"></i>
+                    <span id="eventModalDate"></span>
+                </div>
+                <!-- Time -->
+                <div class="calendar-event-detail-row">
+                    <i class="bi bi-clock"></i>
+                    <span id="eventModalTime"></span>
+                </div>
+                <!-- Student (conditional) -->
+                <div class="calendar-event-detail-row" id="eventModalStudentRow">
+                    <i class="bi bi-person"></i>
+                    <span id="eventModalStudent"></span>
+                </div>
+                <!-- Location (conditional) -->
+                <div class="calendar-event-detail-row" id="eventModalLocationRow">
+                    <i class="bi bi-geo-alt"></i>
+                    <span id="eventModalLocation"></span>
+                </div>
+                <!-- Type -->
+                <div class="calendar-event-detail-row">
+                    <i class="bi bi-tag"></i>
+                    <span id="eventModalType" class="badge bg-secondary"></span>
+                </div>
+                <!-- Status -->
+                <div class="calendar-event-detail-row">
+                    <i class="bi bi-check-circle"></i>
+                    <span id="eventModalStatus" class="badge bg-secondary"></span>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a id="eventModalViewLink" href="#" class="btn btn-spec-primary btn-sm" style="display:none;">
+                    <i class="bi bi-eye me-1"></i>@L["CalendarPage.ViewDetails"]
+                </a>
+                <a id="eventModalEditLink" href="#" class="btn btn-outline-secondary btn-sm" style="display:none;">
+                    <i class="bi bi-pencil me-1"></i>@L["CalendarPage.EditEvent"]
+                </a>
+                <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">@L["CalendarPage.Close"]</button>
+            </div>
+        </div>
+    </div>
+</div>

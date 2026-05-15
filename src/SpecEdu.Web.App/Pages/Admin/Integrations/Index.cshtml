@@ -1,0 +1,228 @@
+@page
+@model SpecEdu.Web.App.Pages.Admin.Integrations.IndexModel
+@using SpecEdu.Domain.Enums
+@{
+    ViewData["Title"] = @L["Integrations.Title"];
+}
+
+<div class="container py-4">
+    <h1 class="mb-4">@L["Integrations.Title"]</h1>
+
+    <!-- Stub notice -->
+    <div class="alert alert-info d-flex align-items-center mb-4" role="alert">
+        <i class="bi bi-info-circle me-2 fs-5"></i>
+        <div>@L["Integrations.StubNotice"]</div>
+    </div>
+
+    <!-- Success / Error messages -->
+    @if (!string.IsNullOrEmpty(Model.SuccessMessage))
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            @Model.SuccessMessage
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+    @if (!string.IsNullOrEmpty(Model.ErrorMessage))
+    {
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            @Model.ErrorMessage
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+
+    <!-- Configured Endpoints -->
+    <div class="spec-card mb-4">
+        <div class="spec-card-header">@L["Integrations.Endpoints"]</div>
+        <div class="spec-card-body">
+            @if (Model.Endpoints.Count == 0)
+            {
+                <p class="text-muted mb-0">@L["Integrations.NoEndpoints"]</p>
+            }
+            else
+            {
+                <div class="table-responsive">
+                    <table class="table table-hover mb-0">
+                        <thead>
+                            <tr>
+                                <th>@L["Integrations.Column.Name"]</th>
+                                <th>@L["Integrations.Column.Type"]</th>
+                                <th>@L["Integrations.Column.BaseUrl"]</th>
+                                <th>@L["Integrations.Column.Status"]</th>
+                                <th>@L["Integrations.Column.LastTested"]</th>
+                                <th>@L["Integrations.Column.Actions"]</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var ep in Model.Endpoints)
+                            {
+                                <tr>
+                                    <td>@ep.Name</td>
+                                    <td>
+                                        <span class="badge @(ep.SystemType == ExternalSystemType.PPP ? "bg-primary" : "bg-info")">
+                                            @ep.SystemType
+                                        </span>
+                                    </td>
+                                    <td>
+                                        @if (!string.IsNullOrEmpty(ep.BaseUrl))
+                                        {
+                                            <code>@ep.BaseUrl</code>
+                                        }
+                                        else
+                                        {
+                                            <span class="text-muted">—</span>
+                                        }
+                                    </td>
+                                    <td>
+                                        @if (ep.IsActive)
+                                        {
+                                            <span class="badge bg-success">@L["Integrations.Status.Active"]</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="badge bg-secondary">@L["Integrations.Status.Inactive"]</span>
+                                        }
+                                    </td>
+                                    <td>
+                                        @if (ep.LastTestedAt.HasValue)
+                                        {
+                                            <span title="@ep.LastTestResult">@ep.LastTestedAt.Value.ToString("g")</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="text-muted">@L["Integrations.NeverTested"]</span>
+                                        }
+                                    </td>
+                                    <td>
+                                        <div class="d-flex gap-1">
+                                            <form method="post" asp-page-handler="TestConnection" class="d-inline">
+                                                <input type="hidden" name="endpointId" value="@ep.Id" />
+                                                <button type="submit" class="btn btn-sm btn-spec-outline">
+                                                    <i class="bi bi-plug"></i> @L["Integrations.Action.Test"]
+                                                </button>
+                                            </form>
+                                            @if (ep.IsActive)
+                                            {
+                                                <form method="post" asp-page-handler="Deactivate" class="d-inline"
+                                                      onsubmit="return confirm('@L["Integrations.Confirm.Deactivate"]');">
+                                                    <input type="hidden" name="endpointId" value="@ep.Id" />
+                                                    <button type="submit" class="btn btn-sm btn-outline-danger">
+                                                        <i class="bi bi-x-circle"></i> @L["Integrations.Action.Deactivate"]
+                                                    </button>
+                                                </form>
+                                            }
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+        </div>
+    </div>
+
+    <!-- Add Endpoint Form -->
+    <div class="spec-card mb-4">
+        <div class="spec-card-header">@L["Integrations.AddEndpoint"]</div>
+        <div class="spec-card-body">
+            <form method="post" asp-page-handler="Create">
+                <div class="row g-3">
+                    <div class="col-md-4">
+                        <label class="form-label">@L["Integrations.Field.Name"]</label>
+                        <input type="text" class="form-control" asp-for="EndpointName" required />
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label">@L["Integrations.Field.Type"]</label>
+                        <select class="form-select" asp-for="EndpointSystemType">
+                            <option value="@((int)ExternalSystemType.PPP)">PPP</option>
+                            <option value="@((int)ExternalSystemType.SPC)">SPC</option>
+                        </select>
+                    </div>
+                    <div class="col-md-5">
+                        <label class="form-label">@L["Integrations.Field.BaseUrl"]</label>
+                        <input type="url" class="form-control" asp-for="EndpointBaseUrl" placeholder="https://" />
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">@L["Integrations.Field.ApiKey"]</label>
+                        <input type="password" class="form-control" asp-for="EndpointApiKey" />
+                    </div>
+                    <div class="col-md-3 d-flex align-items-end">
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" asp-for="EndpointIsActive" />
+                            <label class="form-check-label" asp-for="EndpointIsActive">@L["Integrations.Field.Active"]</label>
+                        </div>
+                    </div>
+                    <div class="col-md-5 d-flex align-items-end">
+                        <button type="submit" class="btn btn-spec-primary">
+                            <i class="bi bi-plus-circle"></i> @L["Integrations.Action.Add"]
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Exchange History -->
+    <div class="spec-card mb-4">
+        <div class="spec-card-header">@L["Integrations.ExchangeHistory"]</div>
+        <div class="spec-card-body">
+            @if (Model.RecentRecords.Count == 0)
+            {
+                <p class="text-muted mb-0">@L["Integrations.NoRecords"]</p>
+            }
+            else
+            {
+                <div class="table-responsive">
+                    <table class="table table-hover mb-0">
+                        <thead>
+                            <tr>
+                                <th>@L["Integrations.Column.Time"]</th>
+                                <th>@L["Integrations.Column.Endpoint"]</th>
+                                <th>@L["Integrations.Column.Direction"]</th>
+                                <th>@L["Integrations.Column.EntityType"]</th>
+                                <th>@L["Integrations.Column.Status"]</th>
+                                <th>@L["Integrations.Column.Summary"]</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var rec in Model.RecentRecords)
+                            {
+                                <tr>
+                                    <td>@rec.CreatedAt.ToString("g")</td>
+                                    <td>@(rec.EndpointName ?? "—")</td>
+                                    <td>
+                                        <span class="badge @(rec.Direction == DataExchangeDirection.Export ? "bg-warning text-dark" : "bg-info")">
+                                            @L[$"Integrations.Direction.{rec.Direction}"]
+                                        </span>
+                                    </td>
+                                    <td>@(rec.EntityType ?? "—")</td>
+                                    <td>
+                                        @{
+                                            var statusClass = rec.Status switch
+                                            {
+                                                DataExchangeStatus.Completed => "bg-success",
+                                                DataExchangeStatus.Failed => "bg-danger",
+                                                DataExchangeStatus.InProgress => "bg-primary",
+                                                DataExchangeStatus.Pending => "bg-secondary",
+                                                DataExchangeStatus.PartiallyCompleted => "bg-warning text-dark",
+                                                _ => "bg-secondary"
+                                            };
+                                        }
+                                        <span class="badge @statusClass">@rec.Status</span>
+                                    </td>
+                                    <td>
+                                        <small>@(rec.ResponseSummary ?? rec.RequestSummary ?? "—")</small>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+        </div>
+    </div>
+
+    <a asp-page="/Admin/Index" class="btn btn-outline-secondary">
+        <i class="bi bi-arrow-left"></i> @L["Common.BackToAdmin"]
+    </a>
+</div>

@@ -3,6 +3,7 @@
 @inject IStringLocalizer<SharedResource> L
 @{
     ViewData["Title"] = L["PricingPage.Title"];
+    ViewData["Description"] = "Transparentní ceník SpecEdu – platforma pro školy a školská poradenská zařízení. Vyberte si tarif podle počtu žáků a požádejte o pilot zdarma.";
 }
 
 <!-- Hero -->
@@ -101,9 +102,7 @@
             <div class="col-md-6 col-lg-3">
                 <div class="text-center">
                     <div class="bg-spec-primary-light rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 64px; height: 64px;">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="var(--spec-primary)" viewBox="0 0 16 16">
-                            <path d="M5 0a.5.5 0 0 1 .5.5V2h1V.5a.5.5 0 0 1 1 0V2h1V.5a.5.5 0 0 1 1 0V2h1V.5a.5.5 0 0 1 1 0V2A2.5 2.5 0 0 1 14 4.5h1.5a.5.5 0 0 1 0 1H14v1h1.5a.5.5 0 0 1 0 1H14v1h1.5a.5.5 0 0 1 0 1H14v1h1.5a.5.5 0 0 1 0 1H14a2.5 2.5 0 0 1-2.5 2.5v1.5a.5.5 0 0 1-1 0V14h-1v1.5a.5.5 0 0 1-1 0V14h-1v1.5a.5.5 0 0 1-1 0V14h-1v1.5a.5.5 0 0 1-1 0V14A2.5 2.5 0 0 1 2 11.5H.5a.5.5 0 0 1 0-1H2v-1H.5a.5.5 0 0 1 0-1H2v-1H.5a.5.5 0 0 1 0-1H2v-1H.5a.5.5 0 0 1 0-1H2A2.5 2.5 0 0 1 4.5 2V.5A.5.5 0 0 1 5 0z"/>
-                        </svg>
+                        <spec-icon name="gear-wide-connected" size="28" class="text-spec-primary"></spec-icon>
                     </div>
                     <h6 class="fw-bold">@L["PricingPage.Included1Title"]</h6>
                     <p class="text-muted small mb-0">@L["PricingPage.Included1Desc"]</p>
@@ -112,9 +111,7 @@
             <div class="col-md-6 col-lg-3">
                 <div class="text-center">
                     <div class="bg-spec-primary-light rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 64px; height: 64px;">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="var(--spec-primary)" viewBox="0 0 16 16">
-                            <path d="M8 1a5 5 0 0 0-5 5v1h1a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a6 6 0 1 1 12 0v6a2.5 2.5 0 0 1-2.5 2.5H9.366a1 1 0 0 1-.866.5h-1a1 1 0 1 1 0-2h1a1 1 0 0 1 .866.5H11.5A1.5 1.5 0 0 0 13 12h-1a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1h1V6a5 5 0 0 0-5-5z"/>
-                        </svg>
+                        <spec-icon name="headset" size="28" class="text-spec-primary"></spec-icon>
                     </div>
                     <h6 class="fw-bold">@L["PricingPage.Included2Title"]</h6>
                     <p class="text-muted small mb-0">@L["PricingPage.Included2Desc"]</p>
@@ -123,9 +120,7 @@
             <div class="col-md-6 col-lg-3">
                 <div class="text-center">
                     <div class="bg-spec-primary-light rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 64px; height: 64px;">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="var(--spec-primary)" viewBox="0 0 16 16">
-                            <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2z"/>
-                        </svg>
+                        <spec-icon name="bookmark" size="28" class="text-spec-primary"></spec-icon>
                     </div>
                     <h6 class="fw-bold">@L["PricingPage.Included3Title"]</h6>
                     <p class="text-muted small mb-0">@L["PricingPage.Included3Desc"]</p>
@@ -134,10 +129,7 @@
             <div class="col-md-6 col-lg-3">
                 <div class="text-center">
                     <div class="bg-spec-primary-light rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 64px; height: 64px;">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="var(--spec-primary)" viewBox="0 0 16 16">
-                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-                            <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
-                        </svg>
+                        <spec-icon name="info-circle" size="28" class="text-spec-primary"></spec-icon>
                     </div>
                     <h6 class="fw-bold">@L["PricingPage.Included4Title"]</h6>
                     <p class="text-muted small mb-0">@L["PricingPage.Included4Desc"]</p>

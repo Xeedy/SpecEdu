@@ -1,0 +1,418 @@
+@page
+@model SpecEdu.Web.App.Pages.Chat.IndexModel
+@inject IStringLocalizer<SpecEdu.Web.App.SharedResource> L
+@{
+    ViewData["Title"] = L["Chat.Title"];
+}
+
+@Html.AntiForgeryToken()
+
+<div class="chat-container">
+    <!-- Left: Conversation List -->
+    <div class="chat-sidebar" id="chatSidebar">
+        <div class="chat-sidebar-header">
+            <h5 class="fw-bold mb-0">@L["Chat.Title"]</h5>
+            <button class="btn btn-sm btn-spec-primary" id="btnNewChat" title="@L["Chat.NewMessage"]">
+                <i class="bi bi-pencil-square"></i>
+            </button>
+        </div>
+        <div class="chat-search">
+            <input type="text" class="form-control form-control-sm" id="chatSearch"
+                   placeholder="@L["Common.Search"]..." />
+        </div>
+        <div class="chat-conversation-list" id="conversationList">
+            @foreach (var conv in Model.Conversations)
+            {
+                var otherParticipants = conv.Participants.Where(p => p.UserId != User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value).ToList();
+                var displayName = conv.IsGroup
+                    ? (conv.Title ?? string.Join(", ", otherParticipants.Select(p => p.FullName)))
+                    : otherParticipants.FirstOrDefault()?.FullName ?? L["Chat.Unknown"].Value;
+                var isActive = Model.ActiveConversationId == conv.Id;
+                <div class="chat-conv-item @(isActive ? "active" : "") @(conv.UnreadCount > 0 ? "unread" : "")"
+                     data-conv-id="@conv.Id" data-conv-name="@displayName">
+                    <div class="chat-conv-avatar">
+                        <i class="bi @(conv.IsGroup ? "bi-people-fill" : "bi-person-circle")"></i>
+                    </div>
+                    <div class="chat-conv-info">
+                        <div class="chat-conv-name">@displayName</div>
+                        <div class="chat-conv-preview">@(conv.LastMessagePreview ?? L["Chat.NoMessages"].Value)</div>
+                    </div>
+                    <div class="chat-conv-meta">
+                        @if (conv.LastMessageAt.HasValue)
+                        {
+                            <span class="chat-conv-time">@conv.LastMessageAt.Value.ToString("dd.MM. HH:mm")</span>
+                        }
+                        @if (conv.UnreadCount > 0)
+                        {
+                            <span class="chat-conv-badge">@conv.UnreadCount</span>
+                        }
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+
+    <!-- Right: Message Area -->
+    <div class="chat-main" id="chatMain">
+        <div class="chat-empty-state" id="chatEmptyState">
+            <i class="bi bi-chat-dots display-1 text-muted"></i>
+            <h5 class="text-muted mt-3">@L["Chat.SelectConversation"]</h5>
+            <p class="text-muted">@L["Chat.SelectConversationHint"]</p>
+        </div>
+
+        <div class="chat-active" id="chatActive" style="display:none;">
+            <div class="chat-main-header" id="chatHeader">
+                <button class="btn btn-sm d-lg-none me-2" id="btnBackToList">
+                    <i class="bi bi-arrow-left"></i>
+                </button>
+                <div class="chat-header-info">
+                    <span class="chat-header-name" id="chatHeaderName"></span>
+                    <span class="chat-header-status text-muted" id="chatHeaderStatus"></span>
+                </div>
+            </div>
+
+            <div class="chat-messages" id="chatMessages">
+                <!-- Messages loaded via JS -->
+            </div>
+
+            <div class="chat-input-area">
+                <div class="chat-attachments-preview" id="attachmentsPreview" style="display:none;"></div>
+                <div class="chat-input-row">
+                    <button type="button" class="btn btn-chat-action" id="btnAttach" title="@L["Chat.AttachFile"]">
+                        <i class="bi bi-paperclip"></i>
+                    </button>
+                    <input type="file" id="fileInput" multiple style="display:none;"
+                           accept=".pdf,.doc,.docx,.xls,.xlsx,.png,.jpg,.jpeg,.gif,.txt,.zip,.csv" />
+                    <input type="text" class="form-control" id="messageInput"
+                           placeholder="@L["Chat.TypeMessage"]..." autocomplete="off" />
+                    <button type="button" class="btn btn-spec-primary btn-chat-send" id="btnSend">
+                        <i class="bi bi-send-fill"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- New Conversation Modal -->
+<div class="modal fade" id="newChatModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">@L["Chat.NewConversation"]</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3">
+                    <label class="form-label">@L["Chat.SearchContacts"]</label>
+                    <input type="text" class="form-control" id="contactSearch"
+                           placeholder="@L["Common.Search"]..." />
+                </div>
+                <div class="mb-3" id="selectedContacts" style="display:none;">
+                    <label class="form-label small text-muted">@L["Chat.Selected"]:</label>
+                    <div id="selectedContactsList" class="d-flex flex-wrap gap-1"></div>
+                </div>
+                <div class="mb-3" id="groupTitleRow" style="display:none;">
+                    <label class="form-label">@L["Chat.GroupTitle"]</label>
+                    <input type="text" class="form-control" id="groupTitle"
+                           placeholder="@L["Chat.GroupTitlePlaceholder"]..." />
+                </div>
+                <div class="chat-contact-list" id="contactList">
+                    <!-- Contacts loaded via JS -->
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-spec-outline" data-bs-dismiss="modal">@L["Common.Cancel"]</button>
+                <button type="button" class="btn btn-spec-primary" id="btnStartChat" disabled>
+                    @L["Chat.StartConversation"]
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+<script>
+(function() {
+    var currentConvId = null;
+    var selectedContactIds = [];
+    var pendingFiles = [];
+    var pollInterval = null;
+    var token = document.querySelector('input[name="__RequestVerificationToken"]')?.value
+        || document.querySelector('meta[name="RequestVerificationToken"]')?.content || '';
+
+    // === Conversation List ===
+    document.querySelectorAll('.chat-conv-item').forEach(function(el) {
+        el.addEventListener('click', function() { openConversation(el.dataset.convId, el.dataset.convName); });
+    });
+
+    function openConversation(convId, name) {
+        currentConvId = convId;
+        document.getElementById('chatEmptyState').style.display = 'none';
+        document.getElementById('chatActive').style.display = 'flex';
+        document.getElementById('chatHeaderName').textContent = name;
+        document.getElementById('chatSidebar').classList.add('chat-sidebar-hidden');
+
+        document.querySelectorAll('.chat-conv-item').forEach(function(el) {
+            el.classList.toggle('active', el.dataset.convId === convId);
+        });
+
+        loadMessages(convId);
+        if (pollInterval) clearInterval(pollInterval);
+        pollInterval = setInterval(function() { loadMessages(convId, true); }, 8000);
+    }
+
+    function loadMessages(convId, silent) {
+        fetch('/Chat?handler=Messages&conversationId=' + convId)
+            .then(function(r) { return r.json(); })
+            .then(function(messages) {
+                var container = document.getElementById('chatMessages');
+                var wasAtBottom = container.scrollTop + container.clientHeight >= container.scrollHeight - 50;
+                container.innerHTML = '';
+                messages.forEach(function(msg) { container.appendChild(buildMessageEl(msg)); });
+                if (!silent || wasAtBottom) container.scrollTop = container.scrollHeight;
+                // Mark read & refresh badge
+                if (!silent) {
+                    var activeItem = document.querySelector('.chat-conv-item[data-conv-id="' + convId + '"]');
+                    if (activeItem) { activeItem.classList.remove('unread'); var badge = activeItem.querySelector('.chat-conv-badge'); if (badge) badge.remove(); }
+                }
+            });
+    }
+
+    function buildMessageEl(msg) {
+        var div = document.createElement('div');
+        div.className = 'chat-msg ' + (msg.isMine ? 'chat-msg-mine' : 'chat-msg-other');
+        var html = '';
+        if (!msg.isMine) html += '<div class="chat-msg-sender">' + escHtml(msg.senderName) + '</div>';
+        if (msg.content) html += '<div class="chat-msg-text">' + escHtml(msg.content) + '</div>';
+        if (msg.attachments && msg.attachments.length > 0) {
+            html += '<div class="chat-msg-attachments">';
+            msg.attachments.forEach(function(att) {
+                var icon = getFileIcon(att.contentType);
+                var sizeStr = formatFileSize(att.fileSizeBytes);
+                html += '<a href="/Chat?handler=Download&attachmentId=' + att.id + '" class="chat-msg-file" target="_blank">'
+                    + '<i class="bi ' + icon + '"></i> ' + escHtml(att.fileName) + ' <span class="text-muted">(' + sizeStr + ')</span></a>';
+            });
+            html += '</div>';
+        }
+        html += '<div class="chat-msg-time">' + formatTime(msg.sentAt) + '</div>';
+        div.innerHTML = html;
+        return div;
+    }
+
+    // === Send Message ===
+    document.getElementById('btnSend').addEventListener('click', sendMessage);
+    document.getElementById('messageInput').addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); }
+    });
+
+    function sendMessage() {
+        if (!currentConvId) return;
+        var input = document.getElementById('messageInput');
+        var text = input.value.trim();
+        if (!text && pendingFiles.length === 0) return;
+
+        input.value = '';
+        input.focus();
+
+        if (pendingFiles.length > 0) {
+            var fd = new FormData();
+            fd.append('conversationId', currentConvId);
+            fd.append('content', text);
+            pendingFiles.forEach(function(f) { fd.append('files', f); });
+            pendingFiles = [];
+            document.getElementById('attachmentsPreview').style.display = 'none';
+            document.getElementById('attachmentsPreview').innerHTML = '';
+
+            fetch('/Chat?handler=SendWithFiles', { method: 'POST', headers: { 'RequestVerificationToken': token }, body: fd })
+                .then(function(r) { return r.json(); })
+                .then(function(msg) { appendMessage(msg); refreshConversationList(); });
+        } else {
+            fetch('/Chat?handler=Send', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', 'RequestVerificationToken': token },
+                body: JSON.stringify({ conversationId: currentConvId, content: text })
+            })
+            .then(function(r) { return r.json(); })
+            .then(function(msg) { appendMessage(msg); refreshConversationList(); });
+        }
+    }
+
+    function appendMessage(msg) {
+        var container = document.getElementById('chatMessages');
+        container.appendChild(buildMessageEl(msg));
+        container.scrollTop = container.scrollHeight;
+    }
+
+    // === File Attachments ===
+    document.getElementById('btnAttach').addEventListener('click', function() {
+        document.getElementById('fileInput').click();
+    });
+
+    document.getElementById('fileInput').addEventListener('change', function() {
+        var files = this.files;
+        for (var i = 0; i < files.length; i++) {
+            if (files[i].size > 10 * 1024 * 1024) continue;
+            pendingFiles.push(files[i]);
+        }
+        updateAttachmentPreview();
+        this.value = '';
+    });
+
+    function updateAttachmentPreview() {
+        var preview = document.getElementById('attachmentsPreview');
+        if (pendingFiles.length === 0) { preview.style.display = 'none'; return; }
+        preview.style.display = 'flex';
+        preview.innerHTML = '';
+        pendingFiles.forEach(function(f, idx) {
+            var chip = document.createElement('span');
+            chip.className = 'chat-file-chip';
+            chip.innerHTML = '<i class="bi ' + getFileIcon(f.type) + '"></i> ' + escHtml(f.name)
+                + ' <button type="button" class="btn-chip-remove" data-idx="' + idx + '">&times;</button>';
+            preview.appendChild(chip);
+        });
+        preview.querySelectorAll('.btn-chip-remove').forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                pendingFiles.splice(parseInt(this.dataset.idx), 1);
+                updateAttachmentPreview();
+            });
+        });
+    }
+
+    // === New Conversation Modal ===
+    document.getElementById('btnNewChat').addEventListener('click', function() {
+        selectedContactIds = [];
+        updateSelectedContacts();
+        document.getElementById('contactSearch').value = '';
+        loadContacts('');
+        new bootstrap.Modal(document.getElementById('newChatModal')).show();
+    });
+
+    document.getElementById('contactSearch').addEventListener('input', function() {
+        loadContacts(this.value);
+    });
+
+    function loadContacts(search) {
+        fetch('/Chat?handler=Contacts&search=' + encodeURIComponent(search))
+            .then(function(r) { return r.json(); })
+            .then(function(contacts) {
+                var list = document.getElementById('contactList');
+                list.innerHTML = '';
+                contacts.forEach(function(c) {
+                    var isSelected = selectedContactIds.indexOf(c.userId) >= 0;
+                    var div = document.createElement('div');
+                    div.className = 'chat-contact-item' + (isSelected ? ' selected' : '');
+                    div.innerHTML = '<div class="chat-contact-avatar"><i class="bi bi-person-circle"></i></div>'
+                        + '<div class="chat-contact-info"><div class="fw-semibold">' + escHtml(c.fullName) + '</div>'
+                        + '<div class="text-muted small">' + escHtml(c.role) + (c.schoolName ? ' &middot; ' + escHtml(c.schoolName) : '') + '</div></div>'
+                        + (isSelected ? '<i class="bi bi-check-circle-fill text-primary"></i>' : '');
+                    div.addEventListener('click', function() { toggleContact(c.userId, c.fullName); loadContacts(document.getElementById('contactSearch').value); });
+                    list.appendChild(div);
+                });
+            });
+    }
+
+    function toggleContact(userId, name) {
+        var idx = selectedContactIds.indexOf(userId);
+        if (idx >= 0) selectedContactIds.splice(idx, 1);
+        else selectedContactIds.push(userId);
+        updateSelectedContacts();
+    }
+
+    function updateSelectedContacts() {
+        var container = document.getElementById('selectedContactsList');
+        var wrapper = document.getElementById('selectedContacts');
+        var groupRow = document.getElementById('groupTitleRow');
+        var btn = document.getElementById('btnStartChat');
+        wrapper.style.display = selectedContactIds.length > 0 ? 'block' : 'none';
+        groupRow.style.display = selectedContactIds.length > 1 ? 'block' : 'none';
+        btn.disabled = selectedContactIds.length === 0;
+        // Rebuild chips (simplified - just show count)
+        container.innerHTML = '';
+        selectedContactIds.forEach(function(id) {
+            var chip = document.createElement('span');
+            chip.className = 'badge bg-primary';
+            chip.textContent = id.substring(0, 8) + '...';
+            container.appendChild(chip);
+        });
+    }
+
+    document.getElementById('btnStartChat').addEventListener('click', function() {
+        if (selectedContactIds.length === 0) return;
+        var title = selectedContactIds.length > 1 ? document.getElementById('groupTitle').value || null : null;
+        fetch('/Chat?handler=NewConversation', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'RequestVerificationToken': token },
+            body: JSON.stringify({ participantIds: selectedContactIds, title: title })
+        })
+        .then(function(r) { return r.json(); })
+        .then(function(data) {
+            bootstrap.Modal.getInstance(document.getElementById('newChatModal')).hide();
+            window.location.href = '/Chat?conversationId=' + data.conversationId;
+        });
+    });
+
+    // === Mobile back button ===
+    document.getElementById('btnBackToList').addEventListener('click', function() {
+        document.getElementById('chatSidebar').classList.remove('chat-sidebar-hidden');
+        document.getElementById('chatActive').style.display = 'none';
+        document.getElementById('chatEmptyState').style.display = 'flex';
+        if (pollInterval) clearInterval(pollInterval);
+    });
+
+    // === Search conversations ===
+    document.getElementById('chatSearch').addEventListener('input', function() {
+        var q = this.value.toLowerCase();
+        document.querySelectorAll('.chat-conv-item').forEach(function(el) {
+            el.style.display = el.dataset.convName.toLowerCase().indexOf(q) >= 0 ? '' : 'none';
+        });
+    });
+
+    // === Refresh conversation list ===
+    function refreshConversationList() {
+        fetch('/Chat?handler=Conversations')
+            .then(function(r) { return r.json(); })
+            .then(function(convs) {
+                // Update badge in sidebar
+                var totalUnread = convs.reduce(function(sum, c) { return sum + c.unreadCount; }, 0);
+                var sidebarBadge = document.getElementById('chatSidebarBadge');
+                if (sidebarBadge) sidebarBadge.textContent = totalUnread > 0 ? totalUnread : '';
+            });
+    }
+
+    // === Auto-open if conversationId is set ===
+    var activeId = '@(Model.ActiveConversationId?.ToString() ?? "")';
+    if (activeId) {
+        var activeEl = document.querySelector('.chat-conv-item[data-conv-id="' + activeId + '"]');
+        if (activeEl) openConversation(activeId, activeEl.dataset.convName);
+    }
+
+    // === Helpers ===
+    function escHtml(s) { var d = document.createElement('div'); d.textContent = s || ''; return d.innerHTML; }
+    function formatTime(iso) {
+        var d = new Date(iso);
+        var now = new Date();
+        if (d.toDateString() === now.toDateString()) return pad(d.getHours()) + ':' + pad(d.getMinutes());
+        return pad(d.getDate()) + '.' + pad(d.getMonth()+1) + '. ' + pad(d.getHours()) + ':' + pad(d.getMinutes());
+    }
+    function pad(n) { return n < 10 ? '0' + n : '' + n; }
+    function formatFileSize(b) {
+        if (b < 1024) return b + ' B';
+        if (b < 1048576) return (b/1024).toFixed(1) + ' KB';
+        return (b/1048576).toFixed(1) + ' MB';
+    }
+    function getFileIcon(ct) {
+        if (!ct) return 'bi-file-earmark';
+        if (ct.indexOf('pdf') >= 0) return 'bi-file-earmark-pdf-fill text-danger';
+        if (ct.indexOf('word') >= 0 || ct.indexOf('doc') >= 0) return 'bi-file-earmark-word-fill text-primary';
+        if (ct.indexOf('excel') >= 0 || ct.indexOf('sheet') >= 0) return 'bi-file-earmark-excel-fill text-success';
+        if (ct.indexOf('image') >= 0) return 'bi-file-earmark-image-fill text-info';
+        if (ct.indexOf('zip') >= 0 || ct.indexOf('rar') >= 0) return 'bi-file-earmark-zip-fill text-warning';
+        return 'bi-file-earmark-fill';
+    }
+
+    // Poll for new conversation list updates
+    setInterval(refreshConversationList, 15000);
+})();
+</script>
+}

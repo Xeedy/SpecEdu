@@ -53,6 +53,13 @@
                         </a>
                     </li>
                 }
+                <li>
+                    <a class="sidebar-link @(currentPage.Contains("Chat") ? "active" : "")" asp-page="/Chat/Index">
+                        <i class="bi bi-chat-dots"></i>
+                        <span>@L["Sidebar.Chat"]</span>
+                        <span class="sidebar-chat-badge" id="chatSidebarBadge"></span>
+                    </a>
+                </li>
             </ul>
         </div>
 
@@ -119,6 +126,12 @@
                         <a class="sidebar-link @(currentPage.Contains("Admin/AuditLog") ? "active" : "")" asp-page="/Admin/AuditLog/Index">
                             <i class="bi bi-journal-text"></i>
                             <span>@L["Sidebar.AuditLog"]</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="sidebar-link @(currentPage.Contains("Admin/Integrations") ? "active" : "")" asp-page="/Admin/Integrations/Index">
+                            <i class="bi bi-plug"></i>
+                            <span>@L["Sidebar.Integrations"]</span>
                         </a>
                     </li>
                 </ul>

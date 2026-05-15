@@ -103,6 +103,8 @@ public static class DependencyInjection
         services.AddScoped<IConsultationService, ConsultationService>();
         services.AddScoped<INotificationService, NotificationService>();
         services.AddScoped<IGdprService, GdprService>();
+        services.AddScoped<IChatService, ChatService>();
+        services.AddScoped<IExternalIntegrationService, ExternalIntegrationService>();
 
         // Register Lazy<T> for services with circular dependencies
         services.AddTransient(typeof(Lazy<>), typeof(LazyResolver<>));
