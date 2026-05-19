@@ -7,11 +7,176 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## Current Implementation Status (2026-04-16)
+
+High-level overview of what is **done**, **partial**, and **not done**.
+
+### Done
+- **Clean Architecture solution**: Domain / Application / Infrastructure / two Web projects (Public + App)
+- **Identity & roles**: 6 roles (Admin, SchoolAdmin, Teacher, SPP, Parent, Guest) with permission-based policies
+- **Multi-tenant schools**: School entity, `SchoolId` on users, tenant filtering
+- **Student management**: Full CRUD (Create / Edit / Details / Index), photo upload, class assignment
+- **Access control**: `StudentGuardian` (parent → child) and `StudentStaffLink` (staff → student with Read/Edit level)
+- **Communication diary**: 5 entry types, visibility (SchoolOnly / ParentVisible), attachments, filtering
+- **PLPP editor**: Draft → Active → Archived workflow, goals (SMART), monthly evaluations, version history, PDF export
+- **Calendar / consultations**: Event CRUD, participants (internal + external), response tracking, reminder scheduling
+- **Reminders**: Control-exam reminders 2 months in advance, background job (`ReminderBackgroundService`), email delivery
+- **Chat / messaging**: 1:1 and group conversations, message threading, attachments, unread tracking
+- **Notifications**: In-app notification bell, unread count, notification center
+- **Audit log**: Every create/update/delete/view on sensitive entities, viewable by Admin
+- **GDPR**: Data export (user request), user consent tracking, soft-delete across entities
+- **Admin console**: Schools CRUD, Users CRUD, Audit log viewer, Integration endpoints CRUD
+- **Public site**: Marketing pages (Home, HowItWorks, Pricing, Contact), feature pages, legal pages, auth pages
+- **Localization**: Czech (default), English, German via `.resx` files — resource keys in both web projects
+- **Two-app architecture**: `Web.Public` (specedu.cz) + `Web.App` (app.specedu.cz) with shared auth cookie, DataProtection keys in DB
+- **Email**: Real SMTP via MailKit (STARTTLS, configurable `DefaultTo` override for testing)
+- **Seed data**: 4 test accounts, 1 school, 3 students, 6 diary entries, 2 PLPPs with goals/evaluations, consultation events, notifications
+
+### Partial
+- **External integrations (PPP/SPC)**: Endpoint CRUD + audit records are real; `TestConnectionAsync` and actual HTTP data exchange are **stubbed** — waiting for the external API specification
+- **User management (Admin)**: Index / Create / Edit pages exist; role-change UX and bulk actions not verified
+- **GDPR export**: `GdprService` + `/Account/DataExport` page exist; full exercise of "right to erasure" flow not verified
+- **Tests**: 17 test files across Domain / Application / Infrastructure; `Web.App.Tests` and `Web.Public.Tests` projects exist but are **empty placeholders**
+
+### Not done
+- **IVP module**: Sprint-plan item — not implemented. (PLPP covers Level 2 support; IVP is a separate document for Level 3+ and is missing.)
+- **School information system (SIS) integration**: no importers yet
+- **Broad statistics / reporting dashboards**: out of MVP scope per Base.txt
+- **Mobile native app**: explicitly out of scope
+
+---
+
 ## [Unreleased]
 
 ### Planned
-- User management pages
-- Student CRUD operations
+- Exercise GDPR data export / deletion end-to-end
+- Wire real HTTP calls in `ExternalIntegrationService` once PPP/SPC API spec is available
+- Add Web.App / Web.Public test projects content
+- IVP module (Level 3+ support plan, analogous to PLPP)
+
+---
+
+## [0.6.0] - 2026-02-17 (Two-project architecture split)
+
+### Added
+- **SpecEdu.Web.Public** project — marketing / landing / auth pages (specedu.cz, port 5000)
+- **SpecEdu.Web.App** project — authenticated management app (app.specedu.cz, port 5001)
+- **Shared authentication cookie** `.SpecEdu.Auth` scoped to `.specedu.cz` in production
+- **DataProtection keys in DB** (`IDataProtectionKeyContext`) so both apps share cookie decryption keys
+- **Cross-app redirect flow**: unauthenticated App → Public login; successful login → App Dashboard; logout → Public site
+- **Separate `.resx` resources** per web project (duplicated; may be unified later)
+- **Independent layouts**: Public uses `_Header` + `_Footer`; App uses `_Sidebar` + `_TopBar`
+
+### Changed
+- Old combined `SpecEdu.Web` project removed; logic split across the two new projects
+- `Program.cs` hardened in both apps: cookie name/domain, HTTPS enforcement, localization middleware
+- `DEVELOPMENT.md` rewritten to describe the two-project architecture
+
+### Notes
+- Both apps share the same DB and run against the same `ApplicationDbContext`
+- A single commit in main changes port layouts; tests must run against `Web.App` as startup for EF tooling
+
+---
+
+## [0.5.0] - 2026-02-16 (Sprint 7: Chat + Notifications + Integrations + Admin)
+
+### Added
+- **Chat / inbox** (`ChatService`, `Chat/Index.cshtml`)
+  - `Conversation`, `ConversationParticipant`, `ChatMessage`, `ChatAttachment` entities
+  - 1:1 and group conversations, message threading via `ParentMessageId`, soft-delete of messages
+  - Per-participant `LastReadAt` → unread counts
+  - File attachments stored via blob path
+- **Notifications** (`NotificationService`, `NotificationBell` view component, `Notifications/Index.cshtml`)
+  - In-app notification types (Info / Success / Warning / Error) with optional link and related-entity pointer
+  - Unread count in top bar, mark-as-read and mark-all-as-read actions
+- **External integrations** (`ExternalIntegrationService`, `Admin/Integrations/Index.cshtml`)
+  - `IntegrationEndpoint` entity (PPP / SPC endpoints with masked API key)
+  - `DataExchangeRecord` immutable audit of every outbound/inbound call
+  - `TestConnectionAsync` is a stub that writes a failed record with "API spec pending" — real HTTP calls deferred
+- **Admin console**
+  - `Admin/Users/*` — user CRUD with role assignment
+  - `Admin/AuditLog/Index.cshtml` — filterable audit log viewer
+  - `Admin/Schools/Edit` — edit existing schools (Create already existed)
+- **GDPR export** (`GdprService`, `Account/DataExport.cshtml`) — user-requested data export
+- **UserConsent entity** — GDPR consent tracking (granted, timestamp, IP)
+
+### Database Migration
+- `20260120020644_AddPlppVersions` (combined) — adds `PlppVersion`, `ConsultationEvent`, `ConsultationParticipant`, `Notification`, `Conversation`, `ConversationParticipant`, `ChatMessage`, `ChatAttachment`, `IntegrationEndpoint`, `DataExchangeRecord`, `AuditLog`, `UserConsent` tables
+
+---
+
+## [0.4.0] - 2026-01-23 (Sprints 5–6: PLPP editor + Calendar)
+
+### Added — PLPP (Plán pedagogické podpory)
+- **Entities**: `Plpp`, `PlppGoal`, `PlppEvaluation`, `PlppVersion`
+- **Workflow**: Draft → Active (activation captures a `PlppVersion` snapshot) → Archived
+- **Goals**: SMART-style with order, subject, success criteria, status (`NotStarted` / `InProgress` / `Completed`), progress notes, target date, responsible person
+- **Monthly evaluations**: What student manages, what needs improvement, recommended adjustments, parent-consultation notes, 1–5 progress rating, parent-notified flag
+- **Version history** (`PlppVersionService`): JSON snapshot per version, change summary, source (`Activation` / `Modification` / `Manual`), diff viewing
+- **PDF export** (`PdfService`, ~550 lines): full PLPP + goals + evaluations, with/without internal notes
+- **Pages**: `Plpps.cshtml`, `PlppCreate`, `PlppEdit`, `PlppVersions`, `PlppDownload`, `PlppVersionDownload`
+- **Parent view**: `MyChildren/PlppDownload.cshtml` for parent-visible PLPPs only
+- **Duplicate for new school year** helper on `IPlppService`
+
+### Added — Calendar / Consultations
+- **Entities**: `ConsultationEvent`, `ConsultationParticipant`
+- **Event types**: IndividualConsultation, GroupConsultation, SchoolEvent, ParentMeeting, StaffMeeting
+- **Participants**: internal users (by `UserId`) + external (name + email), with response status (Pending / Accepted / Declined), organizer flag, required flag
+- **Scheduling**: start/end time, location, online meeting link, optional link to student and/or PLPP
+- **Reminders**: `ReminderMinutesBefore` default 1440 (24 h), `ReminderSent` tracking
+- **Pages**: `SchoolAdmin/Calendar/{Index,Create,Details,Edit}`, `Dashboard/Calendar` (staff view), `MyChildren/Calendar` (parent view)
+- **Shared partial**: `_CalendarEventModal.cshtml`, sidebar filter `_CalendarSidebarContent.cshtml`
+
+### Database Migration
+- `20260119193658_AddPlpp` — PLPP, PlppGoal, PlppEvaluation tables
+
+---
+
+## [0.3.0] - 2026-01-19 (Sprint 4: Reminders for control examinations)
+
+### Added
+- **Reminder entity** with `StudentId`, `DueDate`, `NotifyAt` (= `DueDate` − 2 months), `Channel` (Email), `Status` (Pending / Sent / Failed / Cancelled), retry count, last error
+- **ReminderService** — CRUD + pending/sent/failed transitions
+- **ReminderBackgroundService** — `IHostedService` polling for pending reminders and dispatching via `IEmailService`
+- **EmailService** (`MailKit`) — STARTTLS SMTP, configurable `DefaultTo` override for safe testing
+- **Reminders UI** — `SchoolAdmin/Students/Reminders.cshtml`
+- **Test infrastructure additions** — `SpecEdu.Domain.Tests`, `SpecEdu.Application.Tests`, `SpecEdu.Infrastructure.Tests` gain the first real tests (17 files total across the three)
+
+### Database Migration
+- `20260119160341_AddReminders`
+
+---
+
+## [0.2.0] - 2026-01-18 (Sprints 2–3: Students + Access control + Diary)
+
+### Added — Student & access entities
+- **Student** (`SchoolId`, `FirstName`, `LastName`, `BirthDate`, `Class`, `PhotoId`, `IsActive`) — soft-deletable
+- **StudentGuardian** — links parent user to student with `RelationshipType` (Mother / Father / LegalGuardian / Other)
+- **StudentStaffLink** — links teacher / assistant / SPP / PPP / SPC to student with `AccessLevel` (Read / Edit)
+- **StudentAccessService** — central gate: "which students can user X see, and at what level?" (used by every page that touches student data)
+- **Student pages**: `SchoolAdmin/Students/{Index,Create,Edit,Details}`, `Guardians`, `StaffLinks`
+- **Parent pages**: `MyChildren/{Index,ChildDetails}`
+- **Authorization**: `StudentAccessRequirement` + handler; role × link filtering enforced at query level (not just UI)
+
+### Added — Communication diary
+- **DiaryEntry** — types: Note, PhoneCall, Meeting, ParentCollaboration, PppSpcCollaboration; `Visibility` = SchoolOnly or ParentVisible
+- **DiaryAttachment** — binary file data stored inline (files; path-based storage planned)
+- **DiaryService** — CRUD, visibility-aware queries, attachment upload/download, entry-count-by-type statistics
+- **Diary pages**: `SchoolAdmin/Students/Diary`, `DiaryCreate`, `DiaryEdit`, `DiaryDownload`; parent-facing `MyChildren/ChildDiary`
+
+### Database Migration
+- `20260118220214_AddStudentAndAccessEntities`
+- `20260118222751_AddDiaryEntities`
+
+### Test accounts (added to seeder)
+| Email | Password | Role |
+|-------|----------|------|
+| rodic@testskola.cz | Rodic123! | Parent (linked to Jan + Marie Novák) |
+
+### Seed data
+- Test school "Testovací ZŠ", 3 students (Jan Novák, Marie Nováková, Petr Svoboda)
+- Guardian links for parent, staff links for teacher (Edit on Jan & Marie, Read on Petr)
+- 6 diary entries demonstrating each type and both visibility settings
 
 ---
 
@@ -57,64 +222,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | spravce@testskola.cz | Spravce123! | SchoolAdmin |
 | ucitel@testskola.cz | Ucitel123! | Teacher |
 
-### File Structure
-```
-src/SpecEdu.Domain/
-├── Entities/
-│   └── School.cs                    ← NEW: Multi-tenant school entity
-└── Constants/
-    ├── Permissions.cs               ← NEW: All permission constants
-    └── Roles.cs                     ← UPDATED: Added SchoolAdmin
-
-src/SpecEdu.Application/
-└── Common/
-    ├── Interfaces/
-    │   ├── ICurrentUserService.cs   ← UPDATED: SchoolId, IsAuthenticated, Roles
-    │   ├── IIdentityService.cs      ← NEW: User management interface
-    │   └── ISchoolService.cs        ← NEW: School CRUD interface
-    └── Models/
-        ├── ApplicationUserDto.cs    ← NEW
-        ├── SchoolDto.cs             ← NEW
-        └── AuthResult.cs            ← NEW
-
-src/SpecEdu.Infrastructure/
-├── Authorization/
-│   ├── PermissionRequirement.cs           ← NEW
-│   ├── PermissionAuthorizationHandler.cs  ← NEW
-│   ├── RolePermissions.cs                 ← NEW
-│   └── AuthorizationPolicies.cs           ← NEW
-├── Data/
-│   ├── Configurations/
-│   │   ├── SchoolConfiguration.cs         ← NEW
-│   │   └── ApplicationUserConfiguration.cs ← NEW
-│   ├── ApplicationDbContext.cs            ← UPDATED: Added Schools DbSet
-│   └── DbSeeder.cs                        ← NEW
-├── Identity/
-│   ├── ApplicationUser.cs                 ← UPDATED: SchoolId property
-│   ├── IdentityService.cs                 ← NEW
-│   └── JwtTokenService.cs                 ← UPDATED: school_id claim
-├── Services/
-│   └── SchoolService.cs                   ← NEW
-└── DependencyInjection.cs                 ← UPDATED: New registrations
-
-src/SpecEdu.Web/
-├── Pages/
-│   ├── Account/
-│   │   ├── Login.cshtml[.cs]              ← NEW
-│   │   ├── Logout.cshtml[.cs]             ← NEW
-│   │   └── AccessDenied.cshtml[.cs]       ← NEW
-│   ├── Admin/
-│   │   ├── Index.cshtml[.cs]              ← NEW
-│   │   └── Schools/
-│   │       ├── Index.cshtml[.cs]          ← NEW
-│   │       └── Create.cshtml[.cs]         ← NEW
-│   └── Shared/
-│       └── _Header.cshtml                 ← UPDATED: Auth-aware buttons
-├── Services/
-│   └── CurrentUserService.cs              ← UPDATED: New interface members
-└── Program.cs                             ← UPDATED: Cookie config, seeder
-```
-
 ### Security Features
 - Cookie HttpOnly, Secure, SameSite=Strict
 - Anti-forgery tokens on all forms (Razor Pages default)
@@ -141,15 +248,6 @@ src/SpecEdu.Web/
 - Main content wrapper uses `flex: 1` to push footer to bottom
 - Footer no longer uses `position: absolute`
 
-### Layout Structure (Flexbox)
-```
-body (flex container, column)
-├── header.spec-header
-├── div.container.spec-content-wrapper (flex: 1)
-│   └── main.spec-main (flex: 1)
-└── footer.spec-footer
-```
-
 ---
 
 ## [0.0.7] - 2025-01-17
@@ -170,25 +268,6 @@ body (flex container, column)
 | 5000-5999 | Infrastructure | Email, file storage, external services |
 | 9000-9999 | System | Startup, config, health checks |
 
-### File Structure
-```
-src/SpecEdu.Web/
-└── Logging/
-    └── Log.cs    ← Centralized logging (50+ log methods)
-```
-
-### Usage Example
-```csharp
-// Instead of: _logger.LogInformation("User {Email} logged in", email);
-// Use:        Log.LoginSuccess(logger, email);
-```
-
-### Benefits
-- Compile-time generated (high performance, no boxing)
-- Strongly typed parameters
-- Centralized (easy to modify messages)
-- Consistent event IDs for filtering/monitoring
-
 ---
 
 ## [0.0.6] - 2025-01-17
@@ -207,28 +286,6 @@ src/SpecEdu.Web/
 - Updated `_Layout.cshtml` to use header/footer partials
 - Changed `lang="en"` to `lang="cs"` for Czech
 - Background color now uses `--spec-gray-100` for better contrast
-
-### CSS Variables Defined
-```css
---spec-primary: #4A90D9       /* Main blue */
---spec-primary-dark: #357ABD  /* Hover state */
---spec-primary-light: #E8F4FD /* Light backgrounds */
---spec-secondary: #6C757D     /* Secondary text */
---spec-success: #28A745       /* Success states */
---spec-warning: #FFC107       /* Warnings */
---spec-danger: #DC3545        /* Errors */
-```
-
-### File Structure
-```
-Pages/Shared/
-├── _Layout.cshtml    ← Main layout (updated)
-├── _Header.cshtml    ← New header partial
-└── _Footer.cshtml    ← New footer partial
-
-wwwroot/css/
-└── site.css          ← CSS variables + component styles
-```
 
 ---
 
@@ -249,46 +306,6 @@ wwwroot/css/
 - Updated `DependencyInjection.cs` with Identity and JWT registration
 - Added `UseAuthentication()` middleware in `Program.cs`
 
-### Roles Defined
-| Role | Czech | Description |
-|------|-------|-------------|
-| Admin | Správce | School administrator (one per school) |
-| Teacher | Pedagog | Teachers managing students |
-| Parent | Rodič | View-only access to their child |
-| SPP | ŠPP | School counseling center |
-| PPP | PPP | Pedagogical-psychological counseling |
-| SPC | SPC | Special pedagogical center |
-| Assistant | Asistent | Teaching assistants |
-
-### Infrastructure Structure
-```
-src/SpecEdu.Infrastructure/
-└── Identity/
-    ├── ApplicationUser.cs     ← Custom user entity
-    ├── JwtSettings.cs         ← JWT configuration
-    └── JwtTokenService.cs     ← Token generation
-
-src/SpecEdu.Domain/
-└── Constants/
-    └── Roles.cs               ← Role constants
-```
-
-### NuGet Packages Added
-| Package | Version | Purpose |
-|---------|---------|---------|
-| Microsoft.AspNetCore.Identity.EntityFrameworkCore | 9.0.* | Identity with EF Core |
-| Microsoft.AspNetCore.Authentication.JwtBearer | 9.0.* | JWT authentication |
-
-### Password Policy
-- Minimum 8 characters
-- Requires digit, lowercase, uppercase, special character
-- Account lockout after 5 failed attempts (5 min)
-
-### JWT Configuration
-- Token expiration: 60 minutes
-- Refresh token expiration: 7 days
-- HMAC-SHA256 signing
-
 ---
 
 ## [0.0.4] - 2025-01-17
@@ -302,45 +319,6 @@ src/SpecEdu.Domain/
 - `DependencyInjection.cs` extension method for clean service registration
 - Connection string configuration in `appsettings.json`
 
-### Infrastructure Structure
-```
-src/SpecEdu.Infrastructure/
-├── Data/
-│   └── ApplicationDbContext.cs    ← Main DbContext with audit tracking
-└── DependencyInjection.cs         ← Service registration extension
-
-src/SpecEdu.Application/
-└── Common/
-    └── Interfaces/
-        └── ICurrentUserService.cs ← Current user abstraction
-
-src/SpecEdu.Web/
-└── Services/
-    └── CurrentUserService.cs      ← HTTP context user provider
-```
-
-### NuGet Packages Added (Infrastructure)
-| Package | Version | Purpose |
-|---------|---------|---------|
-| Microsoft.EntityFrameworkCore.SqlServer | 9.0.* | SQL Server database provider |
-| Microsoft.EntityFrameworkCore.Tools | 9.0.* | EF Core CLI tools (migrations) |
-
-### How Audit Fields Work
-```
-On SaveChanges():
-├── New entity (Added)
-│   ├── CreatedAt = DateTime.UtcNow
-│   └── CreatedBy = CurrentUser.UserId
-└── Modified entity (Modified)
-    ├── ModifiedAt = DateTime.UtcNow
-    └── ModifiedBy = CurrentUser.UserId
-```
-
-### Connection String
-```
-Server=(localdb)\\mssqllocaldb;Database=SpecEduDb;Trusted_Connection=True
-```
-
 ---
 
 ## [0.0.3] - 2025-01-17
@@ -352,60 +330,17 @@ Server=(localdb)\\mssqllocaldb;Database=SpecEduDb;Trusted_Connection=True
 - `IAuditableEntity` interface defining audit fields contract
 - `AuditableEntity` abstract class combining BaseEntity + IAuditableEntity
 
-### Domain Structure
-```
-src/SpecEdu.Domain/
-├── Common/
-│   ├── BaseEntity.cs         ← Id property (Guid)
-│   ├── IAuditableEntity.cs   ← Audit fields interface
-│   └── AuditableEntity.cs    ← BaseEntity + audit fields
-└── Entities/
-    └── (future entities inherit from AuditableEntity)
-```
-
-### Audit Fields (GDPR Compliance)
-| Field | Type | Purpose |
-|-------|------|---------|
-| `Id` | `Guid` | Unique identifier |
-| `CreatedAt` | `DateTime` | UTC creation timestamp |
-| `CreatedBy` | `string?` | User who created |
-| `ModifiedAt` | `DateTime?` | UTC modification timestamp |
-| `ModifiedBy` | `string?` | User who modified |
-
-### Design Decision
-- Separated `BaseEntity` (just Id) from `IAuditableEntity` (audit fields)
-- Reason: Not all entities need audit tracking (e.g., lookup tables)
-- Most entities will inherit from `AuditableEntity` (combines both)
-
 ---
 
 ## [0.0.2] - 2025-01-17
 
 ### Added
 - Clean Architecture solution structure implemented
-- `src/SpecEdu.Domain` - Domain layer (entities, interfaces, business rules)
-- `src/SpecEdu.Application` - Application layer (use cases, DTOs, services)
-- `src/SpecEdu.Infrastructure` - Infrastructure layer (EF Core, external services)
-- `src/SpecEdu.Web` - Web layer (Razor Pages, controllers, views)
-- `tests/SpecEdu.Domain.Tests` - Domain unit tests (xUnit)
-- `tests/SpecEdu.Application.Tests` - Application unit tests (xUnit)
-- `tests/SpecEdu.Infrastructure.Tests` - Infrastructure integration tests (xUnit)
-
-### Changed
-- Moved existing Razor Pages project to `src/SpecEdu.Web/`
-- Renamed project from `SpecEdu.csproj` to `SpecEdu.Web.csproj`
-- Updated solution file with all 7 projects
-
-### Project References (Dependency Flow)
-```
-Domain (no dependencies)
-   ↑
-Application (depends on Domain)
-   ↑
-Infrastructure (depends on Domain, Application)
-   ↑
-Web (depends on Application, Infrastructure)
-```
+- `src/SpecEdu.Domain` - Domain layer
+- `src/SpecEdu.Application` - Application layer
+- `src/SpecEdu.Infrastructure` - Infrastructure layer
+- `src/SpecEdu.Web` - Web layer (later split into Web.Public + Web.App in 0.6.0)
+- Test projects for Domain / Application / Infrastructure
 
 ---
 
@@ -420,29 +355,19 @@ Web (depends on Application, Infrastructure)
 - `.gitignore` configured for .NET projects
 - `CHANGELOG.md` for tracking development progress
 
-### Technical Decisions
-
-| Decision | Choice | Reason |
-|----------|--------|--------|
-| Architecture | Clean Architecture | Complex domain, 6+ roles, GDPR compliance, multiple integrations |
-| Database | SQL Server (MSSQL) | Client requirement, developer has local instance |
-| Authentication | ASP.NET Identity + JWT | Industry standard, stateless auth, role-based access |
-| Font | Google Sans (self-hosted) | GDPR compliant, no external requests |
-| Primary Language | Czech | Client requirement, localization planned for future |
-
-### Project Context
-- **Project**: SpecEdu - Platform for schools and educational counseling facilities
-- **Purpose**: Manage students with special educational needs (SVP, SPU, LMP)
-- **Target Users**: Schools, PPP, SPC, parents, teachers, assistants
-- **Development Approach**: Agile, 2-week sprints, methodical progression
-
 ---
 
 ## Version History
 
 | Version | Date | Description |
 |---------|------|-------------|
-| 0.0.8 | 2025-01-17 | Fixed layout shift, flexbox sticky footer, Test page |
+| 0.6.0 | 2026-02-17 | Two-project architecture split (Web.Public + Web.App) |
+| 0.5.0 | 2026-02-16 | Chat, notifications, integrations, admin console, audit log, GDPR |
+| 0.4.0 | 2026-01-23 | PLPP editor (goals, evaluations, versions, PDF) + Calendar |
+| 0.3.0 | 2026-01-19 | Control-exam reminders + email service |
+| 0.2.0 | 2026-01-18 | Students, access control (guardians / staff links), communication diary |
+| 0.1.0 | 2026-01-17 | Identity + roles + multi-tenant schools |
+| 0.0.8 | 2025-01-17 | Flexbox sticky footer, Test page |
 | 0.0.7 | 2025-01-17 | Centralized logging with LoggerMessage source generators |
 | 0.0.6 | 2025-01-17 | Layout, header, footer, CSS variables, light blue theme |
 | 0.0.5 | 2025-01-17 | ASP.NET Identity + JWT authentication, roles |
