@@ -246,6 +246,9 @@
   <data name="CookieConsent.RejectOptional" xml:space="preserve">
     <value>Essential Only</value>
   </data>
+  <data name="MainPage.Hero1" xml:space="preserve">
+    <value>Digital student folder without chaos</value>
+  </data>
   <data name="HeaderPage.Dashboard" xml:space="preserve">
     <value>Dashboard</value>
   </data>
@@ -264,6 +267,9 @@
   </data>
   <data name="ContactPage.Address" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
+  </data>
+  <data name="Common.Actions" xml:space="preserve">
+    <value>Actions</value>
   </data>
   <data name="DiaryPage.FilterType" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
@@ -786,8 +792,5 @@
   </data>
   <data name="MyChildrenPage.ViewCalendar" xml:space="preserve">
     <value>Events Calendar</value>
-  </data>
-  <data name="MainPage.Hero1" xml:space="preserve">
-    <value>Digital student folder without chaos</value>
   </data>
 </root>
