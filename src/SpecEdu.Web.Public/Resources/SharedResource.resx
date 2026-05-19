@@ -249,4 +249,16 @@
   <data name="MainPage.Hero1" xml:space="preserve">
     <value />
   </data>
+  <data name="ForgotPasswordPage.ForgotPassword" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ForgotPasswordPage.EnterEmail" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ForgotPasswordPage.SendLink" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ForgotPasswordPage.BackToLogin" xml:space="preserve">
+    <value />
+  </data>
 </root>
